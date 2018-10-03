@@ -1,0 +1,6 @@
+[submodule "source/asterics"]
+	path = source/asterics
+	url = https://github.com/asterics/AsTeRICS.git
+[submodule "source/asterics-wiki"]
+	path = source/asterics-wiki
+	url = https://github.com/asterics/AsTeRICS.wiki.git
