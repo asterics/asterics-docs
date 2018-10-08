@@ -1,0 +1,31 @@
+{
+  "name": "asterics-docs",
+  "version": "1.0.0",
+  "description": "AsTeRICS Help and Docs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vuepress dev",
+    "build": "vuepress build",
+    "v": "vuepress -V"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asterics/asterics-docs.git"
+  },
+  "keywords": [
+    "AsTeRICS",
+    "Accessibility",
+    "Web",
+    "Development"
+  ],
+  "author": "StudyATHomeInternationally",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/asterics/asterics-docs/issues"
+  },
+  "homepage": "https://github.com/asterics/asterics-docs#readme",
+  "devDependencies": {
+    "vuepress": "^1.0.0-alpha.8"
+  }
+}
