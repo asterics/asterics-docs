@@ -31,7 +31,8 @@ ARE. The ACS can be seen as a configuration program for the ARE.
 
 ## Required devices and conditions
 
-* AsTeRICS hardware platform (cf. [here](http://asterics.harpo.com.pl/hardware.html))
+<!-- * AsTeRICS hardware platform (cf. [here](http://asterics.harpo.com.pl/hardware.html)) -->
+* AsTeRICS hardware platform (cf. [here](https://www.asterics.eu/index.php?id=73))
   or a PC / notebook with Windows XP / VISTA / 7 or later
 * Internet access
 

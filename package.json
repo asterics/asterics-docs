@@ -2,11 +2,10 @@
   "name": "asterics-docs",
   "version": "1.0.0",
   "description": "AsTeRICS Help and Docs",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev",
-    "build": "vuepress build",
+    "dev": "vuepress dev intermediate",
+    "build": "vuepress build intermediate",
     "v": "vuepress -V"
   },
   "repository": {
@@ -26,6 +25,6 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
-    "vuepress": "^1.0.0-alpha.8"
+    "vuepress": "^0.14.4"
   }
 }

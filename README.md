@@ -2,22 +2,34 @@
 
 Repository to manage AsTeRICS related documentation.
 
-## HowTo
+## Dependencies
 
-Start up a terminal and switch to the `intermediate` folder:
+Install needed dependencies with
+
+    ~/asterics-docs $ npm i
+
+## Development Instructions
+
+Run
+
+    ~/asterics-docs $ npm run dev
+
+or alternatively, switch to folder `intermediate` and start the development server manually.
 
     ~/asterics-docs $ cd intermediate
-
-Run `vuepress` either from development server
-
     ~/asterics-docs/intermediate $ vuepress dev
 
-or build the release with
+## Build Instructions
 
+To build for release, run
+
+    ~/asterics-docs $ npm run build
+
+or manually
+
+    ~/asterics-docs $ cd intermediate
     ~/asterics-docs/intermediate $ vuepress build
 
-and locate the result at `.vuepress/dist/`.
+and locate the result at  `intermediate/.vuepress/dist/`.
 
-<br/>
-
-> Note: The build includes another folder, i.e., `.vuepress/public/`, which is needed for the release.
+> Note: The build includes another folder, i.e., `intermediate/.vuepress/public/`, which is needed for the release.
