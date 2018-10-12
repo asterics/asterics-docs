@@ -2,7 +2,6 @@ const { Checkout, Repository, Tag, Tree } = require("nodegit");
 const path = require("path");
 const fs = require("fs-extra");
 const klaw = require("klaw-sync");
-const forEach = require("async-foreach");
 
 let asterics = __dirname + "/source/asterics";
 let acs_help = asterics + "/Documentation/ACS-Help/HTML";
@@ -42,7 +41,6 @@ let acs_help_intermediate = __dirname + "/intermediate/help";
       console.log(f);
       await fs.ensureDir(f)
     }
-
 
   });
 
