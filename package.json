@@ -27,6 +27,8 @@
   "devDependencies": {
     "klaw-sync": "^6.0.0",
     "nodegit": "^0.23.0-alpha.1",
+    "ora": "^3.0.0",
+    "turndown": "^5.0.1",
     "vuepress": "^0.14.4"
   }
 }
