@@ -66,3 +66,5 @@ var foo = function (bar) {
 
 console.log(foo(5));
 ```
+
+Added a test line by mad
