@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev intermediate",
     "build": "vuepress build intermediate",
+    "echo": "echo $FOO",
     "v": "vuepress -V"
   },
   "repository": {
@@ -25,10 +26,11 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
+    "child_process": "^1.0.2",
     "klaw-sync": "^6.0.0",
     "nodegit": "^0.23.0-alpha.1",
     "ora": "^3.0.0",
     "turndown": "^5.0.1",
-    "vuepress": "^0.14.4"
+    "vuepress": "^1.0.0-alpha.17"
   }
 }
