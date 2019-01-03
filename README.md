@@ -19,7 +19,7 @@ or alternatively, switch to folder `intermediate` and start the development serv
     ~/asterics-docs $ cd intermediate
     ~/asterics-docs/intermediate $ vuepress dev
 
-## Utilties
+## Utilty Tool
 
 Use
 
