@@ -26,10 +26,13 @@
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
     "child_process": "^1.0.2",
+    "dotenv": "^6.2.0",
     "klaw-sync": "^6.0.0",
-    "nodegit": "^0.23.0-alpha.1",
+    "minimist": "^1.2.0",
+    "nodegit": "^0.23.0",
     "ora": "^3.0.0",
+    "terminal-kit": "^1.26.8",
     "turndown": "^5.0.1",
-    "vuepress": "0.14.4"
+    "vuepress": "0.14.8"
   }
 }

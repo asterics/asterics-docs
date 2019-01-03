@@ -1,4 +1,19 @@
+const { loadDirStructure } = require("./../../libraries/util-vuepress.js");
+
+console.log(`config.js: __filename is "${__filename}"`);
+console.log(`config.js: __dirname is "${__dirname}"`);
+console.log(`config.js: process.cwd is "${process.cwd()}"`);
+
 const base = process.env.AS_DOCS_VERSION ? `/${process.env.AS_DOCS_VERSION}/` : "/";
+// const cwd
+// const helpPath;
+// const pluginPath;
+
+// async () => {
+//   const sidebarHelp = loadDirStructure("/help/", "intermediate/help");
+//   const sidebarHelpPlugins = loadDirStructure("/help/Plugin/", "intermediate/help/Plugins");
+// };
+
 console.log(`Building version ${process.env.AS_DOCS_VERSION} with base: ${base}`);
 
 module.exports = {
@@ -14,12 +29,7 @@ module.exports = {
     editLinks: true,
     editLinkText: "Help us improve this page!",
     serviceWorker: {
-      updatePopup: true // Boolean | Object, default to undefined.
-      // If set to true, the default text config will be:
-      // updatePopup: {
-      //    message: "New content is available.",
-      //    buttonText: "Refresh"
-      // }
+      updatePopup: true
     },
     nav: [
       {
@@ -43,17 +53,11 @@ module.exports = {
       }
     ],
     sidebar: {
-      // "/welcome/": ["", "QuickStart", "Community", "Architecture"],
-      // "/": ""
-      // "/",
-      // {
-      //   title: "Welcome",
-      //   collapsable: true,
-      //   children: ["/welcome/QuickStart", "/welcome/Architecture", "/welcome/Community"]
-      // },
       "/concepts/": [],
       "/installation/": [],
       "/user_guide/": [],
+      // sidebarHelpPlugins,
+      // sidebarHelp,
       "/help/Plugins/": [
         {
           title: "Actuators",
@@ -129,11 +133,4 @@ module.exports = {
     diplayAllHeaders: true, // default
     lastUpdated: "Last Updated"
   }
-  // configureWebpack: {
-  // resolve: {
-  //   alias: {
-  //     "@img": "img"
-  //   }
-  // }
-  // }
 };
