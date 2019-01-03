@@ -13,7 +13,7 @@ term.setHighlightBgColorRgb(11, 121, 157);
 let menu = [
   "1. build and backup docs version",
   "2. create sidebar entry",
-  "3. show config",
+  "3. show configuration",
   "4. exit"
 ];
 let options = { cancelable: true, exitOnUnexpectedKey: true };
