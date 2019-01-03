@@ -30,6 +30,7 @@ let docsPath = __dirname + "/intermediate";
   astericsVersions = astericsVersions.sort();
 
   /* Ensure target folder */
+  await fs.ensureDir(backupPath);
   if (await fs.existsSync(backupPath)) {
     await asyncForEach(astericsVersions, async version => {
       /* Checkout commit */
@@ -81,7 +82,9 @@ let docsPath = __dirname + "/intermediate";
         /* Build and copy version */
         spinner.text = `building version ${version}`;
         process.env.AS_DOCS_VERSION = `${version}`;
-        let { stdout, stderr } = await exec(`vuepress build ${docsPath}`);
+        let { stdout, stderr } = await exec(
+          `node_modules/vuepress/bin/vuepress.js build ${docsPath}`
+        );
 
         /* Store built version in public directory */
         spinner.text = `storing results of built version ${version}`;
