@@ -8,13 +8,13 @@ const turndown = require("turndown")();
 const ora = require("ora");
 
 /* Custom modules */
-const { asyncForEach } = require("./libraries/util.js");
+const { asyncForEach } = require("./../util/util");
 const {
   loadTaggedVersions,
   getTargetId,
   checkoutCommit,
   checkoutBranch
-} = require("./libraries/git.js");
+} = require("./../util/git");
 
 let astericsPath = __dirname + "/source/asterics";
 let acsHelpPath = astericsPath + "/Documentation/ACS-Help/HTML";

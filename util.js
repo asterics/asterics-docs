@@ -76,4 +76,5 @@ async function processUserEntry(e, r) {
   handleMenu();
 })().catch(err => {
   console.log(err);
+  handleExit();
 });

@@ -1,4 +1,4 @@
-const { loadDirStructure } = require("./../../libraries/util-vuepress.js");
+const { loadDirStructure } = require("./../../libraries/util/util-vuepress.js");
 
 console.log(`config.js: __filename is "${__filename}"`);
 console.log(`config.js: __dirname is "${__dirname}"`);
