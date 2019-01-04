@@ -4,7 +4,9 @@ console.log(`config.js: __filename is "${__filename}"`);
 console.log(`config.js: __dirname is "${__dirname}"`);
 console.log(`config.js: process.cwd is "${process.cwd()}"`);
 
-const base = process.env.AS_DOCS_VERSION ? `/${process.env.AS_DOCS_VERSION}/` : "/";
+const base = process.env.AS_DOCS_VERSION
+  ? `/${process.env.AS_DOCS_VERSION}/`
+  : "/";
 // const cwd
 // const helpPath;
 // const pluginPath;
@@ -14,7 +16,9 @@ const base = process.env.AS_DOCS_VERSION ? `/${process.env.AS_DOCS_VERSION}/` : 
 //   const sidebarHelpPlugins = loadDirStructure("/help/Plugin/", "intermediate/help/Plugins");
 // };
 
-console.log(`Building version ${process.env.AS_DOCS_VERSION} with base: ${base}`);
+console.log(
+  `Building version ${process.env.AS_DOCS_VERSION} with base: ${base}`
+);
 
 module.exports = {
   title: "AsTeRICS",
@@ -22,7 +26,7 @@ module.exports = {
   base,
   themeConfig: {
     repo: "asterics/AsTeRICS",
-    repoLabel: "Contribute!",
+    repoLabel: "Repository!",
     docsRepo: "asterics/asterics-docs",
     docsDir: "intermediate",
     docsBranch: "master",
@@ -33,27 +37,76 @@ module.exports = {
     },
     nav: [
       {
-        text: "Welcome",
+        text: "Getting Started",
         items: [
-          { text: "QuickStart Guide", link: "/welcome/QuickStart" },
-          { text: "Architecture", link: "/welcome/Architecture" },
-          { text: "Community", link: "/welcome/Community" }
+          { text: "Overview", link: "/getting_started/Overview" },
+          { text: "Demos", link: "/getting_started/Demos" }
         ]
       },
-      { text: "Concepts", link: "/concepts/" },
-      { text: "Installation", link: "/installation/" },
-      { text: "Tutorial", link: "/tutorial/" },
-      { text: "Help", link: "/help/" },
-      { text: "Model", link: "/model/" },
-      { text: "Plugin", link: "/plugin/" },
-      { text: "AT Solution", link: "/at_solution/" },
+      {
+        text: "Use!", //maybe rename to 'Create/Use/Configure'
+        items: [
+          { text: "Model", link: "/models/Search" },
+          { text: "AsTeRICS Grid", link: "/asterics_grids/Search" },
+          { text: "AT solution", link: "/at_solutions/Search" } //maybe rename to 'AT application'
+        ]
+      },
+      { text: "Download", link: "/user_doc/Installation" },
+      {
+        text: "Documentation",
+        items: [
+          { text: "Concepts", link: "/user_doc/Concepts" },
+          { text: "Installation", link: "/user_doc/Installation" },
+          { text: "User Interfaces", link: "/user_doc/User_Interfaces" },
+          { text: "Tutorials", link: "/user_doc/Tutorials" },
+          { text: "User manuals", link: "/user_doc/User_Manuals" },
+          { text: "APIs", link: "/user_doc/APIs" }
+        ]
+      },
+      {
+        text: "Create!", //maybe rename to 'Create/Use/Configure'
+        items: [
+          { text: "Model", link: "/models/New" },
+          { text: "AsTeRICS Grid", link: "/asterics_grids/New" },
+          { text: "Plugin", link: "/plugins/New" },
+          { text: "AT solution", link: "/at_solutions/New" } //maybe rename to 'AT application'
+        ]
+      },
+      {
+        text: "Support",
+        items: [
+          { text: "Issues", link: "/support/Issues" },
+          { text: "Contact", link: "/support/Contact" },
+          { text: "Contribute", link: "/support/Contribute" },
+          { text: "Donate", link: "/support/Donate" }
+        ]
+      },
+
       {
         text: "Languages",
-        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
+        items: [
+          { text: "English", link: "/" },
+          { text: "German", link: "/de/" }
+        ]
       }
     ],
     sidebar: {
       "/concepts/": [],
+      // "/getting_started/": ["", "QuickStart", "Community", "Architecture"],
+      // "/": ""
+      // "/",
+      // {
+      //   title: "Welcome",
+      //   collapsable: true,
+      //   children: ["/getting_started/QuickStart", "/getting_started/Architecture", "/getting_started/Community"]
+      // },
+      "/support/": [
+        {
+          title: "Actuators",
+          collapsable: true,
+          children: [["Contact", "Contact"]]
+        }
+      ],
       "/installation/": [],
       "/user_guide/": [],
       // sidebarHelpPlugins,
@@ -80,7 +133,10 @@ module.exports = {
             ["ACS/Actuators", "Actuators"],
             ["ACS/Channels", "Channels"],
             ["ACS/Colours_settings", "Colors Settings"],
-            ["ACS/Component_Collection_Manager", "Component Collection Manager"],
+            [
+              "ACS/Component_Collection_Manager",
+              "Component Collection Manager"
+            ],
             ["ACS/Component_Context_Menu", "Component Context Menu"],
             ["ACS/Connected", "Connected"],
             ["ACS/Control_the_ARE", "Control the ARE"],
@@ -103,7 +159,10 @@ module.exports = {
             ["ACS/Running", "Running"],
             ["ACS/Sensors", "Sensors"],
             ["ACS/Setting_the_Properties", "Setting the Properties"],
-            ["ACS/Status_Reporting_and_Error_Logging", "Status Reporting and Error Logging"],
+            [
+              "ACS/Status_Reporting_and_Error_Logging",
+              "Status Reporting and Error Logging"
+            ],
             ["ACS/Synchronized", "Synchronized"],
             ["ACS/The_Edit_Tab", "Edit Tab"],
             ["ACS/Tooltips", "Tooltips"]
