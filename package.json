@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev intermediate",
+    "prebuild": "node scripts/setup.js",
     "build": "vuepress build intermediate",
     "v": "vuepress -V"
   },
@@ -31,6 +32,7 @@
     "minimist": "^1.2.0",
     "nodegit": "^0.23.0",
     "ora": "^3.0.0",
+    "shelljs": "^0.8.3",
     "terminal-kit": "^1.26.8",
     "turndown": "^5.0.1",
     "vuepress": "0.14.8"

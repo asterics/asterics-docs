@@ -19,7 +19,7 @@ async function handleBuild(header, callback) {
   header();
   term("Select from available tags:\n");
 
-  let versions = await getValidVersions(process.env.ASTERICS_REPO);
+  let versions = await getValidVersions(process.env.GIT_SUBMODULE_ASTERICS);
   let menu = ["all", ...versions];
   let options = { cancelable: true, exitOnUnexpectedKey: true };
   term.singleColumnMenu(menu, options, async (error, response) => {
@@ -44,10 +44,10 @@ async function convertBuildAndCopy(v, final = true) {
   term(`Selection: `).bold(`${v}\n\n`);
 
   /* Checkout commit */
-  await checkoutVersion(process.env.ASTERICS_REPO, v);
+  await checkoutVersion(process.env.GIT_SUBMODULE_ASTERICS, v);
 
   /* Copy and convert ACS Help files */
-  let acsHelpPath = `${process.env.ASTERICS_REPO}/${process.env.ACS_HELP_SRC}`,
+  let acsHelpPath = `${process.env.GIT_SUBMODULE_ASTERICS}/${process.env.ACS_HELP_SRC}`,
     acsHelpDestPath = `${process.env.DOCS_SRC}/${process.env.ACS_HELP_DEST}`;
   await convertHTMLtoMarkdown(acsHelpPath, acsHelpDestPath);
 
@@ -59,7 +59,7 @@ async function convertBuildAndCopy(v, final = true) {
 
   /* Check out master branch */
   if (final) {
-    await checkoutMasterBranch(process.env.ASTERICS_REPO);
+    await checkoutMasterBranch(process.env.GIT_SUBMODULE_ASTERICS);
   } else {
     term("\n");
   }
