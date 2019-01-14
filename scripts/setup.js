@@ -45,7 +45,7 @@ let asterics = {
 /* Run init commands for each repository */
 [asterics, asterics_wiki].forEach(r => {
   /* Clone from local repository (if folder exists). FIXME: search .git/ folder */
-  let ref = fs.existsSync(`../${r.ref}`) ? `--reference ${r.ref}` : "";
+  let ref = fs.existsSync(r.ref[0] === "/" ? r.ref : `../${r.ref}`) ? `--reference ${r.ref}` : "";
   [
     `git submodule update --init ${ref} ${r.path}`,
     `git --git-dir=${r.path}/.git --work-tree=${r.path} checkout ${r.branch}`
