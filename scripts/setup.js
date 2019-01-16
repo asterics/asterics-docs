@@ -83,7 +83,8 @@ try {
 
     /* build docs */
     // set environment variables
-    process.env.ENDPOINT = `${config.get("prefix")}/${v}/`;
+    let prefix = config.get("prefix");
+    process.env.ENDPOINT = prefix ? `/${prefix}/${v}/` : `/${v}/`;
     process.env.DEST = buildPath;
     shell.echo(
       `asterics-docs: building version ${v} (endpoint: ${process.env.ENDPOINT})`
@@ -121,7 +122,8 @@ try {
 } finally {
   /* build docs */
   // set environment variables
-  process.env.ENDPOINT = config.get("prefix");
+  let prefix = config.get("prefix");
+  process.env.ENDPOINT = prefix ? `/${prefix}/` : "";
   process.env.DEST = buildPath;
   shell.echo(
     `asterics-docs: building version ${config.get("latest")} (endpoint: ${
