@@ -10,45 +10,32 @@ if (!shell.which("git")) {
   shell.exit(1);
 }
 
-// let asterics = {
-//     path: process.env.GIT_SUBMODULE_ASTERICS,
-//     ref: gitLocalPath(__dirname, process.env.GIT_SUBMODULE_ASTERICS_REF),
-//     branch: process.env.GIT_SUBMODULE_ASTERICS_BRANCH || "master",
-//     fatal: process.env.GIT_SUBMODULE_ASTERICS_FATALITY || false
-//   },
-//   asterics_wiki = {
-//     path: process.env.GIT_SUBMODULE_ASTERICS_WIKI,
-//     ref: gitLocalPath(__dirname, process.env.GIT_SUBMODULE_ASTERICS_WIKI_REF),
-//     branch: process.env.GIT_SUBMODULE_ASTERICS_WIKI_BRANCH || "master",
-//     fatal: process.env.GIT_SUBMODULE_ASTERICS_WIKI_FATALITY || false
-//   };
-
 /* Run init commands for (all) repositories */
-// [asterics, asterics_wiki].forEach(r => {
-// config.repositories.forEach(r => {
-//   let localPath = gitLocalPath(r.reference);
-//   let refCommand = localPath ? `--reference ${localPath}` : "";
-//   if (refCommand) console.log(`From (local) ${localPath}`);
+[asterics, asterics_wiki].forEach(r => {
+config.repositories.forEach(r => {
+  let localPath = gitLocalPath(r.reference);
+  let refCommand = localPath ? `--reference ${localPath}` : "";
+  if (refCommand) console.log(`From (local) ${localPath}`);
 
-//   /* clone repository */
-//   // eslint-disable-next-line
-//   if (shell.exec(`git submodule update --init ${refCommand} ${r.path}`).code !== 0) {
-//     shell.echo(`failed cloning ${r.path}`);
-//     if (r.fatal) shell.exit(1);
-//   }
-//   /* checkout branch/tag */
-//   // eslint-disable-next-line
-//   if (shell.exec(`git --git-dir=${r.path}/.git --work-tree=${r.path} checkout ${r.branch}`).code !== 0) {
-//     shell.echo(`failed checking out ${r.branch} in ${r.path}`);
-//     if (r.fatal) shell.exit(1);
-//   }
-//   /* pull latest commits */
-//   // eslint-disable-next-line
-//   if (shell.exec(`git --git-dir=${r.path}/.git --work-tree=${r.path} pull origin ${r.branch}`).code !== 0) {
-//     shell.exec(`failed to pull latest commits of ${r.path}`);
-//     if (r.fatal) shell.exit(1);
-//   }
-// });
+  /* clone repository */
+  // eslint-disable-next-line
+  if (shell.exec(`git submodule update --init ${refCommand} ${r.path}`).code !== 0) {
+    shell.echo(`failed cloning ${r.path}`);
+    if (r.fatal) shell.exit(1);
+  }
+  /* checkout branch/tag */
+  // eslint-disable-next-line
+  if (shell.exec(`git --git-dir=${r.path}/.git --work-tree=${r.path} checkout ${r.branch}`).code !== 0) {
+    shell.echo(`failed checking out ${r.branch} in ${r.path}`);
+    if (r.fatal) shell.exit(1);
+  }
+  /* pull latest commits */
+  // eslint-disable-next-line
+  if (shell.exec(`git --git-dir=${r.path}/.git --work-tree=${r.path} pull origin ${r.branch}`).code !== 0) {
+    shell.exec(`failed to pull latest commits of ${r.path}`);
+    if (r.fatal) shell.exit(1);
+  }
+});
 
 /* Get valid versions */
 let versions = config.getSchema().properties.latest.format.sort();
@@ -110,14 +97,14 @@ try {
     fs.copySync(buildPath, backupDir);
 
     /* delete conversion */
-    // config.get("html_to_md").forEach(e => {
-    //   let folder = e.to;
-    //   fs.readdirSync(folder)
-    //     .filter(e => e !== "README.md")
-    //     .forEach(e => {
-    //       fs.removeSync(path.join(folder, e));
-    //     });
-    // });
+    config.get("html_to_md").forEach(e => {
+      let folder = e.to;
+      fs.readdirSync(folder)
+        .filter(e => e !== "README.md")
+        .forEach(e => {
+          fs.removeSync(path.join(folder, e));
+        });
+    });
   });
 } catch (e) {
   // if (typeof e === "LastestReleaseError") {
