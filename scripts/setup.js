@@ -1,9 +1,11 @@
 // require("dotenv").config();
 const fs = require("fs-extra"),
-  path = require("path"),
-  config = require("./../config.js"),
+  path = require("path");
+const config = require(path.join(__dirname, "..", "config.js")),
   shell = require("shelljs");
 const { gitLocalPath } = require("asterics-web-git");
+
+console.log("CWD: " + process.cwd());
 
 if (!shell.which("git")) {
   shell.echo("Sorry, this script requires git");
@@ -11,28 +13,32 @@ if (!shell.which("git")) {
 }
 
 /* Run init commands for (all) repositories */
-[asterics, asterics_wiki].forEach(r => {
-config.repositories.forEach(r => {
-  let localPath = gitLocalPath(r.reference);
+// [asterics, asterics_wiki].forEach(r => {
+config.get("repositories").forEach(r => {
+  let localPath = gitLocalPath(__dirname, r.reference),
+    outputPath = path.join(r.path);
   let refCommand = localPath ? `--reference ${localPath}` : "";
   if (refCommand) console.log(`From (local) ${localPath}`);
 
   /* clone repository */
   // eslint-disable-next-line
-  if (shell.exec(`git submodule update --init ${refCommand} ${r.path}`).code !== 0) {
-    shell.echo(`failed cloning ${r.path}`);
+  let s = shell.exec(`git submodule update --init ${refCommand} ${outputPath}`);
+  if (s.code !== 0) {
+    shell.echo(`failed cloning ${outputPath}`);
     if (r.fatal) shell.exit(1);
   }
   /* checkout branch/tag */
   // eslint-disable-next-line
-  if (shell.exec(`git --git-dir=${r.path}/.git --work-tree=${r.path} checkout ${r.branch}`).code !== 0) {
-    shell.echo(`failed checking out ${r.branch} in ${r.path}`);
+  s = shell.exec(`git --git-dir=${outputPath}/.git --work-tree=${outputPath} checkout ${r.branch}`);
+  if (s.code !== 0) {
+    shell.echo(`failed checking out ${r.branch} in ${outputPath}`);
     if (r.fatal) shell.exit(1);
   }
   /* pull latest commits */
   // eslint-disable-next-line
-  if (shell.exec(`git --git-dir=${r.path}/.git --work-tree=${r.path} pull origin ${r.branch}`).code !== 0) {
-    shell.exec(`failed to pull latest commits of ${r.path}`);
+  s = shell.exec(`git --git-dir=${outputPath}/.git --work-tree=${outputPath} pull origin ${r.branch}`);
+  if (s.code !== 0) {
+    shell.exec(`failed to pull latest commits of ${outputPath}`);
     if (r.fatal) shell.exit(1);
   }
 });
@@ -124,7 +130,7 @@ try {
   );
   let s = shell.exec(`./node_modules/.bin/vuepress build ${docsdir}`);
   if (s.code === 1) {
-    // console.log("FIXME");
+    console.log("FIXME");
   } else if (s.code !== 0) {
     shell.echo(`failed building vuepress project in ${config.get("docsdir")}/`);
     shell.exit(1);
