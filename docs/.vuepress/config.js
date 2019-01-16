@@ -3,13 +3,14 @@ const config = require("./../../config.js");
 const host = config.get("host");
 const port = config.get("port");
 const prefix = config.get("prefix");
-const base = prefix ? `${prefix}/${config.get("endpoint")}/` : `${config.get("endpoint")}/`;
+//const base = prefix ? `${prefix}/${config.get("endpoint")}/` : `${config.get("endpoint")}/`;
+const base = config.get("endpoint");
 const dest = config.get("dest");
 const docsDir = config.get("docsdir");
 
 // console.log("host: " + host);
 // console.log("port: " + port);
-// console.log("base: " + base);
+console.log("XX base: " + base);
 // console.log("dest: " + dest);
 // console.log("docsDir: " + docsDir);
 
