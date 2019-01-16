@@ -1,34 +1,30 @@
-const { loadDirStructure } = require("./../../libraries/util/util-vuepress.js");
+const config = require("./../../config.js");
 
-console.log(`config.js: __filename is "${__filename}"`);
-console.log(`config.js: __dirname is "${__dirname}"`);
-console.log(`config.js: process.cwd is "${process.cwd()}"`);
+const host = config.get("host");
+const port = config.get("port");
+const prefix = config.get("prefix");
+const base = prefix ? `${prefix}/${config.get("endpoint")}/` : `${config.get("endpoint")}/`;
+const dest = config.get("dest");
+const docsDir = config.get("docsdir");
 
-const base = process.env.AS_DOCS_VERSION
-  ? `/${process.env.AS_DOCS_VERSION}/`
-  : "/";
-// const cwd
-// const helpPath;
-// const pluginPath;
-
-// async () => {
-//   const sidebarHelp = loadDirStructure("/help/", "intermediate/help");
-//   const sidebarHelpPlugins = loadDirStructure("/help/Plugin/", "intermediate/help/Plugins");
-// };
-
-console.log(
-  `Building version ${process.env.AS_DOCS_VERSION} with base: ${base}`
-);
+// console.log("host: " + host);
+// console.log("port: " + port);
+// console.log("base: " + base);
+// console.log("dest: " + dest);
+// console.log("docsDir: " + docsDir);
 
 module.exports = {
+  host,
+  port,
+  base,
+  dest,
   title: "AsTeRICS",
   description: "That's all folks.",
-  base,
   themeConfig: {
     repo: "asterics/AsTeRICS",
     repoLabel: "Repository!",
     docsRepo: "asterics/asterics-docs",
-    docsDir: "intermediate",
+    docsDir,
     docsBranch: "master",
     editLinks: true,
     editLinkText: "Help us improve this page!",
@@ -38,10 +34,7 @@ module.exports = {
     nav: [
       {
         text: "Getting Started",
-        items: [
-          { text: "Overview", link: "/getting_started/Overview" },
-          { text: "Demos", link: "/getting_started/Demos" }
-        ]
+        items: [{ text: "Overview", link: "/getting_started/Overview" }, { text: "Demos", link: "/getting_started/Demos" }]
       },
       {
         text: "Use!", //maybe rename to 'Create/Use/Configure'
@@ -64,6 +57,10 @@ module.exports = {
         ]
       },
       {
+        text: "Help",
+        link: "/help/"
+      },
+      {
         text: "Create!", //maybe rename to 'Create/Use/Configure'
         items: [
           { text: "Model", link: "/models/New" },
@@ -84,10 +81,7 @@ module.exports = {
 
       {
         text: "Languages",
-        items: [
-          { text: "English", link: "/" },
-          { text: "German", link: "/de/" }
-        ]
+        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
       }
     ],
     sidebar: {
@@ -122,7 +116,7 @@ module.exports = {
         {
           title: "Welcome to AsTeRICS",
           collapsable: false,
-          children: [""]
+          children: [["ARE/ARE_Introduction", "Intro"]]
         },
         {
           title: "ACS",
@@ -133,10 +127,7 @@ module.exports = {
             ["ACS/Actuators", "Actuators"],
             ["ACS/Channels", "Channels"],
             ["ACS/Colours_settings", "Colors Settings"],
-            [
-              "ACS/Component_Collection_Manager",
-              "Component Collection Manager"
-            ],
+            ["ACS/Component_Collection_Manager", "Component Collection Manager"],
             ["ACS/Component_Context_Menu", "Component Context Menu"],
             ["ACS/Connected", "Connected"],
             ["ACS/Control_the_ARE", "Control the ARE"],
@@ -159,10 +150,7 @@ module.exports = {
             ["ACS/Running", "Running"],
             ["ACS/Sensors", "Sensors"],
             ["ACS/Setting_the_Properties", "Setting the Properties"],
-            [
-              "ACS/Status_Reporting_and_Error_Logging",
-              "Status Reporting and Error Logging"
-            ],
+            ["ACS/Status_Reporting_and_Error_Logging", "Status Reporting and Error Logging"],
             ["ACS/Synchronized", "Synchronized"],
             ["ACS/The_Edit_Tab", "Edit Tab"],
             ["ACS/Tooltips", "Tooltips"]

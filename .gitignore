@@ -1,7 +1,7 @@
 node_modules/
 */**/dist/
 .vscode/
-intermediate/.vuepress/intermediate_build/
-intermediate/help/Plugins/
-intermediate/help/ACS/
-intermediate/help/ARE/
+intermediate/.vuepress/temp/
+docs/help/Plugins/
+docs/help/ACS/
+docs/help/ARE/

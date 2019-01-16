@@ -3,7 +3,7 @@ const { Checkout } = require("nodegit");
 function loadTaggedVersions(tags, pattern = /^v\d+(.\d+)*$/) {
   // https://regex101.com/r/d75rRK/1
   // https://regex101.com/r/d75rRK/2
-  versions = [];
+  let versions = [];
   tags.forEach(tag => {
     if (pattern.test(tag)) {
       versions.push(tag);
@@ -31,7 +31,9 @@ async function getTargetId(repo, tagName) {
 }
 
 async function checkoutCommit(repo, targetid) {
-  await Checkout.tree(repo, targetid, { checkoutStrategy: Checkout.STRATEGY.SAFE_CREATE });
+  await Checkout.tree(repo, targetid, {
+    checkoutStrategy: Checkout.STRATEGY.SAFE_CREATE
+  });
   await repo.setHeadDetached(targetid, repo.defaultSignature);
 }
 

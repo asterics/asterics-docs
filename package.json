@@ -28,15 +28,16 @@
   "devDependencies": {
     "asterics-web-git": "git+https://github.com/sabicalija/asterics-web-git.git#0.1.0",
     "child_process": "^1.0.2",
+    "convict": "^4.4.1",
     "dotenv": "^6.2.0",
     "klaw-sync": "^6.0.0",
-    "minimist": "^1.2.0",
     "nodegit": "^0.23.0",
     "ora": "^3.0.0",
     "shelljs": "^0.8.3",
     "terminal-kit": "^1.26.8",
     "turndown": "^5.0.1",
-    "vuepress": "0.14.8"
+    "vuepress": "0.14.8",
+    "yargs": "^12.0.5"
   },
   "dependencies": {}
 }

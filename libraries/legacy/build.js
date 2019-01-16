@@ -42,7 +42,10 @@ let docsPath = __dirname + "/intermediate";
       spinner.text = `copy and convert files of ${version}`;
       let dirs = await klaw(acsHelpPath, { nofile: true });
       await asyncForEach(dirs, async dir => {
-        let dirName = dir.path.substr(dir.path.lastIndexOf("/") + 1, dir.path.length);
+        let dirName = dir.path.substr(
+          dir.path.lastIndexOf("/") + 1,
+          dir.path.length
+        );
         let relPath = path.relative(acsHelpPath, dir.path);
         let dstPath = `${docsPath}/help/${relPath}`;
 

@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const term = require("terminal-kit").terminal;
 const { handleBuild } = require("./libraries/build");
 const { handleSidebarCreation } = require("./libraries/sidebar");
@@ -11,12 +12,12 @@ term.setDefaultBgColorRgb(7, 80, 105);
 term.setHighlightBgColorRgb(11, 121, 157);
 
 let menu = [
-  "1. build and backup docs version",
-  "2. create sidebar entry",
-  "3. show configuration",
-  "4. exit"
-];
-let options = { cancelable: true, exitOnUnexpectedKey: true };
+    "1. build and backup docs version",
+    "2. create sidebar entry",
+    "3. show configuration",
+    "4. exit"
+  ],
+  options = { cancelable: true, exitOnUnexpectedKey: true };
 
 function printHeader() {
   term("### asterics-docs utility ###\n\n");

@@ -1,0 +1,89 @@
+{
+    "env": {
+        "doc": "The application environment.",
+        "format": ["production", "development"],
+        "default": "development",
+        "env": "NODE_ENV"
+    },
+    "host": {
+        "doc": "The IP address to bind.",
+        "format": "ipaddress",
+        "default": "172.0.0.1",
+        "env": "HOST"
+    },
+    "port": {
+        "doc": "The port of to bind.",
+        "format": "port",
+        "default": 8080,
+        "env": "PORT"
+    },
+    "latest": {
+        "doc": "Latest version.",
+        "format": ["master","v3.0.1"],
+        "default": "master",
+        "env": "LATEST"
+    },
+    "docsdir": {
+        "doc": "Documentation source folder.",
+        "format": "String",
+        "default": "docs",
+        "env": "DOCSDIR"
+    },
+    "dest": {
+        "doc": "Build output folder.",
+        "format": "String",
+        "default": "docs/.vuepress/dist",
+        "env": "DEST"
+    },
+    "prefix": {
+        "doc": "Hosting prefix.",
+        "format": "String",
+        "default": "",
+        "env": "PREFIX"
+    },
+    "endpoint": {
+        "doc": "Hosting endpoint.",
+        "format": "String",
+        "default": "",
+        "env": "ENDPOINT"
+    },
+    "repositories": [{
+        "name": {
+            "doc": "Repository name.",
+            "format": "String",
+            "default": ""
+        },
+        "path": {
+            "doc": "Repository destination.",
+            "format": "String",
+            "default": ""
+        },
+        "reference": {
+            "doc": "Reference repository (auto:foldername, remote, /path/to/repo)",
+            "format": "String",
+            "default": "remote"
+        },
+        "branch": {
+            "doc": "Checkout repository branch|tag.",
+            "format": "String",
+            "default": "master"
+        },
+        "fatal": {
+            "doc": "Abort setup when failed?",
+            "format": "Boolean",
+            "default": false
+        }
+    }],
+    "html_to_md": [{
+        "from": {
+            "doc": "HTML source folder.",
+            "format": "String",
+            "default": ""
+        },
+        "to": {
+            "doc": "Markdown output folder",
+            "format": "String",
+            "default": ""
+        }
+    }]
+}
