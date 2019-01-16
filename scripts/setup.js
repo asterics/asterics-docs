@@ -83,7 +83,7 @@ try {
 
     /* build docs */
     // set environment variables
-    process.env.ENDPOINT = `${config.get("prefix")}/${v}`;
+    process.env.ENDPOINT = `${config.get("prefix")}/${v}/`;
     process.env.DEST = buildPath;
     shell.echo(
       `asterics-docs: building version ${v} (endpoint: ${process.env.ENDPOINT})`
