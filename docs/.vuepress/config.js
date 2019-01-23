@@ -1,18 +1,11 @@
-const config = require("./../../config.js");
+const path = require("path"),
+  config = require(path.join(__dirname, "..", "..", "source", "config", "config.js"));
 
 const host = config.get("host");
 const port = config.get("port");
-const prefix = config.get("prefix");
-//const base = prefix ? `${prefix}/${config.get("endpoint")}/` : `${config.get("endpoint")}/`;
 const base = config.get("endpoint");
 const dest = config.get("dest");
 const docsDir = config.get("docsdir");
-
-// console.log("host: " + host);
-// console.log("port: " + port);
-console.log("XX base: " + base);
-// console.log("dest: " + dest);
-// console.log("docsDir: " + docsDir);
 
 module.exports = {
   host,
@@ -35,7 +28,10 @@ module.exports = {
     nav: [
       {
         text: "Getting Started",
-        items: [{ text: "Overview", link: "/getting_started/Overview" }, { text: "Demos", link: "/getting_started/Demos" }]
+        items: [
+          { text: "Overview", link: "/getting_started/Overview" },
+          { text: "Demos", link: "/getting_started/Demos" }
+        ]
       },
       {
         text: "Use!", //maybe rename to 'Create/Use/Configure'

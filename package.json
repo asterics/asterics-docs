@@ -7,6 +7,8 @@
     "dev": "vuepress dev docs",
     "prebuild": "node source/scripts/setup.js",
     "build": "vuepress build docs",
+    "cli": "node source/scripts/cli.js",
+    "setup": "node source/scripts/setup.js"
   },
   "repository": {
     "type": "git",

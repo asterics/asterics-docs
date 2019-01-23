@@ -1,9 +1,9 @@
 const path = require("path");
 const convict = require("convict");
 /* Load the schema */
-const config = convict(path.join(__dirname, "source", "config", "schema.json"));
+const config = convict(path.join(__dirname, "schema.json"));
 
-require("dotenv").config({ path: path.join(__dirname, "source", "config", ".env") });
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 let html_to_md_ext = process.env.HTML_TO_MD
   ? process.env.HTML_TO_MD.split(" ")
       .map(v => ({

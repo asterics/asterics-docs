@@ -1,11 +1,8 @@
-// require("dotenv").config();
 const fs = require("fs-extra"),
-  path = require("path");
-const config = require(path.join(__dirname, "..", "config.js")),
-  shell = require("shelljs");
-const { gitLocalPath } = require("asterics-web-git");
-
-console.log("CWD: " + process.cwd());
+  path = require("path"),
+  config = require(path.join(__dirname, "..", "config", "config.js")),
+  shell = require("shelljs"),
+  { gitLocalPath } = require("asterics-web-git");
 
 if (!shell.which("git")) {
   shell.echo("Sorry, this script requires git");
@@ -13,12 +10,10 @@ if (!shell.which("git")) {
 }
 
 /* Run init commands for (all) repositories */
-// [asterics, asterics_wiki].forEach(r => {
 config.get("repositories").forEach(r => {
   let localPath = gitLocalPath(__dirname, r.reference),
     outputPath = path.join(r.path);
   let refCommand = localPath ? `--reference ${localPath}` : "";
-  if (refCommand) console.log(`From (local) ${localPath}`);
 
   /* clone repository */
   // eslint-disable-next-line
@@ -50,9 +45,7 @@ if (versions.some(v => v === "master")) {
   versions.push("master");
 }
 /* Get configuration of AsTeRICS */
-const asterics = config
-  .get("repositories")
-  .filter(v => v.name === "AsTeRICS")[0];
+const asterics = config.get("repositories").filter(v => v.name === "AsTeRICS")[0];
 
 // eslint-disable-next-line
 let buildPath = path.join(config.get("docsdir"), ".vuepress", config.get("dest"), config.get("prefix")),
@@ -70,7 +63,7 @@ try {
     }
     /* convert html to md */
     config.get("html_to_md").forEach(e => {
-      s = shell.exec(`node ./cli.js convert ${e.from} ${e.to} -r`);
+      s = shell.exec(`node ./source/scripts/cli.js convert ${e.from} ${e.to} -r`);
       if (s.code !== 0) {
         shell.echo(`failed converting ${e.from} (html) to ${e.to} (md).`);
         // console.log(r.stderr);
@@ -83,13 +76,11 @@ try {
 
     /* build docs */
     // set environment variables
-    let prefix = config.get("prefix");
-    process.env.ENDPOINT = prefix ? `/${prefix}/${v}/` : `/${v}/`;
+    let endpoint = config.get("endpoint");
+    process.env.ENDPOINT = endpoint ? `/${endpoint}/${v}/` : `/${v}/`;
     process.env.DEST = buildPath;
-    shell.echo(
-      `asterics-docs: building version ${v} (endpoint: ${process.env.ENDPOINT})`
-    );
-    s = shell.exec(`./node_modules/.bin/vuepress build ${docsdir}`);
+    shell.echo(`asterics-docs: building version ${v} (endpoint: ${process.env.ENDPOINT})`);
+    s = shell.exec(`npx vuepress build ${docsdir}`);
     if (s.code === 1) {
       // console.log("FIXME");
     } else if (s.code !== 0) {
@@ -125,12 +116,8 @@ try {
   let prefix = config.get("prefix");
   process.env.ENDPOINT = prefix ? `/${prefix}/` : "";
   process.env.DEST = buildPath;
-  shell.echo(
-    `asterics-docs: building version ${config.get("latest")} (endpoint: ${
-      process.env.ENDPOINT
-    })`
-  );
-  let s = shell.exec(`./node_modules/.bin/vuepress build ${docsdir}`);
+  shell.echo(`asterics-docs: building version ${config.get("latest")} (endpoint: ${process.env.ENDPOINT})`);
+  let s = shell.exec(`npx vuepress build ${docsdir}`);
   if (s.code === 1) {
     console.log("FIXME");
   } else if (s.code !== 0) {
@@ -148,5 +135,5 @@ try {
   });
 
   /* cleanup */
-  console.log("finally");
+  // console.log("finally");
 }
