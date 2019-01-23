@@ -3,7 +3,7 @@ home: true
 heroImage: ./img/asterics-logo.svg
 actionText: Get Started →
 actionLink: /welcome/QuickStart.html
-sidebar: true
+sidebar: auto
 features:
 - title: Simplicity First
   details: As easy as it gets. Join the community and help to improve AsTeRICS, while keeping a focus on simplicity.
