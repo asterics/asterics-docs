@@ -1,9 +1,9 @@
 const path = require("path");
 const convict = require("convict");
 /* Load the schema */
-const config = convict(path.join(__dirname, "config", "schema.json"));
+const config = convict(path.join(__dirname, "source", "config", "schema.json"));
 
-require("dotenv").config({ path: path.join(__dirname, "config", ".env") });
+require("dotenv").config({ path: path.join(__dirname, "source", "config", ".env") });
 let html_to_md_ext = process.env.HTML_TO_MD
   ? process.env.HTML_TO_MD.split(" ")
       .map(v => ({
@@ -19,19 +19,19 @@ config.load({
   repositories: [
     {
       name: "AsTeRICS",
-      path: "source/asterics",
+      path: "source/external/asterics",
       reference: "auto:AsTeRICS",
       branch: "master"
     },
     {
       name: "AsTeRICS.wiki",
-      path: "source/asterics-wiki",
+      path: "source/external/asterics-wiki",
       reference: "auto:AsTeRICS.wiki",
       branch: "master"
     }
   ],
   html_to_md: [
-    { from: "source/asterics/Documentation/ACS-Help/HTML", to: "docs/help" }
+    { from: "source/external/asterics/Documentation/ACS-Help/HTML", to: "docs/help" }
     // ...html_to_md_ext
   ]
   // TODO: Implement hook for customization
@@ -40,7 +40,6 @@ config.load({
 
 /* Override configuration */
 // config.set("port", 8002);
-console.log(config.get("env"));
 
 /* Validate configuration with loaded schema */
 config.validate({ allowed: "warn" });

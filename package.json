@@ -4,10 +4,9 @@
   "description": "AsTeRICS Help and Docs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev intermediate",
-    "prebuild": "node scripts/setup.js",
-    "build": "vuepress build intermediate",
-    "v": "vuepress -V"
+    "dev": "vuepress dev docs",
+    "prebuild": "node source/scripts/setup.js",
+    "build": "vuepress build docs",
   },
   "repository": {
     "type": "git",

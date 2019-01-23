@@ -1,6 +1,6 @@
-[submodule "source/asterics"]
-	path = source/asterics
+[submodule "source/external/asterics"]
+	path = source/external/asterics
 	url = https://github.com/asterics/AsTeRICS.git
-[submodule "source/asterics-wiki"]
-	path = source/asterics-wiki
+[submodule "source/external/asterics-wiki"]
+	path = source/external/asterics-wiki
 	url = https://github.com/asterics/AsTeRICS.wiki.git
