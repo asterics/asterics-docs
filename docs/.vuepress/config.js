@@ -21,8 +21,15 @@ module.exports = {
       updatePopup: true
     },
     nav: [
-      { text: "Use", link: "/user_doc/" },
-      { text: "Customize", link: "/help/" },
+      { text: "Getting Started", link: "/user_doc/" },
+      {
+        text: "Discover",
+        items: [
+          { text: "Models", link: "/user_doc/Search-Models" },
+          { text: "AT Solutions", link: "/user_doc/Search-AT-solutions" }
+        ]
+      },
+      { text: "Help", link: "/help/" },
       { text: "Develop", link: "/develop/" },
       // {
       //   text: "Getting Started",
@@ -56,7 +63,7 @@ module.exports = {
         text: "Applications", //maybe rename to 'Create/Use/Configure'
         items: [
           {
-            text: "Model",
+            text: "WebACS",
             link:
               "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
           },
@@ -89,14 +96,13 @@ module.exports = {
     sidebar: {
       "/user_doc/": [
         {
-          title: "Documentation",
-          collapsable: true,
+          title: "Getting Started",
+          collapsable: false,
           children: [
-            ["Concepts", "Getting Started"],
-            ["Installation", "Getting Started"],
-            ["User_Manuals", "Getting Started"],
-            ["User_Interfaces", "Getting Started"],
-            ["Tutorials", "Getting Started"]
+            ["Introduction", "Introduction"],
+            ["Installation", "Installation"],
+            ["Search-Models", "Discover Models"],
+            ["Search-AT-solutions", "Discover AT Solutions"]
           ]
         }
       ],
@@ -122,6 +128,7 @@ module.exports = {
           collapsable: false,
           children: [
             ["AT_solution_development", "Introduction"],
+            ["AT-solution-demos", "Demos"],
             [
               "developer_guide/coding_instructions/AsTeRICS Solutions",
               "AT Solution Tutorial"
@@ -134,16 +141,16 @@ module.exports = {
           collapsable: false,
           children: [
             ["REST-API", "Introduction"],
-            ["developer_guide/api/REST (api)", "REST API Tutorial"],
+            ["developer_guide/api/REST-API.md", "REST API Tutorial"]
             // ["clientExample/are_runtime.html", "Demos"],
             // [
             //   "https://github.com/asterics/AsTeRICS/blob/master/ARE_RestAPIlibraries/clientExample/javascript/areCommunicator.js",
             //   "REST Javascript Client Wrapper"
             // ],
-            [
-              "doc/lib-js-api/index.html",
-              "REST Javascript Client Wrapper Extended"
-            ]
+            // [
+            //   "doc/lib-js-api/index.html",
+            //   "REST Javascript Client Wrapper Extended"
+            // ]
             // [
             //   "https://github.com/asterics/AsTeRICS/tree/master/ARE_RestAPIlibraries/JavaLibrary",
             //   "REST Java Client Wrapper"
@@ -162,9 +169,14 @@ module.exports = {
       ],
       "/help/": [
         {
-          title: "Customize and Create",
+          title: "Help",
           collapsable: false,
           children: [["ARE/ARE_Introduction", "Intro"]]
+        },
+        {
+          title: "User Interfaces",
+          collapsable: false,
+          children: [["../user_doc/User_Interfaces", "User Interfaces"]]
         },
         {
           title: "WebACS",
