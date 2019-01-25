@@ -125,11 +125,8 @@ module.exports = {
             [
               "developer_guide/coding_instructions/AsTeRICS Solutions",
               "AT Solution Tutorial"
-            ]
-            // [
-            //   "https://github.com/asterics/AsTeRICS/tree/master/bin/APE",
-            //   "AsTeRICS Packaging Environment (APE)"
-            // ]
+            ],
+            ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         },
         {
@@ -137,14 +134,15 @@ module.exports = {
           collapsable: false,
           children: [
             ["REST-API", "Introduction"],
-            ["developer_guide/api/REST (api)", "REST API Tutorial"][
-              // ["clientExample/are_runtime.html", "Demos"],
-              // [
-              //   "https://github.com/asterics/AsTeRICS/blob/master/ARE_RestAPIlibraries/clientExample/javascript/areCommunicator.js",
-              //   "REST Javascript Client Wrapper"
-              // ],
-              ("doc/lib-js-api/index.html",
-              "REST Javascript Client Wrapper Extended")
+            ["developer_guide/api/REST (api)", "REST API Tutorial"],
+            // ["clientExample/are_runtime.html", "Demos"],
+            // [
+            //   "https://github.com/asterics/AsTeRICS/blob/master/ARE_RestAPIlibraries/clientExample/javascript/areCommunicator.js",
+            //   "REST Javascript Client Wrapper"
+            // ],
+            [
+              "doc/lib-js-api/index.html",
+              "REST Javascript Client Wrapper Extended"
             ]
             // [
             //   "https://github.com/asterics/AsTeRICS/tree/master/ARE_RestAPIlibraries/JavaLibrary",
