@@ -6,7 +6,7 @@ actionLink: /welcome/QuickStart.html
 sidebar: auto
 features:
 - title: Simplicity First
-  details: As easy as it gets. Join the community and help to improve AsTeRICS, while keeping a focus on simplicity.
+  details: As easy as it gets. Join the community and help to improve [AsTeRICS](https://github.com/asterics/AsTeRICS/tree/v3.0/ARE_RestAPIlibraries/clientExample/javascript), while keeping a focus on simplicity.
 - title: Bring your own Booze 
   details: We drink a lot... Coffee of course. What did you think? And we like to share. But when it gets to drinking beer, it's every man for himself.
 - title: Performance counts

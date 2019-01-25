@@ -1,0 +1,4 @@
+# AsTeRICS Architecture
+
+## Coding guidelines
+....

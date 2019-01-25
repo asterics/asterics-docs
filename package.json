@@ -33,6 +33,12 @@
     "@asterics/node-utils": "^0.1.0",
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
+<<<<<<< HEAD
+=======
+    "klaw-sync": "^60.0",
+    "nodegit": "^0.23.0",
+    "ora": "^3.0.0",
+>>>>>>> draft with develop menu
     "shelljs": "^0.8.3",
     "turndown": "^5.0.1",
     "vuepress": "0.14.8",
