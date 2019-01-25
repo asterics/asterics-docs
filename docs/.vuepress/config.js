@@ -137,16 +137,15 @@ module.exports = {
           collapsable: false,
           children: [
             ["REST-API", "Introduction"],
-            ["developer_guide/api/REST (api)", "REST API Tutorial"]
-            // ["clientExample/are_runtime.html", "Demos"],
-            // [
-            //   "https://github.com/asterics/AsTeRICS/blob/master/ARE_RestAPIlibraries/clientExample/javascript/areCommunicator.js",
-            //   "REST Javascript Client Wrapper"
-            // ],
-            // [
-            //   "doc/lib-js-api/index.html",
-            //   "REST Javascript Client Wrapper Extended"
-            // ]
+            ["developer_guide/api/REST (api)", "REST API Tutorial"][
+              // ["clientExample/are_runtime.html", "Demos"],
+              // [
+              //   "https://github.com/asterics/AsTeRICS/blob/master/ARE_RestAPIlibraries/clientExample/javascript/areCommunicator.js",
+              //   "REST Javascript Client Wrapper"
+              // ],
+              ("doc/lib-js-api/index.html",
+              "REST Javascript Client Wrapper Extended")
+            ]
             // [
             //   "https://github.com/asterics/AsTeRICS/tree/master/ARE_RestAPIlibraries/JavaLibrary",
             //   "REST Java Client Wrapper"
@@ -280,8 +279,8 @@ module.exports = {
           title: "Tutorials",
           collapsable: true,
           children: [
-            ["Tutorials", "Camera Mouse Step by Step"],
-            ["Tutorials", "Simple Model creation"]
+            ["../user_doc/Tutorials", "Camera Mouse Step by Step"],
+            ["../user_doc/Tutorials", "Simple Model creation"]
           ]
         }
       ]
