@@ -1,66 +1,64 @@
 # AsTeRICS Docs
 
-Repository to manage AsTeRICS related documentation.
+AsTeRICS documentation (static site built with `vuepress`).
 
 ## Dependencies
 
 Install needed dependencies with
 
-    ~/asterics-docs $ npm i
-
-## Development Instructions
-
-Run
-
-    ~/asterics-docs $ npm run dev
-
-or alternatively, switch to folder `intermediate` and start the development server manually.
-
-    ~/asterics-docs $ cd intermediate
-    ~/asterics-docs/intermediate $ vuepress dev
-
-## Utilty Tool
-
-Use
-
-    ~/asterics-docs $ node util.js
-
-to start the asterics-docs utility tool, which provides following capabilties:
-
-    1. build and backup docs version
-    2. create sidebar entry
-    3. show configuration
-
-### Configuration
-
-Use variables in file `.env` to configure the utility tool
-
-    ASTERICS_REPO = "source/asterics"
-
-    ACS_HELP_SRC = "Documentation/ACS-Help/HTML"
-    ACS_HELP_DEST = "help"
-    ACS_HELP_FILES_EXT = "FIXME!"
-
-    DOCS_PORT = 8080
-    DOCS_LATEST = "v3.0.1 FIXME!"
-    DOCS_SRC = "intermediate"
-    DOCS_DEST = "intermediate/.vuepress/dist"
-    BUILD_DEST = "intermediate/.vuepress/intermediate_build"
-    SIDEBAR_DEST = "intermediate/.vuepress/sidebar"
-
-    UTIL_TIMEOUT = 5000
+    npm install
 
 ## Build Instructions
 
-To build for release, run
+Build current release (_without legacy versions_):
 
-    ~/asterics-docs $ npm run build
+    npm run build
 
-or manually
+and locate the result at  `docs/.vuepress/dist/`.
 
-    ~/asterics-docs $ cd intermediate
-    ~/asterics-docs/intermediate $ vuepress build
+### Development Instructions
 
-and locate the result at  `intermediate/.vuepress/dist/`.
+Build development release (hot module replacement):
 
-> Note: The build includes another folder, i.e., `intermediate/.vuepress/public/`, which is needed for the release.
+    npm run dev
+
+### Legacy Release
+
+Build legacy releases:
+
+    npm run legacy
+
+### Release Instructions
+
+Build release (legacy + build)
+
+    npm run release
+
+## Configuration Reference
+
+Use variables in file `.env` to configure the builds
+
+    # Host IP address
+    HOST="127.0.0.1"
+
+    # Host port number
+    PORT=8000
+
+    # Path to documentation on server
+    ENDPOINT="docs"
+
+## CLI Reference
+
+Start CLI tool:
+
+    npm run cli <command>
+
+To pass commands and options, use `--` after script command:
+
+    npm run cli -- -h
+
+Commands
+
+    npm run cli -- convert -h
+
+    npm run cli -- sidebar -h

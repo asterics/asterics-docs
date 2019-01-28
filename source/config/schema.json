@@ -17,29 +17,27 @@
         "default": 8080,
         "env": "PORT"
     },
-    "latest": {
-        "doc": "Latest version.",
-        "format": ["master","v3.0.1"],
-        "default": "master",
-        "env": "LATEST"
-    },
-    "docsdir": {
+    "versions": [{
+        "doc": "Documentation version. Last entry is not build to ",
+        "format": ["v2.3", "v2.5", "v2.6","v2.7", "v2.8","v3.0","v3.0.1","master"],
+        "default": "master"
+    }],
+    "documentation": {
         "doc": "Documentation source folder.",
         "format": "String",
         "default": "docs",
-        "env": "DOCSDIR"
+        "env": "DOCUMENTATION"
     },
-    "dest": {
+    "destination": {
         "doc": "Build output folder.",
         "format": "String",
         "default": "docs/.vuepress/dist",
-        "env": "DEST"
+        "env": "DESTINATION"
     },
-    "prefix": {
-        "doc": "Hosting prefix.",
+    "wd": {
+        "doc": "Working directory.",
         "format": "String",
-        "default": "",
-        "env": "PREFIX"
+        "default": ""
     },
     "endpoint": {
         "doc": "Hosting endpoint.",
@@ -47,13 +45,19 @@
         "default": "",
         "env": "ENDPOINT"
     },
-    "repositories": [{
+    "verbose": {
+        "doc": "Verbose cli output.",
+        "format": "Boolean",
+        "default": false,
+        "env": "VERBOSE"
+    },
+    "submodules": [{
         "name": {
             "doc": "Repository name.",
             "format": "String",
             "default": ""
         },
-        "path": {
+        "destination": {
             "doc": "Repository destination.",
             "format": "String",
             "default": ""
@@ -68,7 +72,7 @@
             "format": "String",
             "default": "master"
         },
-        "fatal": {
+        "fatality": {
             "doc": "Abort setup when failed?",
             "format": "Boolean",
             "default": false

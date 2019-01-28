@@ -6,4 +6,6 @@ require("yargs")
   .help("h")
   .version(false)
   .epilog("Run node cli.js <command> --help for detailed usage of given command.")
+  .showHelpOnFail(true)
+  .demandCommand()
   .parse();

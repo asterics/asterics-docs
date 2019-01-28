@@ -1,45 +1,41 @@
 const path = require("path");
-const convict = require("convict");
-/* Load the schema */
-const config = convict(path.join(__dirname, "schema.json"));
 
-require("dotenv").config({ path: path.join(__dirname, ".env") });
-let html_to_md_ext = process.env.HTML_TO_MD
-  ? process.env.HTML_TO_MD.split(" ")
-      .map(v => ({
-        from: v.split("=>")[0],
-        to: v.split("=>")[1]
-      }))
-      .filter(v => v.from !== "")
-  : "";
+let envConfigPath = path.join(process.cwd(), "source", "config", ".env"),
+  schemaPath = path.join(process.cwd(), "source", "config", "schema.json");
+
+require("dotenv").config({ path: envConfigPath });
+const convict = require("convict"),
+  config = convict(schemaPath),
+  { gitLocalPath } = require("@asterics/git-tools");
 
 /* Load configuration */
 config.load({
   env: "production",
-  repositories: [
+  wd: process.cwd(),
+  documentation: "docs",
+  destination: path.join("docs", ".vuepress", "dist"),
+  submodules: [
     {
       name: "AsTeRICS",
-      path: "source/external/asterics",
-      reference: "auto:AsTeRICS",
+      destination: path.join(process.cwd(), "source", "external", "asterics"),
+      reference: gitLocalPath(path.join(process.cwd(), ".."), "auto:AsTeRICS"),
       branch: "master"
     },
     {
       name: "AsTeRICS.wiki",
-      path: "source/external/asterics-wiki",
-      reference: "auto:AsTeRICS.wiki",
+      destination: path.join(process.cwd(), "source", "external", "asterics-wiki"),
+      reference: gitLocalPath(path.join(process.cwd(), ".."), "auto:AsTeRICS.wiki"),
       branch: "master"
     }
   ],
+  versions: ["v2.3", "v2.5", "v3.0.1", "master"],
   html_to_md: [
-    { from: "source/external/asterics/Documentation/ACS-Help/HTML", to: "docs/help" }
-    // ...html_to_md_ext
+    {
+      from: path.join("source", "external", "asterics", "Documentation", "ACS-Help", "HTML"),
+      to: path.join("docs", "help")
+    }
   ]
-  // TODO: Implement hook for customization
-  // html_to_md_custom: [{ from: "InPut.txt", to: "input.txt" }]
 });
-
-/* Override configuration */
-// config.set("port", 8002);
 
 /* Validate configuration with loaded schema */
 config.validate({ allowed: "warn" });

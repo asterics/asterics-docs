@@ -1,24 +1,19 @@
 const path = require("path"),
-  config = require(path.join(__dirname, "..", "..", "source", "config", "config.js"));
-
-const host = config.get("host");
-const port = config.get("port");
-const base = config.get("endpoint");
-const dest = config.get("dest");
-const docsDir = config.get("docsdir");
+  configPath = path.join(process.cwd(), "source", "config", "config.js"),
+  config = require(configPath);
 
 module.exports = {
-  host,
-  port,
-  base,
-  dest,
+  host: config.get("host"),
+  port: config.get("port"),
+  base: config.get("endpoint") ? `/${config.get("endpoint")}/` : "",
+  dest: config.get("destination"),
   title: "AsTeRICS",
   description: "That's all folks.",
   themeConfig: {
     repo: "asterics/AsTeRICS",
     repoLabel: "Repository!",
     docsRepo: "asterics/asterics-docs",
-    docsDir,
+    docsDir: config.get("documentation"),
     docsBranch: "master",
     editLinks: true,
     editLinkText: "Help us improve this page!",
@@ -28,10 +23,7 @@ module.exports = {
     nav: [
       {
         text: "Getting Started",
-        items: [
-          { text: "Overview", link: "/getting_started/Overview" },
-          { text: "Demos", link: "/getting_started/Demos" }
-        ]
+        items: [{ text: "Overview", link: "/getting_started/Overview" }, { text: "Demos", link: "/getting_started/Demos" }]
       },
       {
         text: "Use!", //maybe rename to 'Create/Use/Configure'

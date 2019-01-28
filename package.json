@@ -5,10 +5,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
-    "prebuild": "node source/scripts/setup.js",
     "build": "vuepress build docs",
+    "legacy": "node source/scripts/setup.js",
+    "release": "npm run legacy && npm run build",
     "cli": "node source/scripts/cli.js",
-    "setup": "node source/scripts/setup.js"
+    "presetup": "npm run legacy",
+    "setup": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -27,15 +29,11 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
-    "asterics-web-git": "git+https://github.com/sabicalija/asterics-web-git.git#0.1.0",
-    "child_process": "^1.0.2",
+    "@asterics/git-tools": "^0.1.4",
+    "@asterics/node-utils": "0.0.2",
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
-    "klaw-sync": "^6.0.0",
-    "nodegit": "^0.23.0",
-    "ora": "^3.0.0",
     "shelljs": "^0.8.3",
-    "terminal-kit": "^1.26.8",
     "turndown": "^5.0.1",
     "vuepress": "0.14.8",
     "yargs": "^12.0.5"

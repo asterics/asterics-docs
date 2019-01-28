@@ -1,139 +1,107 @@
-const fs = require("fs-extra"),
-  path = require("path"),
-  config = require(path.join(__dirname, "..", "config", "config.js")),
+const path = require("path"),
+  fs = require("fs");
+
+const configPath = path.join(process.cwd(), "source", "config", "config.js");
+
+const config = require(configPath),
   shell = require("shelljs"),
-  { gitLocalPath } = require("asterics-web-git");
+  { ensureGitSubmodule, checkoutSubmodule } = require("@asterics/git-tools"),
+  { execute } = require("@asterics/node-utils");
 
 if (!shell.which("git")) {
   shell.echo("Sorry, this script requires git");
   shell.exit(1);
 }
 
-/* Run init commands for (all) repositories */
-config.get("repositories").forEach(r => {
-  let localPath = gitLocalPath(__dirname, r.reference),
-    outputPath = path.join(r.path);
-  let refCommand = localPath ? `--reference ${localPath}` : "";
+const AsTeRICS = config.get("submodules").find(submodule => submodule.name === "AsTeRICS"),
+  legacy = config.get("versions"),
+  latest = legacy.pop();
 
-  /* clone repository */
-  // eslint-disable-next-line
-  let s = shell.exec(`git submodule update --init ${refCommand} ${outputPath}`);
-  if (s.code !== 0) {
-    shell.echo(`failed cloning ${outputPath}`);
-    if (r.fatal) shell.exit(1);
-  }
-  /* checkout branch/tag */
-  // eslint-disable-next-line
-  s = shell.exec(`git --git-dir=${outputPath}/.git --work-tree=${outputPath} checkout ${r.branch}`);
-  if (s.code !== 0) {
-    shell.echo(`failed checking out ${r.branch} in ${outputPath}`);
-    if (r.fatal) shell.exit(1);
-  }
-  /* pull latest commits */
-  // eslint-disable-next-line
-  s = shell.exec(`git --git-dir=${outputPath}/.git --work-tree=${outputPath} pull origin ${r.branch}`);
-  if (s.code !== 0) {
-    shell.exec(`failed to pull latest commits of ${outputPath}`);
-    if (r.fatal) shell.exit(1);
-  }
+/* Setup git submodules */
+config.get("submodules").forEach(submodule => ensureGitSubmodule(submodule, config.get("verbose")));
+
+/* Clean possible conversion files of latest release */
+checkoutSubmodule({ ...AsTeRICS, branch: latest }, config.get("verbose"));
+clean();
+
+/* Build legacy versions */
+legacy.forEach(version => {
+  checkoutSubmodule({ ...AsTeRICS, branch: version }, config.get("verbose"));
+  convert();
+  buildLegacy(version);
+  clean(); // conversion
 });
 
-/* Get valid versions */
-let versions = config.getSchema().properties.latest.format.sort();
-if (versions.some(v => v === "master")) {
-  versions = versions.filter(e => e !== "master");
-  versions.push("master");
+/* Build latest versions */
+checkoutSubmodule({ ...AsTeRICS, branch: latest }, config.get("verbose"));
+convert();
+// build();
+
+/* Copy legacy build to public */
+public();
+
+function convert() {
+  config.get("html_to_md").forEach(({ from, to }) => {
+    let script = path.join(config.get("wd"), "source", "scripts", "cli.js");
+    execute({
+      cmd: `node ${script} convert ${from} ${to} -r`,
+      success: `converted files in ${from} to ${to}`,
+      error: `failed converting files in ${from} to ${to}`,
+      verbose: config.get("verbose")
+    });
+  });
 }
-/* Get configuration of AsTeRICS */
-const asterics = config.get("repositories").filter(v => v.name === "AsTeRICS")[0];
 
-// eslint-disable-next-line
-let buildPath = path.join(config.get("docsdir"), ".vuepress", config.get("dest"), config.get("prefix")),
-  backupPath = path.join(config.get("docsdir"), ".vuepress", "temp"),
-  docsdir = config.get("docsdir");
-
-try {
-  versions.forEach(v => {
-    /* checkout version of AsTeRICS repository */
-    // eslint-disable-next-line
-    let s = shell.exec(`git --git-dir=${asterics.path}/.git --work-tree=${asterics.path} checkout ${v}`);
-    if (s.code !== 0) {
-      shell.echo(`failed checking out ${v} in ${asterics.path}`);
-      shell.exit(1);
-    }
-    /* convert html to md */
-    config.get("html_to_md").forEach(e => {
-      s = shell.exec(`node ./source/scripts/cli.js convert ${e.from} ${e.to} -r`);
-      if (s.code !== 0) {
-        shell.echo(`failed converting ${e.from} (html) to ${e.to} (md).`);
-        // console.log(r.stderr);
-        // shell.exit(1);
-      }
-    });
-
-    /* Stop with latest release */
-    if (v === config.get("latest")) throw new Error("latest");
-
-    /* build docs */
-    // set environment variables
-    let endpoint = config.get("endpoint");
-    process.env.ENDPOINT = endpoint ? `/${endpoint}/${v}/` : `/${v}/`;
-    process.env.DEST = buildPath;
-    shell.echo(`asterics-docs: building version ${v} (endpoint: ${process.env.ENDPOINT})`);
-    s = shell.exec(`npx vuepress build ${docsdir}`);
-    if (s.code === 1) {
-      // console.log("FIXME");
-    } else if (s.code !== 0) {
-      shell.echo(`failed building vuepress project in ${docsdir}/`);
-      shell.exit(1);
-    }
-
-    /* backup folder */
-    let backupDir = path.join(backupPath, v);
-    fs.removeSync(backupDir);
-    fs.ensureDir(backupDir);
-    fs.copySync(buildPath, backupDir);
-
-    /* delete conversion */
-    config.get("html_to_md").forEach(e => {
-      let folder = e.to;
-      fs.readdirSync(folder)
-        .filter(e => e !== "README.md")
-        .forEach(e => {
-          fs.removeSync(path.join(folder, e));
-        });
+function clean() {
+  config.get("html_to_md").forEach(({ from, to }) => {
+    let script = path.join(config.get("wd"), "source", "scripts", "cli.js");
+    execute({
+      cmd: `node ${script} convert ${from} ${to} -r -c`,
+      success: `cleaned converted files in ${to}`,
+      error: `failed cleaning converted files in ${to}`,
+      verbose: config.get("verbose")
     });
   });
-} catch (e) {
-  // if (typeof e === "LastestReleaseError") {
-  // console.log("SUCCESS");
-  if (e != "Error: latest") {
-    throw e;
-  }
-} finally {
-  /* build docs */
-  // set environment variables
-  let prefix = config.get("prefix");
-  process.env.ENDPOINT = prefix ? `/${prefix}/` : "";
-  process.env.DEST = buildPath;
-  shell.echo(`asterics-docs: building version ${config.get("latest")} (endpoint: ${process.env.ENDPOINT})`);
-  let s = shell.exec(`npx vuepress build ${docsdir}`);
-  if (s.code === 1) {
-    console.log("FIXME");
-  } else if (s.code !== 0) {
-    shell.echo(`failed building vuepress project in ${config.get("docsdir")}/`);
-    shell.exit(1);
-  }
+}
 
-  /* merge results */
-  fs.readdirSync(backupPath).forEach(e => {
-    let sourcePath = path.join(backupPath, e);
-    let targetPath = path.join(buildPath, e);
-    if (fs.statSync(sourcePath).isDirectory()) {
-      fs.copySync(sourcePath, targetPath);
-    }
+// function build() {
+//   let documentation = path.join(config.get("wd"), config.get("documentation")),
+//     destination = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "dist");
+//   execute({
+//     cmd: `npx vuepress build ${documentation}`,
+//     success: `built docs at ${documentation} (endpoint: ${endpoint}, destination: ${destination})`,
+//     error: `failed building docs at ${documentation} (endpoint: ${endpoint}, destination: ${destination})`,
+//     env: { DESTINATION: destination },
+//     verbose: config.get("verbose")
+//   });
+// }
+
+function buildLegacy(version) {
+  let documentation = path.join(config.get("wd"), config.get("documentation")),
+    endpoint = config.get("endpoint") ? `${config.get("endpoint")}/${version}` : `${version}`,
+    /* NOTE: destinations with a dot in the folder name (e.g., v2.3/) result in error (EISDIR). */
+    destination = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "temp", "build"),
+    final = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "temp", version);
+  execute({
+    cmd: `npx vuepress build ${documentation}`,
+    success: `built docs at ${documentation} (endpoint: /${endpoint}/, destination: ${final})`,
+    error: `failed building docs at ${documentation} (endpoint: /${endpoint}/, destination: ${final})`,
+    env: { ENDPOINT: endpoint, DESTINATION: destination },
+    verbose: config.get("verbose")
+  });
+  shell.mv(destination, final);
+}
+
+function public() {
+  let public = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "public"),
+    temp = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "temp");
+
+  fs.readdirSync(temp).forEach(folder => {
+    let source = path.join(temp, folder);
+    destination = path.join(public, folder);
+
+    fs.renameSync(source, destination);
   });
 
-  /* cleanup */
-  // console.log("finally");
+  fs.rmdirSync(temp);
 }
