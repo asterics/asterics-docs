@@ -1,7 +1,7 @@
 const path = require("path"),
   fs = require("fs");
 
-const configPath = path.join(process.cwd(), "source", "config", "config.js");
+const configPath = path.join(process.cwd(), "src", "config", "config.js");
 
 const config = require(configPath),
   shell = require("shelljs"),
@@ -42,7 +42,7 @@ public();
 
 function convert() {
   config.get("html_to_md").forEach(({ from, to }) => {
-    let script = path.join(config.get("wd"), "source", "scripts", "cli.js");
+    let script = path.join(config.get("wd"), "src", "scripts", "cli.js");
     execute({
       cmd: `node ${script} convert ${from} ${to} -r`,
       success: `converted files in ${from} to ${to}`,
@@ -54,7 +54,7 @@ function convert() {
 
 function clean() {
   config.get("html_to_md").forEach(({ from, to }) => {
-    let script = path.join(config.get("wd"), "source", "scripts", "cli.js");
+    let script = path.join(config.get("wd"), "src", "scripts", "cli.js");
     execute({
       cmd: `node ${script} convert ${from} ${to} -r -c`,
       success: `cleaned converted files in ${to}`,

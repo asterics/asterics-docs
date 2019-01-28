@@ -6,9 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "legacy": "node source/scripts/setup.js",
+    "legacy": "node src/scripts/setup.js",
     "release": "npm run legacy && npm run build",
-    "cli": "node source/scripts/cli.js",
+    "cli": "node src/scripts/cli.js",
     "presetup": "npm run legacy",
     "setup": "vuepress build docs"
   },
@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
-    "@asterics/git-tools": "^0.1.4",
-    "@asterics/node-utils": "0.0.2",
+    "@asterics/git-tools": "^0.1.5",
+    "@asterics/node-utils": "^0.1.0",
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
     "shelljs": "^0.8.3",

@@ -1,5 +1,5 @@
 const path = require("path"),
-  configPath = path.join(process.cwd(), "source", "config", "config.js"),
+  configPath = path.join(process.cwd(), "src", "config", "config.js"),
   config = require(configPath);
 
 module.exports = {

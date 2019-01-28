@@ -1,10 +1,11 @@
 const fs = require("fs"),
   path = require("path");
 
-const configPath = path.join(process.cwd(), "source", "config", "config.js");
+const configPath = path.join(process.cwd(), "src", "config", "config.js");
 
 const config = require(configPath),
-  turndown = require("turndown")();
+  turndown = require("turndown")(),
+  { mkdirp } = require("@asterics/node-utils");
 
 exports.command = "convert <input> [output]";
 exports.aliases = ["conv"];
@@ -79,12 +80,6 @@ function loadJobs({ input, output, recursive }) {
   });
 
   return { directories, conversions };
-}
-
-function mkdirp(directory) {
-  let parent = path.join(directory, "..");
-  if (parent !== path.join("/") && !fs.existsSync(parent)) mkdirp(parent);
-  if (!fs.existsSync(directory)) fs.mkdirSync(directory);
 }
 
 exports.handler = ({ input, output, recursive, clean }) => {
