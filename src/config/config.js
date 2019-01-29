@@ -28,7 +28,7 @@ config.load({
       branch: "master"
     }
   ],
-  versions: ["v2.3", "v2.5", "v3.0.1", "master"],
+  versions: ["v2.3-patch", "v2.5-patch", "v3.0.1", "master"],
   html_to_md: [
     {
       from: path.join("src", "external", "asterics", "Documentation", "ACS-Help", "HTML"),

@@ -19,7 +19,7 @@
     },
     "versions": [{
         "doc": "Documentation version. Last entry is not build to ",
-        "format": ["v2.3", "v2.5", "v2.6","v2.7", "v2.8","v3.0","v3.0.1","master"],
+        "format": ["v2.3-path", "v2.5-path", "v2.6-path","v2.7-path", "v2.8-path","v3.0","v3.0.1","master"],
         "default": "master"
     }],
     "documentation": {
