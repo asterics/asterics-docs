@@ -1,4 +1,2 @@
-# AsTeRICS Architecture
+# Setup Development Environment
 
-## Coding guidelines
-....

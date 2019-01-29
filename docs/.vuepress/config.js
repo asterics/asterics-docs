@@ -8,7 +8,7 @@ module.exports = {
   base: config.get("endpoint") ? `/${config.get("endpoint")}/` : "",
   dest: config.get("destination"),
   title: "AsTeRICS",
-  description: "That's all folks.",
+  description: "Customized Low-Cost Assistive Technologies",
   themeConfig: {
     repo: "asterics/AsTeRICS",
     repoLabel: "Repository!",
@@ -21,16 +21,16 @@ module.exports = {
       updatePopup: true
     },
     nav: [
-      { text: "Getting Started", link: "/user_doc/" },
+      { text: "Getting Started", link: "/getting-started/" },
       {
         text: "Discover",
         items: [
-          { text: "Models", link: "/user_doc/Search-Models" },
-          { text: "AT Solutions", link: "/user_doc/Search-AT-solutions" }
+          { text: "Models", link: "/getting-started/Search-Models" },
+          { text: "Grids", link: "/getting-started/Search-asterics-grids" },
+          { text: "AT Solutions", link: "/getting-started/Search-AT-solutions" }
         ]
       },
       { text: "Help", link: "/help/" },
-      { text: "Develop", link: "/develop/" },
       // {
       //   text: "Getting Started",
       //   items: [
@@ -72,10 +72,11 @@ module.exports = {
             link:
               "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
           },
-          { text: "Plugin", link: "/plugins/New" },
-          { text: "AT solution", link: "/at_solutions/New" } //maybe rename to 'AT application'
+          { text: "Plugin IDE", link: "/plugins/New" },
+          { text: "AT solution IDE", link: "/at_solutions/New" } //maybe rename to 'AT application'
         ]
       },
+      { text: "Develop", link: "/develop/" },
       {
         text: "Support",
         items: [
@@ -94,72 +95,83 @@ module.exports = {
       }
     ],
     sidebar: {
-      "/user_doc/": [
+      "/getting-started/": [
         {
           title: "Getting Started",
           collapsable: false,
+          children: [["", "Introduction"]]
+        },
+        {
+          title: "Discover",
+          collapsable: false,
           children: [
-            ["Introduction", "Introduction"],
-            ["Installation", "Installation"],
-            ["Search-Models", "Discover Models"],
-            ["Search-AT-solutions", "Discover AT Solutions"]
+            ["Search-Models", "Models"],
+            ["Search-asterics-grids", "Grids"],
+            ["Search-AT-solutions", "AT Solutions"]
           ]
         }
       ],
       "/develop/": [
         {
-          title: "Developer Guide",
+          title: "Introduction",
           collapsable: false,
           children: [
-            ["DeveloperGuide", "Setup Development Environment"],
-            ["DeveloperGuide", "Code Guidelines"]
+            ["DeveloperGuide", "Development Environment"],
+            ["Coding-Guidelines", "Coding Guidelines"],
+            ["Unit-Testing", "Unit Testing"]
           ]
         },
         {
-          title: "Plugin Development",
+          title: "Plugin",
           collapsable: false,
           children: [
-            ["Plugin", "Plugin Creation Wizard"],
-            ["Plugin", "bundle_descriptor.xml"]
+            ["Simple-Plugin-Tutorial.md", "Tutorial"],
+            ["Plugin", "Creation Wizard"],
+            ["ARE-HW-Interfacing-JNI.md", "HW Interfacing (JNI)"]
           ]
         },
         {
-          title: "AT solution Development",
+          title: "AT Solution",
           collapsable: false,
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
             [
-              "developer_guide/coding_instructions/AsTeRICS Solutions",
-              "AT Solution Tutorial"
+              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
+              "Tutorial"
             ],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         },
         {
-          title: "ARE REST API",
+          title: "ARE Remote APIs",
           collapsable: false,
           children: [
-            ["REST-API", "Introduction"],
-            ["developer_guide/api/REST-API.md", "REST API Tutorial"]
-            // ["clientExample/are_runtime.html", "Demos"],
+            ["ARE-Webserver.md", "Webserver"],
+            ["REST-API", "REST"],
+            // ["REST-demos.md", "REST API Demos"],
+            // ["asterics-wiki/api/REST-API.md", "REST API Tutorial"],
+            // ["REST-API-js-areCommunicator.md", "JS REST Client lib"],
             // [
-            //   "https://github.com/asterics/AsTeRICS/blob/master/ARE_RestAPIlibraries/clientExample/javascript/areCommunicator.js",
-            //   "REST Javascript Client Wrapper"
+            //   "REST-API-js-wrapper-ext.md",
+            //   "JS Model Manipulation / Deployment lib"
             // ],
-            // [
-            //   "doc/lib-js-api/index.html",
-            //   "REST Javascript Client Wrapper Extended"
-            // ]
-            // [
-            //   "https://github.com/asterics/AsTeRICS/tree/master/ARE_RestAPIlibraries/JavaLibrary",
-            //   "REST Java Client Wrapper"
-            // ]
+            ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
+            // ["REST-API-java-client.md", "REST Java Client lib"]
+          ]
+        },
+        {
+          title: "ARE Middleware",
+          collapsable: false,
+          children: [
+            ["ARE API.md", "Introduction"],
+            ["asterics-wiki/api/Resource Handling.md", "Resource handling"],
+            ["ARE-Keyboard-Mouse-Services.md", "Keyboard/Mouse"],
+            ["asterics-wiki/coding_instructions/JavaCV.md", "Computer Vision"],
+            ["ARE-HW-Interfacing-CIM.md", "Interfacing Peripherals (CIM)"]
           ]
         }
       ],
-
-      "/installation/": [],
       "/help/Plugins/": [
         {
           title: "Actuators",
@@ -168,16 +180,9 @@ module.exports = {
         }
       ],
       "/help/": [
-        {
-          title: "Help",
-          collapsable: false,
-          children: [["ARE/ARE_Introduction", "Intro"]]
-        },
-        {
-          title: "User Interfaces",
-          collapsable: false,
-          children: [["../user_doc/User_Interfaces", "User Interfaces"]]
-        },
+        ["", "Introduction"],
+        ["User-Interfaces", "User Interfaces"],
+        ["Tutorials", "Tutorials"],
         {
           title: "WebACS",
           collapsable: true,
@@ -222,7 +227,6 @@ module.exports = {
             ["ACS/Tooltips", "Tooltips"]
           ]
         },
-
         {
           title: "ACS",
           collapsable: true,
@@ -268,11 +272,6 @@ module.exports = {
           ]
         },
         {
-          title: "ARE",
-          collapsable: true,
-          children: [["ARE/ARE_Introduction", "Introduction"]]
-        },
-        {
           title: "Plugins",
           collapsable: true,
           children: [["Plugins/Introduction", "Introduction"]]
@@ -286,12 +285,9 @@ module.exports = {
           // ]
         },
         {
-          title: "Tutorials",
+          title: "ARE",
           collapsable: true,
-          children: [
-            ["../user_doc/Tutorials", "Camera Mouse Step by Step"],
-            ["../user_doc/Tutorials", "Simple Model creation"]
-          ]
+          children: [["ARE/ARE_Introduction", "Introduction"]]
         }
       ]
     },

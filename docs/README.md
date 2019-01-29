@@ -2,15 +2,15 @@
 home: true
 heroImage: ./img/asterics-logo.svg
 actionText: Get Started →
-actionLink: /welcome/QuickStart.html
+actionLink: /getting-started/
 sidebar: auto
 features:
-- title: Simplicity First
-  details: As easy as it gets. Join the community and help to improve [AsTeRICS](https://github.com/asterics/AsTeRICS/tree/v3.0/ARE_RestAPIlibraries/clientExample/javascript), while keeping a focus on simplicity.
-- title: Bring your own Booze 
-  details: We drink a lot... Coffee of course. What did you think? And we like to share. But when it gets to drinking beer, it's every man for himself.
-- title: Performance counts
-  details: Quick, fast, and with tremendous speed. To put it mildly, it's HUGE.
+- title: Mouse and Keyboard Emulation
+  details: Use customized input devices for mouse and keyboard input.
+- title: Eyetracking
+  details: Use Eyetracking devices for computer control or AAC.
+- title: Environmental Control
+  details: Control your lights, TV or radio with customized input devices.
 footer: GPLv3.0 | Copyright © 2018-present
 ---
 

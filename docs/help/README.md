@@ -1,4 +1,3 @@
-# Customize AsTeRICS
+# Help
 
-In this section you will wind information of how to adapt and existing solution/model or create a new one.
-## Subtitle
+Here you will find user manuals and tutorials.
