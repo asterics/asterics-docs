@@ -6,7 +6,7 @@ let envConfigPath = path.join(process.cwd(), "src", "config", ".env"),
 require("dotenv").config({ path: envConfigPath });
 const convict = require("convict"),
   config = convict(schemaPath),
-  { gitLocalPath } = require("@asterics/git-tools");
+  { getReferenceInPath } = require("@asterics/git-tools");
 
 /* Load configuration */
 config.load({
@@ -18,13 +18,13 @@ config.load({
     {
       name: "AsTeRICS",
       destination: path.join(process.cwd(), "src", "external", "asterics"),
-      reference: gitLocalPath(path.join(process.cwd(), ".."), "auto:AsTeRICS"),
+      reference: getReferenceInPath(process.cwd(), "AsTeRICS"),
       branch: "master"
     },
     {
       name: "AsTeRICS.wiki",
       destination: path.join(process.cwd(), "src", "external", "asterics-wiki"),
-      reference: gitLocalPath(path.join(process.cwd(), ".."), "auto:AsTeRICS.wiki"),
+      reference: getReferenceInPath(process.cwd(), "AsTeRICS.wiki"),
       branch: "master"
     }
   ],
