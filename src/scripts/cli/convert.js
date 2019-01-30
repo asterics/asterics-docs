@@ -30,8 +30,22 @@ exports.builder = yargs => {
 };
 
 function html_to_md(source, target) {
+  /* Read html */
   let html = fs.readFileSync(source).toString("utf8");
+
+  /* Convert to markdown */
   let md = turndown.turndown(html);
+
+  /* Remove first two lines of text (filename) */
+  md = md
+    .split("\n")
+    .splice(2)
+    .join("\n");
+
+  /* Append version selection */
+  md = md + "\n\n<SelectVersion/>";
+
+  /* Create and write to file */
   fs.writeFileSync(target, md);
 }
 
