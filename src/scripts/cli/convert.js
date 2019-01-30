@@ -42,12 +42,11 @@ function html_to_md(source, target) {
     .splice(2)
     .join("\n");
 
-  // /* ... */
-  // md = md.replace(/img\//g, "./img/");
+  /* Correct relative image links */
+  md = md.replace(/img\//g, "./img/");
 
-  // console.log(md);
-  // md = md.replace(/\(.\/img\/(.*?)\s.*\)/g, "$1".toLowerCase());
-  // console.log(md);
+  /* Lowercase image name */
+  md = md.replace(/img\/(.*?(jpg|png))/g, (word, first) => word.replace(first, first.toLowerCase()));
 
   /* Append version selection */
   md = md + "\n\n<SelectVersion/>";
