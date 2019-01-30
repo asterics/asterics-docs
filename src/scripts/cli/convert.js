@@ -42,6 +42,13 @@ function html_to_md(source, target) {
     .splice(2)
     .join("\n");
 
+  // /* ... */
+  // md = md.replace(/img\//g, "./img/");
+
+  // console.log(md);
+  // md = md.replace(/\(.\/img\/(.*?)\s.*\)/g, "$1".toLowerCase());
+  // console.log(md);
+
   /* Append version selection */
   md = md + "\n\n<SelectVersion/>";
 
@@ -70,7 +77,7 @@ function loadTargets({ wd, input, output, recursive, from, to }) {
       ...e,
       destination: path.join(wd, output, path.relative(path.join(wd, input), e.source))
     }))
-    .map(e => ({ ...e, files: e.files.map(file => ({ from: file, to: file.replace(from, to) })) }));
+    .map(e => ({ ...e, files: e.files.map(file => ({ from: file, to: to ? file.replace(from, to) : file })) }));
 }
 
 function loadJobs({ input, output, recursive }) {
@@ -96,18 +103,49 @@ function loadJobs({ input, output, recursive }) {
   return { directories, conversions };
 }
 
+function loadImageJobs({ input, output, recursive }) {
+  let directories = [],
+    copies = [];
+
+  let t = loadTargets({
+    wd: config.get("wd"),
+    input: input,
+    output: output,
+    recursive: recursive,
+    from: /(jpg|png|PNG)/
+  });
+
+  t.forEach(({ source, destination, files }) => {
+    directories.push(destination);
+    files.forEach(({ from, to }) => {
+      copies.push({ from: path.join(source, from), to: path.join(destination, to.toLowerCase()) });
+    });
+  });
+
+  return { imgDirectories: directories, images: copies };
+}
+
 exports.handler = ({ input, output, recursive, clean }) => {
   output = output ? output : input;
-  let { directories, conversions } = loadJobs({ input, output, recursive });
 
+  let { directories, conversions } = loadJobs({ input, output, recursive });
+  let { imgDirectories, images } = loadImageJobs({ input, output, recursive });
+
+  /* =============== CLEAN ==================== */
   if (clean) {
     conversions.forEach(({ to }) => {
       try {
         fs.unlinkSync(to);
       } catch (e) {}
     });
+    images.forEach(({ to }) => {
+      try {
+        fs.unlinkSync(to);
+      } catch (e) {}
+    });
 
     /* Parent folders need to be last in list */
+    directories.push(...imgDirectories);
     directories = directories.filter(directory => fs.existsSync(directory));
     directories = directories.sort((a, b) => b.length - a.length);
     directories.forEach(directory => {
@@ -116,6 +154,8 @@ exports.handler = ({ input, output, recursive, clean }) => {
       } catch (e) {}
     });
   } else {
+    /* ============== BUILD =================== */
+    directories.push(...imgDirectories);
     directories.forEach(directory => {
       mkdirp(directory);
     });
@@ -123,6 +163,12 @@ exports.handler = ({ input, output, recursive, clean }) => {
     conversions.forEach(({ from, to }) => {
       try {
         html_to_md(from, to);
+      } catch (e) {}
+    });
+
+    images.forEach(({ from, to }) => {
+      try {
+        fs.copyFileSync(from, to);
       } catch (e) {}
     });
   }

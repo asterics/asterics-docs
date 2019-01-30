@@ -3,7 +3,7 @@
     <button v-on:click="toggle()" class="dropbtn">Version</button>
     <!-- <div @class="show: showDropdown dropwdown-content: true"> -->
     <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
-      <a href="#" v-for="v in versionNumbers">{{v}}</a>
+      <a href="#" v-on:click="change(v)" v-for="v in versionNumbers">{{v}}</a>
     </div>
   </div>
 </template>
@@ -23,6 +23,10 @@ export default {
       // this.$router.base("dummy");
       this.showDropdown = !this.showDropdown;
     },
+    change(v) {
+      console.log(v);
+      console.log(this.$route.path);
+    },
     toggleVersion(v) {
       this.dummy = v;
     },
@@ -32,7 +36,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     document.addEventListener("click", this.documentClick);
   },
   destroyed() {
@@ -50,9 +54,12 @@ export default {
   font-size: 16px;
   border: none;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 2190;
+  left: 90%;
+  position: fixed;
+  top: 70px;
+  /* position: absolute; */
+  /* top: 0;
+  right: 2190; */
 }
 
 /* Dropdown button on hover & focus */
@@ -71,7 +78,9 @@ export default {
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
-  position: absolute;
+  left: 90%;
+  position: fixed;
+  top: 120px;
   background-color: #c5eefb;
   color: white;
   min-width: 160px;
