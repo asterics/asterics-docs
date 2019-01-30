@@ -34,7 +34,7 @@
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
     "shelljs": "^0.8.3",
-    "turndown": "^5.0.1",
+    "turndown": "^5.0.3",
     "vuepress": "0.14.8",
     "yargs": "^12.0.5"
   },

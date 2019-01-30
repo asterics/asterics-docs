@@ -1,4 +1,5 @@
 const path = require("path"),
+  fs = require("fs"),
   configPath = path.join(process.cwd(), "src", "config", "config.js"),
   config = require(configPath);
 
@@ -31,46 +32,16 @@ module.exports = {
         ]
       },
       { text: "Help", link: "/help/" },
-      // {
-      //   text: "Getting Started",
-      //   items: [
-      //     { text: "Overview", link: "/getting_started/Overview" },
-      //     { text: "Demos", link: "/getting_started/Demos" }
-      //   ]
-      // },
-      // {
-      //   text: "Use", //maybe rename to 'Create/Use/Configure'
-      //   items: [
-      //     { text: "Model", link: "/models/Search" },
-      //     { text: "AsTeRICS Grid", link: "/asterics_grids/Search" },
-      //     { text: "AT solution", link: "/at_solutions/Search" } //maybe rename to 'AT application'
-      //   ]
-      // },
-      // { text: "Download", link: "/user_doc/Installation" },
-      // {
-      //   text: "Documentation",
-      //   link: "/user_doc/"
-      //   //   items: [
-      //   //     { text: "Concepts", link: "/user_doc/Concepts" },
-      //   //     { text: "Installation", link: "/user_doc/Installation" },
-      //   //     { text: "User Interfaces", link: "/user_doc/User_Interfaces" },
-      //   //     { text: "Tutorials", link: "/user_doc/Tutorials" },
-      //   //     { text: "User manuals", link: "/user_doc/User_Manuals" },
-      //   //     { text: "APIs", link: "/user_doc/APIs" }
-      //   //   ]
-      // },
       {
         text: "Applications", //maybe rename to 'Create/Use/Configure'
         items: [
           {
             text: "WebACS",
-            link:
-              "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
+            link: "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
           },
           {
             text: "AsTeRICS Grid",
-            link:
-              "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
+            link: "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
           },
           { text: "Plugin IDE", link: "/plugins/New" },
           { text: "AT solution IDE", link: "/at_solutions/New" } //maybe rename to 'AT application'
@@ -88,10 +59,7 @@ module.exports = {
       },
       {
         text: "Languages",
-        items: [
-          { text: "English", link: "/" },
-          { text: "German", link: "/de/" }
-        ]
+        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
       }
     ],
     sidebar: {
@@ -104,31 +72,19 @@ module.exports = {
         {
           title: "Discover",
           collapsable: false,
-          children: [
-            ["Search-Models", "Models"],
-            ["Search-asterics-grids", "Grids"],
-            ["Search-AT-solutions", "AT Solutions"]
-          ]
+          children: [["Search-Models", "Models"], ["Search-asterics-grids", "Grids"], ["Search-AT-solutions", "AT Solutions"]]
         }
       ],
       "/develop/": [
         {
           title: "Introduction",
           collapsable: false,
-          children: [
-            ["DeveloperGuide", "Development Environment"],
-            ["Coding-Guidelines", "Coding Guidelines"],
-            ["Unit-Testing", "Unit Testing"]
-          ]
+          children: [["DeveloperGuide", "Development Environment"], ["Coding-Guidelines", "Coding Guidelines"], ["Unit-Testing", "Unit Testing"]]
         },
         {
           title: "Plugin",
           collapsable: false,
-          children: [
-            ["Simple-Plugin-Tutorial.md", "Tutorial"],
-            ["Plugin", "Creation Wizard"],
-            ["ARE-HW-Interfacing-JNI.md", "HW Interfacing (JNI)"]
-          ]
+          children: [["Simple-Plugin-Tutorial.md", "Tutorial"], ["Plugin", "Creation Wizard"], ["ARE-HW-Interfacing-JNI.md", "HW Interfacing (JNI)"]]
         },
         {
           title: "AT Solution",
@@ -136,29 +92,14 @@ module.exports = {
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
-            [
-              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
-              "Tutorial"
-            ],
+            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         },
         {
           title: "ARE Remote APIs",
           collapsable: false,
-          children: [
-            ["ARE-Webserver.md", "Webserver"],
-            ["REST-API", "REST"],
-            // ["REST-demos.md", "REST API Demos"],
-            // ["asterics-wiki/api/REST-API.md", "REST API Tutorial"],
-            // ["REST-API-js-areCommunicator.md", "JS REST Client lib"],
-            // [
-            //   "REST-API-js-wrapper-ext.md",
-            //   "JS Model Manipulation / Deployment lib"
-            // ],
-            ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
-            // ["REST-API-java-client.md", "REST Java Client lib"]
-          ]
+          children: [["ARE-Webserver.md", "Webserver"], ["REST-API", "REST"], ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]]
         },
         {
           title: "ARE Middleware",
@@ -172,124 +113,18 @@ module.exports = {
           ]
         }
       ],
-      "/help/Plugins/": [
-        {
-          title: "Actuators",
-          collapsable: true,
-          children: [["actuators/AnalogOut", "Analog Out"]]
-        }
-      ],
-      "/help/": [
-        ["", "Introduction"],
-        ["User-Interfaces", "User Interfaces"],
-        ["Tutorials", "Tutorials"],
-        {
-          title: "WebACS",
-          collapsable: true,
-          children: [
-            ["ACS/intro", "Intro"],
-            ["ACS/ACS_Basic_Functions", "Basic Functions"],
-            ["ACS/Actuators", "Actuators"],
-            ["ACS/Channels", "Channels"],
-            ["ACS/Colours_settings", "Colors Settings"],
-            [
-              "ACS/Component_Collection_Manager",
-              "Component Collection Manager"
-            ],
-            ["ACS/Component_Context_Menu", "Component Context Menu"],
-            ["ACS/Connected", "Connected"],
-            ["ACS/Control_the_ARE", "Control the ARE"],
-            ["ACS/Create_and_Edit_a_Model", "Create and Edit a Model"],
-            ["ACS/Dialogs_settings", "Dialogs Settings"],
-            ["ACS/Disconnected", "Disconnected"],
-            ["ACS/Events", "Events"],
-            ["ACS/External_Tools", "External Tools"],
-            ["ACS/External_Tools_Options", "External Tools Options"],
-            ["ACS/General_settings", "General Settings"],
-            ["ACS/GUI_Designer", "GUI Designer"],
-            ["ACS/Keyboard_control", "Keyboard Control"],
-            ["ACS/Load_and_Save_Models", "Load and Save Models"],
-            ["ACS/Miscellaneous", "Miscellaneous"],
-            ["ACS/Modes", "Modes"],
-            ["ACS/Options", "Options"],
-            ["ACS/Pause", "Pause"],
-            ["ACS/Print", "Print"],
-            ["ACS/Processors", "Processors"],
-            ["ACS/Running", "Running"],
-            ["ACS/Sensors", "Sensors"],
-            ["ACS/Setting_the_Properties", "Setting the Properties"],
-            [
-              "ACS/Status_Reporting_and_Error_Logging",
-              "Status Reporting and Error Logging"
-            ],
-            ["ACS/Synchronized", "Synchronized"],
-            ["ACS/The_Edit_Tab", "Edit Tab"],
-            ["ACS/Tooltips", "Tooltips"]
-          ]
-        },
-        {
-          title: "ACS",
-          collapsable: true,
-          children: [
-            ["ACS/intro", "Intro"],
-            ["ACS/ACS_Basic_Functions", "Basic Functions"],
-            ["ACS/Actuators", "Actuators"],
-            ["ACS/Channels", "Channels"],
-            ["ACS/Colours_settings", "Colors Settings"],
-            [
-              "ACS/Component_Collection_Manager",
-              "Component Collection Manager"
-            ],
-            ["ACS/Component_Context_Menu", "Component Context Menu"],
-            ["ACS/Connected", "Connected"],
-            ["ACS/Control_the_ARE", "Control the ARE"],
-            ["ACS/Create_and_Edit_a_Model", "Create and Edit a Model"],
-            ["ACS/Dialogs_settings", "Dialogs Settings"],
-            ["ACS/Disconnected", "Disconnected"],
-            ["ACS/Events", "Events"],
-            ["ACS/External_Tools", "External Tools"],
-            ["ACS/External_Tools_Options", "External Tools Options"],
-            ["ACS/General_settings", "General Settings"],
-            ["ACS/GUI_Designer", "GUI Designer"],
-            ["ACS/Keyboard_control", "Keyboard Control"],
-            ["ACS/Load_and_Save_Models", "Load and Save Models"],
-            ["ACS/Miscellaneous", "Miscellaneous"],
-            ["ACS/Modes", "Modes"],
-            ["ACS/Options", "Options"],
-            ["ACS/Pause", "Pause"],
-            ["ACS/Print", "Print"],
-            ["ACS/Processors", "Processors"],
-            ["ACS/Running", "Running"],
-            ["ACS/Sensors", "Sensors"],
-            ["ACS/Setting_the_Properties", "Setting the Properties"],
-            [
-              "ACS/Status_Reporting_and_Error_Logging",
-              "Status Reporting and Error Logging"
-            ],
-            ["ACS/Synchronized", "Synchronized"],
-            ["ACS/The_Edit_Tab", "Edit Tab"],
-            ["ACS/Tooltips", "Tooltips"]
-          ]
-        },
-        {
-          title: "Plugins",
-          collapsable: true,
-          children: [["Plugins/Introduction", "Introduction"]]
-          // children: [["Plugins/actuators/AnalogOut", "AnalogOut"]]
-          // children: [
-          //   {
-          //     title: "Actuators",
-          //     collapsable: true,
-          //     children: [["Plugins/actuators/AnalogOut", "AnalogOut"]]
-          //   }
-          // ]
-        },
-        {
-          title: "ARE",
-          collapsable: true,
-          children: [["ARE/ARE_Introduction", "Introduction"]]
-        }
-      ]
+      "/help/Plugins/": loadSidebarFrom({
+        location: path.join(process.cwd(), config.get("documentation"), "help", "Plugins"),
+        pre: [["/help/", "Back to Help"]],
+        post: [],
+        exclude: []
+      }),
+      "/help/": loadSidebarFrom({
+        location: path.join(process.cwd(), config.get("documentation"), "help"),
+        pre: [["", "Introduction"], ["User-Interfaces", "User Interfaces"], ["Tutorials", "Tutorials"]],
+        post: [["Plugins/Introduction", "Plugins"]],
+        exclude: [/Plugins/]
+      })
     },
     sidebarDepth: 3,
     diplayAllHeaders: true, // default
@@ -297,6 +132,49 @@ module.exports = {
   }
 };
 
-function loadHelp() {
-  return {};
+function loadSidebarFrom({ location, pre, post, exclude }) {
+  //location, sidebar, appendix = []) {
+  let sidebar = fs.readdirSync(location);
+
+  /* First level only directories */
+  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
+
+  /* Filter exclude */
+  sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
+
+  /* Map to first level entry */
+  sidebar = sidebar.map(e => ({ title: e, collapable: true, children: null })); //abs: path.join(location, e) }));
+
+  /* Append children for each entry */
+  sidebar.forEach(e => {
+    let children = fs.readdirSync(path.join(location, e.title));
+
+    /* Filter markdown files, only */
+    children = children.filter(child => /.*md$/.test(child));
+
+    /* Remove file extension */
+    children = children.map(child => child.replace(/\.md$/, ""));
+
+    /* Construct arrays containing link and title */
+    children = children.map(child => {
+      let title = child.replace(/_/g, " ");
+      let link = `${e.title}/${child}`;
+
+      return [link, capitalize(title)];
+    });
+
+    e.children = children;
+  });
+
+  /* Capitalize titles */
+  sidebar = sidebar.map(e => ({ ...e, title: capitalize(e.title) }));
+
+  return [...pre, ...sidebar, ...post];
+}
+
+function capitalize(words) {
+  return words
+    .split(" ")
+    .map(word => [word.charAt(0).toUpperCase(), word.slice(1)].join(""))
+    .join(" ");
 }
