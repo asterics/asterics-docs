@@ -4,6 +4,7 @@ const path = require("path"),
   config = require(configPath);
 
 module.exports = {
+  devtools: true,
   host: config.get("host"),
   port: config.get("port"),
   base: config.get("endpoint") ? `/${config.get("endpoint")}/` : "",

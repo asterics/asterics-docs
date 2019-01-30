@@ -1,18 +1,10 @@
 <template>
-  <div class="dd-version">
-    <div class="dropdown-wrapper">
-      <button @click="toggle" class="dropdown-title">Version</button>
-      <ul class="nav-dropdown">
-        <li v-for="v in versionNumbers" class="dropdown-item">
-          <a href="#" @click="toggleVersion(v)">{{v}}</a>
-        </li>
-      </ul>
+  <div class="dropdown">
+    <button v-on:click="toggle()" class="dropbtn">Version</button>
+    <!-- <div @class="show: showDropdown dropwdown-content: true"> -->
+    <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
+      <a href="#" v-for="v in versionNumbers">{{v}}</a>
     </div>
-
-    <div id="versionDropdown"></div>
-    <div>{{dummy}}</div>
-    <!-- <div>{{ $route }}</div> -->
-    <!-- <div>{{ $site }}</div> -->
   </div>
 </template>
 
@@ -21,30 +13,89 @@
 export default {
   data() {
     return {
-      versionNumbers: [
-        "v2.3",
-        "v2.5",
-        "v2.6",
-        "v2.7",
-        "v2.8",
-        "v3.0",
-        "latest"
-      ],
-      dummy: "Text"
+      versionNumbers: ["v2.3-patch", "v2.5-patch", "v3.0.1", "latest"],
+      showDropdown: false
     };
   },
   methods: {
     toggle() {
       console.log("HELLO dummy");
-      this.$router.base("dummy");
+      // this.$router.base("dummy");
+      this.showDropdown = !this.showDropdown;
     },
     toggleVersion(v) {
       this.dummy = v;
+    },
+    documentClick(e) {
+      if (!e.target.matches(".dropbtn")) {
+        this.showDropdown = false;
+      }
     }
+  },
+  created() {
+    document.addEventListener("click", this.documentClick);
+  },
+  destroyed() {
+    document.removeEventListener("click", this.documentClick);
   }
 };
 </script>
 
 <style>
+/* Dropdown Button */
+.dropbtn {
+  background-color: #0ea1d2;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 2190;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #0b799d;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  /* position: relative; */
+  position: absolute;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #c5eefb;
+  color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #0b799d;
+  color: white;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}
 </style>
 
