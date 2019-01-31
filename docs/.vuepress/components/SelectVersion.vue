@@ -2,34 +2,62 @@
   <div class="dropdown">
     <button v-on:click="toggle()" class="dropbtn">Version</button>
     <!-- <div @class="show: showDropdown dropwdown-content: true"> -->
-    <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
+    <!-- <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
       <a href="#" v-on:click="change(v)" v-for="v in versionNumbers">{{v}}</a>
+    </div>-->
+    <!-- <ul class="nav-dropdown" v-show="showDropdown">
+      <li v-for="version in config[this.$route.path]">
+        <a>{{version}}</a>
+      </li>
+    </ul>-->
+    <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
+      <a
+        v-on:click="echo(version,path)"
+        v-for="(path, version) in versions[this.$route.path]"
+        :href="path"
+      >{{version}}</a>
     </div>
   </div>
 </template>
 
 
 <script>
+import path from "path";
+import versions from "../../../src/config/versions.js";
+// let configPath = path.join(process.cwd(), "src", "config", "config.js");
+// import config from `${configPath}`;
+// import config = require("./src/config/config.js");
 export default {
   data() {
     return {
-      versionNumbers: ["v2.3-patch", "v2.5-patch", "v3.0.1", "latest"],
-      showDropdown: false
+      // versionNumbers: ["v2.3-patch", "v2.5-patch", "v3.0.1", "latest"],
+      showDropdown: false,
+      versions
     };
   },
   methods: {
     toggle() {
-      console.log("HELLO dummy");
+      // console.log("HELLO dummy");
       // this.$router.base("dummy");
       this.showDropdown = !this.showDropdown;
     },
-    change(v) {
-      console.log(v);
-      console.log(this.$route.path);
+    echo(version, path) {
+      console.log(`version: ${version}, path: ${path}`);
     },
-    toggleVersion(v) {
-      this.dummy = v;
-    },
+    // change(v) {
+    //   // console.log(v);
+    //   // console.log(this.$route.path);
+    //   // let route = `/${v}/${this.$route.path}`;
+    //   // console.log(route);
+    //   // console.log(this.$router.currentRoute);
+    //   // this.$router.push(route);
+    //   // this.$router.go(route);
+    //   // console.log(this.$page);
+    //   // console.log(config);
+    // },
+    // toggleVersion(v) {
+    //   this.dummy = v;
+    // },
     documentClick(e) {
       if (!e.target.matches(".dropbtn")) {
         this.showDropdown = false;

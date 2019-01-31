@@ -4,7 +4,7 @@ const fs = require("fs"),
 const configPath = path.join(process.cwd(), "src", "config", "config.js");
 
 const config = require(configPath),
-  turndown = require("turndown")(),
+  turndown = require("turndown")({ headingStyle: "atx" }),
   { mkdirp } = require("@asterics/node-utils");
 
 exports.command = "convert <input> [output]";
@@ -46,10 +46,13 @@ function html_to_md(source, target) {
   md = md.replace(/img\//g, "./img/");
 
   /* Lowercase image name */
-  md = md.replace(/img\/(.*?(jpg|png))/g, (word, first) => word.replace(first, first.toLowerCase()));
+  md = md.replace(/img\/(.*?(jpg|png))/g, (url, filename) => url.replace(filename, filename.toLowerCase()));
 
   /* Append version selection */
   md = md + "\n\n<SelectVersion/>";
+
+  /* Append edit link */
+  md = md + '\n<!-- <EditLink href="?"/> -->';
 
   /* Create and write to file */
   fs.writeFileSync(target, md);

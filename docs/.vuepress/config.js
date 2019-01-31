@@ -123,6 +123,7 @@ module.exports = {
       "/help/": loadSidebarFrom({
         location: path.join(process.cwd(), config.get("documentation"), "help"),
         pre: [["", "Introduction"], ["User-Interfaces", "User Interfaces"], ["Tutorials", "Tutorials"]],
+        sidebar: [["ACS/ACS_Basic_Functions", "Basic"]],
         post: [["Plugins/Introduction", "Plugins"]],
         exclude: [/Plugins/]
       })
