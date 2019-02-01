@@ -1,63 +1,35 @@
 <template>
   <div class="dropdown">
-    <button v-on:click="toggle()" class="dropbtn">Version</button>
-    <!-- <div @class="show: showDropdown dropwdown-content: true"> -->
-    <!-- <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
-      <a href="#" v-on:click="change(v)" v-for="v in versionNumbers">{{v}}</a>
-    </div>-->
-    <!-- <ul class="nav-dropdown" v-show="showDropdown">
-      <li v-for="version in config[this.$route.path]">
-        <a>{{version}}</a>
-      </li>
-    </ul>-->
+    <button v-on:click="toggle()" class="dropbtn">{{this.version}}</button>
     <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
-      <a
-        v-on:click="echo(version,path)"
-        v-for="(path, version) in versions[this.$route.path]"
-        :href="path"
-      >{{version}}</a>
+      <a v-for="(route, version) in routes" :href="route">{{version}}</a>
     </div>
   </div>
 </template>
 
 
 <script>
-import path from "path";
-import versions from "../../../src/config/versions.js";
-// let configPath = path.join(process.cwd(), "src", "config", "config.js");
-// import config from `${configPath}`;
-// import config = require("./src/config/config.js");
+import versions from "../../../src/config/versions.json";
+
 export default {
   data() {
     return {
-      // versionNumbers: ["v2.3-patch", "v2.5-patch", "v3.0.1", "latest"],
       showDropdown: false,
       versions
     };
   },
+  computed: {
+    version: function() {
+      return this.$site.themeConfig.store.version;
+    },
+    routes: function() {
+      return this.$site.themeConfig.store.versioned_routes[this.$route.path];
+    }
+  },
   methods: {
     toggle() {
-      // console.log("HELLO dummy");
-      // this.$router.base("dummy");
       this.showDropdown = !this.showDropdown;
     },
-    echo(version, path) {
-      console.log(`version: ${version}, path: ${path}`);
-    },
-    // change(v) {
-    //   // console.log(v);
-    //   // console.log(this.$route.path);
-    //   // let route = `/${v}/${this.$route.path}`;
-    //   // console.log(route);
-    //   // console.log(this.$router.currentRoute);
-    //   // this.$router.push(route);
-    //   // this.$router.go(route);
-    //   // console.log(this.$page);
-    //   // console.log(config);
-    // },
-    // toggleVersion(v) {
-    //   this.dummy = v;
-    // },
     documentClick(e) {
       if (!e.target.matches(".dropbtn")) {
         this.showDropdown = false;
@@ -78,22 +50,24 @@ export default {
 .dropbtn {
   background-color: #0ea1d2;
   color: white;
-  padding: 16px;
+  padding: 1;
   font-size: 16px;
+  font-weight: bold;
   border: none;
   cursor: pointer;
-  left: 90%;
   position: fixed;
-  top: 70px;
-  /* position: absolute; */
-  /* top: 0;
-  right: 2190; */
+  right: 2%;
+  top: 5em;
+  height: 3em;
+  width: 14em;
+  opacity: 0.4;
 }
 
 /* Dropdown button on hover & focus */
 .dropbtn:hover,
 .dropbtn:focus {
   background-color: #0b799d;
+  opacity: 1;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -106,12 +80,12 @@ export default {
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
-  left: 90%;
+  right: 2%;
   position: fixed;
-  top: 120px;
+  top: 8em;
   background-color: #c5eefb;
   color: white;
-  min-width: 160px;
+  width: 14em;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }

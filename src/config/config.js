@@ -28,7 +28,8 @@ config.load({
       branch: "master"
     }
   ],
-  versions: ["v2.3-patch", "v2.5-patch", "v3.0.1", "master"],
+  // versions: ["v2.3-patch", "v2.5-patch", "v3.0.1", "master"],
+  versions: ["2.3", "2.5", "3.0.1", "pre-3.1"],
   // versions: ["v2.3-patch", "master"],
   html_to_md: [
     {

@@ -3,6 +3,8 @@ const path = require("path"),
   configPath = path.join(process.cwd(), "src", "config", "config.js"),
   config = require(configPath);
 
+let version = config.get("endpoint").match(/\d+(\.\d+){0,2}/);
+
 module.exports = {
   devtools: true,
   host: config.get("host"),
@@ -21,6 +23,10 @@ module.exports = {
     editLinkText: "Help us improve this page!",
     serviceWorker: {
       updatePopup: true
+    },
+    store: {
+      version: version ? `v${version[0]}` : "latest",
+      versioned_routes: require(path.join(process.cwd(), "src", "config", "versions.json"))
     },
     nav: [
       { text: "Getting Started", link: "/getting-started/" },

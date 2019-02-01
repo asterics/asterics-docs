@@ -24,6 +24,9 @@ config.get("submodules").forEach(submodule => ensureGitSubmodule(submodule, conf
 checkoutSubmodule({ ...AsTeRICS, branch: latest }, config.get("verbose"));
 clean();
 
+/* Index versioned content */
+versions();
+
 /* Build legacy versions */
 legacy.forEach(version => {
   checkoutSubmodule({ ...AsTeRICS, branch: version }, config.get("verbose"));
@@ -39,6 +42,17 @@ convert();
 
 /* Copy legacy build to public */
 public();
+
+function versions() {
+  let script = path.join(config.get("wd"), "src", "scripts", "cli.js");
+  let versioned = path.join(config.get("wd"), "src", "config", "versions.json");
+  execute({
+    cmd: `node ${script} versions ${versioned} -r -f`,
+    success: "indexed versioned content",
+    error: "failed indexing versioned content",
+    verbose: config.get("verbose")
+  });
+}
 
 function convert() {
   config.get("html_to_md").forEach(({ from, to }) => {
