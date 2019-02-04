@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
-    "@asterics/git-tools": "^0.1.6",
-    "@asterics/node-utils": "^0.1.0",
+    "@asterics/git-tools": "^0.1.7",
+    "@asterics/node-utils": "^0.2.0",
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
     "nodegit": "^0.24.0",

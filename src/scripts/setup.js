@@ -1,4 +1,3 @@
-const fs = require("fs");
 const path = require("path");
 
 const configPath = path.join(process.cwd(), "src", "config", "config.js");
@@ -6,19 +5,12 @@ const indexPath = path.join(process.cwd(), "src", "config", "index.json");
 
 const config = require(configPath),
   shell = require("shelljs"),
-  { ensureGitSubmodule, checkoutSubmodule } = require("@asterics/git-tools"),
-  { execute } = require("@asterics/node-utils"),
-  { loadCopyJobs } = require("./cli/util/jobs.js");
+  { execute } = require("@asterics/node-utils");
 
-// if (!shell.which("git")) {
-//   shell.echo("Sorry, this script requires git");
-//   shell.exit(1);
-// }
-
-// const AsTeRICS = config.get("submodules").find(submodule => submodule.name === "AsTeRICS");
 const legacy = config.get("versions");
 const latest = legacy.pop();
 
+/* Setup submodules */
 init();
 
 /* Create index */
@@ -34,6 +26,8 @@ config.get("versions").forEach(version => {
 /* Merge results */
 merge(latest);
 
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 function init() {
   let script = path.join(process.cwd(), "src", "scripts", "cli.js");
   execute({
