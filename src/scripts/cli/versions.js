@@ -5,7 +5,7 @@ const configPath = path.join(process.cwd(), "src", "config", "config.js");
 
 const config = require(configPath),
   { checkoutSubmodule, ensureGitSubmodule } = require("@asterics/git-tools"),
-  { loadJobs } = require("./jobs.js");
+  { loadConversionJobs } = require("./util/jobs.js");
 
 exports.command = "versions <file>";
 exports.aliases = ["version"];
@@ -36,7 +36,7 @@ exports.handler = ({ file, force }) => {
 
     checkoutSubmodule({ ...AsTeRICS, branch: patchedVersion }, config.get("verbose"));
     config.get("html_to_md").forEach(({ from, to }) => {
-      let { conversions } = loadJobs({ input: from, output: to, recursive: true });
+      let { conversions } = loadConversionJobs({ input: from, output: to, recursive: true });
 
       conversions = conversions.map(({ to }) => path.relative(docs, to));
       conversions = conversions.map(e => e.replace(/\.md$/, ".html"));

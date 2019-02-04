@@ -1,8 +1,8 @@
 const fs = require("fs"),
   path = require("path"),
   { mkdirp } = require("@asterics/node-utils"),
-  { loadJobs, loadImageJobs } = require("./jobs.js"),
-  { html_to_md } = require("./markdown.js");
+  { loadConversionJobs, loadImageJobs } = require("./util/jobs.js"),
+  { html_to_md } = require("./util/markdown.js");
 
 exports.command = "convert <input> [output]";
 exports.aliases = ["conv"];
@@ -29,7 +29,7 @@ exports.builder = yargs => {
 exports.handler = ({ input, output, recursive, clean }) => {
   output = output ? output : input;
 
-  let { directories, conversions } = loadJobs({ input, output, recursive });
+  let { directories, conversions } = loadConversionJobs({ input, output, recursive });
   let { imgDirectories, images } = loadImageJobs({ input, output, recursive });
 
   /* =============== CLEAN ==================== */
