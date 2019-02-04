@@ -29,7 +29,7 @@ function loadTargets({ wd, input, output, recursive, from, to }) {
     .map(e => ({ ...e, files: e.files.map(file => ({ from: file, to: to ? file.replace(from, to) : file })) }));
 }
 
-function loadJobs({ input, output, recursive }) {
+function loadConversionJobs({ input, output, recursive }) {
   let directories = [],
     conversions = [];
 
@@ -50,6 +50,10 @@ function loadJobs({ input, output, recursive }) {
   });
 
   return { directories, conversions };
+}
+
+function loadCopyJobs({ input, output, recursive }) {
+  return { copies: {} };
 }
 
 function loadImageJobs({ input, output, recursive }) {
@@ -74,4 +78,4 @@ function loadImageJobs({ input, output, recursive }) {
   return { imgDirectories: directories, images: copies };
 }
 
-module.exports = { loadJobs, loadImageJobs };
+module.exports = { loadConversionJobs, loadCopyJobs, loadImageJobs };
