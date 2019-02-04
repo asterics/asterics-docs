@@ -33,6 +33,8 @@
     "@asterics/node-utils": "^0.1.0",
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
+    "nodegit": "^0.24.0",
+    "rimraf": "^2.6.3",
     "shelljs": "^0.8.3",
     "turndown": "^5.0.3",
     "vuepress": "0.14.8",
