@@ -2,28 +2,31 @@
   <div class="dropdown">
     <button v-on:click="toggle()" class="dropbtn">{{this.version}}</button>
     <div class="dropdown-content" v-bind:class="{ show: showDropdown }">
-      <a v-for="(route, version) in routes" :href="route">{{version}}</a>
+      <a
+        v-bind:key="entry.route"
+        v-for="(entry, v) in routes[decodeURIComponent(this.$route.path)]"
+        :href="entry.route"
+      >{{v}}</a>
     </div>
   </div>
 </template>
 
 
 <script>
-import versions from "../../../src/config/versions.json";
-
 export default {
   data() {
     return {
-      showDropdown: false,
-      versions
+      showDropdown: false
     };
   },
   computed: {
     version: function() {
-      return this.$site.themeConfig.store.version;
+      let v = this.$site.themeConfig.store.version;
+      let l = this.$site.themeConfig.store.latest;
+      return v === l ? "latest" : v;
     },
     routes: function() {
-      return this.$site.themeConfig.store.versioned_routes[this.$route.path];
+      return this.$site.themeConfig.store.routes;
     }
   },
   methods: {

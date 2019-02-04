@@ -1,32 +1,38 @@
-const path = require("path"),
-  fs = require("fs"),
-  configPath = path.join(process.cwd(), "src", "config", "config.js"),
-  config = require(configPath);
+const path = require("path");
+const fs = require("fs");
 
-let version = config.get("endpoint").match(/\d+(\.\d+){0,2}/);
+const configPath = path.join(process.cwd(), "src", "config", "config.js");
+const indexPath = path.join(process.cwd(), "src", "config", "index.json");
+
+const index = require(indexPath);
+const config = require(configPath);
+
+console.log(`host: ${config.get("host")}`);
+console.log(`port: ${config.get("port")}`);
+console.log(`endpoint: ${config.get("endpoint")}`);
+console.log(`destination: ${config.get("destination")}`);
+console.log(`version: ${config.get("version")}`);
+console.log(`latest: ${config.get("latest")}`);
 
 module.exports = {
   devtools: true,
   host: config.get("host"),
   port: config.get("port"),
-  base: config.get("endpoint") ? `/${config.get("endpoint")}/` : "",
+  base: config.get("endpoint"),
   dest: config.get("destination"),
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
   themeConfig: {
     repo: "asterics/AsTeRICS",
     repoLabel: "Repository!",
-    docsRepo: "asterics/asterics-docs",
-    docsDir: config.get("documentation"),
+    docsRepo: "asterics/AsTeRICS",
+    docsDir: "Documentation/docs",
     docsBranch: "master",
-    editLinks: true,
-    editLinkText: "Help us improve this page!",
-    serviceWorker: {
-      updatePopup: true
-    },
+    editLinks: false,
     store: {
-      version: version ? `v${version[0]}` : "latest",
-      versioned_routes: require(path.join(process.cwd(), "src", "config", "versions.json"))
+      latest: config.get("latest"),
+      version: config.get("version"),
+      routes: index["routes"]
     },
     nav: [
       { text: "Getting Started", link: "/getting-started/" },
@@ -121,13 +127,13 @@ module.exports = {
         }
       ],
       "/help/Plugins/": loadSidebarFrom({
-        location: path.join(process.cwd(), config.get("documentation"), "help", "Plugins"),
+        location: path.join(config.get("documentation"), "help", "Plugins"),
         pre: [["/help/", "Back to Help"]],
         post: [],
         exclude: []
       }),
       "/help/": loadSidebarFrom({
-        location: path.join(process.cwd(), config.get("documentation"), "help"),
+        location: path.join(config.get("documentation"), "help"),
         pre: [["", "Introduction"], ["User-Interfaces", "User Interfaces"], ["Tutorials", "Tutorials"]],
         sidebar: [["ACS/ACS_Basic_Functions", "Basic"]],
         post: [["Plugins/Introduction", "Plugins"]],
@@ -141,7 +147,6 @@ module.exports = {
 };
 
 function loadSidebarFrom({ location, pre, post, exclude }) {
-  //location, sidebar, appendix = []) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */

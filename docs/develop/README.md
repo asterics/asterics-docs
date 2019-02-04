@@ -1,2 +1,0 @@
-# Develop with AsTeRICS
-
