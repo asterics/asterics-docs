@@ -1,6 +1,6 @@
 const path = require("path");
 
-let envConfigPath = path.join(process.cwd(), "src", "config", ".env"),
+const envConfigPath = path.join(process.cwd(), "src", "config", ".env"),
   schemaPath = path.join(process.cwd(), "src", "config", "schema.json");
 
 require("dotenv").config({ path: envConfigPath });
@@ -10,31 +10,53 @@ const convict = require("convict"),
 
 /* Load configuration */
 config.load({
-  env: "production",
-  wd: process.cwd(),
-  documentation: "docs",
-  destination: path.join("docs", ".vuepress", "dist"),
+  versions: ["2.3", "2.5", "2.6", "2.7", "2.8", "3.0", "3.0.1", "pre-3.1"],
   submodules: [
     {
       name: "AsTeRICS",
-      destination: path.join(process.cwd(), "src", "external", "asterics"),
+      location: "src/external/asterics",
       reference: getReferenceInPath(process.cwd(), "AsTeRICS"),
       branch: "master"
     },
     {
       name: "AsTeRICS.wiki",
-      destination: path.join(process.cwd(), "src", "external", "asterics-wiki"),
+      location: "src/external/asterics-wiki",
       reference: getReferenceInPath(process.cwd(), "AsTeRICS.wiki"),
       branch: "master"
     }
   ],
-  // versions: ["v2.3-patch", "v2.5-patch", "v3.0.1", "master"],
-  versions: ["2.3", "2.5", "3.0.1", "pre-3.1"],
-  // versions: ["v2.3-patch", "master"],
-  html_to_md: [
+  dependencies: [
     {
-      from: path.join("src", "external", "asterics", "Documentation", "ACS-Help", "HTML"),
-      to: path.join("docs", "help")
+      repository: "AsTeRICS",
+      source: "Documentation/docs",
+      destination: "docs",
+      recurse: true,
+      filter: /\.(md|jpg|png)$/i,
+      process: [{ rule: /\.(md|jpg|png)$/i, apply: "copy" }],
+      postprocess: [{ rule: /\.md$/i, apply: ["select-version", "edit-link"] }],
+      map: {
+        "2.3": "pre-3.1",
+        "2.5": "pre-3.1",
+        "2.6": "pre-3.1",
+        "2.7": "pre-3.1",
+        "2.8": "pre-3.1",
+        "3.0": "pre-3.1",
+        "3.0.1": "pre-3.1"
+      }
+    },
+    {
+      repository: "AsTeRICS",
+      source: "Documentation/ACS-Help/HTML",
+      destination: "docs/help",
+      recurse: true,
+      filter: /\.(html?|jpg|png)$/i,
+      process: [
+        { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+        { rule: /\.(jpg|png)$/i, apply: "lowercase" },
+        { rule: /\.(jpg|png)$/i, apply: "copy" }
+      ],
+      postprocess: [{ rule: /\.md$/i, apply: ["remove-first-two-lines", "correct-image-path", "lowercase-image", "select-version", "edit-link"] }],
+      map: {}
     }
   ]
 });

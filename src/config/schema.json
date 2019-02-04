@@ -17,9 +17,21 @@
         "default": 8080,
         "env": "PORT"
     },
+    "version": {
+        "doc": "Documentation version.",
+        "format": ["2.3", "2.5", "2.6","2.7", "2.8","3.0","3.0.1","pre-3.1","master"],
+        "default": "master",
+        "env": "VERSION"
+    },
+    "latest": {
+        "doc": "Documentation version.",
+        "format": ["2.3", "2.5", "2.6","2.7", "2.8","3.0","3.0.1","pre-3.1","master"],
+        "default": "master",
+        "env": "LATEST"
+    },
     "versions": [{
-        "doc": "Documentation version. Last entry is not build to ",
-        "format": ["v2.3-path", "v2.5-path", "v2.6-path","v2.7-path", "v2.8-path","v3.0","v3.0.1","master"],
+        "doc": "Documentation versions.",
+        "format": ["2.3", "2.5", "2.6","2.7", "2.8","3.0","3.0.1","pre-3.1","master"],
         "default": "master"
     }],
     "documentation": {
@@ -31,13 +43,8 @@
     "destination": {
         "doc": "Build output folder.",
         "format": "String",
-        "default": "docs/.vuepress/dist",
+        "default": "dist",
         "env": "DESTINATION"
-    },
-    "wd": {
-        "doc": "Working directory.",
-        "format": "String",
-        "default": ""
     },
     "endpoint": {
         "doc": "Hosting endpoint.",
@@ -57,7 +64,7 @@
             "format": "String",
             "default": ""
         },
-        "destination": {
+        "location": {
             "doc": "Repository destination.",
             "format": "String",
             "default": ""
@@ -71,21 +78,46 @@
             "doc": "Checkout repository branch|tag.",
             "format": "String",
             "default": "master"
-        },
-        "fatality": {
-            "doc": "Abort setup when failed?",
-            "format": "Boolean",
-            "default": false
         }
     }],
-    "html_to_md": [{
-        "from": {
-            "doc": "HTML source folder.",
+    "dependencies": [{
+        "repository": {
+            "doc": "Git repository name.",
             "format": "String",
             "default": ""
         },
-        "to": {
-            "doc": "Markdown output folder",
+        "source": {
+            "doc": "Source folder.",
+            "format": "String",
+            "default": ""
+        },
+        "destination": {
+            "doc": "Destination folder",
+            "format": "String",
+            "default": ""
+        },
+        "recurse": {
+            "doc": "Process source folder recursively.",
+            "format": "Boolean",
+            "default": true
+        },
+        "filter": {
+            "doc": "Filter content in source folder.",
+            "format": "RegExp",
+            "default": ""
+        },
+        "process": {
+            "doc": "Process step.",
+            "format": ["copy", "html-to-markdown-copy"],
+            "default": ""
+        },
+        "postprocess": [{
+            "doc": "Post process steps.",
+            "format": ["remove-first-two-lines", "correct-image-path","lowercase-image","select-version","edit-link"],
+            "default": ""
+        }],
+        "map": {
+            "doc": "Version mapping.",
             "format": "String",
             "default": ""
         }
