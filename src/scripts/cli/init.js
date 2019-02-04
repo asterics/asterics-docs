@@ -16,6 +16,6 @@ exports.builder = yargs => {
 
 exports.handler = args => {
   config.get("submodules").forEach(({ name, location, reference, branch }) => {
-    ensureGitSubmodule({ name, destination: location, reference, branch }, config.get("verbose"));
+    ensureGitSubmodule({ name, location, reference, branch }, config.get("verbose"));
   });
 };
