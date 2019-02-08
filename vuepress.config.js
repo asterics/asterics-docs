@@ -46,18 +46,20 @@ module.exports = {
       },
       { text: "Help", link: "/help/" },
       {
-        text: "Applications", //maybe rename to 'Create/Use/Configure'
+        text: "Applications",
         items: [
           {
             text: "WebACS",
-            link: "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
+            link:
+              "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
           },
           {
             text: "AsTeRICS Grid",
-            link: "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
+            link:
+              "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
           },
-          { text: "Plugin IDE", link: "/plugins/New" },
-          { text: "AT solution IDE", link: "/at_solutions/New" } //maybe rename to 'AT application'
+          { text: "Plugin IDE", link: "/webapps/Plugin-IDE" },
+          { text: "AT solution IDE", link: "/webapps/AT-solution-IDE" } //maybe rename to 'AT application'
         ]
       },
       { text: "Develop", link: "/develop/" },
@@ -72,7 +74,10 @@ module.exports = {
       },
       {
         text: "Languages",
-        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
+        items: [
+          { text: "English", link: "/" },
+          { text: "German", link: "/de/" }
+        ]
       }
     ],
     sidebar: {
@@ -85,44 +90,76 @@ module.exports = {
         {
           title: "Discover",
           collapsable: false,
-          children: [["Search-Models", "Models"], ["Search-asterics-grids", "Grids"], ["Search-AT-solutions", "AT Solutions"]]
+          children: [
+            ["Search-Models", "Models"],
+            ["Search-asterics-grids", "Grids"],
+            ["Search-AT-solutions", "AT Solutions"]
+          ]
         }
       ],
+      // "/develop/": [
+      //   "DeveloperGuide" /* /foo/ */,
+      //   "Coding-Guidelines" /* /foo/one.html */,
+      //   "AT_solution_development",
+      //   "AT-solution-demos",
+      //   "asterics-wiki/coding_instructions/AsTeRICS Solutions",
+      //   "APE",
+      //   "ARE-Webserver.md",
+      //   "REST-API",
+      //   "asterics-wiki/api/AsTeRICS Websocket.md",
+      //   "ARE.md" /* /foo/two.html */
+      // ]
       "/develop/": [
         {
-          title: "Introduction",
+          title: "Getting Started",
           collapsable: false,
-          children: [["DeveloperGuide", "Development Environment"], ["Coding-Guidelines", "Coding Guidelines"], ["Unit-Testing", "Unit Testing"]]
+          children: [
+            ["Development-Environment", "Development Environment"],
+            ["Coding-Guidelines", "Coding Guidelines"],
+            ["Unit-Testing", "Unit Testing"]
+          ]
         },
         {
           title: "Plugin",
           collapsable: false,
-          children: [["Simple-Plugin-Tutorial.md", "Tutorial"], ["Plugin", "Creation Wizard"], ["ARE-HW-Interfacing-JNI.md", "HW Interfacing (JNI)"]]
+          children: [
+            ["Plugin-Introduction", "Introduction"],
+            ["Plugin-Tutorial", "Tutorial"],
+            ["Plugin-Advanced", "Advanced"]
+          ]
         },
+        {
+          title: "ARE Middleware",
+          collapsable: false,
+          children: [
+            ["ARE.md", "Advanced"]
+            // ["asterics-wiki/api/Resource Handling.md", "Resource handling"],
+            // ["ARE-Keyboard-Mouse-Services.md", "Keyboard/Mouse"],
+            // ["asterics-wiki/coding_instructions/JavaCV.md", "Computer Vision"],
+            // ["ARE-HW-Interfacing-CIM.md", "Interfacing Peripherals (CIM)"]
+          ]
+        },
+        {
+          title: "ARE Remote APIs",
+          collapsable: false,
+          children: [
+            ["ARE-Webserver.md", "Webserver"],
+            ["REST-API", "REST"],
+            ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
+          ]
+        },
+
         {
           title: "AT Solution",
           collapsable: false,
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
-            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
+            [
+              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
+              "Tutorial"
+            ],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
-          ]
-        },
-        {
-          title: "ARE Remote APIs",
-          collapsable: false,
-          children: [["ARE-Webserver.md", "Webserver"], ["REST-API", "REST"], ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]]
-        },
-        {
-          title: "ARE Middleware",
-          collapsable: false,
-          children: [
-            ["ARE API.md", "Introduction"],
-            ["asterics-wiki/api/Resource Handling.md", "Resource handling"],
-            ["ARE-Keyboard-Mouse-Services.md", "Keyboard/Mouse"],
-            ["asterics-wiki/coding_instructions/JavaCV.md", "Computer Vision"],
-            ["ARE-HW-Interfacing-CIM.md", "Interfacing Peripherals (CIM)"]
           ]
         }
       ],
@@ -134,13 +171,17 @@ module.exports = {
       }),
       "/help/": loadSidebarFrom({
         location: path.join(config.get("documentation"), "help"),
-        pre: [["", "Introduction"], ["User-Interfaces", "User Interfaces"], ["Tutorials", "Tutorials"]],
+        pre: [
+          ["", "Introduction"],
+          ["User-Interfaces", "User Interfaces"],
+          ["Tutorials", "Tutorials"]
+        ],
         sidebar: [["ACS/ACS_Basic_Functions", "Basic"]],
         post: [["Plugins/Introduction", "Plugins"]],
         exclude: [/Plugins/]
       })
     },
-    sidebarDepth: 3,
+    sidebarDepth: 1,
     diplayAllHeaders: true, // default
     lastUpdated: "Last Updated"
   }
@@ -150,7 +191,9 @@ function loadSidebarFrom({ location, pre, post, exclude }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
+  sidebar = sidebar.filter(e =>
+    fs.statSync(path.join(location, e)).isDirectory()
+  );
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
