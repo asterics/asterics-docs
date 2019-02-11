@@ -6,11 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "legacy": "node src/scripts/setup.js",
-    "release": "npm run legacy && npm run build",
-    "cli": "node src/scripts/cli.js",
-    "presetup": "npm run legacy",
-    "setup": "vuepress build docs"
+    "setup": "node src/scripts/setup.js",
+    "cli": "node src/scripts/cli.js"
   },
   "repository": {
     "type": "git",
