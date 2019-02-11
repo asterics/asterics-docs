@@ -10,6 +10,8 @@ const config = require(configPath),
 const legacy = config.get("versions");
 const latest = legacy.pop();
 
+console.log(`Configured versions: ${config.get("versions")}`);
+
 /* Setup submodules */
 init();
 

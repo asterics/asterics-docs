@@ -1,7 +1,7 @@
 const path = require("path");
 
-const envConfigPath = path.join(process.cwd(), "src", "config", ".env"),
-  schemaPath = path.join(process.cwd(), "src", "config", "schema.json");
+const envConfigPath = path.join(process.cwd(), "src/config/.env"),
+  schemaPath = path.join(process.cwd(), "src/config/schema.json");
 
 require("dotenv").config({ path: envConfigPath });
 const convict = require("convict"),
