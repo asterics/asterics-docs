@@ -1,5 +1,6 @@
 pipeline {
   agent {
+    docker 'node:11'
     node {
       label 'Linux'
     }
@@ -7,7 +8,10 @@ pipeline {
   stages {
     stage('Source') {
       steps {
-        sh 'echo Source'
+        sh '''
+          echo Source
+          node -v
+        '''
       }
     }
     stage('Build') {
