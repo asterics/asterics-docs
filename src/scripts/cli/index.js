@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const { getGitRepository } = require("./util/git.js");
 
-const configPath = path.join(process.cwd(), ..."src/config/config.js".split("/"));
-const indexPath = path.join(process.cwd(), ..."src/config/index.json".split("/"));
+const configPath = path.join(process.cwd(), "src/config/config.js");
+const indexPath = path.join(process.cwd(), "src/config/index.json");
 const config = require(configPath);
 
 exports.command = "index";

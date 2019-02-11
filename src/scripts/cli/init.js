@@ -1,6 +1,6 @@
 const path = require("path");
 
-const configPath = path.join(process.cwd(), ..."src/config/config.js".split("/"));
+const configPath = path.join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
 const { ensureGitSubmodule } = require("@asterics/git-tools");
 

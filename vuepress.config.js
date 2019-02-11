@@ -1,8 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 
-const configPath = path.join(process.cwd(), "src", "config", "config.js");
-const indexPath = path.join(process.cwd(), "src", "config", "index.json");
+const configPath = path.join(process.cwd(), "src/config/config.js");
+const indexPath = path.join(process.cwd(), "src/config/index.json");
 
 const index = require(indexPath);
 const config = require(configPath);

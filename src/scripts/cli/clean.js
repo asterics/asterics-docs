@@ -1,7 +1,7 @@
 const path = require("path");
 const rimraf = require("rimraf");
 
-const configPath = path.join(process.cwd(), "src", "config", "config.js");
+const configPath = path.join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
 
 exports.command = "clean";
