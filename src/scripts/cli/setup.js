@@ -3,8 +3,8 @@ const path = require("path");
 const rimraf = require("rimraf");
 const turndown = require("turndown")({ headingStyle: "atx" });
 
-const indexPath = path.join(process.cwd(), "src", "config", "index.json");
-const configPath = path.join(process.cwd(), "src", "config", "config.js");
+const indexPath = path.join(process.cwd(), "src/config/index.json");
+const configPath = path.join(process.cwd(), "src/config/config.js");
 
 const { getGitRepository } = require("./util/git.js");
 const { mkdirp } = require("@asterics/node-utils");
@@ -19,15 +19,14 @@ exports.builder = yargs => {
   yargs
     .usage("node cli.js setup")
     .options({
-      h: { alias: "help", describe: "Show this help.", type: "String" },
-      v: { alias: "version", describe: "Version to setup.", type: "String" },
-      o: { alias: "output", describe: "Output folder", type: "String" }
+      h: { alias: "help", describe: "Show this help.", type: "string" },
+      v: { alias: "version", describe: "Version to setup.", type: "string" },
+      o: { alias: "output", describe: "Output folder", type: "string" }
     })
     .demandOption(["v", "o"]);
 };
 
 exports.handler = ({ version, output }) => {
-  version = version.replace(/(\"|\')/g, "");
   /* Load index */
   if (!fs.existsSync(indexPath)) return;
   let index = JSON.parse(fs.readFileSync(indexPath))["setup"][version];
@@ -39,8 +38,8 @@ exports.handler = ({ version, output }) => {
     { source: "vuepress.config.js", target: `${output}/.vuepress/config.js` },
     { source: "override.styl", target: `${output}/.vuepress/override.styl` }
   ]);
-  jobs.push(...getCopyJobs(path.join(process.cwd(), "src", "components"), path.join(output, ".vuepress", "components")));
-  jobs.push(...getCopyJobs(path.join(process.cwd(), "public"), path.join(output, ".vuepress", "public")));
+  jobs.push(...getCopyJobs(path.join(process.cwd(), "src/components"), path.join(output, ".vuepress/components")));
+  jobs.push(...getCopyJobs(path.join(process.cwd(), "public"), path.join(output, ".vuepress/public")));
   processCopyJobs(jobs);
 
   (async () => {
