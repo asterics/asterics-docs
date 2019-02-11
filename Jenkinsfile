@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    docker 'node:11'
-    node {
+    docker {
+      image 'node:10'
       label 'Linux'
     }
   }
