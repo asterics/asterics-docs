@@ -11,7 +11,7 @@ const convict = require("convict"),
 /* Load configuration */
 config.load({
   // versions: ["2.3", "2.5", "2.6", "2.7", "2.8", "3.0", "3.0.1", "pre-3.1"],
-  versions: ["2.3", "3.0.1", "pre-3.1"],
+  versions: ["2.3", "2.8", "3.0", "3.0.1", "pre-3.1"],
   submodules: [
     {
       name: "AsTeRICS",
