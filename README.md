@@ -20,7 +20,7 @@ npm run setup
 
 and locate the result at  `dist/`.
 
-**Note**: enable _verbose_ logging with
+**Note**: enable _verbose_ logging with by setting variable `VERBOSE`
 
 ```bash
 VERBOSE=true npm run setup
