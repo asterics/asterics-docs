@@ -38,7 +38,7 @@
     "rimraf": "^2.6.3",
     "shelljs": "^0.8.3",
     "turndown": "^5.0.3",
-    "vuepress": "0.14.8",
+    "vuepress": "^1.0.0-alpha.39",
     "yargs": "^12.0.5"
   },
   "dependencies": {}
