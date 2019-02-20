@@ -35,8 +35,9 @@ exports.handler = ({ version, output }) => {
   output = path.isAbsolute(output) ? output : path.join(process.cwd(), output);
   rimraf.sync(output);
   let jobs = absolute([
-    { source: "vuepress.config.js", target: `${output}/.vuepress/config.js` },
-    { source: "override.styl", target: `${output}/.vuepress/override.styl` }
+    { source: "src/config/vuepress.config.js", target: `${output}/.vuepress/config.js` },
+    { source: "src/config/palette.styl", target: `${output}/.vuepress/styles/palette.styl` },
+    { source: "src/config/index.styl", target: `${output}/.vuepress/styles/index.styl` }
   ]);
   jobs.push(...getCopyJobs(path.join(process.cwd(), "src/components"), path.join(output, ".vuepress/components")));
   jobs.push(...getCopyJobs(path.join(process.cwd(), "public"), path.join(output, ".vuepress/public")));
