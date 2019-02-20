@@ -25,7 +25,8 @@ module.exports = {
   plugins: {
     "@vuepress/medium-zoom": {
       selector: ".content img"
-    }
+    },
+    "@vuepress/back-to-top": {}
   },
   themeConfig: {
     repo: "asterics/AsTeRICS",
