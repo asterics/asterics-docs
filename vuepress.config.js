@@ -26,7 +26,14 @@ module.exports = {
     "@vuepress/medium-zoom": {
       selector: ".content img"
     },
-    "@vuepress/back-to-top": {}
+    "@vuepress/back-to-top": {},
+    "@vuepress/pwa": {
+      serviceWorker: true,
+      updatePopup: {
+        message: "New content is available.",
+        buttonText: "Refresh"
+      }
+    }
   },
   themeConfig: {
     repo: "asterics/AsTeRICS",
