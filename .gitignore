@@ -2,6 +2,12 @@
 .vscode/
 node_modules/
 
+*/**/*.pem
+*/**/*.srl
+*/**/*.p7c
+*/**/*.crt
+*/**/*.csr
+
 docs*/
 dist*/
 
