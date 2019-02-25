@@ -33,7 +33,12 @@ module.exports = {
     ["meta", { name: "msapplication-TileColor", content: "#2b5797" }],
     ["meta", { name: "theme-color", content: "#ffffff" }]
   ],
+  // theme: "@vuepress/theme-blog",
+  theme: "./src/themes/asterics",
   plugins: {
+    "./src/plugins/plugin-version-button": {
+      hello: "world"
+    },
     "@vuepress/medium-zoom": {
       selector: ".content img"
     },

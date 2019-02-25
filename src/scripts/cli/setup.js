@@ -40,6 +40,7 @@ exports.handler = ({ version, output }) => {
     { source: "src/config/index.styl", target: `${output}/.vuepress/styles/index.styl` }
   ]);
   jobs.push(...getCopyJobs(path.join(process.cwd(), "src/components"), path.join(output, ".vuepress/components")));
+  jobs.push(...getCopyJobs(path.join(process.cwd(), "src/plugins"), path.join(output, ".vuepress/plugins")));
   jobs.push(...getCopyJobs(path.join(process.cwd(), "public"), path.join(output, ".vuepress/public")));
   processCopyJobs(jobs);
 
