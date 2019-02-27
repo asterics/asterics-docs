@@ -1,24 +1,18 @@
-const fs = require("fs");
 const path = require("path");
 
-const configPath = path.join(process.cwd(), "src", "config", "config.js");
-const indexPath = path.join(process.cwd(), "src", "config", "index.json");
+const configPath = path.join(process.cwd(), "src/config/config.js");
+const indexPath = path.join(process.cwd(), "src/config/index.json");
 
 const config = require(configPath),
   shell = require("shelljs"),
-  { ensureGitSubmodule, checkoutSubmodule } = require("@asterics/git-tools"),
-  { execute } = require("@asterics/node-utils"),
-  { loadCopyJobs } = require("./cli/util/jobs.js");
+  { execute } = require("@asterics/node-utils");
 
-// if (!shell.which("git")) {
-//   shell.echo("Sorry, this script requires git");
-//   shell.exit(1);
-// }
-
-// const AsTeRICS = config.get("submodules").find(submodule => submodule.name === "AsTeRICS");
 const legacy = config.get("versions");
 const latest = legacy.pop();
 
+console.log(`Configured versions: ${config.get("versions")}`);
+
+/* Setup submodules */
 init();
 
 /* Create index */
@@ -34,8 +28,10 @@ config.get("versions").forEach(version => {
 /* Merge results */
 merge(latest);
 
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 function init() {
-  let script = path.join(process.cwd(), "src", "scripts", "cli.js");
+  let script = path.join(process.cwd(), "src/scripts/cli.js");
   execute({
     cmd: `node ${script} init`,
     success: `initialized asterics-docs`,
@@ -45,7 +41,7 @@ function init() {
 }
 
 function index() {
-  let script = path.join(process.cwd(), "src", "scripts", "cli.js");
+  let script = path.join(process.cwd(), "src/scripts/cli.js");
   execute({
     cmd: `node ${script} index`,
     success: `index all required versions`,
@@ -54,11 +50,11 @@ function index() {
   });
 }
 function setup(version, latest) {
-  let script = path.join(process.cwd(), "src", "scripts", "cli.js");
+  let script = path.join(process.cwd(), "src/scripts/cli.js");
   let folder = path.join(process.cwd(), config.get("documentation"));
   folder += latest ? "" : `-${version}`;
   execute({
-    cmd: `node ${script} setup -v="'${version}'" -o ${folder}`,
+    cmd: `node ${script} setup -v=${version} -o ${folder}`,
     success: `setup version ${version} in ${folder}`,
     error: `failed setup version ${version} in ${folder}`,
     verbose: config.get("verbose")
@@ -90,142 +86,3 @@ function merge(latest) {
     shell.mv(source, destination);
   });
 }
-
-// /* Setup git submodules */
-// // config.get("submodules").forEach(submodule => ensureGitSubmodule(submodule, config.get("verbose")));
-
-// /* Clean possible conversion files of latest release */
-// // checkoutSubmodule({ ...AsTeRICS, branch: latest }, config.get("verbose"));
-// // clean();
-
-// /* Index versioned content */
-// // versions();
-
-// /* Build legacy versions */
-// // legacy.forEach(version => {
-// //   checkoutSubmodule({ ...AsTeRICS, branch: version }, config.get("verbose"));
-//   // convert();
-//   // copy(version);
-//   // buildLegacy(version);
-//   // clean(); // conversion
-// // });
-
-// /* Build latest versions */
-// // checkoutSubmodule({ ...AsTeRICS, branch: latest }, config.get("verbose"));
-// // convert();
-// // copy(latest);
-// // // build();
-
-// /* Copy legacy build to public */
-// // public();
-
-// function versions() {
-//   let script = path.join(config.get("wd"), "src", "scripts", "cli.js");
-//   let versioned = path.join(config.get("wd"), "src", "config", "versions.json");
-//   execute({
-//     cmd: `node ${script} versions ${versioned} -r -f`,
-//     success: "indexed versioned content",
-//     error: "failed indexing versioned content",
-//     verbose: config.get("verbose")
-//   });
-// }
-
-// function convert() {
-//   config.get("html_to_md").forEach(({ from, to }) => {
-//     let script = path.join(config.get("wd"), "src", "scripts", "cli.js");
-//     execute({
-//       cmd: `node ${script} convert ${from} ${to} -r`,
-//       success: `converted files in ${from} to ${to}`,
-//       error: `failed converting files in ${from} to ${to}`,
-//       verbose: config.get("verbose")
-//     });
-//   });
-// }
-
-// function copy(version) {
-//   config.get("md_to_md").forEach(({ from, to, versions }) => {
-//     console.log(versions[version]);
-//     let v = versions[version] || version;
-
-//     ensure(from);
-
-//     let { copies } = loadCopyJobs({ input: path.join(process.cwd(), from), output: path.join(process.cwd(), to), recursive: true });
-//   });
-// }
-
-// function ensure(from) {
-//   let submodule = isSubmodule(from);
-
-//   if (submodule) {
-//     ensureGitSubmodule()
-//   }
-// }
-
-// function isSubmodule(location) {
-//   let submodule = null;
-//   config.get("submodules").forEach(s => {
-//     /* Test whether location points to submodule destination, i.e.
-//        relative path does not start with ".."
-//     */
-//     if(!/^\.\./.test(path.relative(s.destination, location))) {
-//       submodule = s;
-//       break;
-//     }
-//   });
-
-//   return s;
-// }
-
-// function clean() {
-//   config.get("html_to_md").forEach(({ from, to }) => {
-//     let script = path.join(config.get("wd"), "src", "scripts", "cli.js");
-//     execute({
-//       cmd: `node ${script} convert ${from} ${to} -r -c`,
-//       success: `cleaned converted files in ${to}`,
-//       error: `failed cleaning converted files in ${to}`,
-//       verbose: config.get("verbose")
-//     });
-//   });
-// }
-
-// // function build() {
-// //   let documentation = path.join(config.get("wd"), config.get("documentation")),
-// //     destination = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "dist");
-// //   execute({
-// //     cmd: `npx vuepress build ${documentation}`,
-// //     success: `built docs at ${documentation} (endpoint: ${endpoint}, destination: ${destination})`,
-// //     error: `failed building docs at ${documentation} (endpoint: ${endpoint}, destination: ${destination})`,
-// //     env: { DESTINATION: destination },
-// //     verbose: config.get("verbose")
-// //   });
-// // }
-
-// function buildLegacy(version) {
-//   let documentation = path.join(config.get("wd"), config.get("documentation")),
-//     endpoint = config.get("endpoint") ? `${config.get("endpoint")}/${version}` : `${version}`,
-//     /* NOTE: destinations with a dot in the folder name (e.g., v2.3/) result in error (EISDIR). */
-//     destination = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "temp", "build"),
-//     final = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "temp", version);
-//   execute({
-//     cmd: `npx vuepress build ${documentation}`,
-//     success: `built docs at ${documentation} (endpoint: /${endpoint}/, destination: ${final})`,
-//     error: `failed building docs at ${documentation} (endpoint: /${endpoint}/, destination: ${final})`,
-//     env: { ENDPOINT: endpoint, DESTINATION: destination },
-//     verbose: config.get("verbose")
-//   });
-//   shell.mv(destination, final);
-// }
-
-// function public() {
-//   let public = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "public"),
-//     temp = path.join(config.get("wd"), config.get("documentation"), ".vuepress", "temp");
-
-//   fs.readdirSync(temp).forEach(folder => {
-//     let source = path.join(temp, folder);
-//     destination = path.join(public, folder);
-
-//     fs.renameSync(source, destination);
-//   });
-
-//   fs.rmdirSync(temp);
-// }

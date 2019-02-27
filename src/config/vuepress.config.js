@@ -1,8 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 
-const configPath = path.join(process.cwd(), "src", "config", "config.js");
-const indexPath = path.join(process.cwd(), "src", "config", "index.json");
+const configPath = path.join(process.cwd(), "src/config/config.js");
+const indexPath = path.join(process.cwd(), "src/config/index.json");
 
 const index = require(indexPath);
 const config = require(configPath);
@@ -22,6 +22,31 @@ module.exports = {
   dest: config.get("destination"),
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
+  head: [
+    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon/apple-touch-icon.png" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon/favicon-32x32.png" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon/favicon-16x16.png" }],
+    ["link", { rel: "manifest", href: "/favicon/site.webmanifest" }],
+    ["link", { rel: "mask-icon", href: "/favicon/safari-pinned-tab.svg", color: "#0ea1f2" }],
+    ["meta", { name: "apple-mobile-web-app-title", content: "AsTeRICS Docs" }],
+    ["meta", { name: "application-name", content: "AsTeRICS Docs" }],
+    ["meta", { name: "msapplication-TileColor", content: "#2b5797" }],
+    ["meta", { name: "theme-color", content: "#ffffff" }]
+  ],
+  plugins: {
+    "@vuepress/medium-zoom": {
+      selector: ".content img"
+    },
+    "@vuepress/back-to-top": {},
+    "@vuepress/pwa": {
+      serviceWorker: true,
+      popupComponent: "AstericsSWUpdatePopup",
+      updatePopup: {
+        message: "New content is available.",
+        buttonText: "Refresh"
+      }
+    }
+  },
   themeConfig: {
     repo: "asterics/AsTeRICS",
     repoLabel: "Repository!",
@@ -50,13 +75,11 @@ module.exports = {
         items: [
           {
             text: "WebACS",
-            link:
-              "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
+            link: "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
           },
           {
             text: "AsTeRICS Grid",
-            link:
-              "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
+            link: "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
           },
           { text: "Plugin IDE", link: "/webapps/Plugin-IDE" },
           { text: "AT solution IDE", link: "/webapps/AT-solution-IDE" } //maybe rename to 'AT application'
@@ -74,10 +97,7 @@ module.exports = {
       },
       {
         text: "Languages",
-        items: [
-          { text: "English", link: "/" },
-          { text: "German", link: "/de/" }
-        ]
+        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
       }
     ],
     sidebar: {
@@ -90,11 +110,7 @@ module.exports = {
         {
           title: "Discover",
           collapsable: false,
-          children: [
-            ["Search-Models", "Models"],
-            ["Search-asterics-grids", "Grids"],
-            ["Search-AT-solutions", "AT Solutions"]
-          ]
+          children: [["Search-Models", "Models"], ["Search-asterics-grids", "Grids"], ["Search-AT-solutions", "AT Solutions"]]
         }
       ],
       // "/develop/": [
@@ -122,11 +138,7 @@ module.exports = {
         {
           title: "Plugin",
           collapsable: false,
-          children: [
-            ["Plugin-Introduction", "Introduction"],
-            ["Plugin-Tutorial", "Tutorial"],
-            ["Plugin-Advanced", "Advanced"]
-          ]
+          children: [["Plugin-Introduction", "Introduction"], ["Plugin-Tutorial", "Tutorial"], ["Plugin-Advanced", "Advanced"]]
         },
         {
           title: "ARE Middleware",
@@ -142,11 +154,7 @@ module.exports = {
         {
           title: "ARE Remote APIs",
           collapsable: false,
-          children: [
-            ["ARE-Webserver.md", "Webserver"],
-            ["REST-API", "REST"],
-            ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
-          ]
+          children: [["ARE-Webserver.md", "Webserver"], ["REST-API", "REST"], ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]]
         },
 
         {
@@ -155,10 +163,7 @@ module.exports = {
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
-            [
-              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
-              "Tutorial"
-            ],
+            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         }
@@ -171,11 +176,7 @@ module.exports = {
       }),
       "/help/": loadSidebarFrom({
         location: path.join(config.get("documentation"), "help"),
-        pre: [
-          ["", "Introduction"],
-          ["User-Interfaces", "User Interfaces"],
-          ["Tutorials", "Tutorials"]
-        ],
+        pre: [["", "Introduction"], ["User-Interfaces", "User Interfaces"], ["Tutorials", "Tutorials"]],
         sidebar: [["ACS/ACS_Basic_Functions", "Basic"]],
         post: [["Plugins/Introduction", "Plugins"]],
         exclude: [/Plugins/]
@@ -191,9 +192,7 @@ function loadSidebarFrom({ location, pre, post, exclude }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e =>
-    fs.statSync(path.join(location, e)).isDirectory()
-  );
+  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));

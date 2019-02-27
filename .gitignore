@@ -1,16 +1,16 @@
-node_modules/
-*/**/dist/
+# Ignore
 .vscode/
-docs/.vuepress/temp/
-docs/.vuepress/public/v*/
-docs/.vuepress/public/2.3/
-docs/.vuepress/public/2.5/
-docs/.vuepress/public/2.6/
-docs/.vuepress/public/2.7/
-docs/.vuepress/public/2.8/
-docs/.vuepress/public/3.0/
-docs/.vuepress/public/3.0.1/
-docs/.vuepress/public/3.1/
-docs/help/Plugins/
-docs/help/ACS/
-docs/help/ARE/
+node_modules/
+
+*/**/*.pem
+*/**/*.srl
+*/**/*.p7c
+*/**/*.crt
+*/**/*.csr
+
+docs*/
+dist*/
+
+src/config/index.json
+
+# Allow

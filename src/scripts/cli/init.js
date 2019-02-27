@@ -1,6 +1,6 @@
 const path = require("path");
 
-const configPath = path.join(process.cwd(), ..."src/config/config.js".split("/"));
+const configPath = path.join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
 const { ensureGitSubmodule } = require("@asterics/git-tools");
 
@@ -16,6 +16,6 @@ exports.builder = yargs => {
 
 exports.handler = args => {
   config.get("submodules").forEach(({ name, location, reference, branch }) => {
-    ensureGitSubmodule({ name, destination: location, reference, branch }, config.get("verbose"));
+    ensureGitSubmodule({ name, location, reference, branch }, config.get("verbose"));
   });
 };
