@@ -11,7 +11,7 @@ const convict = require("convict"),
 /* Load configuration */
 config.load({
   // versions: ["2.3", "2.5", "2.6", "2.7", "2.8", "3.0", "3.0.1", "pre-3.1"],
-  versions: ["2.3", "pre-3.1"],
+  versions: ["3.0", "pre-3.1"],
   submodules: [
     {
       name: "AsTeRICS",
@@ -34,7 +34,7 @@ config.load({
       recurse: true,
       filter: /\.(md|jpg|png)$/i,
       process: [{ rule: /\.(md|jpg|png)$/i, apply: "copy" }],
-      postprocess: [{ rule: /\.md$/i, apply: ["select-version", "edit-link"] }],
+      postprocess: [{ rule: /\.md$/i, apply: ["edit-link"] }],
       map: {
         "2.3": "pre-3.1",
         "2.5": "pre-3.1",
@@ -42,7 +42,8 @@ config.load({
         "2.7": "pre-3.1",
         "2.8": "pre-3.1",
         "3.0": "pre-3.1",
-        "3.0.1": "pre-3.1"
+        "3.0.1": "pre-3.1",
+        "3.1": "pre-3.1"
       }
     },
     {
@@ -56,7 +57,17 @@ config.load({
         { rule: /\.(jpg|png)$/i, apply: "lowercase" },
         { rule: /\.(jpg|png)$/i, apply: "copy" }
       ],
-      postprocess: [{ rule: /\.md$/i, apply: ["remove-first-two-lines", "correct-image-path", "lowercase-image", "select-version", "edit-link"] }],
+      postprocess: [
+        {
+          rule: /\.md$/i,
+          apply: [
+            "remove-first-two-lines",
+            "correct-image-path",
+            "lowercase-image",
+            "edit-link"
+          ]
+        }
+      ],
       map: {}
     }
   ]
