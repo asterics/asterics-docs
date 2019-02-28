@@ -1,8 +1,8 @@
 <template>
   <article class="tile">
-    <a target="_blank" :href="'/getting-started/' + target" class="tile-link">
+    <a target="_blank" :href="$withBase(target)" class="tile-link">
       <h3 class="post-title">{{title}}</h3>
-      <img v-if="imageUrl && imageUrl.indexOf('favicon.ico') < 0" :src="imageUrl">
+      <img v-if="imageUrl && imageUrl.indexOf('favicon.ico') < 0" :src="$withBase(imageUrl)">
     </a>
   </article>
 </template>

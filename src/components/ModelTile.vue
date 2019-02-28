@@ -1,12 +1,12 @@
 <template>
   <article class="tile">
-    <a target="_blank" :href="'/getting-started/' + target" class="tile-link">
+    <a target="_blank" :href="$withBase(target)" class="tile-link">
       <h3 class="post-title">{{title}}</h3>
-      <img v-if="imageUrl && imageUrl.indexOf('favicon.ico') < 0" :src="imageUrl">
+      <img v-if="imageUrl && imageUrl.indexOf('favicon.ico') < 0" :src="$withBase(imageUrl)">
     </a>
     <!-- <ul class="tags">
-      <li v-for="tag in topic.tags" class="tag">
-        <a target="_blank" :href="'https://community.openhab.org/tags/' + tag">{{tag}}</a>
+      <li v-for="tag in tags" class="tag">
+        <a target="_blank" :href="$withBase(tag.href)">{{tag.link}}</a>
       </li>
     </ul>-->
     <div>{{shortDesc}}</div>
