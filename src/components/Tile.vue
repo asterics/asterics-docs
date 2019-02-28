@@ -78,38 +78,11 @@
 <script>
 import Vue from "vue";
 export default {
-  data() {
-    return {
-      showTopics: true
-    };
-  },
-  computed: {
-    topics() {
-      return [
-        {
-          id: "#definition-asterics",
-          title: "Keyboard and Mouse",
-          image_url: "/img/keyboard press key.png"
-        },
-        {
-          id: "#definition-asterics",
-          title: "Environmental Control",
-          image_url: "/img/environmental control.png"
-        },
-        {
-          id: "#definition-asterics",
-          title: "Environmental Control",
-          image_url: "/img/light on.png"
-        },
-        {
-          id: "#definition-asterics",
-          title: "Bioelectric Signal",
-          image_url: "/img/ecgl.svg"
-        }
-      ];
-    }
-  },
-  mounted() {}
+  props: {
+    target: { type: String, default: "#" },
+    title: { type: String, default: "Default Title" },
+    imageUrl: { type: String, default: "" }
+  }
 };
 </script>
 
