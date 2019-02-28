@@ -4,17 +4,14 @@
       <h3 class="post-title">{{title}}</h3>
       <img v-if="imageUrl && imageUrl.indexOf('favicon.ico') < 0" :src="$withBase(imageUrl)">
     </a>
-    <!-- <ul class="tags">
+    <ul class="tags">
       <li v-for="tag in tags" class="tag">
-        <a target="_blank" :href="$withBase(tag.href)">{{tag.link}}</a>
+        <a target="_blank" :href="$withBase(tag.href)">{{tag.text}}</a>
       </li>
-    </ul>-->
+    </ul>
     <div>{{shortDesc}}</div>
-    <div class="read-more">
-      <button class="read-more-button">Start</button>
-    </div>
-    <div class="read-more">
-      <button class="read-more-button">Edit</button>
+    <div v-for="buttonElem in buttons" class="read-more">
+      <button class="read-more-button">{{buttonElem.text}}</button>
     </div>
   </article>
 </template>
@@ -94,7 +91,19 @@ export default {
     target: { type: String, default: "#" },
     title: { type: String, default: "Default Title" },
     imageUrl: { type: String, default: "" },
-    shortDesc: { type: String, default: "Short Description of element." }
+    shortDesc: { type: String, default: "Short Description of element." },
+    tags: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
+    buttons: {
+      type: Array,
+      default: function() {
+        return [{ href: "", text: "Start" }, { href: "", text: "Edit" }];
+      }
+    }
   }
 };
 </script>
