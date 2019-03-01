@@ -2,7 +2,8 @@ pipeline {
   agent none
   options { skipDefaultCheckout() }
   environment {
-    BRANCH_NAME = 'sprint-201901-content'
+    BRANCH_NAME_DOCS = BRANCH_NAME
+    BRANCH_NAME = 'master'
   }
   stages {
     stage('Trigger: asterics-web') {
