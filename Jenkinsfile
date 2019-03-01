@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Trigger: asterics-web') {
       steps {
-        build 'asterics-web/asterics-docs_sprint-201901-content'
+        build 'asterics-web/master'
       }
     }
   }
