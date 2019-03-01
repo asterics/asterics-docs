@@ -2,7 +2,7 @@ pipeline {
   agent none
   options { skipDefaultCheckout() }
   environment {
-    BRANCH_NAME_DOCS = env.BRANCH_NAME
+    BRANCH_NAME_DOCS = "${env.BRANCH_NAME}"
     BRANCH_NAME = 'master'
   }
   stages {
