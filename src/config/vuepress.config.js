@@ -90,41 +90,45 @@ module.exports = {
       routes: index["routes"]
     },
     nav: [
-      { text: "Getting Started", link: "/getting-started/" },
-      {
-        text: "Discover",
-        items: [
-          { text: "Models", link: "/getting-started/Search-Models" },
-          { text: "Grids", link: "/getting-started/Search-asterics-grids" },
-          { text: "AT Solutions", link: "/getting-started/Search-AT-solutions" }
-        ]
-      },
-      { text: "Help", link: "/help/" },
-      {
-        text: "Applications",
-        items: [
-          {
-            text: "WebACS",
-            link:
-              "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
-          },
-          {
-            text: "AsTeRICS Grid",
-            link:
-              "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
-          },
-          { text: "Plugin IDE", link: "/webapps/Plugin-IDE" },
-          { text: "AT solution IDE", link: "/webapps/AT-solution-IDE" } //maybe rename to 'AT application'
-        ]
-      },
+      { text: "Use", link: "/getting-started/" },
+      { text: "Customize", link: "/help/" },
       { text: "Develop", link: "/develop/" },
       {
-        text: "Support",
+        text: "More",
         items: [
-          { text: "Issues", link: "/support/Issues" },
-          { text: "Contact", link: "/support/Contact" },
-          { text: "Contribute", link: "/support/Contribute" },
-          { text: "Donate", link: "/support/Donate" }
+          {
+            text: "Applications",
+            items: [
+              {
+                text: "WebACS",
+                link:
+                  "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
+              },
+              {
+                text: "AsTeRICS Grid",
+                link:
+                  "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
+              },
+              { text: "Plugin IDE", link: "/webapps/Plugin-IDE" },
+              { text: "AT solution IDE", link: "/webapps/AT-solution-IDE" } //maybe rename to 'AT application'
+            ]
+          },
+          {
+            text: "Get Involved",
+            items: [
+              { text: "Issues", link: "/support/Issues" },
+              { text: "Contact", link: "/support/Contact" },
+              { text: "Contribute", link: "/support/Contribute" },
+              { text: "Donate", link: "/support/Donate" }
+            ]
+          },
+          {
+            text: "Version",
+            items: [
+              { text: "latest", link: "/" },
+              { text: "3.0", link: "/3.0/" }
+            ]
+          }
         ]
       },
       {
@@ -135,43 +139,16 @@ module.exports = {
         ]
       },
       {
-        text: "Version",
-        items: [{ text: "latest", link: "/" }, { text: "3.0", link: "/3.0/" }]
+        text: "Download",
+        link: "https://github.com/asterics/AsTeRICS/releases/latest"
       }
     ],
     sidebar: {
       "/getting-started/": [
-        {
-          title: "Getting Started",
-          collapsable: false,
-          children: [
-            ["", "Introduction"],
-            ["Overview.md", "Overview"],
-            ["Installation.md", "Installation"]
-          ]
-        },
-        {
-          title: "Discover",
-          collapsable: false,
-          children: [
-            ["Search-Models", "Models"],
-            ["Search-asterics-grids", "Grids"],
-            ["Search-AT-solutions", "AT Solutions"]
-          ]
-        }
+        ["Overview.md", "Overview"],
+        ["Installation.md", "Installation"],
+        ["Discover.md", "Solutions"]
       ],
-      // "/develop/": [
-      //   "DeveloperGuide" /* /foo/ */,
-      //   "Coding-Guidelines" /* /foo/one.html */,
-      //   "AT_solution_development",
-      //   "AT-solution-demos",
-      //   "asterics-wiki/coding_instructions/AsTeRICS Solutions",
-      //   "APE",
-      //   "ARE-Webserver.md",
-      //   "REST-API",
-      //   "asterics-wiki/api/AsTeRICS Websocket.md",
-      //   "ARE.md" /* /foo/two.html */
-      // ]
       "/develop/": [
         {
           title: "Getting Started",
