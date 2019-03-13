@@ -90,7 +90,7 @@ module.exports = {
       routes: index["routes"]
     },
     nav: [
-      { text: "Use", link: "/getting-started/" },
+      { text: "Get Started", link: "/getting-started/" },
       { text: "Customize", link: "/help/" },
       { text: "Develop", link: "/develop/" },
       {
