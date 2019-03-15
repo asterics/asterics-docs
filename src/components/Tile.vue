@@ -1,78 +1,34 @@
 <template>
-  <article class="tile">
-    <a target="_blank" :href="$withBase(target)" class="tile-link">
-      <h3 class="post-title">{{title}}</h3>
-      <img v-if="imageUrl && imageUrl.indexOf('favicon.ico') < 0" :src="$withBase(imageUrl)">
-    </a>
-  </article>
+  <div>
+    <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+      <b-row no-gutters>
+        <b-col md="6">
+          <b-embed v-if="isVideo" type="iframe" aspect="16by9" :src="imageUrl" allowfullscreen/>
+          <b-card-img v-else :src="$withBase(imageUrl)" class="rounded-0"/>
+        </b-col>
+        <b-col md="6">
+          <b-card-body :title="title">
+            <b-card-text>This is a wider card with supporting text as a natural lead-in to additional content.</b-card-text>
+          </b-card-body>
+        </b-col>
+      </b-row>
+    </b-card>
+  </div>
+
+  <!-- <div class="mt-4">
+    <b-card
+      :title="title"
+      :img-src="$withBase(imageUrl)"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mt-4"
+    ></b-card>
+  </div>-->
 </template>
 
 <style lang="stylus">
-.tile {
-  width: 10vw;
-  max-width: 385px;
-  border: 1px solid #ddd;
-  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.15);
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-
-  .tile-link {
-    color: black;
-
-    &:hover {
-      text-decoration: none;
-    }
-
-    .post-stats {
-      font-size: 10pt;
-      font-weight: normal;
-    }
-
-    h3 {
-      margin-top: 0.4rem;
-    }
-
-    .tags {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-
-      .tag {
-        display: inline;
-        margin-right: 10px;
-        font-size: 8pt;
-        background: #eee;
-        padding: 4px;
-
-        a {
-          color: black;
-        }
-      }
-    }
-
-    .read-more {
-      margin-top: 1rem;
-      font-size: 0.7rem;
-      color: #ff6600;
-      width: auto;
-      display: flex;
-      flex-direction: row;
-
-      .read-more-button {
-        padding: 0.3rem 0.8rem;
-        border: 1px solid #ff6600;
-        border-radius: 4px;
-        box-sizing: border-box;
-
-        &:hover, &:focus {
-          color: white;
-          background-color: #ff6600;
-        }
-      }
-    }
-  }
-}
 </style>
 
 <script>
@@ -81,7 +37,8 @@ export default {
   props: {
     target: { type: String, default: "#" },
     title: { type: String, default: "Default Title" },
-    imageUrl: { type: String, default: "" }
+    imageUrl: { type: String, default: "" },
+    isVideo: { type: Boolean, default: false }
   }
 };
 </script>
