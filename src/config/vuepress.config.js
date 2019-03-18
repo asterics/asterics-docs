@@ -205,20 +205,23 @@ module.exports = {
       ],
       "/help/Plugins/": loadSidebarFrom({
         location: path.join(config.get("documentation"), "help", "Plugins"),
-        pre: [["/help/", "Back to Help"]],
+        pre: [["/help/", "Back"]],
         post: [],
         exclude: []
       }),
-      "/help/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "help"),
-        pre: [
-          ["", "Introduction"],
-          ["User-Interfaces", "User Interfaces"],
-          ["Tutorials", "Tutorials"]
-        ],
-        post: [["Plugins/Introduction", "Plugins"]],
+      "/help/UserManuals/": loadSidebarFrom({
+        location: path.join(config.get("documentation"), "help/UserManuals"),
+        pre: [["/help/", "Back"]],
+        post: [],
         exclude: [/Plugins/, /Img/i]
-      })
+      }),
+      "/help/": [
+        ["", "Overview"],
+        ["Tutorials", "Tutorials"],
+        ["User-Interfaces", "User Interfaces"],
+        ["UserManuals/", "User Manuals"],
+        ["Plugins/Introduction", "Plugins"]
+      ]
     },
     sidebarDepth: 3,
     diplayAllHeaders: true, // default
@@ -238,7 +241,7 @@ function loadSidebarFrom({ location, pre, post, exclude }) {
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
 
   /* Map to first level entry */
-  sidebar = sidebar.map(e => ({ title: e, collapable: true, children: null })); //abs: path.join(location, e) }));
+  sidebar = sidebar.map(e => ({ title: e, collapsable: true, children: null })); //abs: path.join(location, e) }));
 
   /* Append children for each entry */
   sidebar.forEach(e => {
