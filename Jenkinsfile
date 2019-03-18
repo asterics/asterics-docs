@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Trigger: asterics-web') {
       steps {
-        build job: 'asterics-web/master', parameter: [[$class: 'StringParameterValue', name: 'para', value: 'Hello World']]
+        build job: 'asterics-web/master', parameters: [[$class: 'StringParameterValue', name: 'para', value: 'Hello World']]
       }
     }
   }
