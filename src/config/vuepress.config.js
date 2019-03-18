@@ -90,9 +90,11 @@ module.exports = {
       routes: index["routes"]
     },
     nav: [
-      { text: "Get Started", link: "/getting-started/" },
-      { text: "Customize", link: "/help/" },
+      { text: "Get Started", link: "/get-started/" },
+      { text: "Customize", link: "/customize/" },
       { text: "Develop", link: "/develop/" },
+      { text: "Plugins", link: "/plugins/Introduction" },
+      { text: "Manuals", link: "/manuals/" },
       {
         text: "More",
         items: [
@@ -116,10 +118,10 @@ module.exports = {
           {
             text: "Get Involved",
             items: [
-              { text: "Issues", link: "/support/Issues" },
-              { text: "Contact", link: "/support/Contact" },
-              { text: "Contribute", link: "/support/Contribute" },
-              { text: "Donate", link: "/support/Donate" }
+              { text: "Issues", link: "/get-involved/Issues" },
+              { text: "Contact", link: "/get-involved/Contact" },
+              { text: "Contribute", link: "/get-involved/Contribute" },
+              { text: "Donate", link: "/get-involved/Donate" }
             ]
           },
           {
@@ -144,14 +146,13 @@ module.exports = {
       }
     ],
     sidebar: {
-      "/getting-started/": [
+      "/get-started/": [
         ["Overview.md", "Overview"],
-        ["Installation.md", "Installation"],
-        ["Discover.md", "Solutions"]
+        ["Installation.md", "Installation"]
       ],
       "/develop/": [
         {
-          title: "Getting Started",
+          title: "Get Started",
           collapsable: false,
           children: [
             ["Development-Environment", "Development Environment"],
@@ -203,24 +204,22 @@ module.exports = {
           ]
         }
       ],
-      "/help/Plugins/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "help", "Plugins"),
-        pre: [["/help/", "Back"]],
+      "/plugins/": loadSidebarFrom({
+        location: path.join(config.get("documentation"), "plugins"),
+        pre: [],
         post: [],
         exclude: []
       }),
-      "/help/UserManuals/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "help/UserManuals"),
-        pre: [["/help/", "Back"]],
+      "/manuals/": loadSidebarFrom({
+        location: path.join(config.get("documentation"), "manuals"),
+        pre: [],
         post: [],
-        exclude: [/Plugins/, /Img/i]
+        exclude: []
       }),
-      "/help/": [
+      "/customize/": [
         ["", "Overview"],
         ["Tutorials", "Tutorials"],
-        ["User-Interfaces", "User Interfaces"],
-        ["UserManuals/", "User Manuals"],
-        ["Plugins/Introduction", "Plugins"]
+        ["User-Interfaces", "User Interfaces"]
       ]
     },
     sidebarDepth: 3,
