@@ -216,12 +216,11 @@ module.exports = {
           ["User-Interfaces", "User Interfaces"],
           ["Tutorials", "Tutorials"]
         ],
-        sidebar: [["ACS/ACS_Basic_Functions", "Basic"]],
         post: [["Plugins/Introduction", "Plugins"]],
-        exclude: [/Plugins/]
+        exclude: [/Plugins/, /Img/i]
       })
     },
-    sidebarDepth: 1,
+    sidebarDepth: 3,
     diplayAllHeaders: true, // default
     lastUpdated: "Last Updated"
   }
