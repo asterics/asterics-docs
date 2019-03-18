@@ -5,6 +5,9 @@ pipeline {
     BRANCH_NAME_DOCS = BRANCH_NAME
     BRANCH_NAME = 'master'
   }
+  triggers {
+    pollSCM('* * * * *')
+  }
   stages {
     stage('Trigger: asterics-web') {
       steps {
