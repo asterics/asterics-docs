@@ -20,15 +20,7 @@ pipeline {
         ENDPOINT = "docs"
       }
       steps {
-        sh '''
-          yarn install
-          yarn setup
-        '''
-      }
-    }
-    stage('Deploy') {
-      environment {
-        SERVER = credentials('server')
+        build job: 'asterics-web/master', parameter: [[$class: 'StringParameterValue', name: 'para', value: 'Hello World']]
       }
       steps {
         sh '''
