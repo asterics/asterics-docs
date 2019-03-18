@@ -23,7 +23,7 @@ pipeline {
         ENDPOINT = "docs"
       }
       steps {
-        build job: 'asterics-web/master', parameters: [[$class: 'StringParameterValue', name: 'para', value: 'Hello World'], [gitParameter, name: 'BRANCH_WEBACS', value: 'dynamic-properties']]
+        build job: 'asterics-web/master', parameters: [[$class: 'StringParameterValue', name: 'para', value: 'Hello World']] //, [gitParameter, name: 'BRANCH_WEBACS', value: 'dynamic-properties']]
       }
       steps {
         sh '''
