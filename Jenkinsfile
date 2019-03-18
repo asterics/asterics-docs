@@ -13,6 +13,9 @@ pipeline {
       label params.agent
     }
   }
+  triggers {
+    pollSCM('* * * * *')
+  }
   stages {
     stage('Build') {
       environment {
