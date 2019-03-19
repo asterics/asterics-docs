@@ -1,7 +1,7 @@
 
 pipeline {
   parameters {
-    choice(name: 'destination', description: 'Destination folder', choices: ['asterics-web-devlinux', 'asterics-web-devwindows/', 'asterics-web-production' ])
+    choice(name: 'destination', description: 'Destination folder', choices: ['asterics-web-devlinux/docs', 'asterics-web-devwindows/docs', 'asterics-web-production/docs' ])
     choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
