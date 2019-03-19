@@ -17,8 +17,9 @@ pipeline {
     stage('Test') {
       steps {
         script {
-          def p = destination.replace("/docs","")
-          println p
+          def p = params.destination.replace("/docs","")
+          print p
+          print params.destination
         }
         sh '''
           echo "${p}"
