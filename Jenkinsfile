@@ -5,7 +5,7 @@ pipeline {
     choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
-    // gitParameter(name: 'BRANCH_ASTERICS', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'AsTeRICS')
+    gitParameter(name: 'BRANCH_ASTERICS', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepostiroy: 'AsTeRICS')
   }
   agent {
     docker {
@@ -13,30 +13,36 @@ pipeline {
       label params.agent
     }
   }
-  triggers {
-    pollSCM('* * * * *')
-  }
   stages {
+    // stage('Source') {
+    //   steps {
+    //     git branch: env.BRANCH, url: 'https://github.com/asterics/asterics-docs'
+    //   }
+    // }
     stage('Build') {
       environment {
         VERBOSE = true
-        ENDPOINT = "docs"
-      }
-      steps {
-        build job: 'asterics-web/master', parameters: [[$class: 'StringParameterValue', name: 'para', value: 'Hello World']] //, [gitParameter, name: 'BRANCH_WEBACS', value: 'dynamic-properties']]
       }
       steps {
         sh '''
-          mkdir build
-          mv dist build/docs
+          yarn install
+          yarn setup
         '''
+      }
+    }
+    stage('Deploy') {
+      environment {
+        SERVER = credentials('server')
+      }
+      steps {
+        sh "ln -sf dist docs"
         script {
           def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
           sshRemove remote: remote, path: "/var/www/html/${params.destination}", failOnError: false
-          sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
+          sshPut remote: remote, from: 'docs', into: "/var/www/html/${params.destination}"
         }
       }
-    }
+    } f8
   }
   post {
     always {
