@@ -17,7 +17,7 @@ pipeline {
     stage('Test') {
       steps {
         script {
-          def p = new File('/var/www/html/${params.destination}/..').absolutePath
+          def p = new File("/var/www/html/${params.destination}/..").absolutePath
         }
         sh '''
           echo ${p}
