@@ -5,7 +5,7 @@ pipeline {
     choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
-    gitParameter(name: 'BRANCH_ASTERICS', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'AsTeRICS')
+    // gitParameter(name: 'BRANCH_ASTERICS', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'AsTeRICS')
   }
   agent {
     docker {
