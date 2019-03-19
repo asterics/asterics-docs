@@ -17,14 +17,14 @@ config.load({
       name: "AsTeRICS",
       location: "src/external/asterics",
       reference: getReferenceInPath(process.cwd(), "AsTeRICS"),
-      branch: "pre-3.1"
+      branch: "master"
     },
-    // {
-    //   name: "WebACS",
-    //   location: "src/external/webacs",
-    //   reference: getReferenceInPath(process.cwd(), "WebACS"),
-    //   branch: "master"
-    // },
+    {
+      name: "WebACS",
+      location: "src/external/webacs",
+      reference: getReferenceInPath(process.cwd(), "WebACS"),
+      branch: "master"
+    },
     {
       name: "AsTeRICS.wiki",
       location: "src/external/asterics-wiki",
@@ -36,7 +36,7 @@ config.load({
     {
       repository: "AsTeRICS",
       source: "Documentation/docs",
-      destination: "docs",
+      destination: config.get("documentation"),
       recurse: true,
       filter: /\.(md|jpg|png)$/i,
       process: [{ rule: /\.(md|jpg|png)$/i, apply: "copy" }],
@@ -55,7 +55,7 @@ config.load({
     {
       repository: "AsTeRICS",
       source: "Documentation/ACS-Help/HTML/ACS",
-      destination: "manuals/ACS",
+      destination: config.get("documentation") + "/manuals/ACS",
       recurse: true,
       filter: /\.(html?|jpg|png)$/i,
       process: [
@@ -79,7 +79,7 @@ config.load({
     {
       repository: "AsTeRICS",
       source: "Documentation/ACS-Help/HTML/ARE",
-      destination: "manuals/ARE",
+      destination: config.get("documentation") + "/manuals/ARE",
       recurse: true,
       filter: /\.(html?|jpg|png)$/i,
       process: [
@@ -103,7 +103,31 @@ config.load({
     {
       repository: "AsTeRICS",
       source: "Documentation/ACS-Help/HTML/Plugins",
-      destination: "plugins",
+      destination: config.get("documentation") + "/plugins",
+      recurse: true,
+      filter: /\.(html?|jpg|png)$/i,
+      process: [
+        { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+        { rule: /\.(jpg|png)$/i, apply: "lowercase" },
+        { rule: /\.(jpg|png)$/i, apply: "copy" }
+      ],
+      postprocess: [
+        {
+          rule: /\.md$/i,
+          apply: [
+            "remove-first-two-lines",
+            "correct-image-path",
+            "lowercase-image",
+            "edit-link"
+          ]
+        }
+      ],
+      map: {}
+    },
+    {
+      repository: "WebACS",
+      source: "help_files/WebACS",
+      destination: config.get("documentation") + "/manuals/WebACS",
       recurse: true,
       filter: /\.(html?|jpg|png)$/i,
       process: [
@@ -124,30 +148,6 @@ config.load({
       ],
       map: {}
     }
-    // {
-    //   repository: "WebACS",
-    //   source: "help_files/WebACS",
-    //   destination: "manuals/WebACS",
-    //   recurse: true,
-    //   filter: /\.(html?|jpg|png)$/i,
-    //   process: [
-    //     { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
-    //     { rule: /\.(jpg|png)$/i, apply: "lowercase" },
-    //     { rule: /\.(jpg|png)$/i, apply: "copy" }
-    //   ],
-    //   postprocess: [
-    //     {
-    //       rule: /\.md$/i,
-    //       apply: [
-    //         "remove-first-two-lines",
-    //         "correct-image-path",
-    //         "lowercase-image",
-    //         "edit-link"
-    //       ]
-    //     }
-    //   ],
-    //   map: {}
-    // }
   ]
 });
 
