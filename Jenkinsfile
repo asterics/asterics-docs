@@ -1,6 +1,4 @@
 
-def p = new File('/var/www/html/${params.destination}/..').absolutePath
-
 pipeline {
   parameters {
     choice(name: 'destination', description: 'Destination folder', choices: ['asterics-web-devlinux', 'asterics-web-devwindows/', 'asterics-web-production' ])
@@ -18,6 +16,9 @@ pipeline {
   stages {
     stage('Test') {
       steps {
+        script {
+          def p = new File('/var/www/html/${params.destination}/..').absolutePath
+        }
         sh '''
           echo ${p}
         '''
