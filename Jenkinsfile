@@ -23,6 +23,7 @@ pipeline {
         }
         sh '''
           echo "${p}"
+          echo "${params.destination}"
         '''
       }
     }
