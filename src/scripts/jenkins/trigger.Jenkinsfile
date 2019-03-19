@@ -1,13 +1,11 @@
 pipeline {
   agent none
   options { skipDefaultCheckout() }
-  environment {
-    BRANCH_NAME = 'master'
-  }
   stages {
     stage('Trigger: asterics-web') {
       steps {
-        build 'asterics-web/master'
+        build job: 'asterics-web/master'
+        build job: 'asterics-web/master', parameters: [[$class: 'StringParameterValue', name: 'key', value: 'value'
       }
     }
   }
