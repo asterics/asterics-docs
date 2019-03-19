@@ -41,7 +41,7 @@ pipeline {
           sshPut remote: remote, from: 'docs', into: "/var/www/html/${params.destination}"
         }
       }
-    } f8
+    }
   }
   post {
     always {
