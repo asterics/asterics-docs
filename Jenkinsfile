@@ -17,11 +17,11 @@ pipeline {
     stage('Test') {
       steps {
         script {
-          def p = params.BRANCH.replace("/docs","")
+          def p = destination.replace("/docs","")
           println p
         }
         sh '''
-          echo ${p}
+          echo "${p}"
         '''
       }
     }
