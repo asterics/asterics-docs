@@ -92,9 +92,9 @@ module.exports = {
     nav: [
       { text: "Get Started", link: "/get-started/" },
       { text: "Customize", link: "/customize/" },
-      { text: "Develop", link: "/develop/" },
       { text: "Plugins", link: "/plugins/Introduction" },
       { text: "Manuals", link: "/manuals/" },
+      { text: "Develop", link: "/develop/" },
       {
         text: "More",
         items: [
