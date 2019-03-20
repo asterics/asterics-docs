@@ -14,19 +14,6 @@ pipeline {
     }
   }
   stages {
-    // stage('Test') {
-    //   steps {
-    //     script {
-    //       def p = params.destination.replace("/docs","")
-    //       print p
-    //       print params.destination
-    //     }
-    //     sh '''
-    //       echo "${p}"
-    //       echo "${params.destination}"
-    //     '''
-    //   }
-    // }
     stage('Build') {
       environment {
         VERBOSE = true
@@ -43,11 +30,14 @@ pipeline {
         SERVER = credentials('server')
       }
       steps {
-        sh "ln -sf dist docs"
+        sh '''
+          mkdir build
+          ln -sf dist build/docs
+        '''
         script {
           def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
           sshRemove remote: remote, path: "/var/www/html/${params.destination}", failOnError: false
-          sshPut remote: remote, from: 'docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
+          sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
         }
       }
     }
