@@ -32,7 +32,7 @@ pipeline {
       steps {
         sh '''
           mkdir build
-          ln -sf dist build/docs
+          mv dist build/docs
         '''
         script {
           def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
