@@ -17,6 +17,7 @@ pipeline {
     stage('Build') {
       environment {
         VERBOSE = true
+        ENDPOINT = "docs"
       }
       steps {
         sh '''
@@ -40,6 +41,17 @@ pipeline {
           sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
         }
       }
+      steps {
+        sh '''
+          mkdir build
+          mv dist build/docs
+        '''
+        script {
+          def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
+          sshRemove remote: remote, path: "/var/www/html/${params.destination}", failOnError: false
+          sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
+        }
+      }
     }
   }
   post {
@@ -47,4 +59,12 @@ pipeline {
       cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false
     }
   }
+<<<<<<< HEAD
+=======
+  post {
+    always {
+      cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false
+    }
+  }
+>>>>>>> Jenkinsfile: set ENDPOINT
 }
