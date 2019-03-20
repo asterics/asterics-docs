@@ -7,6 +7,9 @@ pipeline {
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
     // gitParameter(name: 'BRANCH_ASTERICS', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'AsTeRICS')
   }
+  triggers {
+    pollSCM('H/15 * * * *')
+  }
   agent {
     docker {
       image params.image
@@ -17,6 +20,7 @@ pipeline {
     stage('Build') {
       environment {
         VERBOSE = true
+        ENDPOINT = "docs"
       }
       steps {
         sh '''
