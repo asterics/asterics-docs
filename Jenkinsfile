@@ -29,13 +29,13 @@ pipeline {
           password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
           file(name: "FILE", description: "Choose a file to upload")
         }
-        steps {
-          echo "Hello ${params.PERSON}"
-          echo "Biography: ${params.BIOGRAPHY}"
-          echo "Toggle: ${params.TOGGLE}"
-          echo "Choice: ${params.CHOICE}"
-          echo "Password: ${params.PASSWORD}"
-        }
+      }
+      steps {
+        echo "Hello ${params.PERSON}"
+        echo "Biography: ${params.BIOGRAPHY}"
+        echo "Toggle: ${params.TOGGLE}"
+        echo "Choice: ${params.CHOICE}"
+        echo "Password: ${params.PASSWORD}"
       }
     }
     // stage('Build') {
