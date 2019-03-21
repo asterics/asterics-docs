@@ -37,7 +37,7 @@ pipeline {
     stage('Prepare') {
       when { 
         anyOf { 
-          equals expected: true, actual: params.deploy
+          equals expected: true, actual: params.release
           equals expected: true, actual: params.store
         }
       }
