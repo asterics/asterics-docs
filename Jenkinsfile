@@ -22,20 +22,22 @@ pipeline {
       input {
         message "Should the build be release on Github?"
         parameters {
-          string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-          text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-          booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
-          choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-          password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-          file(name: "FILE", description: "Choose a file to upload")
+          string(name: 'RELEASE_TAG', defaultValue: 'Mr Jenkins', description: 'Version/Tag')
+          text(name: 'RELEASE_NOTES', defaultValue: '', description: 'Release Notes')
+          // booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+          // choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+          // password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+          // file(name: "FILE", description: "Choose a file to upload")
         }
       }
       steps {
-        echo "Hello ${PERSON}"
-        echo "Biography: ${BIOGRAPHY}"
-        echo "Toggle: ${TOGGLE}"
-        echo "Choice: ${CHOICE}"
-        echo "Password: ${PASSWORD}"
+        echo "Release Tag: ${RELEASE_TAG}"
+        echo "Release Notes:\n${RELEASE_NOTES}"
+        // echo "Hello ${PERSON}"
+        // echo "Biography: ${BIOGRAPHY}"
+        // echo "Toggle: ${TOGGLE}"
+        // echo "Choice: ${CHOICE}"
+        // echo "Password: ${PASSWORD}"
       }
     }
     // stage('Build') {
