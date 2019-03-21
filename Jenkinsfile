@@ -27,10 +27,11 @@ pipeline {
         ENDPOINT = "docs"
       }
       steps {
-        sh '''
-          yarn install
-          yarn setup
-        '''
+        echo "Build"
+        // sh '''
+        //   yarn install
+        //   yarn setup
+        // '''
       }
     }
     stage('Prepare') {
