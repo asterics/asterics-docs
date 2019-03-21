@@ -18,38 +18,51 @@ pipeline {
     }
   }
   stages {
-    stage('Build') {
-      environment {
-        VERBOSE = true
-        ENDPOINT = "docs"
-      }
-      steps {
-        sh '''
-          yarn install
-          yarn setup
-        '''
-      }
-    }
-    stage('Deploy') {
-      environment {
-        SERVER = credentials('server')
-      }
-      steps {
-        sh '''
-          mkdir build
-          mv dist build/docs
-        '''
-        script {
-          def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-          sshRemove remote: remote, path: "/var/www/html/${params.destination}", failOnError: false
-          sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
+    stage('Release') {
+      input {
+        message "Should the build be release on Github?"
+        parameters {
+          string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+          text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+          booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+          choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+          password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+          file(name: "FILE", description: "Choose a file to upload")
         }
       }
     }
+    // stage('Build') {
+    //   environment {
+    //     VERBOSE = true
+    //     ENDPOINT = "docs"
+    //   }
+    //   steps {
+    //     sh '''
+    //       yarn install
+    //       yarn setup
+    //     '''
+    //   }
+    // }
+    // stage('Deploy') {
+    //   environment {
+    //     SERVER = credentials('server')
+    //   }
+    //   steps {
+    //     sh '''
+    //       mkdir build
+    //       mv dist build/docs
+    //     '''
+    //     script {
+    //       def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
+    //       sshRemove remote: remote, path: "/var/www/html/${params.destination}", failOnError: false
+    //       sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
+    //     }
+    //   }
+    // }
   }
-  post {
-    always {
-      cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false
-    }
-  }
+  // post {
+  //   always {
+  //     cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false
+  //   }
+  // }
 }
