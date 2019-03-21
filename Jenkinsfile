@@ -31,11 +31,11 @@ pipeline {
         }
       }
       steps {
-        echo "Hello ${params.PERSON}"
-        echo "Biography: ${params.BIOGRAPHY}"
-        echo "Toggle: ${params.TOGGLE}"
-        echo "Choice: ${params.CHOICE}"
-        echo "Password: ${params.PASSWORD}"
+        echo "Hello ${PERSON}"
+        echo "Biography: ${BIOGRAPHY}"
+        echo "Toggle: ${TOGGLE}"
+        echo "Choice: ${CHOICE}"
+        echo "Password: ${PASSWORD}"
       }
     }
     // stage('Build') {
