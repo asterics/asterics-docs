@@ -43,6 +43,8 @@ pipeline {
       steps {
         echo "Prepare"
       }
+    }
+    stage('Output') {
       parallel {
         stage('Deploy') {
           when {
