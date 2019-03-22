@@ -1,5 +1,5 @@
 module.exports = {
-  branch: "alija/task/101",
+  branch: "origin/alija/task/101",
   repositoryUrl: "https://github.com/asterics/asterics-docs",
   tagFormat: "v${version}",
   plugins: [
@@ -53,5 +53,5 @@ module.exports = {
     // ]
   ],
   dryRun: false,
-  ci: true
+  ci: false
 };
