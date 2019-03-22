@@ -114,6 +114,7 @@ pipeline {
               yarn release
               git status
               git log --oneline --graph --all -20
+              printenv
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
             // echo "Release Notes:\n${RELEASE_NOTES}"
