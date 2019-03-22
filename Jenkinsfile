@@ -105,6 +105,7 @@ pipeline {
               git status
               git log --oneline --graph --all -20
               git checkout $BRANCH
+              git pull
               git status
               git log --oneline --graph --all -20
               yarn install
