@@ -103,6 +103,9 @@ pipeline {
           steps {
             echo "Release"
             sh '''
+              printenv
+              export GIT_BRANCH=$BRANCH
+              printenv
               git status
               git log --oneline --graph --all -20
               git checkout $BRANCH
