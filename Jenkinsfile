@@ -99,7 +99,6 @@ pipeline {
             echo "Release"
             sh '''
               yarn release:prepare
-              git reflog HEAD @{u} -20
               yarn release --branch $GIT_BRANCH
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
