@@ -102,12 +102,13 @@ pipeline {
           steps {
             echo "Release"
             sh '''
-              yarn install
-              yarn release:prepare
               git status
               git log --oneline --graph --all -20
               git checkout $BRANCH
-              git pull origin $BRANCH
+              git status
+              git log --oneline --graph --all -20
+              yarn install
+              yarn release:prepare
               git status
               git log --oneline --graph --all -20
               yarn release
