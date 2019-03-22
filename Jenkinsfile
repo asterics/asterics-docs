@@ -100,7 +100,7 @@ pipeline {
             sh '''
               yarn install
               yarn release:prepare
-              git checkout $BRANCH
+              git checkout $GIT_BRANCH
               yarn release --branch $GIT_BRANCH
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
