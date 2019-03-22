@@ -112,7 +112,7 @@ pipeline {
               yarn release:prepare
               git status
               git log --oneline --graph --all -20
-              yarn release
+              yarn release --branch $BRANCH
               git status
               git log --oneline --graph --all -20
               printenv
