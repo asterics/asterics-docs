@@ -41,7 +41,6 @@
     "dotenv": "^6.2.0",
     "nodegit": "^0.24.0",
     "rimraf": "^2.6.3",
-    "semantic-release": "^15.13.3",
     "shelljs": "^0.8.3",
     "turndown": "^5.0.3",
     "vuepress": "^1.0.0-alpha.0",
