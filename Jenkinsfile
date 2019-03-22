@@ -4,6 +4,10 @@ pipeline {
     booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build')
     booleanParam(name: 'store', defaultValue: false, description: 'Store build')
     booleanParam(name: 'release', defaultValue: false, description: 'Release build')
+    string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The author name associated with the Git release tag.')
+    string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The author email associated with the Git release tag.')
+    string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The committer name associated with the Git release tag.')
+    string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The committer email associated with the Git release tag.')
     choice(name: 'destination', description: 'Destination folder', choices: ['asterics-web-devlinux/docs', 'asterics-web-devwindows/docs', 'asterics-web-production/docs' ])
     choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
@@ -105,6 +109,7 @@ pipeline {
               git status
               git log --oneline --graph --all -20
               yarn release
+              git log --oneline --graph --all -20
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
             // echo "Release Notes:\n${RELEASE_NOTES}"
