@@ -101,6 +101,7 @@ pipeline {
               yarn install
               yarn release:prepare
               git checkout $GIT_BRANCH
+              git pull
               yarn release --branch $GIT_BRANCH
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
