@@ -102,7 +102,8 @@ pipeline {
               yarn release:prepare
               git checkout $BRANCH
               git pull origin $BRANCH
-              yarn release --branch $BRANCH
+              git status
+              yarn release
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
             // echo "Release Notes:\n${RELEASE_NOTES}"
