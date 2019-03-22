@@ -100,7 +100,7 @@ pipeline {
             sh '''
               yarn release:prepare
               printenv
-              yarn release
+              yarn release --branch ${env.GIT_BRANCH}
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
             // echo "Release Notes:\n${RELEASE_NOTES}"
