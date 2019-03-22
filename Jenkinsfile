@@ -104,11 +104,14 @@ pipeline {
             sh '''
               yarn install
               yarn release:prepare
+              git status
+              git log --oneline --graph --all -20
               git checkout $BRANCH
               git pull origin $BRANCH
               git status
               git log --oneline --graph --all -20
               yarn release
+              git status
               git log --oneline --graph --all -20
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
