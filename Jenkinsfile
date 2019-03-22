@@ -87,7 +87,7 @@ pipeline {
           }
           environment {
             GH_TOKEN = credentials('aa09e7a7-8013-4498-a6ca-7d12f57e2cbe')
-            GIT_BRANCH = env.BRANCH
+            GIT_BRANCH = "$BRANCH"
           }
           // input {
           //   message "Should the build be release on Github?"
