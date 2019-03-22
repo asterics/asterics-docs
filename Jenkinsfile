@@ -98,6 +98,7 @@ pipeline {
           steps {
             echo "Release"
             sh '''
+              yarn install
               yarn release:prepare
               git checkout $BRANCH
               yarn release --branch $GIT_BRANCH
