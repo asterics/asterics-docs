@@ -100,9 +100,9 @@ pipeline {
             sh '''
               yarn install
               yarn release:prepare
-              git checkout $GIT_BRANCH
-              git pull
-              yarn release --branch $GIT_BRANCH
+              git checkout $BRANCH
+              git pull origin $BRANCH
+              yarn release --branch $BRANCH
             '''
             // echo "Release Tag: ${RELEASE_TAG}"
             // echo "Release Notes:\n${RELEASE_NOTES}"
