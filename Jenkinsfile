@@ -81,6 +81,9 @@ pipeline {
             // changeset 'assets'
             equals expected: true, actual: params.release
           }
+          environment {
+            GH_TOKEN = credentials('aa09e7a7-8013-4498-a6ca-7d12f57e2cbe')
+          }
           // input {
           //   message "Should the build be release on Github?"
           //   parameters {
@@ -94,6 +97,11 @@ pipeline {
           // }
           steps {
             echo "Release"
+            sh '''
+              yarn release:prepare
+              printenv
+              yarn release
+            '''
             // echo "Release Tag: ${RELEASE_TAG}"
             // echo "Release Notes:\n${RELEASE_NOTES}"
             // echo "Hello ${PERSON}"
