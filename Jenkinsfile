@@ -131,16 +131,16 @@ pipeline {
             //   printenv
             // '''
 
-            def s = java.net.URLEncoder.encode("$TOKEN", "UTF-8")
-            def x = java.net.URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
+            print java.net.URLEncoder.encode("$TOKEN", "UTF-8")
+            print java.net.URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
 
-            print s
-            print x
+            // print s
+            // print x
 
-            sh '''
-              echo $s
-              echo $x
-            '''
+            // sh '''
+            //   echo $s
+            //   echo $x
+            // '''
 
             // sh '''
             //   export GIT_BRANCH=$BRANCH
