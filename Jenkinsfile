@@ -91,12 +91,12 @@ pipeline {
           }
           environment {
             // GH_TOKEN = credentials('aa09e7a7-8013-4498-a6ca-7d12f57e2cbe')
-            GH_AUTHOR_NAME = "$GIT_AUTHOR_NAME"
-            GH_AUTHOR_EMAIL = "$GIT_AUTHOR_EMAIL"
-            GH_COMMITTER_NAME = "$GIT_AUTHOR_NAME"
-            GH_COMMITTER_EMAIL = "$GIT_AUTHOR_EMAIL"
-            GH_TOKEN = "$GIT_PASSWORD"
+            // GH_AUTHOR_NAME = "$GIT_AUTHOR_NAME"
+            // GH_AUTHOR_EMAIL = "$GIT_AUTHOR_EMAIL"
+            GIT_COMMITTER_NAME = "$GIT_AUTHOR_NAME"
+            GIT_COMMITTER_EMAIL = "$GIT_AUTHOR_EMAIL"
             GIT_BRANCH = "$BRANCH"
+            GH_TOKEN = "$GIT_PASSWORD"
             // GIT_CREDENTIALS = "${URLEncoder.encode("$GIT_AUTHOR_EMAIL")}:${URLEncoder.encode("$GIT_PASSWORD")}"
           }
           // input {
