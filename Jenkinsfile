@@ -139,9 +139,11 @@ pipeline {
 
             // print s
             // print x
+            script {
+              env.GIT_CREDENTIALS = URLEncoder.encode("$GIT_AUTHOR_EMAIL") + ":" + URLEncoder.encode("$GIT_PASSWORD")
+            }
 
             sh '''
-              export GIT_CREDENTIALS="${URLEncoder.encode("$GIT_AUTHOR_EMAIL")}:${URLEncoder.encode("$GIT_PASSWORD")}"
               printenv
             '''
 
