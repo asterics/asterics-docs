@@ -141,7 +141,8 @@ pipeline {
             // print x
 
             sh '''
-              GIT_CREDENTIALS="${URLEncoder.encode("$GIT_AUTHOR_EMAIL")}:${URLEncoder.encode("$GIT_PASSWORD")}" echo $GIT_CREDENTIALS
+              export GIT_CREDENTIALS="${URLEncoder.encode("$GIT_AUTHOR_EMAIL")}:${URLEncoder.encode("$GIT_PASSWORD")}"
+              echo $GIT_CREDENTIALS
             '''
 
             // sh '''
