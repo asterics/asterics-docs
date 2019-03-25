@@ -140,7 +140,9 @@ pipeline {
             // print s
             // print x
             script {
-              env.GIT_CREDENTIALS = URLEncoder.encode("$GIT_AUTHOR_EMAIL") + ":" + URLEncoder.encode("$GIT_PASSWORD")
+              def x = URLEncoder.encode("$GIT_AUTHOR_EMAIL")
+              def y = URLEncoder.encode("$GIT_PASSWORD")
+              env.GIT_CREDENTIALS = ":"
             }
 
             sh '''
