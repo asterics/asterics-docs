@@ -97,7 +97,7 @@ pipeline {
             // GH_COMMITTER_EMAIL = "$AUTHOR_EMAIL"
             GH_TOKEN = "$GIT_PASSWORD"
             GIT_BRANCH = "$BRANCH"
-            GIT_CREDENTIALS = "" + URLEncoder.encode("$GIT_AUTHOR_EMAIL") + ":" + URLEncoder.encode("$GIT_PASSWORD")
+            GIT_CREDENTIALS = "${URLEncoder.encode("$GIT_AUTHOR_EMAIL")}:${URLEncoder.encode("$GIT_PASSWORD")}"
           }
           // input {
           //   message "Should the build be release on Github?"
