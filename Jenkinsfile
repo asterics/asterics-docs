@@ -7,9 +7,9 @@ pipeline {
     booleanParam(name: 'release', defaultValue: false, description: 'Release build')
     // string(name: 'AUTHOR', defaultValue: '', description: 'Github user name')
     // string(name: 'AUTHOR_EMAIL', defaultValue: '', description: 'Github user e-mail')
-    password(name: 'GIT_PASSWORD', defaultValue: '', description: 'Github user password/token')
-    // string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The author name associated with the Git release tag.')
+    string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The author name associated with the Git release tag.')
     string(name: 'GIT_AUTHOR_EMAIL', defaultValue: '@semantic-release-bot', description: 'The author email associated with the Git release tag.')
+    password(name: 'GIT_PASSWORD', defaultValue: '', description: 'Github user password/token')
     // string(name: 'GIT_COMMITTER_NAME', defaultValue: '@semantic-release-bot', description: 'The committer name associated with the Git release tag.')
     // string(name: 'GIT_COMMITTER_EMAIL', defaultValue: '@semantic-release-bot', description: 'The committer email associated with the Git release tag.')
     choice(name: 'destination', description: 'Destination folder', choices: ['asterics-web-devlinux/docs', 'asterics-web-devwindows/docs', 'asterics-web-production/docs' ])
@@ -91,11 +91,11 @@ pipeline {
           }
           environment {
             // GH_TOKEN = credentials('aa09e7a7-8013-4498-a6ca-7d12f57e2cbe')
-            // GH_AUTHOR_NAME = "$AUTHOR"
-            // GH_AUTHOR_EMAIL = "$AUTHOR_EMAIL"
-            // GH_COMMITTER_NAME = "$AUTHOR"
-            // GH_COMMITTER_EMAIL = "$AUTHOR_EMAIL"
-            GH_TOKEN = "$GIT_PASSWORD"
+            GH_AUTHOR_NAME = "$AUTHOR"
+            GH_AUTHOR_EMAIL = "$AUTHOR_EMAIL"
+            GH_COMMITTER_NAME = "$AUTHOR"
+            GH_COMMITTER_EMAIL = "$AUTHOR_EMAIL"
+            // GH_TOKEN = "$GIT_PASSWORD"
             GIT_BRANCH = "$BRANCH"
             // GIT_CREDENTIALS = "${URLEncoder.encode("$GIT_AUTHOR_EMAIL")}:${URLEncoder.encode("$GIT_PASSWORD")}"
           }
@@ -111,7 +111,7 @@ pipeline {
           //   }
           // }
           steps {
-            echo "Release 1"
+            echo "Release"
             // sh '''
             //   printenv
             //   export GIT_BRANCH=$BRANCH
@@ -139,14 +139,28 @@ pipeline {
 
             // print s
             // print x
-            script {
-              def x = URLEncoder.encode("$GIT_AUTHOR_EMAIL")
-              def y = URLEncoder.encode("$GIT_PASSWORD")
-              env.GIT_CREDENTIALS = ":"
-            }
+            // script {
+            //   def x = URLEncoder.encode("$GIT_AUTHOR_EMAIL")
+            //   def y = URLEncoder.encode("$GIT_PASSWORD")
+            //   env.GIT_CREDENTIALS = ":"
+            // }
+
+            // sh '''
+            //   printenv
+            // '''
 
             sh '''
-              printenv
+              git checkout $BRANCH
+              git pull
+              yarn install
+              yarn release:prepare
+              
+              set +x
+              alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
+              export GIT_CREDENTIALS=$(urlencode $GIT_AUTHOR_EMAIL):$(urlencode $GIT_PASSWORD)
+              set -x
+
+              yarn release --branch $BRANCH
             '''
 
             // sh '''
