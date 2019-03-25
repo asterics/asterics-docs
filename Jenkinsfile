@@ -149,16 +149,16 @@ pipeline {
             //   printenv
             // '''
 
+            // set +x
+            // alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
+            // export GIT_CREDENTIALS="$GIT_AUTHOR_EMAIL":"$GIT_PASSWORD"
+            // set -x
             sh '''
               git checkout $BRANCH
               git pull
               yarn install
               yarn release:prepare
               
-              set +x
-              alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
-              export GIT_CREDENTIALS="$GIT_AUTHOR_EMAIL":"$GIT_PASSWORD"
-              set -x
               printenv
 
               yarn release --branch $BRANCH
