@@ -5,7 +5,7 @@ pipeline {
     booleanParam(name: 'store', defaultValue: false, description: 'Store build')
     booleanParam(name: 'release', defaultValue: false, description: 'Release build')
     string(name: 'AUTHOR', defaultValue: '', description: 'Github user name')
-    string(name: 'AUTHOR_MAIL', defaultValue: '', description: 'Github user e-mail')
+    string(name: 'AUTHOR_EMAIL', defaultValue: '', description: 'Github user e-mail')
     password(name: 'TOKEN', defaultValue: '', description: 'Github user password/token')
     // string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The author name associated with the Git release tag.')
     // string(name: 'GIT_AUTHOR_EMAIL', defaultValue: '@semantic-release-bot', description: 'The author email associated with the Git release tag.')
@@ -91,9 +91,9 @@ pipeline {
           environment {
             // GH_TOKEN = credentials('aa09e7a7-8013-4498-a6ca-7d12f57e2cbe')
             GH_AUTHOR_NAME = "$AUTHOR"
-            GH_AUTHOR_EMAIL = "$AUTHOR_MAIL"
+            GH_AUTHOR_EMAIL = "$AUTHOR_EMAIL"
             GH_COMMITTER_NAME = "$AUTHOR"
-            GH_COMMITTER_EMAIL = "$AUTHOR_MAIL"
+            GH_COMMITTER_EMAIL = "$AUTHOR_EMAIL"
             GH_TOKEN = "$TOKEN"
             GIT_BRANCH = "$BRANCH"
           }
@@ -136,7 +136,7 @@ pipeline {
               git pull
               yarn install
               yarn release:prepare
-              yarn release --branch $BRANCH
+              yarn release --branch $BRANCH --gh-username $AUTHOR_EMAIL
             '''
 
             // .. to be continued
