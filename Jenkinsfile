@@ -1,3 +1,4 @@
+import java.net.URLEncoder
 
 pipeline {
   parameters {
@@ -8,7 +9,7 @@ pipeline {
     // string(name: 'AUTHOR_EMAIL', defaultValue: '', description: 'Github user e-mail')
     password(name: 'TOKEN', defaultValue: '', description: 'Github user password/token')
     // string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The author name associated with the Git release tag.')
-    // string(name: 'GIT_AUTHOR_EMAIL', defaultValue: '@semantic-release-bot', description: 'The author email associated with the Git release tag.')
+    string(name: 'GIT_AUTHOR_EMAIL', defaultValue: '@semantic-release-bot', description: 'The author email associated with the Git release tag.')
     // string(name: 'GIT_COMMITTER_NAME', defaultValue: '@semantic-release-bot', description: 'The committer name associated with the Git release tag.')
     // string(name: 'GIT_COMMITTER_EMAIL', defaultValue: '@semantic-release-bot', description: 'The committer email associated with the Git release tag.')
     choice(name: 'destination', description: 'Destination folder', choices: ['asterics-web-devlinux/docs', 'asterics-web-devwindows/docs', 'asterics-web-production/docs' ])
@@ -130,14 +131,25 @@ pipeline {
             //   printenv
             // '''
 
+            def s = java.net.URLEncoder.encode("$TOKEN", "UTF-8")
+            def x = java.net.URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
+
+            print s
+            print x
+
             sh '''
-              export GIT_BRANCH=$BRANCH
-              git checkout $BRANCH
-              git pull
-              yarn install
-              yarn release:prepare
-              yarn release --branch $BRANCH
+              echo $s
+              echo $x
             '''
+
+            // sh '''
+            //   export GIT_BRANCH=$BRANCH
+            //   git checkout $BRANCH
+            //   git pull
+            //   yarn install
+            //   yarn release:prepare
+            //   yarn release --branch $BRANCH
+            // '''
 
             // .. to be continued
             // --gh-username --gh-token https://github.com/semantic-release/cli
