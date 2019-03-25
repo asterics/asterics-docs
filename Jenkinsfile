@@ -131,8 +131,8 @@ pipeline {
             //   printenv
             // '''
 
-            print java.net.URLEncoder.encode("$TOKEN", "UTF-8")
-            print java.net.URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
+            print URLEncoder.encode("$TOKEN", "UTF-8")
+            print URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
 
             // print s
             // print x
