@@ -109,7 +109,7 @@ pipeline {
           //   }
           // }
           steps {
-            echo "Release"
+            echo "Release 1"
             // sh '''
             //   printenv
             //   export GIT_BRANCH=$BRANCH
