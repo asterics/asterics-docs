@@ -7,7 +7,7 @@ pipeline {
     booleanParam(name: 'release', defaultValue: false, description: 'Release build')
     // string(name: 'AUTHOR', defaultValue: '', description: 'Github user name')
     // string(name: 'AUTHOR_EMAIL', defaultValue: '', description: 'Github user e-mail')
-    password(name: 'TOKEN', defaultValue: '', description: 'Github user password/token')
+    password(name: 'GIT_PASSWORD', defaultValue: '', description: 'Github user password/token')
     // string(name: 'GIT_AUTHOR_NAME', defaultValue: '@semantic-release-bot', description: 'The author name associated with the Git release tag.')
     string(name: 'GIT_AUTHOR_EMAIL', defaultValue: '@semantic-release-bot', description: 'The author email associated with the Git release tag.')
     // string(name: 'GIT_COMMITTER_NAME', defaultValue: '@semantic-release-bot', description: 'The committer name associated with the Git release tag.')
@@ -95,8 +95,9 @@ pipeline {
             // GH_AUTHOR_EMAIL = "$AUTHOR_EMAIL"
             // GH_COMMITTER_NAME = "$AUTHOR"
             // GH_COMMITTER_EMAIL = "$AUTHOR_EMAIL"
-            GH_TOKEN = "$TOKEN"
+            GH_TOKEN = "$GIT_PASSWORD"
             GIT_BRANCH = "$BRANCH"
+            GIT_CREDENTIALS = URLEncoder.encode("$GIT_AUTHOR_EMAIL") + ":" + URLEncoder.encode("$GIT_PASSWORD")
           }
           // input {
           //   message "Should the build be release on Github?"
@@ -131,8 +132,10 @@ pipeline {
             //   printenv
             // '''
 
-            print URLEncoder.encode("$TOKEN", "UTF-8")
-            print URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
+            // print URLEncoder.encode("$TOKEN", "UTF-8")
+            // print URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
+
+            print "$GIT_CREDENTIALS"
 
             // print s
             // print x
