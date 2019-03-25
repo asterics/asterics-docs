@@ -135,7 +135,7 @@ pipeline {
             // print URLEncoder.encode("$TOKEN", "UTF-8")
             // print URLEncoder.encode("$GIT_AUTHOR_EMAIL", "UTF-8")
 
-            print "$GIT_CREDENTIALS"
+            // print "$GIT_CREDENTIALS"
 
             // print s
             // print x
