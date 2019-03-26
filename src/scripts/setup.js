@@ -1,6 +1,4 @@
-const { writeFileSync } = require("fs");
 const { join } = require("path");
-const { execSync } = require("child_process");
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const indexPath = join(process.cwd(), "src/config/index.json");
@@ -29,9 +27,6 @@ config.get("versions").forEach(version => {
 
 /* Merge results */
 merge(latest);
-
-/* Create and save build statistics */
-logBuildInfo();
 
 //------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------
@@ -90,15 +85,4 @@ function merge(latest) {
     source += `-${version.replace(/\./g, "")}`;
     shell.mv(source, destination);
   });
-}
-
-function logBuildInfo() {
-  let branch = execSync("git rev-parse --abbrev-ref HEAD", { encoding: "utf8" }).replace("\n", "");
-  let commitId = execSync("git rev-parse HEAD", { encoding: "utf8" }).replace("\n", "");
-  let commitUrl = "https://github.com/asterics/asterics-docs/commit/" + commitId;
-  let date = Date();
-
-  let buildInfo = { date, branch, commitId, commitUrl };
-
-  writeFileSync(join(process.cwd(), config.get("destination"), "build.json"), JSON.stringify(buildInfo, null, 4), "utf8");
 }
