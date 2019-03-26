@@ -1,7 +1,9 @@
-const path = require("path");
+const { writeFileSync } = require("fs");
+const { join } = require("path");
+const { execSync } = require("child_process");
 
-const configPath = path.join(process.cwd(), "src/config/config.js");
-const indexPath = path.join(process.cwd(), "src/config/index.json");
+const configPath = join(process.cwd(), "src/config/config.js");
+const indexPath = join(process.cwd(), "src/config/index.json");
 
 const config = require(configPath),
   shell = require("shelljs"),
@@ -28,10 +30,13 @@ config.get("versions").forEach(version => {
 /* Merge results */
 merge(latest);
 
+/* Create and save build statistics */
+logBuildInfo();
+
 //------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------
 function init() {
-  let script = path.join(process.cwd(), "src/scripts/cli.js");
+  let script = join(process.cwd(), "src/scripts/cli.js");
   execute({
     cmd: `node ${script} init`,
     success: `initialized asterics-docs`,
@@ -41,7 +46,7 @@ function init() {
 }
 
 function index() {
-  let script = path.join(process.cwd(), "src/scripts/cli.js");
+  let script = join(process.cwd(), "src/scripts/cli.js");
   execute({
     cmd: `node ${script} index`,
     success: `index all required versions`,
@@ -50,8 +55,8 @@ function index() {
   });
 }
 function setup(version, latest) {
-  let script = path.join(process.cwd(), "src/scripts/cli.js");
-  let folder = path.join(process.cwd(), config.get("documentation"));
+  let script = join(process.cwd(), "src/scripts/cli.js");
+  let folder = join(process.cwd(), config.get("documentation"));
   folder += latest ? "" : `-${version}`;
   execute({
     cmd: `node ${script} setup -v=${version} -o ${folder}`,
@@ -62,9 +67,9 @@ function setup(version, latest) {
 }
 
 function build(version, isLatest, latest) {
-  let docsDir = path.join(process.cwd(), config.get("documentation"));
+  let docsDir = join(process.cwd(), config.get("documentation"));
   docsDir += isLatest ? "" : `-${version}`;
-  let destDir = path.join(process.cwd(), config.get("destination"));
+  let destDir = join(process.cwd(), config.get("destination"));
   destDir += isLatest ? "" : `-${version.replace(/\./g, "")}`;
   const index = require(indexPath);
   const endpoint = index["setup"][version]["endpoint"];
@@ -80,9 +85,19 @@ function build(version, isLatest, latest) {
 function merge(latest) {
   config.get("versions").forEach(version => {
     if (version === latest) return;
-    let destination = path.join(process.cwd(), config.get("destination"), version);
-    let source = path.join(process.cwd(), config.get("destination"));
+    let destination = join(process.cwd(), config.get("destination"), version);
+    let source = join(process.cwd(), config.get("destination"));
     source += `-${version.replace(/\./g, "")}`;
     shell.mv(source, destination);
   });
+}
+
+function logBuildInfo() {
+  let commitId = execSync("git rev-parse HEAD", { encoding: "utf8" }).replace("\n", "");
+  let commitUrl = "https://github.com/asterics/asterics-docs/commit/" + commitId;
+  let date = Date();
+
+  let buildInfo = { date, commitId, commitUrl };
+
+  writeFileSync(join(process.cwd(), config.get("destination"), "build.json"), JSON.stringify(buildInfo, null, 4), "utf8");
 }
