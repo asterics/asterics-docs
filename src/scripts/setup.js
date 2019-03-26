@@ -93,11 +93,12 @@ function merge(latest) {
 }
 
 function logBuildInfo() {
+  let branch = execSync("git rev-parse --abbrev-ref HEAD", { encoding: "utf8" }).replace("\n", "");
   let commitId = execSync("git rev-parse HEAD", { encoding: "utf8" }).replace("\n", "");
   let commitUrl = "https://github.com/asterics/asterics-docs/commit/" + commitId;
   let date = Date();
 
-  let buildInfo = { date, commitId, commitUrl };
+  let buildInfo = { date, branch, commitId, commitUrl };
 
   writeFileSync(join(process.cwd(), config.get("destination"), "build.json"), JSON.stringify(buildInfo, null, 4), "utf8");
 }
