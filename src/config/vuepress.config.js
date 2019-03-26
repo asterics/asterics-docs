@@ -91,13 +91,21 @@ module.exports = {
     },
     nav: [
       { text: "Get Started", link: "/get-started/" },
+      { text: "Solutions", link: "/solutions/" },
       { text: "Customize", link: "/customize/" },
       { text: "Plugins", link: "/plugins/Introduction" },
-      { text: "Manuals", link: "/manuals/" },
       { text: "Develop", link: "/develop/" },
       {
         text: "More",
         items: [
+          {
+            text: "Manuals",
+            items: [
+              { text: "WebACS", link: "/manuals/WebACS/ACS_Basic_Functions" },
+              { text: "ACS", link: "/manuals/ACS/ACS_Basic_Functions" },
+              { text: "ARE", link: "/manuals/ARE/ARE_Introduction" }
+            ]
+          },
           {
             text: "Applications",
             items: [
@@ -110,25 +118,15 @@ module.exports = {
                 text: "AsTeRICS Grid",
                 link:
                   "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
-              },
-              { text: "Plugin IDE", link: "/webapps/Plugin-IDE" },
-              { text: "AT solution IDE", link: "/webapps/AT-solution-IDE" } //maybe rename to 'AT application'
+              }
             ]
           },
           {
             text: "Get Involved",
             items: [
-              { text: "Issues", link: "/get-involved/Issues" },
+              { text: "Who we are", link: "/get-involved/Who-we-are" },
               { text: "Contact", link: "/get-involved/Contact" },
-              { text: "Contribute", link: "/get-involved/Contribute" },
-              { text: "Donate", link: "/get-involved/Donate" }
-            ]
-          },
-          {
-            text: "Version",
-            items: [
-              { text: "latest", link: "/" },
-              { text: "3.0", link: "/3.0/" }
+              { text: "Contribute", link: "/get-involved/Contribute" }
             ]
           }
         ]
