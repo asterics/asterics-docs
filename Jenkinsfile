@@ -17,6 +17,7 @@ pipeline {
     stage('Build') {
       environment {
         VERBOSE = true
+        ENDPOINT = "docs"
       }
       steps {
         sh '''
