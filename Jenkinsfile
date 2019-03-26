@@ -110,6 +110,7 @@ pipeline {
             sh '''
               git checkout $BRANCH
               git pull
+              rm -rf src/external/*
               yarn release:prepare
               yarn release --branch $BRANCH
             '''
