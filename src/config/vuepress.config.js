@@ -124,7 +124,7 @@ module.exports = {
           {
             text: "Get Involved",
             items: [
-              { text: "Who we are", link: "/get-involved/Who-we-are" },
+              { text: "About us", link: "/get-involved/About-us" },
               { text: "Contact", link: "/get-involved/Contact" },
               { text: "Contribute", link: "/get-involved/Contribute" }
             ]
@@ -215,9 +215,8 @@ module.exports = {
         exclude: []
       }),
       "/customize/": [
-        ["", "Overview"],
-        ["Tutorials", "Tutorials"],
-        ["User-Interfaces", "User Interfaces"]
+        ["Model-Customization", "Model Customization"],
+        ["Model-Creation", "Model Creation"]
       ]
     },
     sidebarDepth: 3,
