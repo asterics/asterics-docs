@@ -10,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "postbuild": "node src/scripts/logBuild.js",
     "setup": "node src/scripts/setup.js",
+    "postsetup": "node src/scripts/logBuild.js",
     "cli": "node src/scripts/cli.js",
     "release": "semantic-release",
     "release:prepare": "yarn add -D semantic-release@15 @semantic-release/commit-analyzer @semantic-release/changelog @semantic-release/exec"
