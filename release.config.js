@@ -13,7 +13,7 @@ module.exports = {
     [
       "@semantic-release/github",
       {
-        assets: [{ path: "docs.zip", label: "asterics-docs" }]
+        assets: [{ path: "docs-v*.zip", label: "AsTeRICS Docs" }, { path: "dist/build.json", label: "build.json" }]
       }
     ],
     [
@@ -43,14 +43,13 @@ module.exports = {
       {
         changelogFile: "CHANGELOG.md"
       }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        prepareCmd: "node src/scripts/semantic-release/prepare.js ${nextRelease.version} ${options.branch} ${commits.length} ${Date.now()}"
+      }
     ]
-    // [
-    //   "@semantic-release/exec",
-    //   {
-    //     prepareCmd: "node release.js ${nextRelease.version} ${options.branch} ${commits.length} ${Date.now()}",
-    //     publishCmd: "node publish.js ${nextRelease.version} ${options.branch} ${commits.length} ${Date.now()}"
-    //   }
-    // ]
   ],
   dryRun: false,
   ci: false

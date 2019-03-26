@@ -1,6 +1,6 @@
 {
   "name": "asterics-docs",
-  "version": "1.1.0",
+  "version": "0.0.1",
   "description": "AsTeRICS Help and Docs",
   "engines": {
     "node": "^10.0.0",
@@ -13,7 +13,7 @@
     "setup": "node src/scripts/setup.js",
     "cli": "node src/scripts/cli.js",
     "release": "semantic-release",
-    "release:prepare": "yarn add -D semantic-release@15 @semantic-release/commit-analyzer @semantic-release/changelog"
+    "release:prepare": "yarn add -D semantic-release@15 @semantic-release/commit-analyzer @semantic-release/changelog @semantic-release/exec"
   },
   "repository": {
     "type": "git",
