@@ -111,6 +111,10 @@ pipeline {
               git checkout $BRANCH
               git pull
               rm -rf src/external/*
+              ls -la
+              ls -la src/external
+              ls -la .git/
+              ls -la .git/refs/tags
               yarn release:prepare
               yarn release --branch $BRANCH
             '''
