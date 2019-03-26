@@ -31,6 +31,7 @@ pipeline {
         }
       }
       environment {
+        FATALITY = true
         VERBOSE = true
         ENDPOINT = "docs"
       }
