@@ -36,7 +36,8 @@ function init() {
     cmd: `node ${script} init`,
     success: `initialized asterics-docs`,
     error: `failed initializing asterics-docs`,
-    verbose: config.get("verbose")
+    verbose: config.get("verbose"),
+    fatal: config.get("fatality")
   });
 }
 
@@ -46,7 +47,8 @@ function index() {
     cmd: `node ${script} index`,
     success: `index all required versions`,
     error: `failed indexing versions`,
-    verbose: config.get("verbose")
+    verbose: config.get("verbose"),
+    fatal: config.get("fatality")
   });
 }
 function setup(version, latest) {
@@ -57,7 +59,8 @@ function setup(version, latest) {
     cmd: `node ${script} setup -v=${version} -o ${folder}`,
     success: `setup version ${version} in ${folder}`,
     error: `failed setup version ${version} in ${folder}`,
-    verbose: config.get("verbose")
+    verbose: config.get("verbose"),
+    fatal: config.get("fatality")
   });
 }
 
@@ -73,7 +76,8 @@ function build(version, isLatest, latest) {
     success: `build asterics-docs in ${docsDir} to ${destDir} (version: ${version}, endpoint: ${endpoint})`,
     error: `failed building asterics-docs in ${docsDir} to ${destDir} (version: ${version}, endpoint: ${endpoint})`,
     verbose: config.get("verbose"),
-    env: { VERSION: version, DOCUMENTATION: docsDir, DESTINATION: destDir, ENDPOINT: endpoint, LATEST: latest }
+    env: { VERSION: version, DOCUMENTATION: docsDir, DESTINATION: destDir, ENDPOINT: endpoint, LATEST: latest },
+    fatal: config.get("fatality")
   });
 }
 
