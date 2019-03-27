@@ -18,7 +18,7 @@
             <div>
               <b-button-group>
                 <div v-for="buttonElem in buttons">
-                  <b-button variant="outline-primary">{{buttonElem.text}}</b-button>
+                  <b-button variant="primary">{{buttonElem.text}}</b-button>
                 </div>
               </b-button-group>
             </div>
