@@ -8,7 +8,7 @@ const config = require(configPath);
 
 const branch = BRANCH || execSync("git rev-parse --abbrev-ref HEAD", { encoding: "utf8" }).replace("\n", "");
 const commitId = execSync("git rev-parse HEAD", { encoding: "utf8" }).replace("\n", "");
-const commitUrl = "https://github.com/asterics/WebACS/commit/" + commitId;
+const commitUrl = "https://github.com/asterics/asterics-docs/commit/" + commitId;
 const date = Date();
 
 const buildInfo = JSON.stringify({ date, branch, commitId, commitUrl }, null, 4);
