@@ -43,7 +43,7 @@
     "documentation": {
         "doc": "Documentation source folder.",
         "format": "String",
-        "default": "vdocs",
+        "default": "docs",
         "env": "DOCUMENTATION"
     },
     "destination": {
