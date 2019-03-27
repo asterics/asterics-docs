@@ -88,8 +88,12 @@ pipeline {
           agent {
             label params.agent
           }
+          environment {
+            DESTINATION = "dist"
+          }
           steps {
             archiveArtifacts artifacts: 'asterics-docs.zip', fingerprint: true
+            archiveArtifacts artifacts: "$DESTINATION/build.json", fingerprint: true
           }
         }
         stage('Release') {
