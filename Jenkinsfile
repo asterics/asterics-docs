@@ -109,17 +109,9 @@ pipeline {
           }
           steps {
             sh '''
-              git tag -l
               git checkout $BRANCH
               git pull
-              git tag -l
-              rm -rf src/external/*
-              ls -la
-              ls -la src/external
-              rm -rf .git/modules/src/external/*
-              ls -la .git/
-              ls -la .git/refs/tags
-              git tag -l
+              rm -rf src/external/* .git/modules/src/external/*
               yarn release:prepare
               yarn release --branch $BRANCH
             '''
