@@ -37,6 +37,7 @@ pipeline {
       }
       steps {
         sh '''
+          git tag -l
           yarn install
           yarn setup
         '''
@@ -53,7 +54,7 @@ pipeline {
         label params.agent
       }
       steps {
-        sh 'cd dist && zip -r ../docs.zip *'
+        sh 'cd dist && zip -r ../asterics-docs.zip *'
       }
     }
     stage('Output') {
@@ -88,7 +89,7 @@ pipeline {
             label params.agent
           }
           steps {
-            archiveArtifacts artifacts: 'docs.zip', fingerprint: true
+            archiveArtifacts artifacts: 'asterics-docs.zip', fingerprint: true
           }
         }
         stage('Release') {
@@ -108,13 +109,17 @@ pipeline {
           }
           steps {
             sh '''
+              git tag -l
               git checkout $BRANCH
               git pull
+              git tag -l
               rm -rf src/external/*
               ls -la
               ls -la src/external
+              rm -rf .git/modules/src/external/*
               ls -la .git/
               ls -la .git/refs/tags
+              git tag -l
               yarn release:prepare
               yarn release --branch $BRANCH
             '''
