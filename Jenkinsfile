@@ -45,7 +45,7 @@ pipeline {
             VERBOSE = true
             ENDPOINT = ""
             DOCUMENTATION = "docs"
-            DESTINTATION = "dist"
+            DESTINATION = "dist"
           }
           steps {
             sh '''
@@ -69,7 +69,7 @@ pipeline {
             VERBOSE = true
             ENDPOINT = "docs"
             DOCUMENTATION = "docs-deploy"
-            DESTINTATION = "dist-deploy"
+            DESTINATION = "dist-deploy"
           }
           steps {
             sh '''
@@ -93,7 +93,7 @@ pipeline {
             VERBOSE = true
             ENDPOINT = "asterics-docs"
             DOCUMENTATION = "docs-deploy-io"
-            DESTINTATION = "dist-deploy-io"
+            DESTINATION = "dist-deploy-io"
           }
           steps {
             sh '''
