@@ -112,6 +112,7 @@ pipeline {
               git checkout $BRANCH
               git pull
               rm -rf src/external/* .git/modules/src/external/*
+              ls -la . ./dist
               yarn release:prepare
               yarn release --branch $BRANCH
             '''
