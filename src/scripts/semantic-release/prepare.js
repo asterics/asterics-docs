@@ -9,5 +9,5 @@ const release = readdirSync(process.cwd())
 
 /* Rename if `docs.zip` found */
 if (release.length > 0) {
-  symlinkSync("docs.zip", `docs-v${version}.zip`);
+  symlinkSync("asterics-docs.zip", `asterics-docs-v${version}.zip`);
 }
