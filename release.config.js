@@ -13,7 +13,7 @@ module.exports = {
     [
       "@semantic-release/github",
       {
-        assets: [{ path: "docs-v*.zip", label: "AsTeRICS Docs" }, { path: "dist/build.json", label: "build.json" }]
+        assets: [{ path: "dist/build.json", label: "build.json" }, { path: "docs-v*.zip", label: "AsTeRICS Docs" }]
       }
     ],
     [
