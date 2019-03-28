@@ -5,6 +5,7 @@ pipeline {
     booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
     booleanParam(name: 'store', defaultValue: false, description: 'Store build')
     booleanParam(name: 'release', defaultValue: false, description: 'Release build')
+    booleanParam(name: 'release_comment', defaultValue: true, description: 'Add comment to each issue and pull request resolved')
     password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error.')
     choice(name: 'dest', description: 'Destination folder', choices: ['asterics-web-devlinux/docs', 'asterics-web-devwindows/docs', 'asterics-web-production/docs' ])
     choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])

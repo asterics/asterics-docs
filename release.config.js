@@ -1,3 +1,8 @@
+const { release_comment } = process.env;
+const successComment = release_comment
+  ? ":tada: This issue has been resolved in version ${nextRelease.version} :tada:\n\nThe release is available on [GitHub release](<github_release_url>)"
+  : false;
+
 module.exports = {
   // branch: "alija/task/101",
   repositoryUrl: "https://github.com/asterics/asterics-docs",
@@ -13,7 +18,8 @@ module.exports = {
     [
       "@semantic-release/github",
       {
-        assets: [{ path: "asterics-docs-v*.zip", label: "AsTeRICS Docs" }, { path: "dist/build.json", label: "build.json" }]
+        assets: [{ path: "asterics-docs-v*.zip", label: "AsTeRICS Docs" }, { path: "dist/build.json", label: "build.json" }],
+        successComment
       }
     ],
     [
