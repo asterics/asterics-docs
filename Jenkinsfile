@@ -104,7 +104,7 @@ pipeline {
         }
       }
     }
-    stage('Prepare') {
+    stage('Prepare: Release/Store') {
       when { 
         anyOf { 
           equals expected: true, actual: params.release
@@ -163,7 +163,7 @@ pipeline {
               cp -r dist-deploy-io/* gh-pages/
               cd gh-pages
               git add *
-              git -c user.name='Mr. Jenkins' -c user.email='studyathome@technium-wien.at' commit -m 'docs: release asterics-docs'
+              git -c user.name='Mr. Jenkins' -c user.email='studyathome@technikum-wien.at' commit -m 'docs: release asterics-docs'
               git push https://$GH_TOKEN@github.com/asterics/asterics-docs.git
             '''
           }
