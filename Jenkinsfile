@@ -155,7 +155,12 @@ pipeline {
             '''
             script {
               if (params.deploy_io_exchange) {
-                sh 'cd gh-pages && git reset --hard HEAD~1'
+                sh '''
+                  cd gh-pages
+                  git log
+                  git reset --hard HEAD~1
+                  git log
+                '''
               }
             }
             sh '''
