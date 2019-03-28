@@ -170,7 +170,7 @@ pipeline {
               cd gh-pages
               git add *
               git -c user.name='Mr. Jenkins' -c user.email='studyathome@technikum-wien.at' commit -m 'docs: release asterics-docs'
-              git push https://$GH_TOKEN@github.com/asterics/asterics-docs.git
+              git push -f https://$GH_TOKEN@github.com/asterics/asterics-docs.git
             '''
           }
         }
