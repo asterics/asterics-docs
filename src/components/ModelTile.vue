@@ -21,7 +21,7 @@
               <b-badge :href="$withBase(tag.href)" variant="primary">{{tag.text}}</b-badge>
             </div>
             <b-card-text>{{shortDesc}}</b-card-text>
-            <b-button :href="$withBase(target)" variant="primary">Learn More</b-button>
+            <b-button :href="$withBase(target)" variant="primary">Read More</b-button>
           </b-card-body>
         </b-col>
       </b-row>
