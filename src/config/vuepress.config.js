@@ -20,6 +20,23 @@ module.exports = {
   port: config.get("port"),
   base: config.get("endpoint"),
   dest: config.get("destination"),
+  shouldPrefetch: (file, type) => {
+    //console.log("shouldPrefetch: " + file);
+    return false;
+    // type is inferred based on the file extension.
+    // https://fetch.spec.whatwg.org/#concept-request-destination
+    if (type === "script" || type === "style") {
+      return true;
+    }
+    if (type === "font") {
+      // only preload woff2 fonts
+      return /\.woff2$/.test(file);
+    }
+    if (type === "image") {
+      // only preload important images
+      return file === "hero.jpg";
+    }
+  },
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
   head: [
