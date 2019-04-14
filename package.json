@@ -11,7 +11,8 @@
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
     "setup": "node src/scripts/setup.js",
-    "cli": "node src/scripts/cli.js"
+    "cli": "node src/scripts/cli.js",
+    "docs": "babel-node --presets @babel/env src/scripts/docs.js"
   },
   "repository": {
     "type": "git",
@@ -30,8 +31,11 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
-    "@asterics/git-tools": "^0.1.7",
-    "@asterics/node-utils": "^0.2.0",
+    "@asterics/git-tools": "file:/media/alija/DataNTFS/Git/github/asterics/node-git-tools",
+    "@asterics/node-utils": "file:/media/alija/DataNTFS/Git/github/asterics/node-utils",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
     "@vuepress/plugin-active-header-links": "^1.0.0-alpha.0",
     "@vuepress/plugin-back-to-top": "^1.0.0-alpha.0",
     "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.0",
@@ -46,7 +50,6 @@
     "yargs": "^12.0.5"
   },
   "dependencies": {
-    "@asterics/web-app-utils": "file:./libs/asterics-web-app-utils-0.0.1-rc11.tgz",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.14"
   }
