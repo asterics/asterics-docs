@@ -50,9 +50,11 @@ $ VERSION=2.3 npx vuepress dev docs/
 
 ## New Devel (-> Task 104)
 
-$ yarn docs init v2.3
+$ yarn docs init
 
-$ yarn docs dev v2.3 --combine
+$ yarn docs setup v2.3 --combine
+
+$ yarn docs dev v2.3
 
 $ yarn docs build v2.3
 
