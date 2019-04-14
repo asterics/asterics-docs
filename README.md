@@ -48,6 +48,23 @@ $ VERSION=2.3 npx vuepress build docs/ -d dist/
 $ VERSION=2.3 npx vuepress dev docs/
 ```
 
+## New Devel (-> Task 104)
+
+$ yarn docs init v2.3
+
+$ yarn docs dev v2.3 --combine
+
+$ yarn docs build v2.3
+
+$ yarn docs diff v2.3 -r AsTeRICS
+
+$ yarn docs commit v2.3 -r AsTeRICS WebACS
+
+* Blog
+* Markdown Syntax Sugar
+* Versions
+* Layouts
+
 ## Configuration Reference
 
 Use variables in file `.env` to configure the builds
