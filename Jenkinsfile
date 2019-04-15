@@ -1,4 +1,3 @@
-
 pipeline {
   parameters {
     booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome')
@@ -217,22 +216,6 @@ pipeline {
           }
         }
       }
-      steps {
-        sh '''
-          mkdir build
-          mv dist build/docs
-        '''
-        script {
-          def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-          sshRemove remote: remote, path: "/var/www/html/${params.destination}", failOnError: false
-          sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.destination.replace("/docs", "")}"
-        }
-      }
-    }
-  }
-  post {
-    always {
-      cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false
     }
   }
 }
