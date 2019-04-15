@@ -5,13 +5,12 @@ Documentation of [AsTeRICS](https://github.com/asterics/AsTeRICS.git).
 [![AsTeRICS](https://raw.githubusercontent.com/asterics/asterics-docs/store/badge/asterics-badge.svg?sanitize=true)](https://github.com/asterics/AsTeRICS)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-
 ## Dependencies
 
 Install needed dependencies with
 
 ```bash
-npm install
+yarn install
 ```
 
 ## Release Instructions
@@ -19,7 +18,7 @@ npm install
 Build current release with
 
 ```bash
-npm run setup
+yarn run setup
 ```
 
 and locate the result at  `dist/`.
@@ -27,7 +26,7 @@ and locate the result at  `dist/`.
 **Note**: enable _verbose_ logging with by setting variable `VERBOSE`
 
 ```bash
-VERBOSE=true npm run setup
+VERBOSE=true yarn run setup
 ```
 
 ## Development Instructions
@@ -36,13 +35,13 @@ Setup and build individual versions using the provided `cli` tools (cf. [CLI Ref
 
 ```bash
 # Initialize asterics-docs
-$ npm run cli -- init
+$ yarn run cli -- init
 
 # Index all possible version (cf. src/config/config.js)
-$ npm run cli -- index
+$ yarn run cli -- index
 
 # Setup docs folder of requested version
-$ npm run cli -- setup -v 2.3 -o docs/
+$ yarn run cli -- setup -v 2.3 -o docs/
 
 # Build set up version,..
 $ VERSION=2.3 npx vuepress build docs/ -d dist/
@@ -68,16 +67,16 @@ ENDPOINT="docs"
 
 ## CLI Reference
 
-Start CLI tool, either using `npm`:
+Start CLI tool, either using `yarn`:
 
 ```bash
-npm run cli <command>
+yarn run cli <command>
 ```
 
 **Note**: To pass commands and options, use `--` after script command:
 
 ```bash
-npm run cli -- -h
+yarn run cli -- -h
 ```
 
 ---
@@ -91,8 +90,8 @@ node src/scripts/cli.js -h
 ### Commands
 
 ```bash
-npm run cli -- init  -h
-npm run cli -- index -h
-npm run cli -- setup -h
-npm run cli -- clean -h
+yarn run cli -- init  -h
+yarn run cli -- index -h
+yarn run cli -- setup -h
+yarn run cli -- clean -h
 ```

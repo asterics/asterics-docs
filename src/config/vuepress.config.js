@@ -20,14 +20,61 @@ module.exports = {
   port: config.get("port"),
   base: config.get("endpoint"),
   dest: config.get("destination"),
+  shouldPrefetch: (file, type) => {
+    //console.log("shouldPrefetch: " + file);
+    return false;
+    // type is inferred based on the file extension.
+    // https://fetch.spec.whatwg.org/#concept-request-destination
+    if (type === "script" || type === "style") {
+      return true;
+    }
+    if (type === "font") {
+      // only preload woff2 fonts
+      return /\.woff2$/.test(file);
+    }
+    if (type === "image") {
+      // only preload important images
+      return file === "hero.jpg";
+    }
+  },
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
   head: [
-    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon/apple-touch-icon.png" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon/favicon-32x32.png" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon/favicon-16x16.png" }],
+    [
+      "link",
+      {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/favicon/apple-touch-icon.png"
+      }
+    ],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon/favicon-32x32.png"
+      }
+    ],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon/favicon-16x16.png"
+      }
+    ],
     ["link", { rel: "manifest", href: "/favicon/site.webmanifest" }],
-    ["link", { rel: "mask-icon", href: "/favicon/safari-pinned-tab.svg", color: "#0ea1f2" }],
+    [
+      "link",
+      {
+        rel: "mask-icon",
+        href: "/favicon/safari-pinned-tab.svg",
+        color: "#0ea1f2"
+      }
+    ],
     ["meta", { name: "apple-mobile-web-app-title", content: "AsTeRICS Docs" }],
     ["meta", { name: "application-name", content: "AsTeRICS Docs" }],
     ["meta", { name: "msapplication-TileColor", content: "#2b5797" }],
@@ -48,8 +95,8 @@ module.exports = {
     }
   },
   themeConfig: {
-    repo: "asterics/AsTeRICS",
-    repoLabel: "Repository!",
+    // repo: "asterics/AsTeRICS",
+    // repoLabel: "Repository!",
     docsRepo: "asterics/AsTeRICS",
     docsDir: "Documentation/docs",
     docsBranch: "master",
@@ -60,74 +107,67 @@ module.exports = {
       routes: index["routes"]
     },
     nav: [
-      { text: "Getting Started", link: "/getting-started/" },
-      {
-        text: "Discover",
-        items: [
-          { text: "Models", link: "/getting-started/Search-Models" },
-          { text: "Grids", link: "/getting-started/Search-asterics-grids" },
-          { text: "AT Solutions", link: "/getting-started/Search-AT-solutions" }
-        ]
-      },
-      { text: "Help", link: "/help/" },
-      {
-        text: "Applications",
-        items: [
-          {
-            text: "WebACS",
-            link: "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
-          },
-          {
-            text: "AsTeRICS Grid",
-            link: "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
-          },
-          { text: "Plugin IDE", link: "/webapps/Plugin-IDE" },
-          { text: "AT solution IDE", link: "/webapps/AT-solution-IDE" } //maybe rename to 'AT application'
-        ]
-      },
+      { text: "Get Started", link: "/get-started/" },
+      { text: "Solutions", link: "/solutions/" },
+      { text: "Customize", link: "/customize/" },
+      { text: "Plugins", link: "/plugins/Introduction" },
       { text: "Develop", link: "/develop/" },
       {
-        text: "Support",
+        text: "More",
         items: [
-          { text: "Issues", link: "/support/Issues" },
-          { text: "Contact", link: "/support/Contact" },
-          { text: "Contribute", link: "/support/Contribute" },
-          { text: "Donate", link: "/support/Donate" }
+          {
+            text: "Manuals",
+            items: [
+              { text: "WebACS", link: "/manuals/WebACS/ACS_Basic_Functions" },
+              { text: "ACS", link: "/manuals/ACS/ACS_Basic_Functions" },
+              { text: "ARE", link: "/manuals/ARE/ARE_Introduction" }
+            ]
+          },
+          {
+            text: "Applications",
+            items: [
+              {
+                text: "WebACS",
+                link:
+                  "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
+              },
+              {
+                text: "AsTeRICS Grid",
+                link:
+                  "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
+              }
+            ]
+          },
+          {
+            text: "Get Involved",
+            items: [
+              { text: "About us", link: "/get-involved/About-us" },
+              { text: "Contact", link: "/get-involved/Contact" },
+              { text: "Contribute", link: "/get-involved/Contribute" }
+            ]
+          }
         ]
       },
       {
         text: "Languages",
-        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
+        items: [
+          { text: "English", link: "/" },
+          { text: "German", link: "/de/" }
+        ]
+      },
+      {
+        text: "Download",
+        link: "https://github.com/asterics/AsTeRICS/releases/latest"
       }
     ],
     sidebar: {
-      "/getting-started/": [
-        {
-          title: "Getting Started",
-          collapsable: false,
-          children: [["", "Introduction"]]
-        },
-        {
-          title: "Discover",
-          collapsable: false,
-          children: [["Search-Models", "Models"], ["Search-asterics-grids", "Grids"], ["Search-AT-solutions", "AT Solutions"]]
-        }
+      "/get-started/": [
+        ["Overview.md", "Overview"],
+        ["Installation.md", "Installation"]
       ],
-      // "/develop/": [
-      //   "DeveloperGuide" /* /foo/ */,
-      //   "Coding-Guidelines" /* /foo/one.html */,
-      //   "AT_solution_development",
-      //   "AT-solution-demos",
-      //   "asterics-wiki/coding_instructions/AsTeRICS Solutions",
-      //   "APE",
-      //   "ARE-Webserver.md",
-      //   "REST-API",
-      //   "asterics-wiki/api/AsTeRICS Websocket.md",
-      //   "ARE.md" /* /foo/two.html */
-      // ]
       "/develop/": [
         {
-          title: "Getting Started",
+          title: "Get Started",
           collapsable: false,
           children: [
             ["Development-Environment", "Development Environment"],
@@ -138,7 +178,11 @@ module.exports = {
         {
           title: "Plugin",
           collapsable: false,
-          children: [["Plugin-Introduction", "Introduction"], ["Plugin-Tutorial", "Tutorial"], ["Plugin-Advanced", "Advanced"]]
+          children: [
+            ["Plugin-Introduction", "Introduction"],
+            ["Plugin-Tutorial", "Tutorial"],
+            ["Plugin-Advanced", "Advanced"]
+          ]
         },
         {
           title: "ARE Middleware",
@@ -154,7 +198,11 @@ module.exports = {
         {
           title: "ARE Remote APIs",
           collapsable: false,
-          children: [["ARE-Webserver.md", "Webserver"], ["REST-API", "REST"], ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]]
+          children: [
+            ["ARE-Webserver.md", "Webserver"],
+            ["REST-API", "REST"],
+            ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
+          ]
         },
 
         {
@@ -163,26 +211,32 @@ module.exports = {
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
-            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
+            [
+              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
+              "Tutorial"
+            ],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         }
       ],
-      "/help/Plugins/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "help", "Plugins"),
-        pre: [["/help/", "Back to Help"]],
+      "/plugins/": loadSidebarFrom({
+        location: path.join(config.get("documentation"), "plugins"),
+        pre: [],
         post: [],
         exclude: []
       }),
-      "/help/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "help"),
-        pre: [["", "Introduction"], ["User-Interfaces", "User Interfaces"], ["Tutorials", "Tutorials"]],
-        sidebar: [["ACS/ACS_Basic_Functions", "Basic"]],
-        post: [["Plugins/Introduction", "Plugins"]],
-        exclude: [/Plugins/]
-      })
+      "/manuals/": loadSidebarFrom({
+        location: path.join(config.get("documentation"), "manuals"),
+        pre: [],
+        post: [],
+        exclude: []
+      }),
+      "/customize/": [
+        ["Model-Customization", "Model Customization"],
+        ["Model-Creation", "Model Creation"]
+      ]
     },
-    sidebarDepth: 1,
+    sidebarDepth: 3,
     diplayAllHeaders: true, // default
     lastUpdated: "Last Updated"
   }
@@ -192,13 +246,15 @@ function loadSidebarFrom({ location, pre, post, exclude }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
+  sidebar = sidebar.filter(e =>
+    fs.statSync(path.join(location, e)).isDirectory()
+  );
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
 
   /* Map to first level entry */
-  sidebar = sidebar.map(e => ({ title: e, collapable: true, children: null })); //abs: path.join(location, e) }));
+  sidebar = sidebar.map(e => ({ title: e, collapsable: true, children: null })); //abs: path.join(location, e) }));
 
   /* Append children for each entry */
   sidebar.forEach(e => {
