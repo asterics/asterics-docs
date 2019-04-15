@@ -1,7 +1,7 @@
-const path = require("path");
+const { join } = require("path");
 
-const configPath = path.join(process.cwd(), "src/config/config.js");
-const indexPath = path.join(process.cwd(), "src/config/index.json");
+const configPath = join(process.cwd(), "src/config/config.js");
+const indexPath = join(process.cwd(), "src/config/index.json");
 
 const config = require(configPath),
   shell = require("shelljs"),
@@ -31,40 +31,43 @@ merge(latest);
 //------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------
 function init() {
-  let script = path.join(process.cwd(), "src/scripts/cli.js");
+  let script = join(process.cwd(), "src/scripts/cli.js");
   execute({
     cmd: `node ${script} init`,
     success: `initialized asterics-docs`,
     error: `failed initializing asterics-docs`,
-    verbose: config.get("verbose")
+    verbose: config.get("verbose"),
+    fatal: config.get("fatality")
   });
 }
 
 function index() {
-  let script = path.join(process.cwd(), "src/scripts/cli.js");
+  let script = join(process.cwd(), "src/scripts/cli.js");
   execute({
     cmd: `node ${script} index`,
     success: `index all required versions`,
     error: `failed indexing versions`,
-    verbose: config.get("verbose")
+    verbose: config.get("verbose"),
+    fatal: config.get("fatality")
   });
 }
 function setup(version, latest) {
-  let script = path.join(process.cwd(), "src/scripts/cli.js");
-  let folder = path.join(process.cwd(), config.get("documentation"));
+  let script = join(process.cwd(), "src/scripts/cli.js");
+  let folder = join(process.cwd(), config.get("documentation"));
   folder += latest ? "" : `-${version}`;
   execute({
     cmd: `node ${script} setup -v=${version} -o ${folder}`,
     success: `setup version ${version} in ${folder}`,
     error: `failed setup version ${version} in ${folder}`,
-    verbose: config.get("verbose")
+    verbose: config.get("verbose"),
+    fatal: config.get("fatality")
   });
 }
 
 function build(version, isLatest, latest) {
-  let docsDir = path.join(process.cwd(), config.get("documentation"));
+  let docsDir = join(process.cwd(), config.get("documentation"));
   docsDir += isLatest ? "" : `-${version}`;
-  let destDir = path.join(process.cwd(), config.get("destination"));
+  let destDir = join(process.cwd(), config.get("destination"));
   destDir += isLatest ? "" : `-${version.replace(/\./g, "")}`;
   const index = require(indexPath);
   const endpoint = index["setup"][version]["endpoint"];
@@ -73,15 +76,16 @@ function build(version, isLatest, latest) {
     success: `build asterics-docs in ${docsDir} to ${destDir} (version: ${version}, endpoint: ${endpoint})`,
     error: `failed building asterics-docs in ${docsDir} to ${destDir} (version: ${version}, endpoint: ${endpoint})`,
     verbose: config.get("verbose"),
-    env: { VERSION: version, DOCUMENTATION: docsDir, DESTINATION: destDir, ENDPOINT: endpoint, LATEST: latest }
+    env: { VERSION: version, DOCUMENTATION: docsDir, DESTINATION: destDir, ENDPOINT: endpoint, LATEST: latest },
+    fatal: config.get("fatality")
   });
 }
 
 function merge(latest) {
   config.get("versions").forEach(version => {
     if (version === latest) return;
-    let destination = path.join(process.cwd(), config.get("destination"), version);
-    let source = path.join(process.cwd(), config.get("destination"));
+    let destination = join(process.cwd(), config.get("destination"), version);
+    let source = join(process.cwd(), config.get("destination"));
     source += `-${version.replace(/\./g, "")}`;
     shell.mv(source, destination);
   });

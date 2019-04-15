@@ -1,6 +1,6 @@
 {
   "name": "asterics-docs",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "AsTeRICS Help and Docs",
   "engines": {
     "node": "^10.0.0",
@@ -11,7 +11,10 @@
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
     "setup": "node src/scripts/setup.js",
-    "cli": "node src/scripts/cli.js"
+    "postsetup": "node src/scripts/logBuild.js",
+    "cli": "node src/scripts/cli.js",
+    "release": "semantic-release",
+    "release:prepare": "yarn add -D semantic-release@15 @semantic-release/commit-analyzer @semantic-release/changelog @semantic-release/exec"
   },
   "repository": {
     "type": "git",

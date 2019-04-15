@@ -17,6 +17,12 @@
         "default": 8080,
         "env": "PORT"
     },
+    "fatality": {
+        "doc": "Build error fatality.",
+        "format": "Boolean",
+        "default": false,
+        "env": "FATALITY"
+    },
     "version": {
         "doc": "Documentation version.",
         "format": ["2.3", "2.5", "2.6","2.7", "2.8","3.0","3.0.1","pre-3.1","master"],
