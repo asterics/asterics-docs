@@ -50,20 +50,14 @@ exports.handler = ({ version, output }) => {
     {
       source: "src/config/index.styl",
       target: `${output}/.vuepress/styles/index.styl`
+    },
+    {
+      source: "src/config/main.scss",
+      target: `${output}/.vuepress/styles/main.scss`
     }
   ]);
-  jobs.push(
-    ...getCopyJobs(
-      path.join(process.cwd(), "src/components"),
-      path.join(output, ".vuepress/components")
-    )
-  );
-  jobs.push(
-    ...getCopyJobs(
-      path.join(process.cwd(), "public"),
-      path.join(output, ".vuepress/public")
-    )
-  );
+  jobs.push(...getCopyJobs(path.join(process.cwd(), "src/components"), path.join(output, ".vuepress/components")));
+  jobs.push(...getCopyJobs(path.join(process.cwd(), "public"), path.join(output, ".vuepress/public")));
   processCopyJobs(jobs);
 
   (async () => {
@@ -86,12 +80,7 @@ exports.handler = ({ version, output }) => {
         if (blob.isBinary()) {
           binary(target, blob.content(), file["action"]);
         } else {
-          content(
-            target,
-            blob.toString(),
-            file["action"],
-            file["post-actions"]
-          );
+          content(target, blob.toString(), file["action"], file["post-actions"]);
         }
       }
     }
@@ -130,9 +119,7 @@ function content(location, text, action, postactions) {
         text = text.replace(/img\//g, "./img/");
         break;
       case "lowercase-image":
-        text = text.replace(/img\/(.*?(jpg|png))/g, (url, filename) =>
-          url.replace(filename, filename.toLowerCase())
-        );
+        text = text.replace(/img\/(.*?(jpg|png))/g, (url, filename) => url.replace(filename, filename.toLowerCase()));
         break;
       case "select-version":
         text = text + "\n\n<SelectVersion/>";
@@ -159,12 +146,8 @@ function processCopyJobs(jobs) {
 function absolute(list) {
   let result = [];
   for (let { source, target } of list) {
-    source = path.isAbsolute(source)
-      ? source
-      : path.join(process.cwd(), ...source.split("/"));
-    target = path.isAbsolute(target)
-      ? target
-      : path.join(process.cwd(), ...target.split("/"));
+    source = path.isAbsolute(source) ? source : path.join(process.cwd(), ...source.split("/"));
+    target = path.isAbsolute(target) ? target : path.join(process.cwd(), ...target.split("/"));
     result.push({ source, target });
   }
   return result;

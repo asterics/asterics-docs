@@ -4,8 +4,9 @@
 .sidebar 
     width 20rem
 
-.content.default 
-    max-width 70%
+@media screen and (max-width: 768px)
+    .content 
+        max-width 99% !important
 
 .myjumbotron 
     overflow-wrap: break-word
@@ -14,38 +15,10 @@
     display: inline-block
     width: 100%
 
-.badge
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.badge-primary
-    background-color: #0ea1d2
-    border-color: #0ea1d2    
-
-.button
-    outline-color: #0ea1d2
-    color: #0ea1d2
-
-.btn
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.btn-primary
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.btn-secondary
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.btn-success
-    background-color: #0ea1d2
-    border-color: #0ea1d2    
-
 .nav-link
     padding: 0
 
 :focus 
     outline-width: 3px
     outline-style: solid
-    outline-color: #0ea1d2
+    outline-color: $info
