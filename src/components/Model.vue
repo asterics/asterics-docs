@@ -16,6 +16,7 @@
                 <b-badge
                   v-for="tag in tags"
                   :href="tag.href"
+                  :key="tag.text"
                   variant="secondary"
                   role="button"
                   class="model-title-tag model-text"
@@ -45,14 +46,21 @@
           v-b-tooltip.hover.bottom="'Make sure the ARE is up and running!'"
           @click="start"
         >Start</b-button>
-        <b-button class="model-btn" variant="primary" @click="open" v-else>Open</b-button>
+        <b-button
+          class="model-btn model-btn-text"
+          variant="primary"
+          :href="open"
+          target="_blank"
+          v-else
+        >Open</b-button>
         <b-button
           :disabled="webapp === ''"
-          class="model-btn"
+          class="model-btn model-btn-text"
           variant="info"
-          @click="settings"
+          :href="webapp"
+          target="_blank"
         >Settings</b-button>
-        <b-button class="model-btn" variant="info" @click="edit">Edit</b-button>
+        <b-button class="model-btn model-btn-text" variant="info" :href="edit" target="_blank">Edit</b-button>
       </div>
     </b-card>
     <br>
@@ -121,6 +129,16 @@ export default {
         type = "none";
       }
       return type;
+    },
+    open: function() {
+      return `${this.aGrid}/${this.grid}`;
+    },
+    edit: function() {
+      if (this.model !== "") {
+        return `${this.webacs}/?areBaseURI=${this.are}&openFile=${this.model}`;
+      } else {
+        return `${this.aGrid}/edit/${this.grid}`;
+      }
     }
   },
   methods: {
@@ -135,22 +153,6 @@ export default {
           console.log(error, status);
         }
       );
-    },
-    open() {
-      let link = `${this.aGrid}/${this.grid}`;
-      window.open(link);
-    },
-    settings() {
-      window.open(this.webapp);
-    },
-    edit() {
-      let link;
-      if (this.model !== "") {
-        link = `${this.webacs}/?areBaseURI=${this.are}&openFile=${this.model}`;
-      } else {
-        link = `${this.aGrid}/edit/${this.grid}`;
-      }
-      window.open(link);
     }
   }
 };
@@ -161,10 +163,6 @@ export default {
   transition: font-size 1s ease-out;
   font-size: 1.5vw;
 } */
-
-.model-btn-text {
-  text-decoration: none;
-}
 
 @media screen and (max-width: 625px) {
   .model-text {
@@ -193,6 +191,10 @@ export default {
   margin: 0px 2px;
   border-radius: 5px;
   box-shadow: 3px 2px 2px 0px #ccc;
+}
+
+.model-btn-text {
+  text-decoration: none !important;
 }
 
 @media screen and (max-width: 425px) {
