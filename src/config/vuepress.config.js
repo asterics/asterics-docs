@@ -92,6 +92,11 @@ module.exports = {
         message: "New content is available.",
         buttonText: "Refresh"
       }
+    },
+    "@vuepress/active-header-links": {
+      sidebarLinkSelector: ".sidebar-link",
+      headerAnchorSelector: ".header-anchor",
+      headerTopOffset: 120
     }
   },
   themeConfig: {
@@ -128,13 +133,11 @@ module.exports = {
             items: [
               {
                 text: "WebACS",
-                link:
-                  "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
+                link: "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
               },
               {
                 text: "AsTeRICS Grid",
-                link:
-                  "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
+                link: "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
               }
             ]
           },
@@ -150,10 +153,7 @@ module.exports = {
       },
       {
         text: "Languages",
-        items: [
-          { text: "English", link: "/" },
-          { text: "German", link: "/de/" }
-        ]
+        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
       },
       {
         text: "Download",
@@ -161,10 +161,7 @@ module.exports = {
       }
     ],
     sidebar: {
-      "/get-started/": [
-        ["Overview.md", "Overview"],
-        ["Installation.md", "Installation"]
-      ],
+      "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
       "/develop/": [
         {
           title: "Get Started",
@@ -178,11 +175,7 @@ module.exports = {
         {
           title: "Plugin",
           collapsable: false,
-          children: [
-            ["Plugin-Introduction", "Introduction"],
-            ["Plugin-Tutorial", "Tutorial"],
-            ["Plugin-Advanced", "Advanced"]
-          ]
+          children: [["Plugin-Introduction", "Introduction"], ["Plugin-Tutorial", "Tutorial"], ["Plugin-Advanced", "Advanced"]]
         },
         {
           title: "ARE Middleware",
@@ -198,11 +191,7 @@ module.exports = {
         {
           title: "ARE Remote APIs",
           collapsable: false,
-          children: [
-            ["ARE-Webserver.md", "Webserver"],
-            ["REST-API", "REST"],
-            ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
-          ]
+          children: [["ARE-Webserver.md", "Webserver"], ["REST-API", "REST"], ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]]
         },
 
         {
@@ -211,10 +200,7 @@ module.exports = {
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
-            [
-              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
-              "Tutorial"
-            ],
+            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         }
@@ -231,10 +217,7 @@ module.exports = {
         post: [],
         exclude: []
       }),
-      "/customize/": [
-        ["Model-Customization", "Model Customization"],
-        ["Model-Creation", "Model Creation"]
-      ]
+      "/customize/": [["Model-Customization", "Model Customization"], ["Model-Creation", "Model Creation"]]
     },
     sidebarDepth: 3,
     diplayAllHeaders: true, // default
@@ -246,9 +229,7 @@ function loadSidebarFrom({ location, pre, post, exclude }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e =>
-    fs.statSync(path.join(location, e)).isDirectory()
-  );
+  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));

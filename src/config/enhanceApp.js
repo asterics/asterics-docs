@@ -1,8 +1,6 @@
-import Vue from "vue";
 import BootstrapVue from "bootstrap-vue";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
+import "./styles/main.scss";
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app

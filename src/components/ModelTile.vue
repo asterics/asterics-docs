@@ -8,8 +8,18 @@
           <b-card-footer>
             <div>
               <b-button-group>
-                <div v-for="buttonElem in buttons">
-                  <b-button :href="$withBase(buttonElem.href)" variant="primary">{{buttonElem.text}}</b-button>
+                <div v-for="buttonElem in buttons" :key="buttonElem.text">
+                  <b-button
+                    v-if="buttonElem.text=='Start'"
+                    @click="startModel(buttonElem.href)"
+                    variant="primary"
+                  >{{buttonElem.text}}</b-button>
+                  <b-button
+                    v-else
+                    :href="buttonElem.href"
+                    target="_blank"
+                    variant="primary"
+                  >{{buttonElem.text}}</b-button>
                 </div>
               </b-button-group>
             </div>
@@ -17,7 +27,7 @@
         </b-col>
         <b-col md="6">
           <b-card-body :title="title">
-            <div v-for="tag in tags">
+            <div v-for="tag in tags" :key="tag.text">
               <b-badge :href="$withBase(tag.href)" variant="primary">{{tag.text}}</b-badge>
             </div>
             <b-card-text>{{shortDesc}}</b-card-text>
@@ -29,13 +39,14 @@
   </div>
 </template>
 
-<style lang="stylus">
-</style>
+<style lang="stylus"></style>
 
 <script>
 import Vue from "vue";
+import { deployModelFromWebserverApplySettingsAndStartModel } from "@asterics/web-app-utils";
 export default {
   props: {
+    isVideo: { type: Boolean, default: false },
     target: { type: String, default: "#" },
     title: { type: String, default: "Default Title" },
     imageUrl: { type: String, default: "" },
@@ -51,6 +62,21 @@ export default {
       default: function() {
         return [{ href: "", text: "Start" }, { href: "", text: "Edit" }];
       }
+    }
+  },
+  methods: {
+    startModel: function(link) {
+      console.log(link);
+      deployModelFromWebserverApplySettingsAndStartModel(
+        link,
+        {},
+        function(data, HTTPStatus) {
+          console.log(data);
+        },
+        function(status, error) {
+          console.log(status);
+        }
+      );
     }
   }
 };
