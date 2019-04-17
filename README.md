@@ -66,6 +66,9 @@ $ yarn docs commit v2.3 -r AsTeRICS WebACS
 * Markdown Syntax Sugar
 * Versions
 * Layouts
+* Fallback for Translation
+* "Help us tranlate..." - Button
+* Rather combine than single versions
 
 ## Configuration Reference
 
