@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@asterics/are-rest@0.0.1-alpha.0":
+  version "0.0.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/@asterics/are-rest/-/are-rest-0.0.1-alpha.0.tgz#a3eb96095e35d2218085301969ed4768e224182c"
+  integrity sha512-Y3SpRDB5J+NYY0P0aDE5quSuEt5K1Bs7gzQL6IGj202L7nh+Ng8jRdKVH5G5dyeWwZJVQRNPgxv3CZQyxWO7Dg==
+  dependencies:
+    axios "^0.18.0"
+
 "@asterics/git-tools@^0.1.7":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@asterics/git-tools/-/git-tools-0.1.7.tgz#372aa337c84728c3013c6f9961710eba116ec150"
@@ -14,15 +21,12 @@
   dependencies:
     shelljs "^0.8.3"
 
-"@asterics/rest@file:../../sabicalija/rest":
-  version "0.0.1"
+"@asterics/web-app-utils@^0.0.1-alpha.1":
+  version "0.0.1-alpha.1"
+  resolved "https://registry.yarnpkg.com/@asterics/web-app-utils/-/web-app-utils-0.0.1-alpha.1.tgz#765dfd5198ab64b2cc2e7aeaf388bf101e95bd92"
+  integrity sha512-4ez1Atx8BQGYGE8XkdIzl9fPyjusHjpg6hm8L7huCmMeI5dXiiRFxKFbklciWHIU0z1JQ1cveWjqVsbvy7msIA==
   dependencies:
-    axios "^0.18.0"
-
-"@asterics/web-app-utils@file:../../sabicalija/web-app-utils":
-  version "0.0.1"
-  dependencies:
-    "@asterics/rest" "file:../../sabicalija/rest"
+    "@asterics/are-rest" "0.0.1-alpha.0"
     axios "^0.18.0"
     xmldom "^0.1.27"
     xmlhttprequest "^1.8.0"
