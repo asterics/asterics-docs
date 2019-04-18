@@ -87,6 +87,7 @@
             target="_blank"
           >Edit</b-button>
           <b-button
+            :disabled="modelType === 'none'"
             class="model-btn-icon model-btn-text model-btn-settings"
             @click="toggleSettings"
             variant="info"
@@ -400,6 +401,11 @@ export default {
 }
 
 .model-btn:disabled {
+  border: 1px solid darken(gray, 10%);
+  background-color: darken(gray, 10%);
+}
+
+.model-btn-settings:disabled {
   border: 1px solid darken(gray, 10%);
   background-color: darken(gray, 10%);
 }
