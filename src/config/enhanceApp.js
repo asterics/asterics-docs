@@ -2,6 +2,10 @@ import BootstrapVue from "bootstrap-vue";
 
 import "./styles/main.scss";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 export default ({
   Vue, // the version of Vue being used in the VuePress app
   options, // the options for the root Vue instance
@@ -9,4 +13,8 @@ export default ({
   siteData // site metadata
 }) => {
   Vue.use(BootstrapVue);
+
+  library.add(faCog);
+  Vue.component("font-awesome-icon", FontAwesomeIcon);
+  Vue.config.productionTip = false;
 };

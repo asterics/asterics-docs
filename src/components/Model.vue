@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div id="model">
     <b-card no-body class="overflow-hidden">
       <b-row no-gutters>
         <b-col :order="left ? 1 : 2">
-          <b-card-img class="model-img" :src="sanitize(image)"></b-card-img>
+          <b-card-img-lazy class="model-img" :src="sanitize(image)"></b-card-img-lazy>
         </b-col>
         <b-col :order="left ? 2 : 1">
           <b-card-body>
@@ -61,6 +61,9 @@
           target="_blank"
         >Settings</b-button>
         <b-button class="model-btn model-btn-text" variant="info" :href="edit" target="_blank">Edit</b-button>
+        <b-button class="model-btn-icon model-btn-text" variant="info">
+          <font-awesome-icon icon="cog"/>
+        </b-button>
       </div>
     </b-card>
     <br>
@@ -175,6 +178,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#model {
+  // max-width: 800px;
+}
+
 /* .model-text {
   transition: font-size 1s ease-out;
   font-size: 1.5vw;
@@ -207,6 +214,11 @@ export default {
   margin: 0px 2px;
   border-radius: 5px;
   box-shadow: 3px 2px 2px 0px #ccc;
+}
+
+.model-btn-icon {
+  min-height: 100%;
+  width: 8%;
 }
 
 .model-btn-text {
