@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import { deployModelFromWebserverApplySettingsAndStartModel } from "@asterics/web-app-utils";
 export default {
   props: {
     title: {
@@ -115,7 +114,8 @@ export default {
     return {
       webacs: "http://asterics.github.io/AsTeRICS/webapps/WebACS",
       are: "http://localhost:8081",
-      aGrid: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid"
+      aGrid: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid",
+      deploy: null
     };
   },
   computed: {
@@ -143,8 +143,7 @@ export default {
   },
   methods: {
     start() {
-      console.log("start", this.model);
-      deployModelFromWebserverApplySettingsAndStartModel(
+      this.deploy(
         this.model,
         (data, status) => {
           console.log(data, status);
@@ -154,6 +153,13 @@ export default {
         }
       );
     }
+  },
+  mounted() {
+    import("@asterics/web-app-utils").then(
+      ({ deployModelFromWebserverApplySettingsAndStartModel }) => {
+        this.deploy = deployModelFromWebserverApplySettingsAndStartModel;
+      }
+    );
   }
 };
 </script>
