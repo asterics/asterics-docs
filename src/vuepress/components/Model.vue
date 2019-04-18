@@ -94,89 +94,101 @@
             <font-awesome-icon class="fa-2x" icon="cog"/>
           </b-button>
         </div>
-        <div v-if="showSettings">
-          <b-input-group class="mt-3" v-if="modelType === 'model'">
-            <b-input-group-text slot="prepend" class="model-setting-label">ARE</b-input-group-text>
-            <b-form-input v-model="settings.are"></b-form-input>
-            <b-input-group-append>
-              <b-button
-                @click="clearSetting('are')"
-                variant="primary"
-                v-b-tooltip.hover.bottom="'Clear'"
-              >
-                <font-awesome-icon icon="backspace"/>
-              </b-button>
-              <b-button
-                @click="loadDefault('are')"
-                variant="info"
-                v-b-tooltip.hover.bottom="'Reset'"
-              >
-                <font-awesome-icon icon="sync"/>
-              </b-button>
-              <b-button id="tooltip-are" variant="info">
-                <font-awesome-icon icon="question-circle"/>
-              </b-button>
-              <b-tooltip target="tooltip-are" placement="right">
-                <strong>URL</strong> to use for
-                <em style="white-space: nowrap;">AsTeRICS ARE</em>.
-              </b-tooltip>
-            </b-input-group-append>
-          </b-input-group>
-          <b-input-group class="mt-3" v-if="modelType === 'model'">
-            <b-input-group-text slot="prepend" class="model-setting-label">WebACS</b-input-group-text>
-            <b-form-input v-model="settings.webacs"></b-form-input>
-            <b-input-group-append>
-              <b-button
-                @click="clearSetting('webacs')"
-                variant="primary"
-                v-b-tooltip.hover.bottom="'Clear'"
-              >
-                <font-awesome-icon icon="backspace"/>
-              </b-button>
-              <b-button
-                @click="loadDefault('webacs')"
-                variant="info"
-                v-b-tooltip.hover.bottom="'Reset'"
-              >
-                <font-awesome-icon icon="sync"/>
-              </b-button>
-              <b-button id="tooltip-webacs" variant="info">
-                <font-awesome-icon icon="question-circle"/>
-              </b-button>
-              <b-tooltip target="tooltip-webacs" placement="right">
-                <strong>URL</strong> to use for
-                <em style="white-space: nowrap;">AsTeRICS WebACS</em>.
-              </b-tooltip>
-            </b-input-group-append>
-          </b-input-group>
-          <b-input-group class="mt-3" v-if="modelType === 'grid'">
-            <b-input-group-text slot="prepend" class="model-setting-label">Grid</b-input-group-text>
-            <b-form-input v-model="settings.grid"></b-form-input>
-            <b-input-group-append>
-              <b-button
-                @click="clearSetting('grid')"
-                variant="primary"
-                v-b-tooltip.hover.bottom="'Clear'"
-              >
-                <font-awesome-icon icon="backspace"/>
-              </b-button>
-              <b-button
-                @click="loadDefault('grid')"
-                variant="info"
-                v-b-tooltip.hover.bottom="'Reset'"
-              >
-                <font-awesome-icon icon="sync"/>
-              </b-button>
-              <b-button id="tooltip-grid" variant="info">
-                <font-awesome-icon icon="question-circle"/>
-              </b-button>
-              <b-tooltip target="tooltip-grid" placement="right">
-                <strong>URL</strong> to use for
-                <em style="white-space: nowrap;">AsTeRICS Grid</em>.
-              </b-tooltip>
-            </b-input-group-append>
-          </b-input-group>
-        </div>
+        <transition
+          appear
+          enter-class
+          enter-active-class="animated slideInUp"
+          leave-class
+          leave-active-class="animated slideOutDown"
+        >
+          <div v-if="showSettings">
+            <b-input-group class="mt-3" v-if="modelType === 'model'">
+              <b-input-group-text slot="prepend" class="model-setting-label">ARE</b-input-group-text>
+              <b-form-input v-model="settings.are"></b-form-input>
+              <b-input-group-append>
+                <b-button
+                  @click="clearSetting('are')"
+                  variant="primary"
+                  v-b-tooltip.hover.bottom="'Clear'"
+                >
+                  <font-awesome-icon icon="backspace"/>
+                </b-button>
+                <b-button
+                  @click="loadDefault('are')"
+                  variant="info"
+                  v-b-tooltip.hover.bottom="'Reset'"
+                >
+                  <font-awesome-icon icon="sync"/>
+                </b-button>
+                <b-button id="tooltip-are" variant="info" style="border-radius: 0px 5px 5px 0px;">
+                  <font-awesome-icon icon="question-circle"/>
+                </b-button>
+                <b-tooltip target="tooltip-are" placement="right">
+                  <strong>URL</strong> to use for
+                  <em style="white-space: nowrap;">AsTeRICS ARE</em>.
+                </b-tooltip>
+              </b-input-group-append>
+            </b-input-group>
+            <b-input-group class="mt-3" v-if="modelType === 'model'">
+              <b-input-group-text slot="prepend" class="model-setting-label">WebACS</b-input-group-text>
+              <b-form-input v-model="settings.webacs"></b-form-input>
+              <b-input-group-append>
+                <b-button
+                  @click="clearSetting('webacs')"
+                  variant="primary"
+                  v-b-tooltip.hover.bottom="'Clear'"
+                >
+                  <font-awesome-icon icon="backspace"/>
+                </b-button>
+                <b-button
+                  @click="loadDefault('webacs')"
+                  variant="info"
+                  v-b-tooltip.hover.bottom="'Reset'"
+                >
+                  <font-awesome-icon icon="sync"/>
+                </b-button>
+                <b-button
+                  id="tooltip-webacs"
+                  style="border-radius: 0px 5px 5px 0px;"
+                  variant="info"
+                >
+                  <font-awesome-icon icon="question-circle"/>
+                </b-button>
+                <b-tooltip target="tooltip-webacs" placement="right">
+                  <strong>URL</strong> to use for
+                  <em style="white-space: nowrap;">AsTeRICS WebACS</em>.
+                </b-tooltip>
+              </b-input-group-append>
+            </b-input-group>
+            <b-input-group class="mt-3" v-if="modelType === 'grid'">
+              <b-input-group-text slot="prepend" class="model-setting-label">Grid</b-input-group-text>
+              <b-form-input v-model="settings.grid"></b-form-input>
+              <b-input-group-append>
+                <b-button
+                  @click="clearSetting('grid')"
+                  variant="primary"
+                  v-b-tooltip.hover.bottom="'Clear'"
+                >
+                  <font-awesome-icon icon="backspace"/>
+                </b-button>
+                <b-button
+                  @click="loadDefault('grid')"
+                  variant="info"
+                  v-b-tooltip.hover.bottom="'Reset'"
+                >
+                  <font-awesome-icon icon="sync"/>
+                </b-button>
+                <b-button id="tooltip-grid" variant="info" style="border-radius: 0px 5px 5px 0px;">
+                  <font-awesome-icon icon="question-circle"/>
+                </b-button>
+                <b-tooltip target="tooltip-grid" placement="right">
+                  <strong>URL</strong> to use for
+                  <em style="white-space: nowrap;">AsTeRICS Grid</em>.
+                </b-tooltip>
+              </b-input-group-append>
+            </b-input-group>
+          </div>
+        </transition>
       </div>
     </b-card>
     <br>

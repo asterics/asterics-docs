@@ -37,9 +37,7 @@ exports.handler = ({ version, output }) => {
   /* Create output folder */
   output = path.isAbsolute(output) ? output : path.join(process.cwd(), output);
   rimraf.sync(output);
-  let jobs = [];
-  jobs.push(...getCopyJobs(path.join(process.cwd(), "src/vuepress"), path.join(output, ".vuepress")));
-  jobs.push(...getCopyJobs(path.join(process.cwd(), "public"), path.join(output, ".vuepress/public")));
+  let jobs = getCopyJobs(path.join(process.cwd(), "src/vuepress"), path.join(output, ".vuepress"));
   processCopyJobs(jobs);
 
   (async () => {
