@@ -3,7 +3,7 @@ import BootstrapVue from "bootstrap-vue";
 import "./styles/main.scss";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faBackspace, faQuestionCircle, faSync } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default ({
@@ -14,7 +14,7 @@ export default ({
 }) => {
   Vue.use(BootstrapVue);
 
-  library.add(faCog);
+  library.add(faCog, faBackspace, faQuestionCircle, faSync);
   Vue.component("font-awesome-icon", FontAwesomeIcon);
   Vue.config.productionTip = false;
 };

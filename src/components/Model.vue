@@ -37,33 +37,127 @@
           </b-card-body>
         </b-col>
       </b-row>
-      <div slot="footer" class="model-btn-container">
-        <b-button
-          v-if="modelType === 'model' || modelType === 'none'"
-          class="model-btn"
-          variant="primary"
-          :disabled="modelType === 'none'"
-          v-b-tooltip.hover.bottom="'Make sure the ARE is up and running!'"
-          @click="start"
-        >Start</b-button>
-        <b-button
-          class="model-btn model-btn-text"
-          variant="primary"
-          :href="sanitize(open)"
-          target="_blank"
-          v-else
-        >Open</b-button>
-        <b-button
-          :disabled="webapp === ''"
-          class="model-btn model-btn-text"
-          variant="info"
-          :href="sanitize(webapp)"
-          target="_blank"
-        >Settings</b-button>
-        <b-button class="model-btn model-btn-text" variant="info" :href="edit" target="_blank">Edit</b-button>
-        <b-button class="model-btn-icon model-btn-text" variant="info">
-          <font-awesome-icon icon="cog"/>
-        </b-button>
+      <div slot="footer">
+        <div class="model-btn-container">
+          <b-button
+            v-if="modelType === 'model' || modelType === 'none'"
+            class="model-btn"
+            variant="primary"
+            :disabled="modelType === 'none'"
+            v-b-tooltip.hover.bottom="'Make sure the ARE is up and running!'"
+            @click="start"
+          >Start</b-button>
+          <b-button
+            class="model-btn model-btn-text"
+            variant="primary"
+            :href="sanitize(open)"
+            target="_blank"
+            v-else
+          >Open</b-button>
+          <b-button
+            :disabled="webapp === ''"
+            class="model-btn model-btn-text"
+            variant="info"
+            :href="sanitize(webapp)"
+            target="_blank"
+          >Settings</b-button>
+          <b-button
+            class="model-btn model-btn-text"
+            variant="info"
+            :href="edit"
+            target="_blank"
+          >Edit</b-button>
+          <b-button
+            class="model-btn-icon model-btn-text model-btn-settings"
+            @click="toggleSettings"
+            variant="info"
+          >
+            <font-awesome-icon class="fa-2x" icon="cog"/>
+          </b-button>
+        </div>
+        <div v-if="showSettings">
+          <b-input-group class="mt-3" v-if="modelType === 'model'">
+            <b-input-group-text slot="prepend" class="model-setting-label">ARE</b-input-group-text>
+            <b-form-input v-model="settings.are"></b-form-input>
+            <b-input-group-append>
+              <b-button
+                @click="clearSetting('are')"
+                variant="primary"
+                v-b-tooltip.hover.bottom="'Clear'"
+              >
+                <font-awesome-icon icon="backspace"/>
+              </b-button>
+              <b-button
+                @click="loadDefault('are')"
+                variant="info"
+                v-b-tooltip.hover.bottom="'Reset'"
+              >
+                <font-awesome-icon icon="sync"/>
+              </b-button>
+              <b-button id="tooltip-are" variant="info">
+                <font-awesome-icon icon="question-circle"/>
+              </b-button>
+              <b-tooltip target="tooltip-are" placement="right">
+                <strong>URL</strong> to use for
+                <em style="white-space: nowrap;">AsTeRICS ARE</em>.
+              </b-tooltip>
+            </b-input-group-append>
+          </b-input-group>
+          <b-input-group class="mt-3" v-if="modelType === 'model'">
+            <b-input-group-text slot="prepend" class="model-setting-label">WebACS</b-input-group-text>
+            <b-form-input v-model="settings.webacs"></b-form-input>
+            <b-input-group-append>
+              <b-button
+                @click="clearSetting('webacs')"
+                variant="primary"
+                v-b-tooltip.hover.bottom="'Clear'"
+              >
+                <font-awesome-icon icon="backspace"/>
+              </b-button>
+              <b-button
+                @click="loadDefault('webacs')"
+                variant="info"
+                v-b-tooltip.hover.bottom="'Reset'"
+              >
+                <font-awesome-icon icon="sync"/>
+              </b-button>
+              <b-button id="tooltip-webacs" variant="info">
+                <font-awesome-icon icon="question-circle"/>
+              </b-button>
+              <b-tooltip target="tooltip-webacs" placement="right">
+                <strong>URL</strong> to use for
+                <em style="white-space: nowrap;">AsTeRICS WebACS</em>.
+              </b-tooltip>
+            </b-input-group-append>
+          </b-input-group>
+          <b-input-group class="mt-3" v-if="modelType === 'grid'">
+            <b-input-group-text slot="prepend" class="model-setting-label">Grid</b-input-group-text>
+            <b-form-input v-model="settings.grid"></b-form-input>
+            <b-input-group-append>
+              <b-button
+                @click="clearSetting('grid')"
+                variant="primary"
+                v-b-tooltip.hover.bottom="'Clear'"
+              >
+                <font-awesome-icon icon="backspace"/>
+              </b-button>
+              <b-button
+                @click="loadDefault('grid')"
+                variant="info"
+                v-b-tooltip.hover.bottom="'Reset'"
+              >
+                <font-awesome-icon icon="sync"/>
+              </b-button>
+              <b-button id="tooltip-grid" variant="info">
+                <font-awesome-icon icon="question-circle"/>
+              </b-button>
+              <b-tooltip target="tooltip-grid" placement="right">
+                <strong>URL</strong> to use for
+                <em style="white-space: nowrap;">AsTeRICS Grid</em>.
+              </b-tooltip>
+            </b-input-group-append>
+          </b-input-group>
+        </div>
       </div>
     </b-card>
     <br>
@@ -115,11 +209,22 @@ export default {
   },
   data() {
     return {
-      webacs: "http://asterics.github.io/AsTeRICS/webapps/WebACS",
-      are: "https://[::1]:8081",
-      aGrid: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid",
+      settings: {
+        default: {
+          webacs: "http://asterics.github.io/AsTeRICS/webapps/WebACS",
+          are: "https://[::1]:8081",
+          grid: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid"
+        },
+        webacs: null,
+        are: null,
+        grid: null
+      },
+      show: {
+        grid: false
+      },
       deploy: null,
-      setURI: null
+      setURI: null,
+      showSettings: false
     };
   },
   computed: {
@@ -135,19 +240,21 @@ export default {
       return type;
     },
     open: function() {
-      return `${this.aGrid}/${this.grid}`;
+      return `${this.settings.grid}/${this.grid}`;
     },
     edit: function() {
       if (this.model !== "") {
-        return `${this.webacs}/?areBaseURI=${this.are}&openFile=${this.model}`;
+        return `${this.settings.webacs}/?areBaseURI=${
+          this.settings.are
+        }&openFile=${this.model}`;
       } else {
-        return `${this.aGrid}/edit/${this.grid}`;
+        return `${this.settings.grid}/edit/${this.grid}`;
       }
     }
   },
   methods: {
     start() {
-      this.setURI(`${this.are}/rest/`);
+      this.setURI(`${this.settings.are}/rest/`);
       this.deploy(
         this.model,
         (data, status) => {
@@ -164,6 +271,15 @@ export default {
       } else {
         return url;
       }
+    },
+    toggleSettings() {
+      this.showSettings = !this.showSettings;
+    },
+    loadDefault(setting) {
+      this.settings[setting] = this.settings.default[setting];
+    },
+    clearSetting(setting) {
+      this.settings[setting] = "";
     }
   },
   mounted() {
@@ -173,6 +289,11 @@ export default {
         this.setURI = setBaseURI;
       }
     );
+  },
+  created() {
+    for (let setting in this.settings.default) {
+      this.settings[setting] = this.settings.default[setting];
+    }
   }
 };
 </script>
@@ -180,6 +301,11 @@ export default {
 <style lang="scss" scoped>
 #model {
   // max-width: 800px;
+}
+
+.model-setting-label {
+  min-width: 100px;
+  font-weight: bold;
 }
 
 /* .model-text {
@@ -227,7 +353,11 @@ export default {
 
 @media screen and (max-width: 425px) {
   .model-btn {
-    transition: width 4s;
+    width: 100%;
+    margin: 5px 0 5px 0;
+  }
+
+  .model-btn-settings {
     width: 100%;
     margin: 5px 0 5px 0;
   }
