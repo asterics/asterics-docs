@@ -28,35 +28,17 @@ exports.builder = yargs => {
 
 exports.handler = ({ version, output }) => {
   /* Load index */
-  if (!fs.existsSync(indexPath)) return;
+  if (!fs.existsSync(indexPath)) {
+    console.error("No index file available. Run 'yarn cli index' to create an index.");
+    return;
+  }
   let index = JSON.parse(fs.readFileSync(indexPath))["setup"][version];
 
   /* Create output folder */
   output = path.isAbsolute(output) ? output : path.join(process.cwd(), output);
   rimraf.sync(output);
-  let jobs = absolute([
-    {
-      source: "src/config/vuepress.config.js",
-      target: `${output}/.vuepress/config.js`
-    },
-    {
-      source: "src/config/enhanceApp.js",
-      target: `${output}/.vuepress/enhanceApp.js`
-    },
-    {
-      source: "src/config/palette.styl",
-      target: `${output}/.vuepress/styles/palette.styl`
-    },
-    {
-      source: "src/config/index.styl",
-      target: `${output}/.vuepress/styles/index.styl`
-    },
-    {
-      source: "src/config/main.scss",
-      target: `${output}/.vuepress/styles/main.scss`
-    }
-  ]);
-  jobs.push(...getCopyJobs(path.join(process.cwd(), "src/components"), path.join(output, ".vuepress/components")));
+  let jobs = [];
+  jobs.push(...getCopyJobs(path.join(process.cwd(), "src/vuepress"), path.join(output, ".vuepress")));
   jobs.push(...getCopyJobs(path.join(process.cwd(), "public"), path.join(output, ".vuepress/public")));
   processCopyJobs(jobs);
 
