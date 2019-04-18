@@ -3,7 +3,7 @@
     <b-card no-body class="overflow-hidden">
       <b-row no-gutters>
         <b-col :order="left ? 1 : 2">
-          <b-card-img class="model-img" :src="image"></b-card-img>
+          <b-card-img class="model-img" :src="sanitize(image)"></b-card-img>
         </b-col>
         <b-col :order="left ? 2 : 1">
           <b-card-body>
@@ -15,7 +15,7 @@
               >
                 <b-badge
                   v-for="tag in tags"
-                  :href="tag.href"
+                  :href="sanitize(tag.href)"
                   :key="tag.text"
                   variant="secondary"
                   role="button"
@@ -28,7 +28,7 @@
               {{description}}
               <b-badge
                 variant="primary"
-                :href="docs"
+                :href="sanitize(docs)"
                 class="btn model-docs model-text"
                 role="button"
                 tabindex="0"
@@ -49,7 +49,7 @@
         <b-button
           class="model-btn model-btn-text"
           variant="primary"
-          :href="open"
+          :href="sanitize(open)"
           target="_blank"
           v-else
         >Open</b-button>
@@ -57,7 +57,7 @@
           :disabled="webapp === ''"
           class="model-btn model-btn-text"
           variant="info"
-          :href="webapp"
+          :href="sanitize(webapp)"
           target="_blank"
         >Settings</b-button>
         <b-button class="model-btn model-btn-text" variant="info" :href="edit" target="_blank">Edit</b-button>
@@ -113,9 +113,10 @@ export default {
   data() {
     return {
       webacs: "http://asterics.github.io/AsTeRICS/webapps/WebACS",
-      are: "http://localhost:8081",
+      are: "https://[::1]:8081",
       aGrid: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid",
-      deploy: null
+      deploy: null,
+      setURI: null
     };
   },
   computed: {
@@ -143,6 +144,7 @@ export default {
   },
   methods: {
     start() {
+      this.setURI(`${this.are}/rest/`);
       this.deploy(
         this.model,
         (data, status) => {
@@ -152,12 +154,20 @@ export default {
           console.log(error, status);
         }
       );
+    },
+    sanitize(url) {
+      if (url[0] === "/") {
+        return this.$withBase(url);
+      } else {
+        return url;
+      }
     }
   },
   mounted() {
     import("@asterics/web-app-utils").then(
-      ({ deployModelFromWebserverApplySettingsAndStartModel }) => {
+      ({ deployModelFromWebserverApplySettingsAndStartModel, setBaseURI }) => {
         this.deploy = deployModelFromWebserverApplySettingsAndStartModel;
+        this.setURI = setBaseURI;
       }
     );
   }
