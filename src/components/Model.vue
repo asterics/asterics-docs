@@ -21,7 +21,26 @@
                   role="button"
                   class="model-title-tag model-text"
                   tabindex="0"
-                >{{tag.text}}</b-badge>
+                >
+                  <font-awesome-icon icon="tag"/>
+                  {{tag.text}}
+                </b-badge>
+                <b-badge
+                  variant="info"
+                  role="button"
+                  class="model-title-tag-accessibility model-text"
+                >
+                  <font-awesome-icon icon="universal-access"/>
+                  <span>Audio</span>
+                </b-badge>
+                <b-badge variant="info" role="button" class="model-title-tag-platform model-text">
+                  <font-awesome-icon icon="universal-access"/>
+                  <span>Windows</span>
+                </b-badge>
+                <b-badge variant="info" role="button" class="model-title-tag-platform model-text">
+                  <font-awesome-icon icon="universal-access"/>
+                  <span>Linux</span>
+                </b-badge>
               </div>
             </b-card-title>
             <b-card-text class="model-text" title-tag="h6">
@@ -393,6 +412,26 @@ export default {
   background-color: transparent;
   color: darken(#42b983, 20%);
   border: 0.15rem solid #42b983;
+}
+
+.model-title-tag-accessibility {
+  margin-right: 0.5rem;
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px gray;
+  padding-bottom: 6px;
+  background-color: transparent;
+  color: rgb(182, 105, 4);
+  border: 0.15rem solid rgb(182, 105, 4);
+}
+
+.model-title-tag-platform {
+  margin-right: 0.5rem;
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px gray;
+  padding-bottom: 6px;
+  background-color: transparent;
+  color: rgb(76, 7, 122);
+  border: 0.15rem solid rgb(76, 7, 122);
 }
 
 .model-title {
