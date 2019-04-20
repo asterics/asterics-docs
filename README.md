@@ -51,16 +51,17 @@ $ VERSION=2.3 npx vuepress dev docs/
 ## New Devel (-> Task 104)
 
 $ yarn docs init
+$ yarn docs clean aka. yarn docs init --clean
 
-$ yarn docs setup v2.3 --combine
-
-$ yarn docs dev v2.3
-
-$ yarn docs build v2.3
+$ yarn docs setup
+$ yarn docs dev
+$ yarn docs build
 
 $ yarn docs diff v2.3 -r AsTeRICS
-
 $ yarn docs commit v2.3 -r AsTeRICS WebACS
+
+$ yarn docs convert --html-to-markdown -i file/folder -o file/folder
+
 
 * Blog
 * Markdown Syntax Sugar
