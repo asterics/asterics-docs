@@ -6,11 +6,15 @@ module.exports = function(api) {
       [
         "@babel/env",
         {
-          useBuiltIns: "usage",
-          corejs: "3.0.0",
-          targets: "maintained node versions"
+          // useBuiltIns: "usage",
+          // corejs: "3.0.0",
+          targets: {
+            node: "current"
+          },
+          debug: true
         }
-      ]
+      ],
+      ["@babel/typescript"]
     ]
   };
 };

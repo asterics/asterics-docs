@@ -13,7 +13,11 @@
     "setup": "node src/scripts/setup.js",
     "cli": "node src/scripts/cli.js",
     "docs": "babel-node --presets @babel/env src/scripts/docs.js",
-    "compile": "babel src --out-dir debug --source-maps --watch"
+    "compile": "babel src --out-dir debug --source-maps --watch",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check --watch",
+    "build:types": "tsc --emitDeclarationOnly --declaration",
+    "build:js": "babel src --out-dir compile --extensions \".ts,.tsx\" --source-maps inline"
   },
   "repository": {
     "type": "git",
@@ -37,6 +41,8 @@
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/node": "^11.13.6",
     "@vuepress/plugin-active-header-links": "^1.0.0-alpha.0",
     "@vuepress/plugin-back-to-top": "^1.0.0-alpha.0",
     "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.0",
@@ -48,7 +54,9 @@
     "nodegit": "^0.24.0",
     "rimraf": "^2.6.3",
     "shelljs": "^0.8.3",
+    "ts-loader": "^5.3.3",
     "turndown": "^5.0.3",
+    "typescript": "^3.4.4",
     "vuepress": "^1.0.0-alpha.0",
     "yargs": "^12.0.5"
   },
