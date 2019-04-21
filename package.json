@@ -12,8 +12,8 @@
     "build": "vuepress build docs",
     "setup": "node src/scripts/setup.js",
     "cli": "node src/scripts/cli.js",
-    "docs": "babel-node --presets @babel/env src/scripts/docs.js",
-    "compile": "babel src --out-dir debug --source-maps --watch"
+    "docs": "babel-node --config-file ./babel.config.js src/scripts/docs.js",
+    "compile": "babel src/scripts --out-dir debug --source-maps --watch"
   },
   "repository": {
     "type": "git",
@@ -44,7 +44,6 @@
     "chalk": "^2.4.2",
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
-    "jsdom": "^14.0.0",
     "nodegit": "^0.24.0",
     "rimraf": "^2.6.3",
     "shelljs": "^0.8.3",
@@ -54,7 +53,6 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.14",
-    "core-js": "3"
+    "bootstrap-vue": "^2.0.0-rc.14"
   }
 }
