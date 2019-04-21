@@ -171,21 +171,6 @@ function log(job, options) {
       end: ""
     })
   );
-  // if (job.destination === "" || job.destination === undefined) {
-  //   process.stdout.write(
-  //     success(relative(process.cwd(), job.source), {
-  //       label: "Converting page",
-  //       end: ""
-  //     })
-  //   );
-  // } else {
-  //   process.stdout.write(
-  //     success(`${relative(process.cwd(), job.source)} to ${relative(process.cwd(), job.destination)}`, {
-  //       label: "Converting page",
-  //       end: ""
-  //     })
-  //   );
-  // }
 }
 
 function markup(source) {
