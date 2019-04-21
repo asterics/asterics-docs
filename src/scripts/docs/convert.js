@@ -237,6 +237,9 @@ function copy(pictures, options) {
             logPicMissing(picture, options);
           }
         });
+      } else {
+        copiedPictures.push(picture.destination);
+        logPic(picture, options);
       }
     }
   }
