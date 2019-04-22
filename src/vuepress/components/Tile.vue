@@ -8,7 +8,9 @@
         </b-col>
         <b-col md="6">
           <b-card-body :title="title">
-            <b-card-text>This is a wider card with supporting text as a natural lead-in to additional content.</b-card-text>
+            <b-card-text>
+              <slot></slot>
+            </b-card-text>
           </b-card-body>
         </b-col>
       </b-row>
@@ -28,8 +30,7 @@
   </div>-->
 </template>
 
-<style lang="stylus">
-</style>
+<style lang="stylus"></style>
 
 <script>
 import Vue from "vue";
