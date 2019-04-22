@@ -52,78 +52,78 @@ config.load({
         "3.1": "pre-3.1"
       }
     },
-    {
-      repository: "AsTeRICS",
-      source: "Documentation/ACS-Help/HTML/ACS",
-      destination: config.get("documentation") + "/manuals/ACS",
-      recurse: true,
-      filter: /\.(html?|jpg|png|svg)$/i,
-      process: [
-        { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
-      ],
-      postprocess: [
-        {
-          rule: /\.md$/i,
-          apply: [
-            "remove-first-two-lines",
-            "correct-image-path",
-            "lowercase-image",
-            "edit-link"
-          ]
-        }
-      ],
-      map: {}
-    },
-    {
-      repository: "AsTeRICS",
-      source: "Documentation/ACS-Help/HTML/ARE",
-      destination: config.get("documentation") + "/manuals/ARE",
-      recurse: true,
-      filter: /\.(html?|jpg|png|svg)$/i,
-      process: [
-        { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
-      ],
-      postprocess: [
-        {
-          rule: /\.md$/i,
-          apply: [
-            "remove-first-two-lines",
-            "correct-image-path",
-            "lowercase-image",
-            "edit-link"
-          ]
-        }
-      ],
-      map: {}
-    },
-    {
-      repository: "AsTeRICS",
-      source: "Documentation/ACS-Help/HTML/Plugins",
-      destination: config.get("documentation") + "/plugins",
-      recurse: true,
-      filter: /\.(html?|jpg|png|svg)$/i,
-      process: [
-        { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
-      ],
-      postprocess: [
-        {
-          rule: /\.md$/i,
-          apply: [
-            "remove-first-two-lines",
-            "correct-image-path",
-            "lowercase-image",
-            "edit-link"
-          ]
-        }
-      ],
-      map: {}
-    },
+    // {
+    //   repository: "AsTeRICS",
+    //   source: "Documentation/ACS-Help/HTML/ACS",
+    //   destination: config.get("documentation") + "/manuals/ACS",
+    //   recurse: true,
+    //   filter: /\.(html?|jpg|png|svg)$/i,
+    //   process: [
+    //     { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
+    //   ],
+    //   postprocess: [
+    //     {
+    //       rule: /\.md$/i,
+    //       apply: [
+    //         "remove-first-two-lines",
+    //         "correct-image-path",
+    //         "lowercase-image",
+    //         "edit-link"
+    //       ]
+    //     }
+    //   ],
+    //   map: {}
+    // },
+    // {
+    //   repository: "AsTeRICS",
+    //   source: "Documentation/ACS-Help/HTML/ARE",
+    //   destination: config.get("documentation") + "/manuals/ARE",
+    //   recurse: true,
+    //   filter: /\.(html?|jpg|png|svg)$/i,
+    //   process: [
+    //     { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
+    //   ],
+    //   postprocess: [
+    //     {
+    //       rule: /\.md$/i,
+    //       apply: [
+    //         "remove-first-two-lines",
+    //         "correct-image-path",
+    //         "lowercase-image",
+    //         "edit-link"
+    //       ]
+    //     }
+    //   ],
+    //   map: {}
+    // },
+    // {
+    //   repository: "AsTeRICS",
+    //   source: "Documentation/ACS-Help/HTML/Plugins",
+    //   destination: config.get("documentation") + "/plugins",
+    //   recurse: true,
+    //   filter: /\.(html?|jpg|png|svg)$/i,
+    //   process: [
+    //     { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
+    //   ],
+    //   postprocess: [
+    //     {
+    //       rule: /\.md$/i,
+    //       apply: [
+    //         "remove-first-two-lines",
+    //         "correct-image-path",
+    //         "lowercase-image",
+    //         "edit-link"
+    //       ]
+    //     }
+    //   ],
+    //   map: {}
+    // },
     // {
     //   repository: "AsTeRICS",
     //   source: "Documentation/docs/.vuepress/public",
