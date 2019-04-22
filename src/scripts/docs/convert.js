@@ -34,8 +34,8 @@ export const builder = yargs => {
       h: { alias: "help", describe: "Show this help." },
       e: { alias: "ext", describe: "File extension for conversion.", type: "string", default: "md" },
       p: { alias: "pictures", describe: "Copy pictures during conversion.", type: "boolean", default: true },
-      l: {
-        alias: "logging",
+      v: {
+        alias: "verbose",
         describe: "Print processing information to stdout",
         type: "boolean"
       },
@@ -48,6 +48,8 @@ export const builder = yargs => {
     });
 };
 export const handler = options => {
+  options.verbose = config.get("verbose") || options.verbose;
+
   if (!fs.existsSync(options.file)) {
     process.stdout.write(error("Input file/folder does not exist!"));
     return;
@@ -156,7 +158,7 @@ function convert(jobs, options) {
     }
     process.stdout.write("\n");
 
-    if (!options.logging) {
+    if (!options.verbose) {
       moveCursor(process.stdout, 0, -pictures.length - 2);
       cursorTo(process.stdout, 0);
       clearScreenDown(process.stdout);
@@ -280,7 +282,7 @@ function logMissing() {
 
 function logStats(options) {
   process.stdout.write(
-    `${options.logging ? `${"=".repeat(120)}\n` : ""}Converted ${chalk.green(convertedFiles.length)} files. Copied ${chalk.blue(
+    `${options.verbose ? `${"=".repeat(120)}\n` : ""}Converted ${chalk.green(convertedFiles.length)} files. Copied ${chalk.blue(
       copiedPictures.length
     )} pictures.\n`
   );
