@@ -32,8 +32,8 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
-    "@asterics/git-tools": "file:/media/alija/DataNTFS/Git/github/asterics/node-git-tools",
-    "@asterics/node-utils": "file:/media/alija/DataNTFS/Git/github/asterics/node-utils",
+    "@asterics/git-tools": "^0.1.7",
+    "@asterics/node-utils": "^0.2.0",
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
