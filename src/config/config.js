@@ -135,26 +135,12 @@ config.load({
     // },
     {
       repository: "WebACS",
-      source: "help_files/WebACS",
+      source: "docs/manuals/WebACS",
       destination: config.get("documentation") + "/manuals/WebACS",
       recurse: true,
-      filter: /\.(html?|jpg|png|svg)$/i,
-      process: [
-        { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
-        { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
-      ],
-      postprocess: [
-        {
-          rule: /\.md$/i,
-          apply: [
-            "remove-first-two-lines",
-            "correct-image-path",
-            "lowercase-image",
-            "edit-link"
-          ]
-        }
-      ],
+      filter: /\.(md|jpg|png|svg)$/i,
+      process: [{ rule: /\.(md|jpg|png|svg)$/i, apply: "copy" }],
+      postprocess: [{ rule: /\.md$/i, apply: ["edit-link"] }],
       map: {}
     }
   ]
