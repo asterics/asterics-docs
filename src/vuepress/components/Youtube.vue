@@ -26,7 +26,7 @@
           <div class="embed-responsive embed-responsive-16by9">
             <iframe
               class="embed-responsive-item"
-              :src="`https://www.youtube.com/embed/${code}?rel=0`"
+              :src="`https://www.youtube${nocookie ? '-nocookie' : ''}.com/embed/${code}?rel=0`"
               allowfullscreen
             ></iframe>
           </div>
@@ -34,9 +34,9 @@
         <b-col cols="12" md="6" :order="order(false)">
           <b-card-body>
             <b-card-title>
-              <a target="_blank" :href="`https://www.youtube.com/watch?${code}`">{{title}}</a>
+              <a target="_blank" :href="`https://www.youtube.com/watch?v=${code}`">{{title}}</a>
             </b-card-title>
-            <b-card-text>This is a wider card with supporting text as a natural lead-in to additional content.</b-card-text>
+            <b-card-text>{{description}}</b-card-text>
           </b-card-body>
         </b-col>
       </b-row>
@@ -59,7 +59,16 @@ export default {
       type: String,
       default: "Title"
     },
-    code: String
+    description: {
+      type: String,
+      default:
+        "This is a wider card with supporting text as a natural lead-in to additional content."
+    },
+    code: String,
+    nocookie: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {};

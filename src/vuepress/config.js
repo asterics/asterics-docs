@@ -45,11 +45,29 @@ module.exports = {
     md.use(require("markdown-it-deflist"));
     md.use(require("markdown-it-abbr"));
     md.use(require("markdown-it-emoji"));
-    md.use(require("markdown-it-mark"));
-    md.use(require("markdown-it-ins"));
+    // md.use(require("markdown-it-mark"));
+
     md.use(require("markdown-it-checkbox"));
     md.use(require("markdown-it-imsize"), { autofill: true });
     md.use(require("markdown-it-kbd"));
+    // md.use(require("markdown-it-container"), "spoiler", {
+    //   validate: function(params) {
+    //     return params.trim().match(/^spoiler\s+(.*)$/);
+    //   },
+
+    //   render: function(tokens, idx) {
+    //     var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/);
+
+    //     if (tokens[idx].nesting === 1) {
+    //       // opening tag
+    //       return '<details style="background-color: red;"><summary>' + md.utils.escapeHtml(m[1]) + "</summary>\n";
+    //     } else {
+    //       // closing tag
+    //       return "</details>\n";
+    //     }
+    //   }
+    // });
+    
   },
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
