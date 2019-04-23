@@ -1,23 +1,3 @@
-<style lang="scss" scoped>
-.element {
-  padding: 0;
-  margin: 0;
-  margin-bottom: 2rem;
-  min-width: 600px;
-}
-
-@media screen and (min-width: 1290px) {
-  .group-element {
-    padding: 0 20px 0 0;
-  }
-
-  .group-element:nth-child(2n) {
-    padding: 0 0 0 20px;
-  }
-}
-</style>
-
-
 <template>
   <b-col :class="{'element': true, 'group-element': !single}" :xl="single ? 12 : 6" cols="12">
     <b-card no-body class="overflow-hidden">
@@ -75,7 +55,7 @@ export default {
   },
   methods: {
     order: function(left) {
-      if (screen.width < 789) {
+      if (typeof screen !== "undefined" && screen.width < 789) {
         return left ? 1 : 2;
       } else {
         if (left) {
