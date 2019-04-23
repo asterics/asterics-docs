@@ -6,6 +6,9 @@ import { mkdirp } from "@asterics/node-utils";
 import { warn, info, error, success } from "./shared";
 import converter from "./shared/converter";
 
+const configPath = join(process.cwd(), "src/config/config.js");
+const config = require(configPath);
+
 /* Locals */
 let convertedFiles = [];
 let copiedPictures = [];
@@ -177,13 +180,26 @@ function log(job, options) {
 
 function markup(source) {
   const r = /src="(.*\.(?:jpe?g|gif|png|svg))"/gim;
+  const rMd = /\((.*(?:jpe?g|gif|png|svg).*)\)/gim;
   let html = fs.readFileSync(source, { encoding: "utf-8" });
+
+  /* lowercase images */
   html = html.replace(r, (_, file) => {
     let filename = basename(file).toLowerCase();
     let dir = dirname(file);
     return `src=${dir}/${filename}`;
   });
+
   let md = converter.turndown(html);
+  /* adapt image paths */
+  md = md.replace(rMd, (_, file) => {
+    if (file[0] === ".") {
+      return `(${file})`;
+    } else {
+      return `(./${file})`;
+    }
+  });
+
   md = md.split("\n");
   md.splice(0, 1);
   return md.join("\n");
