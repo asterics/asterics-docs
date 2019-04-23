@@ -92,7 +92,7 @@ pipeline {
           environment {
             FATALITY = true
             VERBOSE = true
-            ENDPOINT = "asterics-docs"
+            ENDPOINT = ""
             DOCUMENTATION = "docs-deploy-io"
             DESTINATION = "dist-deploy-io"
           }
