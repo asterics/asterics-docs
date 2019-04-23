@@ -180,7 +180,7 @@ function log(job, options) {
 
 function markup(source) {
   const r = /src="(.*\.(?:jpe?g|gif|png|svg))"/gim;
-  const rMd = /\((.*(?:jpe?g|gif|png|svg).*)\)/gim;
+  const rMd = /\((.*(?:jpe?g|gif|png|svg).*)\)/gim; // cf. https://regex101.com/r/xsbixc/1
   let html = fs.readFileSync(source, { encoding: "utf-8" });
 
   /* lowercase images */
