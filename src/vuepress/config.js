@@ -124,8 +124,8 @@ module.exports = {
             text: "Manuals",
             items: [
               { text: "WebACS", link: "/manuals/WebACS/" },
-              { text: "ACS", link: "/manuals/ACS/" },
-              { text: "ARE", link: "/manuals/ARE/" }
+              { text: "ACS", link: "/manuals/ACS/" }
+              // { text: "ARE", link: "/manuals/ARE/" }
             ]
           },
           {
@@ -235,6 +235,7 @@ module.exports = {
         location: path.join(config.get("documentation"), "manuals"),
         pre: [],
         post: [],
+        exclude: [/ARE/],
         excludeFiles: [/README\.md/]
       }),
       "/customize/": [
@@ -284,7 +285,7 @@ function loadSidebarFrom({
       let title = child.replace(/_/g, " ");
       let link = `${e.title}/${child}`;
 
-      console.log(`title: ${title}, link: ${link}`);
+      //console.log(`title: ${title}, link: ${link}`);
 
       return [link, capitalize(title)];
     });
