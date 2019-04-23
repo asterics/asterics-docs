@@ -20,6 +20,7 @@ module.exports = {
   port: config.get("port"),
   base: config.get("endpoint"),
   dest: config.get("destination"),
+  theme: "@asterics/docs",
   shouldPrefetch: (file, type) => {
     //console.log("shouldPrefetch: " + file);
     return true;
@@ -67,7 +68,6 @@ module.exports = {
     //     }
     //   }
     // });
-    
   },
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
