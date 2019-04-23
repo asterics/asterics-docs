@@ -37,6 +37,20 @@ module.exports = {
       return file === "hero.jpg";
     }
   },
+  extendMarkdown: md => {
+    md.set({ breaks: true, typographer: true, linkify: true });
+    md.use(require("markdown-it-sub"));
+    md.use(require("markdown-it-sup"));
+    md.use(require("markdown-it-footnote"));
+    md.use(require("markdown-it-deflist"));
+    md.use(require("markdown-it-abbr"));
+    md.use(require("markdown-it-emoji"));
+    md.use(require("markdown-it-mark"));
+    md.use(require("markdown-it-ins"));
+    md.use(require("markdown-it-checkbox"));
+    md.use(require("markdown-it-imsize"), { autofill: true });
+    md.use(require("markdown-it-kbd"));
+  },
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
   head: [
@@ -133,8 +147,7 @@ module.exports = {
             items: [
               {
                 text: "WebACS",
-                link:
-                  "https://webacs.asterics.eu/index.html?areBaseURI=https://localhost:8083"
+                link: "https://webacs.asterics.eu/index.html?areBaseURI=https://localhost:8083"
               },
               {
                 text: "AsTeRICS Grid",
@@ -167,10 +180,7 @@ module.exports = {
       }
     ],
     sidebar: {
-      "/get-started/": [
-        ["Overview.md", "Overview"],
-        ["Installation.md", "Installation"]
-      ],
+      "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
       "/develop/": [
         {
           title: "Get Started",
@@ -184,11 +194,7 @@ module.exports = {
         {
           title: "Plugin",
           collapsable: false,
-          children: [
-            ["Plugin-Introduction", "Introduction"],
-            ["Plugin-Tutorial", "Tutorial"],
-            ["Plugin-Advanced", "Advanced"]
-          ]
+          children: [["Plugin-Introduction", "Introduction"], ["Plugin-Tutorial", "Tutorial"], ["Plugin-Advanced", "Advanced"]]
         },
         {
           title: "ARE Middleware",
@@ -204,11 +210,7 @@ module.exports = {
         {
           title: "ARE Remote APIs",
           collapsable: false,
-          children: [
-            ["ARE-Webserver.md", "Webserver"],
-            ["REST-API", "REST"],
-            ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
-          ]
+          children: [["ARE-Webserver.md", "Webserver"], ["REST-API", "REST"], ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]]
         },
 
         {
@@ -217,10 +219,7 @@ module.exports = {
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
-            [
-              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
-              "Tutorial"
-            ],
+            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         }
@@ -238,10 +237,7 @@ module.exports = {
         exclude: [/ARE/],
         excludeFiles: [/README\.md/]
       }),
-      "/customize/": [
-        ["Model-Customization", "Model Customization"],
-        ["Model-Creation", "Model Creation"]
-      ]
+      "/customize/": [["Model-Customization", "Model Customization"], ["Model-Creation", "Model Creation"]]
     },
     sidebarDepth: 3,
     diplayAllHeaders: true, // default
@@ -249,19 +245,11 @@ module.exports = {
   }
 };
 
-function loadSidebarFrom({
-  location,
-  pre,
-  post,
-  exclude = [],
-  excludeFiles = []
-}) {
+function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e =>
-    fs.statSync(path.join(location, e)).isDirectory()
-  );
+  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
