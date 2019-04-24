@@ -69,7 +69,7 @@ module.exports = {
     //   }
     // });
   },
-  title: "AsTeRICS",
+  title: "Home",
   description: "Customized Low-Cost Assistive Technologies",
   head: [
     [
@@ -134,6 +134,7 @@ module.exports = {
   themeConfig: {
     // repo: "asterics/AsTeRICS",
     // repoLabel: "Repository!",
+    // logo: "/assets/img/asterics-logo.svg",
     docsRepo: "asterics/AsTeRICS",
     docsDir: "Documentation/docs",
     docsBranch: "master",
