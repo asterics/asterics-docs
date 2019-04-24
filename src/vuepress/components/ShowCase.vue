@@ -10,7 +10,7 @@
             <b-card-title>
               <a :href="sanitize(link)">{{title}}</a>
             </b-card-title>
-            <b-card-text>This is a wider card with supporting text as a natural lead-in to additional content.</b-card-text>
+            <b-card-text>{{description}}</b-card-text>
           </b-card-body>
         </b-col>
       </b-row>
@@ -32,6 +32,11 @@ export default {
     title: {
       type: String,
       default: "Title"
+    },
+    description: {
+      type: String,
+      default:
+        "This is a wider card with supporting text as a natural lead-in to additional content."
     },
     link: {
       type: String,
