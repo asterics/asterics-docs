@@ -288,14 +288,16 @@ export default {
   },
   methods: {
     start() {
-      if (this.bowser) {
-        const browser = this.bowser.getParser(window.navigator.userAgent);
-        const browserName = browser.getBrowserName();
+      if (this.bowser !== null) {
+        try {
+          const browser = this.bowser.getParser(window.navigator.userAgent);
+          const browserName = browser.getBrowserName();
 
-        if (browser.getBrowserName() === "Firefox") {
-          // this.makeToast();
-          this.$bvToast.show(this.startInfo.id);
-        }
+          if (browser.getBrowserName() === "Firefox") {
+            // this.makeToast();
+            this.$bvToast.show(this.startInfo.id);
+          }
+        } catch (err) {}
       }
 
       this.setURI(`${this.settings.are}/rest/`);
@@ -363,10 +365,15 @@ export default {
   created() {
     this.generateId();
     // detect ARE default connection
-    if (this.bowser) {
-      const browser = this.bowser.getParser(window.navigator.userAgent);
-      if (browser.getBrowserName() === "Firefox") {
-        this.securedConnection = true;
+    if (this.bowser !== null) {
+      console.log(this.bowser);
+      try {
+        const browser = this.bowser.getParser(window.navigator.userAgent);
+        if (browser.getBrowserName() === "Firefox") {
+          this.securedConnection = true;
+        }
+      } catch (err) {
+        this.securedConnection = false;
       }
     }
 
