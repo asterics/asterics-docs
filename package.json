@@ -68,7 +68,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "animate.css": "^3.7.0",
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.14",
+    "bootstrap-vue": "^2.0.0-rc.19",
     "bowser": "^2.3.0",
     "vuex": "^3.1.0"
   }

@@ -166,11 +166,12 @@ module.exports = {
             items: [
               {
                 text: "WebACS",
-                link: "https://webacs.asterics.eu/index.html?areBaseURI=https://localhost:8083"
+                link:
+                  "http://asterics.github.io/WebACS/?helpUrlPath=https://asterics-web.studyathome.technikum-wien.at/docs&areBaseURI=http://127.0.0.1:8081"
               },
               {
                 text: "AsTeRICS Grid",
-                link: "https://grid.asterics.eu"
+                link: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid"
               }
             ]
           },
