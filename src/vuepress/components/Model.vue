@@ -172,7 +172,6 @@
 </template>
 
 <script>
-import bowser from "bowser";
 import ModelInput from "./ModelInput.vue";
 export default {
   components: {
@@ -252,6 +251,7 @@ export default {
       },
       deploy: null,
       setURI: null,
+      bowser: null,
       showSettings: false,
       securedConnection: false,
       showInfo: false
@@ -286,7 +286,7 @@ export default {
   },
   methods: {
     start() {
-      const browser = bowser.getParser(window.navigator.userAgent);
+      const browser = this.bowser.getParser(window.navigator.userAgent);
       const browserName = browser.getBrowserName();
 
       if (browser.getBrowserName() === "Firefox") {
@@ -354,13 +354,18 @@ export default {
         this.setURI = setBaseURI;
       }
     );
+    import("bowser").then(bowser => {
+      this.bowser = bowser;
+    });
   },
   created() {
     this.generateId();
     // detect ARE default connection
-    const browser = bowser.getParser(window.navigator.userAgent);
-    if (browser.getBrowserName() === "Firefox") {
-      this.securedConnection = true;
+    if (this.bowser) {
+      const browser = this.bowser.getParser(window.navigator.userAgent);
+      if (browser.getBrowserName() === "Firefox") {
+        this.securedConnection = true;
+      }
     }
 
     // load defaults
