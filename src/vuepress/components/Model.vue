@@ -39,7 +39,7 @@
                   </b-badge>
 
                   <b-badge
-                    v-for="sys in os.split(' ')"
+                    v-for="sys in os"
                     :key="sys"
                     variant="info"
                     role="button"
@@ -199,8 +199,10 @@ export default {
       }
     },
     os: {
-      type: String,
-      default: ""
+      type: Array,
+      default: function() {
+        return [];
+      }
     },
     image: {
       type: String,
@@ -286,23 +288,23 @@ export default {
   },
   methods: {
     start() {
-      const browser = this.bowser.getParser(window.navigator.userAgent);
-      const browserName = browser.getBrowserName();
+      if (this.bowser) {
+        const browser = this.bowser.getParser(window.navigator.userAgent);
+        const browserName = browser.getBrowserName();
 
-      if (browser.getBrowserName() === "Firefox") {
-        // this.makeToast();
-        this.$bvToast.show(this.startInfo.id);
+        if (browser.getBrowserName() === "Firefox") {
+          // this.makeToast();
+          this.$bvToast.show(this.startInfo.id);
+        }
       }
 
       this.setURI(`${this.settings.are}/rest/`);
       this.deploy(
         this.model,
         (data, status) => {
-          console.log(browserName);
           console.log(data, status);
         },
         (status, error) => {
-          console.log(browserName);
           console.log(error, status);
         }
       );
