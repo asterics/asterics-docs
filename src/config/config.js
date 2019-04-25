@@ -1,314 +1,152 @@
 const path = require("path");
-const fs = require("fs");
 
-const configPath = path.join(process.cwd(), "src/config/config.js");
-const indexPath = path.join(process.cwd(), "src/config/index.json");
+const envConfigPath = path.join(process.cwd(), "src/config/.env"),
+  schemaPath = path.join(process.cwd(), "src/config/schema.json");
 
-const index = require(indexPath);
-const config = require(configPath);
+require("dotenv").config({ path: envConfigPath });
+const convict = require("convict"),
+  config = convict(schemaPath),
+  { getReferenceInPath } = require("@asterics/git-tools");
 
-console.log(`host: ${config.get("host")}`);
-console.log(`port: ${config.get("port")}`);
-console.log(`endpoint: ${config.get("endpoint")}`);
-console.log(`destination: ${config.get("destination")}`);
-console.log(`version: ${config.get("version")}`);
-console.log(`latest: ${config.get("latest")}`);
-
-module.exports = {
-  devtools: true,
-  host: config.get("host"),
-  port: config.get("port"),
-  base: config.get("endpoint"),
-  dest: config.get("destination"),
-  theme: "@asterics/docs",
-  shouldPrefetch: (file, type) => {
-    //console.log("shouldPrefetch: " + file);
-    return true;
-    // type is inferred based on the file extension.
-    // https://fetch.spec.whatwg.org/#concept-request-destination
-    if (type === "script" || type === "style") {
-      return true;
+/* Load configuration */
+config.load({
+  // versions: ["2.3", "2.5", "2.6", "2.7", "2.8", "3.0", "3.0.1", "pre-3.1"],
+  versions: ["pre-3.1"],
+  submodules: [
+    {
+      name: "AsTeRICS",
+      location: "src/external/asterics",
+      reference: getReferenceInPath(process.cwd(), "AsTeRICS"),
+      branch: "master"
+    },
+    {
+      name: "WebACS",
+      location: "src/external/webacs",
+      reference: getReferenceInPath(process.cwd(), "WebACS"),
+      branch: "master"
+    },
+    {
+      name: "AsTeRICS.wiki",
+      location: "src/external/asterics-wiki",
+      reference: getReferenceInPath(process.cwd(), "AsTeRICS.wiki"),
+      branch: "master"
     }
-    if (type === "font") {
-      // only preload woff2 fonts
-      return /\.woff2$/.test(file);
-    }
-    if (type === "image") {
-      // only preload important images
-      return file === "hero.jpg";
-    }
-  },
-  extendMarkdown: md => {
-    md.set({ breaks: true, typographer: true, linkify: true });
-    md.use(require("markdown-it-sub"));
-    md.use(require("markdown-it-sup"));
-    md.use(require("markdown-it-footnote"));
-    md.use(require("markdown-it-deflist"));
-    md.use(require("markdown-it-abbr"));
-    md.use(require("markdown-it-emoji"));
-    // md.use(require("markdown-it-mark"));
-
-    md.use(require("markdown-it-checkbox"));
-    md.use(require("markdown-it-imsize"), { autofill: true });
-    md.use(require("markdown-it-kbd"));
-    // md.use(require("markdown-it-container"), "spoiler", {
-    //   validate: function(params) {
-    //     return params.trim().match(/^spoiler\s+(.*)$/);
-    //   },
-
-    //   render: function(tokens, idx) {
-    //     var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/);
-
-    //     if (tokens[idx].nesting === 1) {
-    //       // opening tag
-    //       return '<details style="background-color: red;"><summary>' + md.utils.escapeHtml(m[1]) + "</summary>\n";
-    //     } else {
-    //       // closing tag
-    //       return "</details>\n";
-    //     }
-    //   }
-    // });
-  },
-  title: "Home",
-  description: "Customized Low-Cost Assistive Technologies",
-  head: [
-    [
-      "link",
-      {
-        rel: "apple-touch-icon",
-        sizes: "180x180",
-        href: "/favicon/apple-touch-icon.png"
-      }
-    ],
-    [
-      "link",
-      {
-        rel: "icon",
-        type: "image/png",
-        sizes: "32x32",
-        href: "/favicon/favicon-32x32.png"
-      }
-    ],
-    [
-      "link",
-      {
-        rel: "icon",
-        type: "image/png",
-        sizes: "16x16",
-        href: "/favicon/favicon-16x16.png"
-      }
-    ],
-    ["link", { rel: "manifest", href: "/favicon/site.webmanifest" }],
-    [
-      "link",
-      {
-        rel: "mask-icon",
-        href: "/favicon/safari-pinned-tab.svg",
-        color: "#0ea1f2"
-      }
-    ],
-    ["meta", { name: "apple-mobile-web-app-title", content: "AsTeRICS Docs" }],
-    ["meta", { name: "application-name", content: "AsTeRICS Docs" }],
-    ["meta", { name: "msapplication-TileColor", content: "#2b5797" }],
-    ["meta", { name: "theme-color", content: "#ffffff" }]
   ],
-  plugins: {
-    "@vuepress/medium-zoom": {
-      selector: ".content img"
-    },
-    "@vuepress/back-to-top": {},
-    // "@vuepress/pwa": {
-    //   serviceWorker: true,
-    //   popupComponent: "AstericsSWUpdatePopup",
-    //   updatePopup: {
-    //     message: "New content is available.",
-    //     buttonText: "Refresh"
-    //   }
-    // },
-    "@vuepress/active-header-links": {
-      sidebarLinkSelector: ".sidebar-link",
-      headerAnchorSelector: ".header-anchor",
-      headerTopOffset: 120
-    }
-  },
-  themeConfig: {
-    // repo: "asterics/AsTeRICS",
-    // repoLabel: "Repository!",
-    // logo: "/assets/img/asterics-logo.svg",
-    docsRepo: "asterics/AsTeRICS",
-    docsDir: "Documentation/docs",
-    docsBranch: "master",
-    editLinks: false,
-    store: {
-      latest: config.get("latest"),
-      version: config.get("version"),
-      routes: index["routes"]
-    },
-    nav: [
-      { text: "Get Started", link: "/get-started/" },
-      { text: "Solutions", link: "/solutions/" },
-      { text: "Customize", link: "/customize/" },
-      { text: "Plugins", link: "/plugins/" },
-      { text: "Develop", link: "/develop/" },
-      {
-        text: "More",
-        items: [
-          {
-            text: "Manuals",
-            items: [
-              { text: "WebACS", link: "/manuals/WebACS/" },
-              { text: "ACS", link: "/manuals/ACS/" }
-              // { text: "ARE", link: "/manuals/ARE/" }
-            ]
-          },
-          {
-            text: "Applications",
-            items: [
-              {
-                text: "WebACS",
-                link: "https://webacs.asterics.eu/index.html?areBaseURI=https://localhost:8083"
-              },
-              {
-                text: "AsTeRICS Grid",
-                link: "https://grid.asterics.eu"
-              }
-            ]
-          },
-          {
-            text: "Get Involved",
-            items: [
-              { text: "About us", link: "/get-involved/About-us" },
-              { text: "Contact", link: "/get-involved/Contact" },
-              { text: "Contribute", link: "/get-involved/Contribute" },
-              { text: "Legal Notice", link: "/get-involved/Legal-Notice" }
-            ]
-          }
-        ]
-      },
-      // as long as there is just 1 language, comment it out
-      // {
-      //   text: "Languages",
-      //   items: [
-      //     { text: "English", link: "/" },
-      //     { text: "German", link: "/de/" }
-      //   ]
-      // },
-      {
-        text: "Download",
-        link: "https://github.com/asterics/AsTeRICS/releases/latest"
+  dependencies: [
+    {
+      repository: "AsTeRICS",
+      source: "Documentation/docs",
+      destination: config.get("documentation"),
+      recurse: true,
+      filter: /\.(md|jpg|png|svg)$/i,
+      process: [{ rule: /\.(md|jpg|png|svg)$/i, apply: "copy" }],
+      postprocess: [{ rule: /\.md$/i, apply: ["edit-link"] }],
+      map: {
+        "2.3": "pre-3.1",
+        "2.5": "pre-3.1",
+        "2.6": "pre-3.1",
+        "2.7": "pre-3.1",
+        "2.8": "pre-3.1",
+        "3.0": "pre-3.1",
+        "3.0.1": "pre-3.1",
+        "3.1": "pre-3.1"
       }
-    ],
-    sidebar: {
-      "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
-      "/develop/": [
-        {
-          title: "Get Started",
-          collapsable: false,
-          children: [
-            ["Development-Environment", "Development Environment"]
-            //   ["Coding-Guidelines", "Coding Guidelines"],
-            //   ["Unit-Testing", "Unit Testing"]
-          ]
-        },
-        {
-          title: "Plugin",
-          collapsable: false,
-          children: [["Plugin-Introduction", "Introduction"], ["Plugin-Tutorial", "Tutorial"], ["Plugin-Advanced", "Advanced"]]
-        },
-        {
-          title: "ARE Middleware",
-          collapsable: false,
-          children: [
-            ["ARE.md", "Advanced"]
-            // ["asterics-wiki/api/Resource Handling.md", "Resource handling"],
-            // ["ARE-Keyboard-Mouse-Services.md", "Keyboard/Mouse"],
-            // ["asterics-wiki/coding_instructions/JavaCV.md", "Computer Vision"],
-            // ["ARE-HW-Interfacing-CIM.md", "Interfacing Peripherals (CIM)"]
-          ]
-        },
-        {
-          title: "ARE Remote APIs",
-          collapsable: false,
-          children: [["ARE-Webserver.md", "Webserver"], ["REST-API", "REST"], ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]]
-        },
-
-        {
-          title: "AT Solution",
-          collapsable: false,
-          children: [
-            ["AT_solution_development", "Introduction"],
-            ["AT-solution-demos", "Demos"],
-            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
-            ["APE", "AsTeRICS Packaging Environment (APE)"]
-          ]
-        }
-      ],
-      "/plugins/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "plugins"),
-        pre: [],
-        post: [],
-        excludeFiles: [/README\.md/]
-      }),
-      "/manuals/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "manuals"),
-        pre: [],
-        post: [],
-        exclude: [/ARE/],
-        excludeFiles: [/README\.md/]
-      }),
-      "/customize/": [["Model-Customization", "Model Customization"], ["Model-Creation", "Model Creation"]]
     },
-    sidebarDepth: 3,
-    diplayAllHeaders: true, // default
-    lastUpdated: "Last Updated"
-  }
-};
+    // {
+    //   repository: "AsTeRICS",
+    //   source: "Documentation/ACS-Help/HTML/ACS",
+    //   destination: config.get("documentation") + "/manuals/ACS",
+    //   recurse: true,
+    //   filter: /\.(html?|jpg|png|svg)$/i,
+    //   process: [
+    //     { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
+    //   ],
+    //   postprocess: [
+    //     {
+    //       rule: /\.md$/i,
+    //       apply: [
+    //         "remove-first-two-lines",
+    //         "correct-image-path",
+    //         "lowercase-image",
+    //         "edit-link"
+    //       ]
+    //     }
+    //   ],
+    //   map: {}
+    // },
+    // {
+    //   repository: "AsTeRICS",
+    //   source: "Documentation/ACS-Help/HTML/ARE",
+    //   destination: config.get("documentation") + "/manuals/ARE",
+    //   recurse: true,
+    //   filter: /\.(html?|jpg|png|svg)$/i,
+    //   process: [
+    //     { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
+    //   ],
+    //   postprocess: [
+    //     {
+    //       rule: /\.md$/i,
+    //       apply: [
+    //         "remove-first-two-lines",
+    //         "correct-image-path",
+    //         "lowercase-image",
+    //         "edit-link"
+    //       ]
+    //     }
+    //   ],
+    //   map: {}
+    // },
+    // {
+    //   repository: "AsTeRICS",
+    //   source: "Documentation/ACS-Help/HTML/Plugins",
+    //   destination: config.get("documentation") + "/plugins",
+    //   recurse: true,
+    //   filter: /\.(html?|jpg|png|svg)$/i,
+    //   process: [
+    //     { rule: /\.html?$/i, apply: "html-to-markdown-copy" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "lowercase" },
+    //     { rule: /\.(jpg|png|svg)$/i, apply: "copy" }
+    //   ],
+    //   postprocess: [
+    //     {
+    //       rule: /\.md$/i,
+    //       apply: [
+    //         "remove-first-two-lines",
+    //         "correct-image-path",
+    //         "lowercase-image",
+    //         "edit-link"
+    //       ]
+    //     }
+    //   ],
+    //   map: {}
+    // },
+    // {
+    //   repository: "AsTeRICS",
+    //   source: "Documentation/docs/.vuepress/public",
+    //   destination: "public",
+    //   recurse: true,
+    //   process: [{ rule: /\.*$/i, apply: "copy" }],
+    //   postprocess: [],
+    //   map: {}
+    // },
+    {
+      repository: "WebACS",
+      source: "docs/manuals/WebACS",
+      destination: config.get("documentation") + "/manuals/WebACS",
+      recurse: true,
+      filter: /\.(md|jpg|png|svg)$/i,
+      process: [{ rule: /\.(md|jpg|png|svg)$/i, apply: "copy" }],
+      postprocess: [{ rule: /\.md$/i, apply: ["edit-link"] }],
+      map: {}
+    }
+  ]
+});
 
-function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] }) {
-  let sidebar = fs.readdirSync(location);
+/* Validate configuration with loaded schema */
+config.validate({ allowed: "warn" });
 
-  /* First level only directories */
-  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
-
-  /* Filter exclude */
-  sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
-
-  /* Map to first level entry */
-  sidebar = sidebar.map(e => ({ title: e, collapsable: true, children: null })); //abs: path.join(location, e) }));
-
-  /* Append children for each entry */
-  sidebar.forEach(e => {
-    let children = fs.readdirSync(path.join(location, e.title));
-
-    /* Filter markdown files, only */
-    children = children.filter(child => /.*md$/.test(child));
-
-    /* Remove file extension */
-    children = children.filter(e => !excludeFiles.some(r => r.test(e)));
-    children = children.map(child => child.replace(/\.md$/, ""));
-
-    /* Construct arrays containing link and title */
-    children = children.map(child => {
-      let title = child.replace(/_/g, " ");
-      let link = `${e.title}/${child}`;
-
-      //console.log(`title: ${title}, link: ${link}`);
-
-      return [link, capitalize(title)];
-    });
-
-    e.children = children;
-  });
-
-  /* Capitalize titles */
-  sidebar = sidebar.map(e => ({ ...e, title: capitalize(e.title) }));
-
-  return [...pre, ...sidebar, ...post];
-}
-
-function capitalize(words) {
-  return words
-    .split(" ")
-    .map(word => [word.charAt(0).toUpperCase(), word.slice(1)].join(""))
-    .join(" ");
-}
+module.exports = config;
