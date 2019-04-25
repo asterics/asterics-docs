@@ -51,11 +51,11 @@ export default {
     return {};
   },
   methods: {
-    order: function(left) {
+    order: function(placeLeft) {
       if (typeof screen !== "undefined" && screen.width < 789) {
         return left ? 1 : 2;
       } else {
-        if (left) {
+        if (placeLeft) {
           return this.left ? 1 : 2;
         } else {
           return this.left ? 2 : 1;
@@ -69,6 +69,16 @@ export default {
         return url;
       }
     }
+  },
+  created() {
+    console.log("created");
+    const browser = bowser.getParser(window.navigator.userAgent);
+    console.log(`The current browser name is ${browser.getBrowserName()}`);
+  },
+  mounted() {
+    console.log("mounted");
+    const browser = bowser.getParser(window.navigator.userAgent);
+    console.log(`The current browser name is ${browser.getBrowserName()}`);
   }
 };
 </script>

@@ -33,9 +33,9 @@
   },
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
-    "@asterics/vuepress-theme-docs": "file:./src/vuepress/themes/vuepress-theme-docs",
     "@asterics/git-tools": "^0.1.7",
     "@asterics/node-utils": "^0.2.0",
+    "@asterics/vuepress-theme-docs": "file:./src/vuepress/themes/vuepress-theme-docs",
     "@vuepress/plugin-active-header-links": "^1.0.0-alpha.47",
     "@vuepress/plugin-back-to-top": "^1.0.0-alpha.47",
     "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.47",
@@ -69,6 +69,7 @@
     "animate.css": "^3.7.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.14",
+    "bowser": "^2.3.0",
     "vuex": "^3.1.0"
   }
 }

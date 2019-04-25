@@ -22,7 +22,9 @@
     shelljs "^0.8.3"
 
 "@asterics/vuepress-theme-docs@file:./src/vuepress/themes/vuepress-theme-docs":
-  version "1.0.0"
+  version "1.0.0-alpha.0"
+  dependencies:
+    "@vuepress/theme-default" "^1.0.0-alpha.47"
 
 "@asterics/web-app-utils@^0.0.1-alpha.3":
   version "0.0.1-alpha.3"
@@ -1682,6 +1684,11 @@ bootstrap@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.3.1.tgz#280ca8f610504d99d7b6b4bfc4b68cec601704ac"
   integrity sha512-rXqOmH1VilAt2DyPzluTi2blhk17bO7ef+zLLPlWvG494pDxcM234pJ8wTc/6R40UWizAIIMgxjvxZg5kmsbag==
+
+bowser@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/bowser/-/bowser-2.3.0.tgz#624798388d972ec9639eb877629bca8ffd415c60"
+  integrity sha512-qaw3ZkREeT6HfHxr7HAY/xUdJHiopfktBUrctrlaLImZZYW82mLvHd04Fg3Zp/mnbt+YrMfX7PImZIL+65h7FQ==
 
 brace-expansion@^1.1.7:
   version "1.1.11"

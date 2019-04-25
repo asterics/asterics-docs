@@ -26,20 +26,26 @@
                   {{tag.text}}
                 </b-badge>
                 <b-badge
+                  v-for="disability in disabilties"
+                  :href="sanitize(disability.href)"
+                  :key="disability.text"
                   variant="info"
                   role="button"
                   class="model-title-tag-accessibility model-text"
                 >
                   <font-awesome-icon icon="universal-access"/>
-                  <span>Audio</span>
+                  <span>{{disability.text}}</span>
                 </b-badge>
-                <b-badge variant="info" role="button" class="model-title-tag-platform model-text">
+
+                <b-badge
+                  v-for="sys in os"
+                  :key="sys"
+                  variant="info"
+                  role="button"
+                  class="model-title-tag-platform model-text"
+                >
                   <font-awesome-icon icon="universal-access"/>
-                  <span>Windows</span>
-                </b-badge>
-                <b-badge variant="info" role="button" class="model-title-tag-platform model-text">
-                  <font-awesome-icon icon="universal-access"/>
-                  <span>Linux</span>
+                  <span>{{sys}}</span>
                 </b-badge>
               </div>
             </b-card-title>
@@ -57,10 +63,17 @@
         </b-col>
       </b-row>
       <div slot="footer">
+        <!-- <transition
+          appear
+          enter-class
+          enter-active-class="animated slideInUp"
+          leave-class
+          leave-active-class="animated slideOutDown"
+        >-->
         <div class="model-btn-container">
           <b-button
             v-if="modelType === 'model' || modelType === 'none'"
-            class="model-btn"
+            class="model-btn model-btn-text"
             variant="primary"
             :disabled="modelType === 'none'"
             v-b-tooltip.hover.bottom="'Make sure the ARE is up and running!'"
@@ -95,101 +108,45 @@
             <font-awesome-icon class="fa-2x" icon="cog"/>
           </b-button>
         </div>
-        <transition
-          appear
-          enter-class
-          enter-active-class="animated slideInUp"
-          leave-class
-          leave-active-class="animated slideOutDown"
-        >
-          <div v-if="showSettings">
-            <b-input-group class="mt-3" v-if="modelType === 'model'">
-              <b-input-group-text slot="prepend" class="model-setting-label">ARE</b-input-group-text>
-              <b-form-input v-model="settings.are"></b-form-input>
-              <b-input-group-append>
-                <b-button
-                  @click="clearSetting('are')"
-                  variant="primary"
-                  v-b-tooltip.hover.bottom="'Clear'"
-                >
-                  <font-awesome-icon icon="backspace"/>
-                </b-button>
-                <b-button
-                  @click="loadDefault('are')"
-                  variant="info"
-                  v-b-tooltip.hover.bottom="'Reset'"
-                >
-                  <font-awesome-icon icon="sync"/>
-                </b-button>
-                <b-button id="tooltip-are" variant="info" style="border-radius: 0px 5px 5px 0px;">
-                  <font-awesome-icon icon="question-circle"/>
-                </b-button>
-                <b-tooltip target="tooltip-are" placement="right">
-                  <strong>URL</strong> to use for
-                  <em style="white-space: nowrap;">AsTeRICS ARE</em>.
-                </b-tooltip>
-              </b-input-group-append>
-            </b-input-group>
-            <b-input-group class="mt-3" v-if="modelType === 'model'">
-              <b-input-group-text slot="prepend" class="model-setting-label">WebACS</b-input-group-text>
-              <b-form-input v-model="settings.webacs"></b-form-input>
-              <b-input-group-append>
-                <b-button
-                  @click="clearSetting('webacs')"
-                  variant="primary"
-                  v-b-tooltip.hover.bottom="'Clear'"
-                >
-                  <font-awesome-icon icon="backspace"/>
-                </b-button>
-                <b-button
-                  @click="loadDefault('webacs')"
-                  variant="info"
-                  v-b-tooltip.hover.bottom="'Reset'"
-                >
-                  <font-awesome-icon icon="sync"/>
-                </b-button>
-                <b-button
-                  id="tooltip-webacs"
-                  style="border-radius: 0px 5px 5px 0px;"
-                  variant="info"
-                >
-                  <font-awesome-icon icon="question-circle"/>
-                </b-button>
-                <b-tooltip target="tooltip-webacs" placement="right">
-                  <strong>URL</strong> to use for
-                  <em style="white-space: nowrap;">AsTeRICS WebACS</em>.
-                </b-tooltip>
-              </b-input-group-append>
-            </b-input-group>
-            <b-input-group class="mt-3" v-if="modelType === 'grid'">
-              <b-input-group-text slot="prepend" class="model-setting-label">Grid</b-input-group-text>
-              <b-form-input v-model="settings.grid"></b-form-input>
-              <b-input-group-append>
-                <b-button
-                  @click="clearSetting('grid')"
-                  variant="primary"
-                  v-b-tooltip.hover.bottom="'Clear'"
-                >
-                  <font-awesome-icon icon="backspace"/>
-                </b-button>
-                <b-button
-                  @click="loadDefault('grid')"
-                  variant="info"
-                  v-b-tooltip.hover.bottom="'Reset'"
-                >
-                  <font-awesome-icon icon="sync"/>
-                </b-button>
-                <b-button id="tooltip-grid" variant="info" style="border-radius: 0px 5px 5px 0px;">
-                  <font-awesome-icon icon="question-circle"/>
-                </b-button>
-                <b-tooltip target="tooltip-grid" placement="right">
-                  <strong>URL</strong> to use for
-                  <em style="white-space: nowrap;">AsTeRICS Grid</em>.
-                </b-tooltip>
-              </b-input-group-append>
-            </b-input-group>
-          </div>
-        </transition>
+        <div v-if="showSettings">
+          <ModelInput
+            v-if="modelType === 'model'"
+            label="ARE"
+            v-model="settings.are"
+            :defaults="settings.default.are"
+          >
+            <template slot="tool-tip">
+              <strong>URL</strong> to use for
+              <em style="white-space: nowrap;">AsTeRICS ARE</em>.
+            </template>
+          </ModelInput>
+
+          <ModelInput
+            v-if="modelType === 'model'"
+            label="WebACS"
+            v-model="settings.webacs"
+            :defaults="settings.default.webacs"
+          >
+            <template slot="tool-tip">
+              <strong>URL</strong> to use for
+              <em style="white-space: nowrap;">AsTeRICS WebACS</em>.
+            </template>
+          </ModelInput>
+
+          <ModelInput
+            v-if="modelType === 'grid'"
+            label="Grid"
+            v-model="settings.grid"
+            :defaults="settings.default.grid"
+          >
+            <template slot="tool-tip">
+              <strong>URL</strong> to use for
+              <em style="white-space: nowrap;">AsTeRICS Grid</em>.
+            </template>
+          </ModelInput>
+        </div>
+
+        <!-- </transition> -->
       </div>
     </b-card>
     <br>
@@ -197,7 +154,12 @@
 </template>
 
 <script>
+import bowser from "bowser";
+import ModelInput from "./ModelInput.vue";
 export default {
+  components: {
+    ModelInput
+  },
   props: {
     title: {
       type: String,
@@ -208,6 +170,18 @@ export default {
       default: "Short Description"
     },
     tags: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
+    disabilties: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
+    os: {
       type: Array,
       default: function() {
         return [];
@@ -243,8 +217,9 @@ export default {
     return {
       settings: {
         default: {
-          webacs: "http://asterics.github.io/AsTeRICS/webapps/WebACS",
-          are: "https://[::1]:8081",
+          webacs: "http://asterics.github.io/WebACS/",
+          are: "http://127.0.0.1:8081",
+          areSecure: "https://127.0.0.1:8083",
           grid: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid"
         },
         webacs: null,
@@ -256,7 +231,9 @@ export default {
       },
       deploy: null,
       setURI: null,
-      showSettings: false
+      showSettings: false,
+      securedConnection: false,
+      showInfo: false
     };
   },
   computed: {
@@ -276,7 +253,7 @@ export default {
     },
     edit: function() {
       if (this.model !== "") {
-        return `${this.settings.webacs}/?areBaseURI=${
+        return `${this.settings.webacs}?areBaseURI=${
           this.settings.are
         }&openFile=${this.model}`;
       } else {
@@ -286,13 +263,17 @@ export default {
   },
   methods: {
     start() {
+      const browser = bowser.getParser(window.navigator.userAgent);
+      const browserName = browser.getBrowserName();
       this.setURI(`${this.settings.are}/rest/`);
       this.deploy(
         this.model,
         (data, status) => {
+          console.log(browserName);
           console.log(data, status);
         },
         (status, error) => {
+          console.log(browserName);
           console.log(error, status);
         }
       );
@@ -323,8 +304,18 @@ export default {
     );
   },
   created() {
-    for (let setting in this.settings.default) {
+    // detect ARE default connection
+    const browser = bowser.getParser(window.navigator.userAgent);
+    if (browser.getBrowserName() === "Firefox") {
+      this.securedConnection = true;
+    }
+
+    // load defaults
+    for (let setting of ["webacs", "are", "grid"]) {
       this.settings[setting] = this.settings.default[setting];
+    }
+    if (this.securedConnection) {
+      this.settings["are"] = this.settings.default["areSecure"];
     }
   }
 };
@@ -335,9 +326,20 @@ export default {
   // max-width: 800px;
 }
 
+.model-settings-input {
+  min-height: 40px;
+}
+
 .model-setting-label {
-  min-width: 100px;
+  min-width: 140px;
   font-weight: bold;
+}
+
+.model-settings-label-img {
+  display: inline-block;
+  width: 24px;
+  background-color: lighten(gray, 50%);
+  margin-right: 8px;
 }
 
 /* .model-text {
@@ -345,14 +347,18 @@ export default {
   font-size: 1.5vw;
 } */
 
-@media screen and (max-width: 625px) {
-  .model-text {
-    font-size: 3vw;
-  }
-  .model-btn-text {
-    font-size: 4vw;
-  }
-}
+// @media screen and (max-width: 625px) {
+//   .model-text {
+//     font-size: 3vw;
+//   }
+//   .model-btn-text {
+//     font-size: 4vw;
+//   }
+
+//   .model-btn-icon {
+//     width: 25%;
+//   }
+// }
 
 .model-btn-container {
   display: flex;
@@ -376,14 +382,14 @@ export default {
 
 .model-btn-icon {
   min-height: 100%;
-  width: 8%;
+  width: 15%;
 }
 
 .model-btn-text {
   text-decoration: none !important;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 525px) {
   .model-btn {
     width: 100%;
     margin: 5px 0 5px 0;
@@ -391,9 +397,33 @@ export default {
 
   .model-btn-settings {
     width: 100%;
+    // width: 70px;
+    // display: flex;
+    // align-content: center;
     margin: 5px 0 5px 0;
   }
 }
+
+// @media screen and (max-width: 825px) {
+//   .model-btn-settings {
+//     width: 70px;
+//   }
+// }
+
+// #model
+//   > div
+//   > div.card-footer
+//   > div
+//   > div
+//   > button.btn.model-btn-icon.model-btn-text.model-btn-settings.btn-info {
+//   width: 70px;
+// }
+
+// @media screen and (max-width: 650px) {
+//   .model-btn-icon {
+//     width: 15%;
+//   }
+// }
 
 .model-btn:focus {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
