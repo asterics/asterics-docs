@@ -69,16 +69,6 @@ export default {
         return url;
       }
     }
-  },
-  created() {
-    console.log("created");
-    const browser = bowser.getParser(window.navigator.userAgent);
-    console.log(`The current browser name is ${browser.getBrowserName()}`);
-  },
-  mounted() {
-    console.log("mounted");
-    const browser = bowser.getParser(window.navigator.userAgent);
-    console.log(`The current browser name is ${browser.getBrowserName()}`);
   }
 };
 </script>
