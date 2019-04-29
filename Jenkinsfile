@@ -168,6 +168,7 @@ pipeline {
               rm -rf gh-pages/*
               cp -r dist-deploy-io/* gh-pages/
               cd gh-pages
+              echo "www.asterics.eu" >> ./CNAME
               git add .
               git add -u .
               git -c user.name='Mr. Jenkins' -c user.email='studyathome@technikum-wien.at' commit -m 'docs: release asterics-docs'
