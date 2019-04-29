@@ -10,7 +10,7 @@
         slot="lead"
       >Create Customized Low-Cost Assistive Technologies for People with Disabilities.</template>
 
-      <p>Are you disabled and want to use a computer to work, browse the internet or write E-Mails?</p>
+      <p>Are you looking for special solutions to use a computer, control your environment or play games?</p>
       <!-- <b-button-group> -->
       <b-button variant="primary" href="./solutions/">Discover Solutions</b-button>
       <b-button variant="info" href="get-started/">Get Started</b-button>
