@@ -272,8 +272,22 @@ module.exports = {
         excludeFiles: [/README\.md/]
       }),
       "/customize/": [
-        ["Model-Customization", "Model Customization"],
-        ["Model-Creation", "Model Creation"]
+        {
+          title: "Model",
+          collapsable: false,
+          children: [
+            ["Model-Customization", "Customization"],
+            ["Model-Creation", "Creation"]
+          ]
+        },
+        {
+          title: "AsTeRICS Grid",
+          collapsable: false,
+          children: [
+            ["Grid-Customization", "Customization"],
+            ["Grid-Creation", "Creation"]
+          ]
+        }
       ]
     },
     sidebarDepth: 3,
