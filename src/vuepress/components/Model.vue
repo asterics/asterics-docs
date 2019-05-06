@@ -139,28 +139,13 @@
               </template>
             </ModelInput>
           </div>
-
-          <!-- </transition> -->
         </div>
       </b-card>
-      <!-- <div class="p-3 bg-secondary progress-bar-striped" style="min-height: 150px;">
-      <b-toast
-        title="BootstrapVue"
-        visible
-        static
-        no-auto-hide
-      >Hello, world! This is a toast message.</b-toast>
-      </div>-->
-      <br>
     </div>
     <b-toast :id="startInfo.id" variant="info" solid>
       <div slot="toast-title" class="d-flex flex-grow-1 align-items-baseline">
         <b-img blank blank-color="#42b983" class="mr-2" width="12" height="12"></b-img>
-        <strong class="mr-auto">Notice!</strong>
-        <!-- <small class="text-muted mr-2">42 seconds ago</small> -->
-        <!-- `Firefox users will have to add an exception this website. Make sure the ARE is running and open link ${
-          this.areWebserver
-        } and add an exception.`,-->
+        <strong class="mr-auto">Firefox User Information</strong>
       </div>
       <div>
         Firefox users will have to add an exception for this website. Make sure the
@@ -172,6 +157,7 @@
 </template>
 
 <script>
+import bowser from "bowser";
 import ModelInput from "./ModelInput.vue";
 export default {
   components: {
@@ -253,7 +239,7 @@ export default {
       },
       deploy: null,
       setURI: null,
-      bowser: null,
+      browser: "default",
       showSettings: false,
       securedConnection: false,
       showInfo: false
@@ -288,16 +274,9 @@ export default {
   },
   methods: {
     start() {
-      if (this.bowser !== null) {
-        try {
-          const browser = this.bowser.getParser(window.navigator.userAgent);
-          const browserName = browser.getBrowserName();
-
-          if (browser.getBrowserName() === "Firefox") {
-            // this.makeToast();
-            this.$bvToast.show(this.startInfo.id);
-          }
-        } catch (err) {}
+      if (this.browser === "Firefox") {
+        // this.makeToast();
+        this.$bvToast.show(this.startInfo.id);
       }
 
       this.setURI(`${this.settings.are}/rest/`);
@@ -343,7 +322,6 @@ export default {
     },
     generateId() {
       // generate "unique" ids
-      // console.log(this.startInfo.id)
       this.startInfo.id =
         "_" +
         Math.random()
@@ -358,41 +336,30 @@ export default {
         this.setURI = setBaseURI;
       }
     );
-    import("bowser").then(bowser => {
-      this.bowser = bowser;
-    });
+  },
+  beforeMount() {
+    this.browser = bowser
+      .getParser(window.navigator.userAgent)
+      .getBrowserName();
+
+    if (this.browser === "Firefox") {
+      this.securedConnection = true;
+      this.settings["are"] = this.settings.default["areSecure"];
+    } else {
+      this.securedConnection = false;
+    }
   },
   created() {
     this.generateId();
-    // detect ARE default connection
-    if (this.bowser !== null) {
-      console.log(this.bowser);
-      try {
-        const browser = this.bowser.getParser(window.navigator.userAgent);
-        if (browser.getBrowserName() === "Firefox") {
-          this.securedConnection = true;
-        }
-      } catch (err) {
-        this.securedConnection = false;
-      }
-    }
-
     // load defaults
     for (let setting of ["webacs", "are", "grid"]) {
       this.settings[setting] = this.settings.default[setting];
-    }
-    if (this.securedConnection) {
-      this.settings["are"] = this.settings.default["areSecure"];
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-#model {
-  // max-width: 800px;
-}
-
 .model-settings-input {
   min-height: 40px;
 }
@@ -408,24 +375,6 @@ export default {
   background-color: lighten(gray, 50%);
   margin-right: 8px;
 }
-
-/* .model-text {
-  transition: font-size 1s ease-out;
-  font-size: 1.5vw;
-} */
-
-// @media screen and (max-width: 625px) {
-//   .model-text {
-//     font-size: 3vw;
-//   }
-//   .model-btn-text {
-//     font-size: 4vw;
-//   }
-
-//   .model-btn-icon {
-//     width: 25%;
-//   }
-// }
 
 .model-btn-container {
   display: flex;
@@ -464,33 +413,9 @@ export default {
 
   .model-btn-settings {
     width: 100%;
-    // width: 70px;
-    // display: flex;
-    // align-content: center;
     margin: 5px 0 5px 0;
   }
 }
-
-// @media screen and (max-width: 825px) {
-//   .model-btn-settings {
-//     width: 70px;
-//   }
-// }
-
-// #model
-//   > div
-//   > div.card-footer
-//   > div
-//   > div
-//   > button.btn.model-btn-icon.model-btn-text.model-btn-settings.btn-info {
-//   width: 70px;
-// }
-
-// @media screen and (max-width: 650px) {
-//   .model-btn-icon {
-//     width: 15%;
-//   }
-// }
 
 .model-btn:focus {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
@@ -512,11 +437,6 @@ export default {
   flex-wrap: wrap;
   margin: auto;
   align-content: stretch;
-}
-
-.model-title-elements {
-  /* border: 1px solid black; */
-  /* display: flex; */
 }
 
 .model-title-tag {
