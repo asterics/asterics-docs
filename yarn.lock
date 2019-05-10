@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@asterics/are-rest@0.0.1-alpha.0":
-  version "0.0.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@asterics/are-rest/-/are-rest-0.0.1-alpha.0.tgz#a3eb96095e35d2218085301969ed4768e224182c"
-  integrity sha512-Y3SpRDB5J+NYY0P0aDE5quSuEt5K1Bs7gzQL6IGj202L7nh+Ng8jRdKVH5G5dyeWwZJVQRNPgxv3CZQyxWO7Dg==
+"@asterics/are-rest@0.0.1-alpha.4":
+  version "0.0.1-alpha.4"
+  resolved "https://registry.yarnpkg.com/@asterics/are-rest/-/are-rest-0.0.1-alpha.4.tgz#7a7a1523893814d912ba02585a50ebb4aef4cd81"
+  integrity sha512-jANSdgPs6/bu7c7oLYtGIywlip6Be9Bh5leCQbS/o2o4RYArzREsRcIxsPEApcz55ieoIYXpNxhP7K4xMlp8MA==
   dependencies:
     axios "^0.18.0"
 
@@ -26,15 +26,14 @@
   dependencies:
     "@vuepress/theme-default" "^1.0.0-alpha.47"
 
-"@asterics/web-app-utils@^0.0.1-alpha.3":
-  version "0.0.1-alpha.3"
-  resolved "https://registry.yarnpkg.com/@asterics/web-app-utils/-/web-app-utils-0.0.1-alpha.3.tgz#c81d837845592143d4b56da5695253dced0e516f"
-  integrity sha512-Xreie8fas95eZ/DtF30X3ZrlbjaklwGH/vuyGSYCJPKCHzhGDeB7QX2NIfniJDooQdVBn7nLHVJWeDotihn7Xg==
+"@asterics/web-app-utils@0.0.1-alpha.6":
+  version "0.0.1-alpha.6"
+  resolved "https://registry.yarnpkg.com/@asterics/web-app-utils/-/web-app-utils-0.0.1-alpha.6.tgz#34540a3e0231ccf3c3b3edf5544973b651735d21"
+  integrity sha512-rS6khZdB9VDd46AQbK8Lr2vc3nTTH45n2pzub/o+kzZci3B6j5rvIVbVEZ697wK8Uqt20tI7aJDlBlSRDnAz8g==
   dependencies:
-    "@asterics/are-rest" "0.0.1-alpha.0"
+    "@asterics/are-rest" "0.0.1-alpha.4"
     axios "^0.18.0"
     xmldom "^0.1.27"
-    xmlhttprequest "^1.8.0"
 
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
@@ -6251,6 +6250,11 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
+platform@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.5.tgz#fb6958c696e07e2918d2eeda0f0bc9448d733444"
+  integrity sha512-TuvHS8AOIZNAlE77WUDiR4rySV/VMptyMfcfeoMgs4P8apaZM3JrnbzBiixKUv+XR6i+BXrQh8WAnjaSPFO65Q==
+
 pn@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
@@ -9188,11 +9192,6 @@ xmldom@^0.1.27:
   version "0.1.27"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
   integrity sha1-1QH5ezvbQDr4757MIFcxh6rawOk=
-
-xmlhttprequest@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/xmlhttprequest/-/xmlhttprequest-1.8.0.tgz#67fe075c5c24fef39f9d65f5f7b7fe75171968fc"
-  integrity sha1-Z/4HXFwk/vOfnWX197f+dRcZaPw=
 
 xregexp@4.0.0:
   version "4.0.0"

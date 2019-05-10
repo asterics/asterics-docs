@@ -142,15 +142,16 @@
         </div>
       </b-card>
     </div>
-    <b-toast :id="startInfo.id" variant="info" solid>
+    <b-toast auto-hide-delay="5000" :id="startInfo.id" variant="info" solid>
       <div slot="toast-title" class="d-flex flex-grow-1 align-items-baseline">
         <b-img blank blank-color="#42b983" class="mr-2" width="12" height="12"></b-img>
         <strong class="mr-auto">Firefox User Information</strong>
       </div>
       <div>
-        Firefox users will have to add an exception for this website. Make sure the
-        <strong>ARE</strong> is running and open link
-        <a :href="areWebserver" target="_blank">{{areWebserver}}</a> and add an exception.
+        Please make sure that you've added an exception for the ARE webserver.
+        Make sure an
+        <strong>ARE</strong> is running and open the link
+        <a :href="areWebserver" target="_blank">{{areWebserver}}</a> to add an exception for the local webserver.
       </div>
     </b-toast>
   </div>
@@ -158,6 +159,7 @@
 
 <script>
 import bowser from "bowser";
+import platform from "platform";
 import ModelInput from "./ModelInput.vue";
 export default {
   components: {
@@ -225,10 +227,10 @@ export default {
       areWebserver: "https://127.0.0.1:8083/",
       settings: {
         default: {
-          webacs: "http://asterics.github.io/WebACS/",
+          webacs: "http://webacs.asterics.eu/",
           are: "http://127.0.0.1:8081",
           areSecure: "https://127.0.0.1:8083",
-          grid: "https://asterics.github.io/AsTeRICS-Grid/package/static/#grid"
+          grid: "https://grid.asterics.eu/package/static/#grid"
         },
         webacs: null,
         are: null,
@@ -262,9 +264,7 @@ export default {
     },
     edit: function() {
       if (this.model !== "") {
-        return `${
-          this.settings.webacs
-        }?helpUrlPath=https://asterics-web.studyathome.technikum-wien.at/docs&areBaseURI=${
+        return `${this.settings.webacs}?areBaseURI=${
           this.settings.are
         }&openFile=${this.model}`;
       } else {
@@ -274,33 +274,37 @@ export default {
   },
   methods: {
     start() {
-      if (this.browser === "Firefox") {
-        // this.makeToast();
-        this.$bvToast.show(this.startInfo.id);
-      }
-
       this.setURI(`${this.settings.are}/rest/`);
       this.deploy(
         this.model,
+        {},
         (data, status) => {
           console.log(data, status);
         },
         (status, error) => {
-          console.log(error, status);
-        }
-      );
-    },
-    makeToast() {
-      this.toastCount++;
-      this.$bvToast.toast(
-        `Firefox users will have to add an exception this website. Make sure the ARE is running and open link ${
-          this.areWebserver
-        } and add an exception.`,
-        {
-          title: "Firefox User Information",
-          autoHideDelay: 5000,
-          appendToast: false,
-          variant: "info"
+          console.log(status, error);
+
+          if (error == "Internal Server Error") {
+            if (!this.os.includes(platform.os.family)) {
+              this.$bvToast.toast(
+                `This plugin is only supported on: ${this.os.join(" ")}. ${
+                  platform.os.family
+                } is unfortunately not included.`,
+                {
+                  title: "Unsupported Operating System",
+                  variant: "info",
+                  solid: true
+                }
+              );
+            }
+          }
+
+          if (error == "Network Error") {
+            if (this.browser === "Firefox") {
+              // this.makeToast();
+              this.$bvToast.show(this.startInfo.id);
+            }
+          }
         }
       );
     },
@@ -360,127 +364,3 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.model-settings-input {
-  min-height: 40px;
-}
-
-.model-setting-label {
-  min-width: 140px;
-  font-weight: bold;
-}
-
-.model-settings-label-img {
-  display: inline-block;
-  width: 24px;
-  background-color: lighten(gray, 50%);
-  margin-right: 8px;
-}
-
-.model-btn-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.btn {
-  cursor: pointer;
-}
-
-.model-btn {
-  font-size: 1.4rem;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  flex-grow: 1;
-  margin: 0px 2px;
-  border-radius: 5px;
-  box-shadow: 3px 2px 2px 0px #ccc;
-}
-
-.model-btn-icon {
-  min-height: 100%;
-  width: 15%;
-}
-
-.model-btn-text {
-  text-decoration: none !important;
-}
-
-@media screen and (max-width: 525px) {
-  .model-btn {
-    width: 100%;
-    margin: 5px 0 5px 0;
-  }
-
-  .model-btn-settings {
-    width: 100%;
-    margin: 5px 0 5px 0;
-  }
-}
-
-.model-btn:focus {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(44, 106, 128, 0.5);
-}
-
-.model-btn:disabled {
-  border: 1px solid darken(gray, 10%);
-  background-color: darken(gray, 10%);
-}
-
-.model-btn-settings:disabled {
-  border: 1px solid darken(gray, 10%);
-  background-color: darken(gray, 10%);
-}
-
-.model-title-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  align-content: stretch;
-}
-
-.model-title-tag {
-  margin-right: 0.5rem;
-  text-decoration: none;
-  box-shadow: 1px 1px 2px 0px gray;
-  padding-bottom: 6px;
-  background-color: transparent;
-  color: darken(#42b983, 20%);
-  border: 0.15rem solid #42b983;
-}
-
-.model-title-tag-accessibility {
-  margin-right: 0.5rem;
-  text-decoration: none;
-  box-shadow: 1px 1px 2px 0px gray;
-  padding-bottom: 6px;
-  background-color: transparent;
-  color: rgb(182, 105, 4);
-  border: 0.15rem solid rgb(182, 105, 4);
-}
-
-.model-title-tag-platform {
-  margin-right: 0.5rem;
-  text-decoration: none;
-  box-shadow: 1px 1px 2px 0px gray;
-  padding-bottom: 6px;
-  background-color: transparent;
-  color: rgb(76, 7, 122);
-  border: 0.15rem solid rgb(76, 7, 122);
-}
-
-.model-title {
-  padding-right: 1rem;
-}
-
-.model-img {
-  object-fit: cover;
-  object-position: 0 100%;
-  height: 100%;
-}
-
-.model-docs {
-  text-decoration: none;
-  box-shadow: 1px 1px 2px 0px gray;
-}
-</style>
