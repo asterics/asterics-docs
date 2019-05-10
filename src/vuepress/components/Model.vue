@@ -364,3 +364,108 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.model-settings-input {
+  min-height: 40px;
+}
+.model-setting-label {
+  min-width: 140px;
+  font-weight: bold;
+}
+.model-settings-label-img {
+  display: inline-block;
+  width: 24px;
+  background-color: lighten(gray, 50%);
+  margin-right: 8px;
+}
+.model-btn-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.btn {
+  cursor: pointer;
+}
+.model-btn {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  flex-grow: 1;
+  margin: 0px 2px;
+  border-radius: 5px;
+  box-shadow: 3px 2px 2px 0px #ccc;
+}
+.model-btn-icon {
+  min-height: 100%;
+  width: 15%;
+}
+.model-btn-text {
+  text-decoration: none !important;
+}
+@media screen and (max-width: 525px) {
+  .model-btn {
+    width: 100%;
+    margin: 5px 0 5px 0;
+  }
+  .model-btn-settings {
+    width: 100%;
+    margin: 5px 0 5px 0;
+  }
+}
+.model-btn:focus {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(44, 106, 128, 0.5);
+}
+.model-btn:disabled {
+  border: 1px solid darken(gray, 10%);
+  background-color: darken(gray, 10%);
+}
+.model-btn-settings:disabled {
+  border: 1px solid darken(gray, 10%);
+  background-color: darken(gray, 10%);
+}
+.model-title-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  align-content: stretch;
+}
+.model-title-tag {
+  margin-right: 0.5rem;
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px gray;
+  padding-bottom: 6px;
+  background-color: transparent;
+  color: darken(#42b983, 20%);
+  border: 0.15rem solid #42b983;
+}
+.model-title-tag-accessibility {
+  margin-right: 0.5rem;
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px gray;
+  padding-bottom: 6px;
+  background-color: transparent;
+  color: rgb(182, 105, 4);
+  border: 0.15rem solid rgb(182, 105, 4);
+}
+.model-title-tag-platform {
+  margin-right: 0.5rem;
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px gray;
+  padding-bottom: 6px;
+  background-color: transparent;
+  color: rgb(76, 7, 122);
+  border: 0.15rem solid rgb(76, 7, 122);
+}
+.model-title {
+  padding-right: 1rem;
+}
+.model-img {
+  object-fit: cover;
+  object-position: 0 100%;
+  height: 100%;
+}
+.model-docs {
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px gray;
+}
+</style>
