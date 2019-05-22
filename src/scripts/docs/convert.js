@@ -3,7 +3,7 @@ import fs from "fs";
 import { join, relative, dirname, basename, isAbsolute, parse } from "path";
 import { cursorTo, moveCursor, clearScreenDown } from "readline";
 import { mkdirp } from "@asterics/node-utils";
-import { warn, info, error, success } from "./shared";
+import { warn, info, error, success } from "./shared/logger.js";
 import converter from "./shared/converter";
 
 const configPath = join(process.cwd(), "src/config/config.js");

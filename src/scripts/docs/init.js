@@ -3,7 +3,7 @@ import { moveCursor, clearScreenDown } from "readline";
 import { sync as rmdir } from "rimraf";
 import chalk from "chalk";
 import { ensureGitSubmodule } from "@asterics/git-tools";
-import { info, success } from "./shared";
+import { info, success } from "./shared/logger.js";
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
