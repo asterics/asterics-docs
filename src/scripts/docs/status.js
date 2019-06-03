@@ -12,25 +12,6 @@ const ident = {
   file: 8
 };
 
-const statusOpts = {
-  staged: {
-    flags:
-      Status.OPT.INCLUDE_UNTRACKED |
-      Status.OPT.RECURSE_UNTRACKED_DIRS |
-      Status.OPT.RENAMES_HEAD_TO_INDEX |
-      Status.OPT.RENAMES_FROM_REWRITES,
-    show: Status.SHOW.INDEX_ONLY
-  },
-  unstaged: {
-    flags: Status.OPT.RENAMES_INDEX_TO_WORKDIR | Status.OPT.RENAMES_FROM_REWRITES,
-    show: Status.SHOW.WORKDIR_ONLY
-  },
-  untracked: {
-    flags: Status.OPT.INCLUDE_UNTRACKED | Status.OPT.RECURSE_UNTRACKED_DIRS,
-    show: Status.SHOW.WORKDIR_ONLY
-  }
-};
-
 export const command = "status";
 export const alias = ["s", "stat"];
 export const describe = "show the status of the asterics-docs project docs";
@@ -46,12 +27,6 @@ export const handler = async options => {
     const d = join(process.cwd(), config.get("documentation"));
     const r = await Repository.open(d);
 
-    // const status = await r.getStatusExt();
-    // if (status.length > 0) {
-    //   console.log("ALL");
-    //   printFiles(status);
-    // }
-
     await logStaged(r);
     await logUnstaged(r);
     await logUntracked(r);
@@ -59,34 +34,6 @@ export const handler = async options => {
     console.log(err);
   }
 };
-
-function printFiles(files) {
-  for (const file of files) {
-    printState(file);
-  }
-  console.log("\n");
-}
-
-function printState(file) {
-  let status = [];
-
-  if (file.isConflicted()) status.push("CONFLICTED");
-  if (file.isDeleted()) status.push("DELETED");
-  if (file.isIgnored()) status.push("IGNORED");
-  if (file.isModified()) status.push("MODIFIED");
-  if (file.isNew()) status.push("NEW");
-  if (file.isRenamed()) status.push("RENAMED");
-  if (file.isTypechange()) status.push("TYPECHANGE");
-
-  process.stdout.write(`${file.path()}: `);
-  for (const [i, state] of status.entries()) {
-    if (i === status.length - 1) {
-      process.stdout.write(`${state}.\n`);
-    } else {
-      process.stdout.write(`${state}, `);
-    }
-  }
-}
 
 async function logStaged(r) {
   const opts = {
@@ -98,9 +45,6 @@ async function logStaged(r) {
     show: Status.SHOW.INDEX_ONLY
   };
   const staged = await r.getStatusExt(opts);
-
-  // if (staged.length > 0) printFiles(staged);
-  // return;
 
   if (staged.length > 0) {
     process.stdout.write("Changes to be committed:\n");
@@ -135,9 +79,6 @@ async function logUnstaged(r) {
     show: Status.SHOW.WORKDIR_ONLY
   };
   const unstaged = await r.getStatusExt(opts);
-
-  // if (unstaged.length > 0) printFiles(unstaged);
-  // return;
 
   if (unstaged.length > 0) {
     process.stdout.write("Changes not staged for commit:\n");
@@ -176,10 +117,6 @@ async function logUntracked(r) {
   const status = await r.getStatusExt(opts);
   const untracked = status.filter(e => e.isNew());
   const prefix = " ".repeat(ident.file);
-  // const untracked = s.filter(e => e.indexToWorkdir()).filter(e => e.isNew());
-
-  // if (untracked.length > 0) printFiles(untracked);
-  // return;
 
   if (untracked.length > 0) {
     process.stdout.write("Untracked files:\n\n");
