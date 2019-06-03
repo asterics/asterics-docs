@@ -1,9 +1,7 @@
 import { join } from "path";
 import { getIndex } from "./shared/util.js";
 import { success, error, info } from "./shared/logger.js";
-import { Repository, Odb, Object } from "nodegit";
-import { DiffieHellman } from "crypto";
-import { relativeTimeRounding } from "moment";
+import { Repository, Odb, Object, Diff, Status } from "nodegit";
 
 let index;
 const configPath = join(process.cwd(), "src/config/config.js");
@@ -12,6 +10,25 @@ const config = require(configPath);
 const ident = {
   repository: 4,
   file: 8
+};
+
+const statusOpts = {
+  staged: {
+    flags:
+      Status.OPT.INCLUDE_UNTRACKED |
+      Status.OPT.RECURSE_UNTRACKED_DIRS |
+      Status.OPT.RENAMES_HEAD_TO_INDEX |
+      Status.OPT.RENAMES_FROM_REWRITES,
+    show: Status.SHOW.INDEX_ONLY
+  },
+  unstaged: {
+    flags: Status.OPT.RENAMES_INDEX_TO_WORKDIR | Status.OPT.RENAMES_FROM_REWRITES,
+    show: Status.SHOW.WORKDIR_ONLY
+  },
+  untracked: {
+    flags: Status.OPT.INCLUDE_UNTRACKED | Status.OPT.RECURSE_UNTRACKED_DIRS,
+    show: Status.SHOW.WORKDIR_ONLY
+  }
 };
 
 export const command = "status";
@@ -29,17 +46,11 @@ export const handler = async options => {
     const d = join(process.cwd(), config.get("documentation"));
     const r = await Repository.open(d);
 
-    await logStatus(r);
-    return;
-    // const s = await getStatus(r);
-    // const se = await r.getStatusExt();
-
-    // await logStatus(r);
-
-    // for (const f of s) {
-    //   log(success, f);
+    // const status = await r.getStatusExt();
+    // if (status.length > 0) {
+    //   console.log("ALL");
+    //   printFiles(status);
     // }
-    // return;
 
     await logStaged(r);
     await logUnstaged(r);
@@ -49,174 +60,202 @@ export const handler = async options => {
   }
 };
 
-async function logStatus(repository) {
-  const status = await repository.getStatusExt();
-  for (const file of status) {
-    const h2i = file.headToIndex();
-    const i2w = file.indexToWorkdir();
-    console.log(file.path());
+function printFiles(files) {
+  for (const file of files) {
+    printState(file);
+  }
+  console.log("\n");
+}
+
+function printState(file) {
+  let status = [];
+
+  if (file.isConflicted()) status.push("CONFLICTED");
+  if (file.isDeleted()) status.push("DELETED");
+  if (file.isIgnored()) status.push("IGNORED");
+  if (file.isModified()) status.push("MODIFIED");
+  if (file.isNew()) status.push("NEW");
+  if (file.isRenamed()) status.push("RENAMED");
+  if (file.isTypechange()) status.push("TYPECHANGE");
+
+  process.stdout.write(`${file.path()}: `);
+  for (const [i, state] of status.entries()) {
+    if (i === status.length - 1) {
+      process.stdout.write(`${state}.\n`);
+    } else {
+      process.stdout.write(`${state}, `);
+    }
   }
 }
 
-// async function logStatus(repository) {
-//   const s = await r.getStatusExt();
-// }
+async function logStaged(r) {
+  const opts = {
+    flags:
+      Status.OPT.INCLUDE_UNTRACKED |
+      Status.OPT.RECURSE_UNTRACKED_DIRS |
+      Status.OPT.RENAMES_HEAD_TO_INDEX |
+      Status.OPT.RENAMES_FROM_REWRITES,
+    show: Status.SHOW.INDEX_ONLY
+  };
+  const staged = await r.getStatusExt(opts);
 
-// async function getStatus(r) {
-//   let status = await r.getStatus();
-//   let statusExt = await r.getStatusExt();
+  // if (staged.length > 0) printFiles(staged);
+  // return;
 
-//   const renamed = statusExt.filter(e => e.isRenamed()).map(e => e.path());
-//   if (renamed.length === 0) {
-//     return status;
-//   }
-
-//   const deleted = status.filter(e => e.isDeleted()).map(e => e.path());
-//   const head = await r.getHeadCommit();
-//   for (let file of deleted) {
-//     const e = await head.getEntry(file);
-//     const o = e.oid();
-//     console.log(file, o);
-//   }
-
-//   for (let file of renamed) {
-//     const p = join(process.cwd(), config.get("documentation"), file);
-//     const oid = await Odb.hashfile(p, Object.TYPE.BLOB);
-//     const o = oid.tostrS();
-//     console.log(file, o);
-//   }
-
-//   /* Populate status with correct renamed entry */
-//   for (let file of status) {
-//     file.isRenamed = () => (renamed.includes(file.path()) ? true : false);
-//   }
-//   /* Find original file for each renamed one */
-//   for (let rename of renamed) {
-//     const head = r.getHeadCommit();
-//   }
-//   for (let file of status) {
-//     console.log(`${file.path()}: renamed (${file.isRenamed() ? "true" : "false"})`);
-//   }
-// }
-
-async function logStaged(repository) {
-  const status = await repository.getStatus();
-  const statusExt = await repository.getStatusExt();
-  const staged = statusExt.filter(e => e.inIndex());
   if (staged.length > 0) {
     process.stdout.write("Changes to be committed:\n");
 
-    for (const r of config.get("repositories")) {
-      if (hasCandidate(status.filter(e => e.inIndex()), r.name)) {
-        process.stdout.write(info("\n" + " ".repeat(ident.repository) + r.name, { end: "\n", label: "" }));
-
+    /* Log indexed files */
+    for (const repo of config.get("repositories")) {
+      if (hasCandidate(staged, repo.name)) {
+        process.stdout.write(info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" }));
         for (const file of staged) {
-          if (file.isRenamed()) {
-            await logRenamed(success, file, repository, r.name);
-          } else if (isInRepository(file, r.name)) {
+          if (isInRepository(file, repo.name)) {
             log(success, file);
           }
         }
       }
     }
 
-    process.stdout.write("\n" + " ".repeat(ident.repository) + "*".repeat(6) + "\n");
-    for (const file of staged.filter(e => e.isNew())) {
-      log(success, file);
-    }
-    process.stdout.write("\n");
-  }
-}
-
-async function logUnstaged(repository) {
-  const status = await repository.getStatus();
-  const unstaged = status.filter(e => !e.inIndex()).filter(e => !e.isNew());
-  if (unstaged.length > 0) {
-    process.stdout.write("Changes not staged for commit:\n");
-
-    for (const r of config.get("repositories")) {
-      if (hasCandidate(unstaged, r.name)) {
-        process.stdout.write(info("\n" + " ".repeat(ident.repository) + r.name, { end: "\n", label: "" }));
-
-        for (const file of unstaged) {
-          if (isInRepository(file, r.name)) {
-            log(error, file);
-          }
-        }
+    /* Log unindexed files */
+    const unindexed = staged.filter(e => e.isNew());
+    if (unindexed.length > 0) {
+      process.stdout.write(info("\n" + " ".repeat(ident.repository) + "*".repeat(6), { end: "\n", label: "" }));
+      for (const file of unindexed) {
+        log(success, file);
       }
     }
     process.stdout.write("\n");
   }
 }
 
-async function logUntracked(repository) {
-  const status = await repository.getStatus();
-  const untracked = status.filter(e => !e.inIndex()).filter(e => e.isNew());
+async function logUnstaged(r) {
+  const opts = {
+    flags: Status.OPT.RENAMES_HEAD_TO_INDEX | Status.OPT.RENAMES_INDEX_TO_WORKDIR | Status.OPT.RENAMES_FROM_REWRITES,
+    show: Status.SHOW.WORKDIR_ONLY
+  };
+  const unstaged = await r.getStatusExt(opts);
+
+  // if (unstaged.length > 0) printFiles(unstaged);
+  // return;
+
+  if (unstaged.length > 0) {
+    process.stdout.write("Changes not staged for commit:\n");
+
+    /* Log indexed files */
+    for (const repo of config.get("repositories")) {
+      if (hasCandidate(unstaged, repo.name, "indexToWorkdir")) {
+        process.stdout.write(info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" }));
+        for (const file of unstaged) {
+          if (isInRepository(file, repo.name, "indexToWorkdir")) {
+            log(error, file, "indexToWorkdir");
+          }
+        }
+      }
+    }
+
+    /* Log unindexed files */
+    if (hasUnindexed(unstaged)) {
+      process.stdout.write(info("\n" + " ".repeat(ident.repository) + "*".repeat(6), { end: "\n", label: "" }));
+      for (const file of unstaged) {
+        if (isInNoneRepository(file)) {
+          log(error, file);
+        }
+      }
+    }
+
+    process.stdout.write("\n");
+  }
+}
+
+async function logUntracked(r) {
+  const opts = {
+    flags: Status.OPT.INCLUDE_UNTRACKED | Status.OPT.RECURSE_UNTRACKED_DIRS,
+    show: Status.SHOW.WORKDIR_ONLY
+  };
+  const status = await r.getStatusExt(opts);
+  const untracked = status.filter(e => e.isNew());
+  const prefix = " ".repeat(ident.file);
+  // const untracked = s.filter(e => e.indexToWorkdir()).filter(e => e.isNew());
+
+  // if (untracked.length > 0) printFiles(untracked);
+  // return;
+
   if (untracked.length > 0) {
     process.stdout.write("Untracked files:\n\n");
     for (const file of untracked) {
-      process.stdout.write(error("", { end: "\n", label: " ".repeat(ident.file) + file.path() }));
+      process.stdout.write(error("", { end: "\n", label: prefix + `${file.path()}` }));
     }
     process.stdout.write("\n");
   }
 }
 
-function hasCandidate(status, repository) {
+function log(logger, file, changes = "headToIndex") {
+  const prefix = " ".repeat(ident.file);
+  if (file.isConflicted()) {
+    process.stdout.write(logger("", { end: "\n", label: prefix + `conflicted: ${file.path()}` }));
+  } else if (file.isDeleted()) {
+    process.stdout.write(logger("", { end: "\n", label: prefix + `deleted:    ${file.path()}` }));
+  } else if (file.isRenamed()) {
+    const oldFile = file[changes]().oldFile();
+    const newFile = file[changes]().newFile();
+    process.stdout.write(logger("", { end: "\n", label: prefix + `renamed:    ${oldFile.path()} -> ${newFile.path()}` }));
+  } else if (file.isIgnored()) {
+  } else if (file.isModified()) {
+    process.stdout.write(logger("", { end: "\n", label: prefix + `modified:   ${file.path()}` }));
+  } else if (file.isNew()) {
+    process.stdout.write(logger("", { end: "\n", label: prefix + `new file:   ${file.path()}` }));
+  } else {
+    process.stdout.write(logger("", { end: "\n", label: prefix + `unknown:    ${file.path()}` }));
+  }
+}
+
+function hasCandidate(status, repository, changes = "headToIndex") {
   let result = false;
   for (const file of status) {
-    if (isInRepository(file, repository)) {
+    if (isInRepository(file, repository, changes)) {
       result = true;
     }
   }
   return result;
 }
 
-function isInRepository(file, repository) {
-  const entry = index[file.path()];
+function hasUnindexed(status) {
+  for (const file of status) {
+    let found = false;
+
+    for (const repo of config.get("repositories")) {
+      if (hasCandidate([file], repo.name)) {
+        found = true;
+      }
+    }
+
+    if (!found) return true;
+  }
+
+  return false;
+}
+
+function isInRepository(file, repository, changes = "headToIndex") {
+  const path = file.isRenamed() ? getOldFilePath(file, changes) : file.path();
+  const entry = index[path];
   if (entry && entry.repository === repository) {
     return true;
   }
   return false;
 }
 
-function log(logger, f, identation = ident.file) {
-  const text = f.isConflicted()
-    ? "conflicted: "
-    : f.isDeleted()
-    ? "deleted:    "
-    : // : f.isIgnored()
-    // ? "ignored:      "
-    f.isModified()
-    ? "modified:   "
-    : f.isNew()
-    ? "new file:   "
-    : f.isRenamed()
-    ? "renamed:    "
-    : // : f.isTypechange()
-      // ? "typechange: "
-      "other:      ";
-  const label = " ".repeat(identation) + text;
-  process.stdout.write(logger("", { end: "\n", label: `${label}${f.path()}` }));
-}
-
-async function logRenamed(logger, f, repository, submodule, identation = ident.file) {
-  const status = await repository.getStatus();
-  const head = await repository.getHeadCommit();
-  const path = join(process.cwd(), config.get("documentation"), f.path());
-  const newOid = await Odb.hashfile(path, Object.TYPE.BLOB);
-
-  /* Search for a deleted file with same oid */
-  for (const file of status.filter(e => e.isDeleted())) {
-    const e = await head.getEntry(file.path());
-    if (newOid.equal(e.id())) {
-      if (isInRepository(file, submodule)) {
-        const label = " ".repeat(identation) + "renamed:    ";
-        process.stdout.write(logger("", { end: "\n", label: `${label}${file.path()} -> ${f.path()}` }));
-      }
-      return;
+function isInNoneRepository(file) {
+  for (const repo of config.get("repositories")) {
+    if (isInRepository(file, repo.name)) {
+      return false;
     }
   }
+  return true;
+}
 
-  /* Default log if same oid was not found */
-  // log(logger, f);
+function getOldFilePath(file, changes = "headToIndex") {
+  return file[changes]()
+    .oldFile()
+    .path();
 }
