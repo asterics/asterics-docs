@@ -28,6 +28,9 @@ export const handler = async options => {
     index = await getIndex(false);
     const d = join(process.cwd(), config.get("documentation"));
     const r = await Repository.open(d);
+
+    await logStatus(r);
+    return;
     // const s = await getStatus(r);
     // const se = await r.getStatusExt();
 
@@ -45,6 +48,15 @@ export const handler = async options => {
     console.log(err);
   }
 };
+
+async function logStatus(repository) {
+  const status = await repository.getStatusExt();
+  for (const file of status) {
+    const h2i = file.headToIndex();
+    const i2w = file.indexToWorkdir();
+    console.log(file.path());
+  }
+}
 
 // async function logStatus(repository) {
 //   const s = await r.getStatusExt();
