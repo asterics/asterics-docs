@@ -1,8 +1,8 @@
 import fs from "fs";
-import { join, relative, dirname } from "path";
-import { Repository } from "nodegit";
+import { join, dirname } from "path";
+import { Repository, Signature } from "nodegit";
 import { mkdirp } from "@asterics/node-utils";
-import { getIndex } from "./index.js";
+import { getIndex } from "./shared/util.js";
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
@@ -26,19 +26,21 @@ export const builder = yargs => {
 };
 export const handler = async options => {
   options.verbose = config.get("verbose") || options.verbose;
+  // TODO: test if documentation folder exists
   const index = await getIndex(options);
-  await load(index, options);
+  await loadIndex(index, options);
+  await createRepository();
 };
 
-async function load(index, options) {
+async function loadIndex(index, options) {
   for (let destination in index) {
     const { repository, source, branch, hash } = index[destination];
-    const { location } = config.get("submodules").find(s => s.name === repository);
+    const { location } = config.get("repositories").find(s => s.name === repository);
     const d = join(process.cwd(), config.get("documentation"), destination);
 
     try {
       const r = await Repository.open(join(process.cwd(), location));
-      const c = await r.getBranchCommit(`origin/${branch}`);
+      const c = await r.getBranchCommit(branch);
       const e = await c.getEntry(source);
       const b = await e.getBlob();
 
@@ -56,7 +58,24 @@ async function load(index, options) {
         fs.writeFileSync(d, b.toString());
       }
     } catch (err) {
-      console.log("error", location, source, filter);
+      console.log("error", err, location, source);
     }
+  }
+}
+
+async function createRepository() {
+  try {
+    const r = await Repository.init(join(process.cwd(), config.get("documentation")), 0);
+
+    const index = await r.refreshIndex();
+    await index.addAll();
+    await index.write();
+    const oid = await index.writeTree();
+
+    const author = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
+    const committer = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
+    await r.createCommit("HEAD", author, committer, "Initial commit", oid, []);
+  } catch (err) {
+    console.log(err);
   }
 }
