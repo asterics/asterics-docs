@@ -10,3 +10,4 @@ export const warn = logger(chalk.yellow, "warning");
 export const info = logger(chalk.blue, "info");
 export const error = logger(chalk.red, "error");
 export const success = logger(chalk.green, "success");
+export const message = logger(chalk.white, "message");
