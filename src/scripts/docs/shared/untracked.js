@@ -1,4 +1,4 @@
-import { createInterface, cursorTo, clearScreenDown } from "readline";
+import { createInterface, cursorTo, clearScreenDown, moveCursor } from "readline";
 import { join } from "path";
 import { Repository, Reference, Status } from "nodegit";
 import { success, error, message } from "./logger.js";
@@ -6,9 +6,12 @@ import { success, error, message } from "./logger.js";
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
 const repositories = config.get("repositories");
-let index = null;
 
-export async function hasUntracked(index) {
+/* Module variables */
+let index = null;
+let lineCount = 0;
+
+export async function hasUntracked(options, index) {
   const untracked = await getUntracked();
   for (const file of untracked) {
     const entry = index[file.path()];
@@ -19,8 +22,8 @@ export async function hasUntracked(index) {
   return false;
 }
 
-export async function resolveUntracked(i) {
-  index = i;
+export async function resolveUntracked(options, idx) {
+  index = idx;
   const selection = await getSelection();
   await getRepository(selection);
   // await getBranch(selection);
@@ -66,6 +69,9 @@ function ask(query) {
     output: process.stdout
   });
 
+  const lines = query.split("\n");
+  lineCount += Math.max(1, lines.length - 1);
+
   return new Promise(resolve =>
     rl.question(query, answer => {
       rl.close();
@@ -75,9 +81,25 @@ function ask(query) {
 }
 
 /* Log */
-function resetScreen() {
+function resetCompleteScreen() {
   cursorTo(process.stdout, 0, 0);
   clearScreenDown(process.stdout);
+}
+
+function resetScreen() {
+  cursorTo(process.stdout, 0);
+  if (lineCount > 0) {
+    moveCursor(process.stdout, 0, -lineCount);
+    clearScreenDown(process.stdout);
+    lineCount = 0;
+  }
+}
+
+function writeScreen(text) {
+  const lines = text.split("\n");
+  const count = lines.length - 1;
+  lineCount += count;
+  process.stdout.write(text);
 }
 
 async function getLogLengths(status) {
@@ -143,10 +165,10 @@ function printHeader(lengths) {
   let h = 0;
   for (const column in lengths.columns) {
     const l = lengths.columns[column] + lengths.ident;
-    process.stdout.write(`${column}${" ".repeat(l - column.length)}`);
+    writeScreen(`${column}${" ".repeat(l - column.length)}`);
     h += l;
   }
-  process.stdout.write("\n" + "-".repeat(h) + "\n");
+  writeScreen("\n" + "-".repeat(h) + "\n");
 }
 
 function printUntrackedFile(pos, lengths, file, selection = "") {
@@ -170,39 +192,39 @@ function printUntrackedFile(pos, lengths, file, selection = "") {
     const idx = parseInt(selection);
     if (idx > 0 && pos + 1 === idx) {
       logger = error;
-      // process.stdout.write(error("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
+      // writeScreen(error("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
     } else {
       if (valid) {
         logger = success;
-        // process.stdout.write(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
+        // writeScreen(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
       }
-      // process.stdout.write(`${i}${path}${repo}${branch}${destination}\n`);
+      // writeScreen(`${i}${path}${repo}${branch}${destination}\n`);
     }
   } else {
     try {
       const r = new RegExp(`^${selection}`);
       if (selection !== "" && r.exec(file.path())) {
         logger = error;
-        // process.stdout.write(error("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
+        // writeScreen(error("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
       } else {
         if (valid) {
           logger = success;
-          // process.stdout.write(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
+          // writeScreen(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
         }
-        // process.stdout.write(`${i}${path}${repo}${branch}${destination}\n`);
+        // writeScreen(`${i}${path}${repo}${branch}${destination}\n`);
       }
     } catch (err) {
       if (valid) {
         logger = success;
       }
       // if (valid) {
-      //   process.stdout.write(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
+      //   writeScreen(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
       // } else {
-      //   process.stdout.write(`${i}${path}${repo}${branch}${destination}\n`);
+      //   writeScreen(`${i}${path}${repo}${branch}${destination}\n`);
       // }
     }
   }
-  process.stdout.write(logger("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
+  writeScreen(logger("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
 }
 
 async function logUntracked(selection = "") {
@@ -212,7 +234,7 @@ async function logUntracked(selection = "") {
   for (const [i, file] of untracked.entries()) {
     printUntrackedFile(i, lengths, file, selection);
   }
-  process.stdout.write("\n");
+  writeScreen("\n");
 }
 
 /* Selection */
@@ -235,8 +257,8 @@ async function getSelection() {
 
 async function promptSelection(selection) {
   resetScreen();
-  process.stdout.write("Select entries. Status of untracked files:\n");
-  process.stdout.write("  (use the index number or a regular expression)\n\n");
+  writeScreen("Select entries. Status of untracked files:\n");
+  writeScreen("  (use the index number or a regular expression)\n\n");
   await logUntracked(selection);
 }
 
@@ -282,11 +304,11 @@ async function getRepository(selection) {
 }
 
 function promptRepository() {
-  process.stdout.write("Select repository:\n");
-  process.stdout.write("  (use the index number or a regular expression)\n\n");
+  writeScreen("Select repository:\n");
+  writeScreen("  (use the index number or a regular expression)\n\n");
   for (const [i, repo] of repositories.entries()) {
     const idx = `${i + 1}`;
-    process.stdout.write(" ".repeat(4 - idx.length) + idx + ": " + repo.name + "\n");
+    writeScreen(" ".repeat(4 - idx.length) + idx + ": " + repo.name + "\n");
   }
 }
 

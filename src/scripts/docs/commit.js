@@ -35,8 +35,8 @@ export const handler = async options => {
     }
 
     /* Verify if any new files were created */
-    while (await hasUntracked(index)) {
-      await resolveUntracked(index);
+    while (await hasUntracked(options, index)) {
+      await resolveUntracked(options, index);
     }
 
     /* Commit all changes to local repository */
