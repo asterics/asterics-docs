@@ -1,7 +1,8 @@
 import { createInterface, cursorTo, clearScreenDown } from "readline";
-import { join } from "path";
+import { join, isAbsolute, extname, dirname, normalize } from "path";
 import { Repository, Reference, Status } from "nodegit";
 import { cursorSavePosition, cursorRestorePosition } from "ansi-escapes";
+import { table, getBorderCharacters } from "table";
 import { success, error, message } from "./logger.js";
 
 const configPath = join(process.cwd(), "src/config/config.js");
@@ -25,9 +26,8 @@ export async function resolveUntracked(i) {
   index = i;
   const selection = await getSelection();
   await getRepository(selection);
-  // await getBranch(selection);
-  // await getDestination(selection);
-  await ask("");
+  await getBranch(selection);
+  await getSource(selection);
 }
 
 /* Util */
@@ -62,62 +62,45 @@ async function filterUntrackedSelection(selection) {
   return [];
 }
 
-function ask(query) {
-  const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  return new Promise(resolve =>
-    rl.question(query, answer => {
-      rl.close();
-      resolve(answer);
-    })
-  );
-}
-
-/* Log */
-function resetScreen() {
-  // cursorTo(process.stdout, 0, 0);
-  process.stdout.write(cursorRestorePosition);
-  clearScreenDown(process.stdout);
-}
-
-async function getLogLengths(status) {
-  let lengths = {
-    ident: 4,
-    columns: {
-      "#": 5,
-      path: 15,
-      repository: 10,
-      branch: 10,
-      destination: 15
+function getTableOptions(header, entries) {
+  let opts = {
+    columns: {},
+    border: {
+      topBody: "",
+      topJoin: "",
+      topLeft: "",
+      topRight: "",
+      bottomBody: "",
+      bottomJoin: "",
+      bottomLeft: "",
+      bottomRight: "",
+      bodyLeft: "",
+      bodyRight: "",
+      bodyJoin: "",
+      joinBody: "-",
+      joinLeft: "",
+      joinRight: "",
+      joinJoin: ""
+    },
+    drawHorizontalLine: (index, size) => {
+      return index === 1;
     }
   };
+  for (let i = 0; i < header.length; i++) {
+    const min = i === 0 ? 4 : 20;
+    const alignment = i === 0 ? "right" : "left";
+    opts.columns[i] = {
+      alignment: alignment,
+      width: getColumnWidth(entries, i, min)
+    };
+  }
+  return opts;
+}
 
-  /* Get number of status entries */
-  const i = String(status.length).length;
-  lengths.columns["#"] = Math.max(lengths.columns["#"], i);
-
-  /* Get length of longest path */
-  const p = Math.max(...status.map(e => e.path().length));
-  lengths.columns.path = Math.max(lengths.columns.path, p);
-
-  /* Get length of longest repository name */
-  const r = Math.max(...repositories.map(e => e.name.length));
-  lengths.columns.repository = Math.max(lengths.columns.repository, r);
-
-  /* Get length of longest branch name */
-  const branches = await getBranches();
-  const b = Math.max(...branches.map(e => e.length));
-  lengths.columns.branch = Math.max(lengths.columns.branch, b);
-
-  /* Get length of longest destination */
-  const destinations = status.filter(e => index[e.path()]).map(e => index[e.path()]);
-  const d = Math.max(...destinations);
-  lengths.columns.destination = Math.max(lengths.columns.destination, d);
-
-  return lengths;
+function getColumnWidth(entries, idx, min) {
+  const l = entries.map(e => e[idx].length);
+  const max = Math.max(...l);
+  return max > min ? max : min;
 }
 
 async function getBranches() {
@@ -142,80 +125,25 @@ async function getBranches() {
   return branches;
 }
 
-function printHeader(lengths) {
-  let h = 0;
-  for (const column in lengths.columns) {
-    const l = lengths.columns[column] + lengths.ident;
-    process.stdout.write(`${column}${" ".repeat(l - column.length)}`);
-    h += l;
-  }
-  process.stdout.write("\n" + "-".repeat(h) + "\n");
+function ask(query) {
+  const rl = createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  return new Promise(resolve =>
+    rl.question(query, answer => {
+      rl.close();
+      resolve(answer);
+    })
+  );
 }
 
-function printUntrackedFile(pos, lengths, file, selection = "") {
-  let p = file.path();
-  let e = index[p];
-  let r = e ? (e.repository ? e.repository : "-") : "-";
-  let b = e ? (e.branch ? e.branch : "-") : "-";
-  let d = e ? (e.destination ? e.destination : "-") : "-";
-
-  const valid = r === "-" || b === "-" || d === "-" ? false : true;
-
-  const n = `${pos + 1}:  `;
-  const i = `${" ".repeat(lengths.columns["#"] + lengths.ident - n.length)}${n}`;
-  const path = `${p}${" ".repeat(lengths.columns.path + lengths.ident - p.length)}`;
-  const repo = `${r}${" ".repeat(lengths.columns.repository + lengths.ident - r.length)}`;
-  const branch = `${b}${" ".repeat(lengths.columns.branch + lengths.ident - b.length)}`;
-  const destination = `${d}${" ".repeat(lengths.columns.destination + lengths.ident - d.length)}`;
-
-  let logger = message;
-  if (Number.isInteger(parseInt(selection))) {
-    const idx = parseInt(selection);
-    if (idx > 0 && pos + 1 === idx) {
-      logger = error;
-      // process.stdout.write(error("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
-    } else {
-      if (valid) {
-        logger = success;
-        // process.stdout.write(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
-      }
-      // process.stdout.write(`${i}${path}${repo}${branch}${destination}\n`);
-    }
-  } else {
-    try {
-      const r = new RegExp(`^${selection}`);
-      if (selection !== "" && r.exec(file.path())) {
-        logger = error;
-        // process.stdout.write(error("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
-      } else {
-        if (valid) {
-          logger = success;
-          // process.stdout.write(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
-        }
-        // process.stdout.write(`${i}${path}${repo}${branch}${destination}\n`);
-      }
-    } catch (err) {
-      if (valid) {
-        logger = success;
-      }
-      // if (valid) {
-      //   process.stdout.write(success("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
-      // } else {
-      //   process.stdout.write(`${i}${path}${repo}${branch}${destination}\n`);
-      // }
-    }
-  }
-  process.stdout.write(logger("", { end: "\n", label: `${i}${path}${repo}${branch}${destination}` }));
-}
-
-async function logUntracked(selection = "") {
-  const untracked = await getUntracked();
-  const lengths = await getLogLengths(untracked);
-  printHeader(lengths);
-  for (const [i, file] of untracked.entries()) {
-    printUntrackedFile(i, lengths, file, selection);
-  }
-  process.stdout.write("\n");
+/* Log */
+function resetScreen() {
+  // cursorTo(process.stdout, 0, 0);
+  process.stdout.write(cursorRestorePosition);
+  clearScreenDown(process.stdout);
 }
 
 /* Selection */
@@ -224,23 +152,70 @@ async function getSelection() {
   let valid = true;
 
   do {
-    await promptSelection("");
-    selection = await ask("Selection: ");
+    // await promptSelection("");
+    await promptSelection();
+    selection = await ask("\nSelection: ");
     if (await isValidSelection(selection)) {
       valid = true;
       await promptSelection(selection);
     } else {
       valid = false;
     }
-  } while (!valid || "n" === (await ask("Continue? (Y/n): ")));
+  } while (!valid || "n" === (await ask("\nContinue? (Y/n): ")));
   return selection;
 }
 
-async function promptSelection(selection) {
+async function promptSelection(selection = "") {
+  const header = ["# ", "path", "repository", "branch", "source"];
+  const entries = await getUntrackedEntries(selection);
+  const opts = getTableOptions(header, entries);
   resetScreen();
   process.stdout.write("Select entries. Status of untracked files:\n");
-  process.stdout.write("  (use the index number or a regular expression)\n\n");
-  await logUntracked(selection);
+  process.stdout.write("  (use the index number, the file name or a regular expression)\n\n");
+  process.stdout.write(table([header, ...highlightSelection(entries, selection)], opts));
+}
+
+function highlightSelection(entries, selection = "") {
+  let result = [];
+
+  for (const [i, entry] of entries.entries()) {
+    const valid = entry[2] !== "-" && entry[3] !== "-" && entry[4] !== "-";
+    let logger = valid ? success : message;
+    if (Number.isInteger(parseInt(selection))) {
+      const idx = parseInt(selection);
+      if (idx > 0 && idx <= entries.length) {
+        if (idx - 1 === i) {
+          logger = error;
+        }
+      }
+    } else if (selection !== "") {
+      try {
+        const r = new RegExp(`^${selection}`);
+        if (r.exec(entry[1])) {
+          logger = error;
+        }
+      } catch (err) {}
+    }
+    let newEntry = [];
+    for (const e of entry) {
+      newEntry.push(logger("", { end: "", label: e }));
+    }
+    result.push(newEntry);
+  }
+  return result;
+}
+
+async function getUntrackedEntries() {
+  const untracked = await getUntracked();
+  return untracked.map((file, idx) => {
+    const i = `${idx + 1}`;
+    const p = file.path();
+    const e = index[p];
+    const r = e ? (e.repository ? e.repository : "-") : "-";
+    const b = e ? (e.branch ? e.branch : "-") : "-";
+    const d = e ? (e.source ? e.source : "-") : "-";
+    return [i, p, r, b, d];
+  });
 }
 
 async function isValidSelection(selection) {
@@ -285,12 +260,14 @@ async function getRepository(selection) {
 }
 
 function promptRepository() {
-  process.stdout.write("Select repository:\n");
-  process.stdout.write("  (use the index number or a regular expression)\n\n");
-  for (const [i, repo] of repositories.entries()) {
-    const idx = `${i + 1}`;
-    process.stdout.write(" ".repeat(4 - idx.length) + idx + ": " + repo.name + "\n");
-  }
+  const header = ["# ", "repository"];
+  const entries = repositories.map((repo, idx) => {
+    return [`${idx + 1}`, repo.name];
+  });
+  const opts = getTableOptions(header, entries);
+  process.stdout.write("\nSelect repository:\n");
+  process.stdout.write("  (use the index or the repository name)\n\n");
+  process.stdout.write(table([header, ...entries], opts));
 }
 
 function isValidRepository(repository) {
@@ -319,5 +296,145 @@ async function updateRepository(selection, repository) {
   for (let entry of await filterUntrackedSelection(selection)) {
     index[entry.path()] = index[entry.path()] || {};
     index[entry.path()].repository = repository;
+  }
+}
+
+/* Branch */
+async function getBranch(selection) {
+  let branch = "";
+  let valid = true;
+  const repository = await getRepositoryOfSelection(selection);
+  const branches = await getBranchesOfRepository(repository);
+
+  do {
+    await promptSelection(selection);
+    promptBranch(branches);
+    branch = await ask("\nSelection: ");
+    if (isValidBranch(branch, branches)) {
+      valid = true;
+      await updateBranch(selection, branch, branches);
+      await promptSelection(selection);
+      promptBranch(branches);
+    } else {
+      valid = false;
+      continue;
+    }
+  } while (!valid || "n" === (await ask("\nContinue? (Y/n)")));
+}
+
+async function getRepositoryOfSelection(selection) {
+  let repository = "";
+  const untracked = await getUntracked();
+
+  if (Number.isInteger(parseInt(selection))) {
+    const idx = parseInt(selection);
+    if (idx > 0 && idx <= untracked.length) {
+      const file = untracked[idx - 1];
+      const entry = index[file.path()];
+      repository = entry.repository;
+    }
+  } else {
+    try {
+      const r = new RegExp(`${selection}`);
+      for (const file of untracked) {
+        if (selection !== "" && r.exec(file.path())) {
+          const entry = index[file.path()];
+          repository = entry.repository;
+        }
+      }
+    } catch (err) {}
+  }
+  return repository;
+}
+
+async function promptBranch(branches) {
+  const header = ["# ", "branch"];
+  const entries = branches.map((branch, idx) => {
+    return [`${idx + 1}`, branch];
+  });
+  const opts = getTableOptions(header, entries);
+  process.stdout.write(`\nSelect branch:\n`);
+  process.stdout.write("  (use the index or the branch name)\n\n");
+  process.stdout.write(table([header, ...entries], opts));
+}
+
+async function getBranchesOfRepository(repository) {
+  const repo = repositories.filter(e => e.name === repository);
+  const d = join(process.cwd(), repo[0].location);
+  const r = await Repository.open(d);
+  const refs = await r.getReferenceNames(Reference.TYPE.LISTALL);
+  return refs
+    .filter(e => {
+      const regex = /^refs\/remotes\/origin\/(.*)/;
+      return regex.exec(e);
+    })
+    .map(e => {
+      const regex = /^refs\/remotes\/origin\/(.*)/;
+      return e.replace(regex, (m, branch) => branch);
+    })
+    .filter(e => e !== "HEAD");
+}
+
+async function isValidBranch(branch, branches) {
+  let result = false;
+  if (Number.isInteger(parseInt(branch))) {
+    const idx = parseInt(branch);
+    if (idx > 0 && idx <= branches.length) result = true;
+  } else {
+    for (const b of branches) {
+      if (b === branch) {
+        result = true;
+        break;
+      }
+    }
+  }
+  return result;
+}
+
+async function updateBranch(selection, branch, branches) {
+  if (Number.isInteger(parseInt(branch))) {
+    const idx = parseInt(branch);
+    if (idx > 0 && idx <= branches.length) {
+      branch = branches[idx - 1];
+    }
+  }
+  for (let entry of await filterUntrackedSelection(selection)) {
+    index[entry.path()] = index[entry.path()] || {};
+    index[entry.path()].branch = branch;
+  }
+}
+
+/* Source */
+async function getSource(selection) {
+  let source = "";
+  let valid = true;
+
+  do {
+    await promptSelection(selection);
+    source = await ask("\nSource: ");
+    if (isValidSource(source)) {
+      valid = true;
+      await updateSource(selection, source);
+      await promptSelection(selection);
+    } else {
+      valid = false;
+      continue;
+    }
+  } while (!valid || "n" === (await ask("\nContinue? (Y/n): ")));
+  resetScreen();
+}
+
+function isValidSource(source) {
+  return !isAbsolute(source);
+}
+
+async function updateSource(selection, source) {
+  source = normalize(source);
+  if (extname(source) !== "") {
+    source = dirname(source);
+  }
+  for (let entry of await filterUntrackedSelection(selection)) {
+    index[entry.path()] = index[entry.path()] || {};
+    index[entry.path()].source = source;
   }
 }

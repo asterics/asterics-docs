@@ -54,6 +54,7 @@
   "dependencies": {
     "ansi-escapes": "^4.1.0",
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.14"
+    "bootstrap-vue": "^2.0.0-rc.14",
+    "table": "^5.4.0"
   }
 }
