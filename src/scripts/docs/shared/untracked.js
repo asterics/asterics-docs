@@ -1,6 +1,7 @@
 import { createInterface, cursorTo, clearScreenDown } from "readline";
 import { join } from "path";
 import { Repository, Reference, Status } from "nodegit";
+import { cursorSavePosition, cursorRestorePosition } from "ansi-escapes";
 import { success, error, message } from "./logger.js";
 
 const configPath = join(process.cwd(), "src/config/config.js");
@@ -20,6 +21,7 @@ export async function hasUntracked(index) {
 }
 
 export async function resolveUntracked(i) {
+  process.stdout.write(cursorSavePosition);
   index = i;
   const selection = await getSelection();
   await getRepository(selection);
@@ -76,7 +78,8 @@ function ask(query) {
 
 /* Log */
 function resetScreen() {
-  cursorTo(process.stdout, 0, 0);
+  // cursorTo(process.stdout, 0, 0);
+  process.stdout.write(cursorRestorePosition);
   clearScreenDown(process.stdout);
 }
 
