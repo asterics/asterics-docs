@@ -48,10 +48,11 @@ $ VERSION=2.3 npx vuepress build docs/ -d dist/
 $ VERSION=2.3 npx vuepress dev docs/
 ```
 
-## New Devel (-> Task 104)
+## New Devel (-> Task 135)
 
 $ yarn docs init
-$ yarn docs clean aka. yarn docs init --clean
+$ yarn docs index
+?? $ yarn docs clean aka. yarn docs init --clean
 
 $ yarn docs setup
 $ yarn docs dev
