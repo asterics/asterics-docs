@@ -1,16 +1,14 @@
 # Ignore
-.vscode/
+## Globals
 node_modules/
+.vscode/
+.certs/
 
-*/**/*.pem
-*/**/*.srl
-*/**/*.p7c
-*/**/*.crt
-*/**/*.csr
+## Root
+/docs*/
+/dist*/
 
-docs*/
-dist*/
-
+## Configuration
 src/config/.env
 
 # Allow
