@@ -1,8 +1,9 @@
 # Ignore
 ## Globals
-node_modules/
-.vscode/
+.audits/
 .certs/
+.vscode/
+node_modules/
 
 ## Root
 /docs*/
