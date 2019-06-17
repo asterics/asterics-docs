@@ -6,8 +6,8 @@
 node_modules/
 
 ## Root
-/docs*/
-/dist*/
+/docs*
+/dist*
 
 ## Configuration
 src/config/.env
