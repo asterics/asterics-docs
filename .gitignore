@@ -8,10 +8,9 @@ node_modules/
 */**/*.crt
 */**/*.csr
 
-./docs*/
-./dist*/
+docs*/
+dist*/
 
-src/config/index.json
 src/config/.env
 
 # Allow

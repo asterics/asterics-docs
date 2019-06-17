@@ -7,3 +7,6 @@
 [submodule "src/external/webacs"]
 	path = src/external/webacs
 	url = https://github.com/asterics/WebACS.git
+[submodule "src/external/asterics-docs"]
+	path = src/external/asterics-docs
+	url = https://github.com/asterics/asterics-docs.git
