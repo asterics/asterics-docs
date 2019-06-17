@@ -2,8 +2,9 @@ import { createInterface, cursorTo, clearScreenDown } from "readline";
 import { join, isAbsolute, extname, dirname, normalize } from "path";
 import { Repository, Reference, Status } from "nodegit";
 import { cursorSavePosition, cursorRestorePosition } from "ansi-escapes";
-import { table, getBorderCharacters } from "table";
+import { table } from "table";
 import { success, error, message } from "./logger.js";
+import { getBranchesOfRepository } from "./util.js";
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
@@ -13,7 +14,7 @@ let index = null;
 export async function hasUntracked(index) {
   const untracked = await getUntracked();
   for (const file of untracked) {
-    const entry = index[file.path()];
+    const entry = index.entry(file);
     if (entry === undefined) {
       return true;
     }
@@ -23,7 +24,8 @@ export async function hasUntracked(index) {
 
 export async function resolveUntracked(i) {
   process.stdout.write(cursorSavePosition);
-  index = i;
+  /* FIXME: use method Index#update() instead of direct manipulation */
+  index = i.entries;
   const selection = await getSelection();
   await getRepository(selection);
   await getBranch(selection);
@@ -55,7 +57,7 @@ async function filterUntrackedSelection(selection) {
     }
   } else {
     try {
-      const r = new RexExp(`^${selection}`);
+      const r = new RegExp(`^${selection}`);
       return untracked.filter(e => r.exec(e.path()));
     } catch (err) {}
   }
@@ -125,7 +127,7 @@ async function getBranches() {
   return branches;
 }
 
-function ask(query) {
+export function ask(query) {
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout
@@ -161,11 +163,11 @@ async function getSelection() {
     } else {
       valid = false;
     }
-  } while (!valid || "n" === (await ask("\nContinue? (Y/n): ")));
+  } while (!valid || "n" === (await ask("\nProceed with selection? (Y/n): ")));
   return selection;
 }
 
-async function promptSelection(selection = "") {
+export async function promptSelection(selection = "") {
   const header = ["# ", "path", "repository", "branch", "source"];
   const entries = await getUntrackedEntries(selection);
   const opts = getTableOptions(header, entries);
@@ -250,13 +252,13 @@ async function getRepository(selection) {
     if (isValidRepository(repository)) {
       valid = true;
       await updateRepository(selection, repository);
-      await promptSelection(selection);
-      promptRepository();
+      // await promptSelection(selection);
+      // promptRepository();
     } else {
       valid = false;
       continue;
     }
-  } while (!valid || "n" === (await ask("\nContinue? (Y/n): ")));
+  } while (!valid); // || "n" === (await ask("\nContinue? (Y/n): ")));
 }
 
 function promptRepository() {
@@ -313,13 +315,13 @@ async function getBranch(selection) {
     if (isValidBranch(branch, branches)) {
       valid = true;
       await updateBranch(selection, branch, branches);
-      await promptSelection(selection);
-      promptBranch(branches);
+      // await promptSelection(selection);
+      // promptBranch(branches);
     } else {
       valid = false;
       continue;
     }
-  } while (!valid || "n" === (await ask("\nContinue? (Y/n)")));
+  } while (!valid); // || "n" === (await ask("\nContinue? (Y/n)")));
 }
 
 async function getRepositoryOfSelection(selection) {
@@ -356,23 +358,6 @@ async function promptBranch(branches) {
   process.stdout.write(`\nSelect branch:\n`);
   process.stdout.write("  (use the index or the branch name)\n\n");
   process.stdout.write(table([header, ...entries], opts));
-}
-
-async function getBranchesOfRepository(repository) {
-  const repo = repositories.filter(e => e.name === repository);
-  const d = join(process.cwd(), repo[0].location);
-  const r = await Repository.open(d);
-  const refs = await r.getReferenceNames(Reference.TYPE.LISTALL);
-  return refs
-    .filter(e => {
-      const regex = /^refs\/remotes\/origin\/(.*)/;
-      return regex.exec(e);
-    })
-    .map(e => {
-      const regex = /^refs\/remotes\/origin\/(.*)/;
-      return e.replace(regex, (m, branch) => branch);
-    })
-    .filter(e => e !== "HEAD");
 }
 
 async function isValidBranch(branch, branches) {
@@ -415,12 +400,12 @@ async function getSource(selection) {
     if (isValidSource(source)) {
       valid = true;
       await updateSource(selection, source);
-      await promptSelection(selection);
+      // await promptSelection(selection);
     } else {
       valid = false;
       continue;
     }
-  } while (!valid || "n" === (await ask("\nContinue? (Y/n): ")));
+  } while (!valid); // || "n" === (await ask("\nContinue? (Y/n): ")));
   resetScreen();
 }
 

@@ -1,11 +1,15 @@
-import fs from "fs";
-import { join, dirname } from "path";
+import { existsSync, writeFileSync } from "fs";
+import { join, dirname, relative } from "path";
+import { clearScreenDown } from "readline";
+import { Index } from "./shared/index.js";
+import { error, info } from "./shared/logger.js";
+import { cursorSavePosition, cursorRestorePosition } from "ansi-escapes";
 import { Repository, Signature } from "nodegit";
 import { mkdirp } from "@asterics/node-utils";
-import { getIndex } from "./shared/util.js";
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
+let opts = null;
 
 export const command = "setup [version] [out]";
 export const aliases = ["s"];
@@ -25,45 +29,70 @@ export const builder = yargs => {
     });
 };
 export const handler = async options => {
+  /* Process options */
   options.verbose = config.get("verbose") || options.verbose;
-  // TODO: test if documentation folder exists
-  const index = await getIndex(options);
-  await loadIndex(index, options);
-  await createRepository();
+  opts = options;
+
+  /* Check existance of local `docs` repository */
+  const d = join(process.cwd(), config.get("documentation"));
+  if (!existsSync(d)) {
+    /* Load index */
+    const dependencies = config.get("dependencies");
+    const versions = config.get("versions");
+    const index = await new Index(dependencies, versions);
+
+    process.stdout.write(cursorSavePosition);
+
+    /* Load indexed files */
+    for (const path in index.entries) {
+      const entry = index.entry(path);
+      await loadFile(path, entry);
+    }
+    clearScreenDown(process.stdout);
+
+    /* Create local `docs` repository */
+    await setupWorkingRepository();
+  } else {
+    process.stdout.write(error(`cannot setup asterics-docs. folder '${relative(process.cwd(), d)}' exists already.`));
+  }
 };
 
-async function loadIndex(index, options) {
-  for (let destination in index) {
-    const { repository, source, branch, hash } = index[destination];
-    const { location } = config.get("repositories").find(s => s.name === repository);
-    const d = join(process.cwd(), config.get("documentation"), destination);
+async function loadFile(path, entry) {
+  ensureParentDir(path);
+  await copyFile(path, entry);
+}
 
-    try {
-      const r = await Repository.open(join(process.cwd(), location));
-      const c = await r.getBranchCommit(branch);
-      const e = await c.getEntry(source);
-      const b = await e.getBlob();
-
-      const dir = dirname(d);
-      if (!fs.existsSync(dir)) {
-        console.log(`creating directory: ${dir}`);
-        mkdirp(dir);
-      }
-
-      if (b.isBinary()) {
-        console.log(`creating binary: ${d}`);
-        fs.writeFileSync(d, b.content());
-      } else {
-        console.log(`creating text file: ${d}`);
-        fs.writeFileSync(d, b.toString());
-      }
-    } catch (err) {
-      console.log("error", err, location, source);
+function ensureParentDir(path) {
+  try {
+    const d = join(process.cwd(), config.get("documentation"), path);
+    const parent = dirname(d);
+    if (!existsSync(parent)) {
+      mkdirp(parent);
     }
+  } catch (err) {
+    process.stdout.write(error(err));
   }
 }
 
-async function createRepository() {
+async function copyFile(path, entry) {
+  try {
+    const { repository, source, branch } = entry;
+    const { location } = config.get("repositories").find(r => r.name === repository);
+    const r = await Repository.open(join(process.cwd(), location));
+    const c = await r.getBranchCommit(`origin/${branch}`);
+    const e = await c.getEntry(source);
+    const b = await e.getBlob();
+    const destination = join(process.cwd(), config.get("documentation"), path);
+    const content = b.isBinary() ? b.content() : b.toString();
+    clearScreenDown(process.stdout);
+    process.stdout.write(info(path, { end: opts.verbose ? "\n" : cursorRestorePosition, label: "loading" }));
+    writeFileSync(destination, content);
+  } catch (err) {
+    process.stdout.write(error(err));
+  }
+}
+
+async function setupWorkingRepository() {
   try {
     const r = await Repository.init(join(process.cwd(), config.get("documentation")), 0);
 
@@ -76,6 +105,6 @@ async function createRepository() {
     const committer = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
     await r.createCommit("HEAD", author, committer, "Initial commit", oid, []);
   } catch (err) {
-    console.log(err);
+    process.stdout.write(error(err));
   }
 }

@@ -1,7 +1,7 @@
 import { join } from "path";
-import { getIndex } from "./shared/util.js";
+import { Index } from "./shared/index.js";
 import { success, error, info } from "./shared/logger.js";
-import { Repository, Odb, Object, Diff, Status } from "nodegit";
+import { Repository, Status } from "nodegit";
 
 let index;
 const configPath = join(process.cwd(), "src/config/config.js");
@@ -23,29 +23,35 @@ export const builder = yargs => {
 };
 export const handler = async options => {
   try {
-    index = await getIndex(false);
+    const dependencies = config.get("dependencies");
+    const versions = config.get("versions");
+    index = await new Index(dependencies, versions);
+
     const d = join(process.cwd(), config.get("documentation"));
     const r = await Repository.open(d);
 
-    await logStaged(r);
-    await logUnstaged(r);
-    await logUntracked(r);
+    if (await hasChanges(r)) {
+      await logStaged(r);
+      await logUnstaged(r);
+      await logUntracked(r);
+    } else {
+      process.stdout.write("nothing to commit, working tree clean\n");
+    }
   } catch (err) {
-    console.log(err);
+    process.stdout.write(error(err));
   }
 };
 
-async function logStaged(r) {
-  const opts = {
-    flags:
-      Status.OPT.INCLUDE_UNTRACKED |
-      Status.OPT.RECURSE_UNTRACKED_DIRS |
-      Status.OPT.RENAMES_HEAD_TO_INDEX |
-      Status.OPT.RENAMES_FROM_REWRITES,
-    show: Status.SHOW.INDEX_ONLY
-  };
-  const staged = await r.getStatusExt(opts);
+async function hasChanges(r) {
+  const staged = await getStaged(r);
+  const unstaged = await getUnstaged(r);
+  const untracked = await getUntracked(r);
+  const equality = staged.length === 0 && unstaged.length === 0 && untracked.length === 0;
+  return !equality;
+}
 
+async function logStaged(r) {
+  const staged = await getStaged(r);
   if (staged.length > 0) {
     process.stdout.write("Changes to be committed:\n");
 
@@ -73,12 +79,20 @@ async function logStaged(r) {
   }
 }
 
-async function logUnstaged(r) {
+async function getStaged(r) {
   const opts = {
-    flags: Status.OPT.RENAMES_HEAD_TO_INDEX | Status.OPT.RENAMES_INDEX_TO_WORKDIR | Status.OPT.RENAMES_FROM_REWRITES,
-    show: Status.SHOW.WORKDIR_ONLY
+    flags:
+      Status.OPT.INCLUDE_UNTRACKED |
+      Status.OPT.RECURSE_UNTRACKED_DIRS |
+      Status.OPT.RENAMES_HEAD_TO_INDEX |
+      Status.OPT.RENAMES_FROM_REWRITES,
+    show: Status.SHOW.INDEX_ONLY
   };
-  const unstaged = await r.getStatusExt(opts);
+  return await r.getStatusExt(opts);
+}
+
+async function logUnstaged(r) {
+  const unstaged = await getUnstaged(r);
 
   if (unstaged.length > 0) {
     process.stdout.write("Changes not staged for commit:\n");
@@ -109,13 +123,16 @@ async function logUnstaged(r) {
   }
 }
 
-async function logUntracked(r) {
+async function getUnstaged(r) {
   const opts = {
-    flags: Status.OPT.INCLUDE_UNTRACKED | Status.OPT.RECURSE_UNTRACKED_DIRS,
+    flags: Status.OPT.RENAMES_HEAD_TO_INDEX | Status.OPT.RENAMES_INDEX_TO_WORKDIR | Status.OPT.RENAMES_FROM_REWRITES,
     show: Status.SHOW.WORKDIR_ONLY
   };
-  const status = await r.getStatusExt(opts);
-  const untracked = status.filter(e => e.isNew());
+  return await r.getStatusExt(opts);
+}
+
+async function logUntracked(r) {
+  const untracked = await getUntracked(r);
   const prefix = " ".repeat(ident.file);
 
   if (untracked.length > 0) {
@@ -125,6 +142,15 @@ async function logUntracked(r) {
     }
     process.stdout.write("\n");
   }
+}
+
+async function getUntracked(r) {
+  const opts = {
+    flags: Status.OPT.INCLUDE_UNTRACKED | Status.OPT.RECURSE_UNTRACKED_DIRS,
+    show: Status.SHOW.WORKDIR_ONLY
+  };
+  const status = await r.getStatusExt(opts);
+  return status.filter(e => e.isNew());
 }
 
 function log(logger, file, changes = "headToIndex") {
@@ -175,7 +201,7 @@ function hasUnindexed(status) {
 
 function isInRepository(file, repository, changes = "headToIndex") {
   const path = file.isRenamed() ? getOldFilePath(file, changes) : file.path();
-  const entry = index[path];
+  const entry = index.entry(path);
   if (entry && entry.repository === repository) {
     return true;
   }
