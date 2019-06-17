@@ -1,6 +1,6 @@
 import { join, relative } from "path";
 import { Repository } from "nodegit";
-import { Dependency } from "./dependency.js";
+import { Dependency } from "./config.js";
 
 const noop = () => {};
 
