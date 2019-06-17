@@ -1,11 +1,16 @@
 import { join } from "path";
-import { getIndex } from "./shared/util.js";
+import { Repository, Status } from "nodegit";
 import { error } from "./shared/logger.js";
-import { hasUntracked, resolveUntracked } from "./shared/untracked.js";
+import { ask, hasUntracked, resolveUntracked, promptSelection } from "./shared/untracked.js";
+import { Index } from "./shared/index.js";
+import { getStaged, getUnstaged, getUntracked } from "./shared/status.js";
+// import { getIndex } from "./shared/util.js";
+import { getBranchesOfRepository } from "./shared/util.js";
 
-let index;
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
+const repositories = config.get("repositories");
+let index = null;
 
 const envConfigPath = join(process.cwd(), "src/config/.env");
 require("dotenv").config({ path: envConfigPath });
@@ -27,7 +32,10 @@ export const handler = async options => {
   // console.log("commit", options);
   try {
     /* Load current index */
-    index = await getIndex(false);
+    const dependendencies = config.get("dependencies");
+    const versions = config.get("versions");
+    index = await new Index(dependendencies, versions);
+    // index = await getIndex(false);
 
     /* Verify if author, committer, and message are specified */
     if (!verifyOptions(options)) {
@@ -35,17 +43,93 @@ export const handler = async options => {
     }
 
     /* Verify if any new files were created */
-    while (await hasUntracked(index)) {
-      await resolveUntracked(index);
+    // while (await hasUntracked(index)) {
+    //   await resolveUntracked(index);
+    // }
+
+    if (await hasUntracked(index)) {
+      do {
+        await resolveUntracked(index);
+      } while ((await hasUntracked(index)) || (await proceed()));
     }
 
-    /* Commit all changes to local repository */
-
     /* Commit all changes to remote submodules */
+    await commit(index);
+
+    /* Commit all changes to local repository */
   } catch (err) {
-    console.log(err);
+    process.stdout.write(error(err));
   }
 };
+
+async function proceed() {
+  await promptSelection();
+  return "n" === (await ask("\nContinue? (Y/n): "));
+}
+
+async function commit(index) {
+  const d = join(process.cwd(), config.get("documentation"));
+  const r = await Repository.open(d);
+  const staged = await getStaged(r);
+  // printIndexInfo(staged);
+  // for (const file of staged) {
+  //   console.log(file.path());
+  // }
+
+  console.log("\n");
+
+  // Iterate repo
+  for (const repo of repositories) {
+    const b = await getBranchesOfRepository(repo.name);
+    const branches = getStagedBranches(staged, repo, b);
+    // Iterate branch
+    // console.log(repo.name, branches);
+    for (const branch of branches) {
+      await commitFiles(repo, branch, staged);
+    }
+  }
+}
+
+async function commitFiles(r, b, status) {
+  /* Get relevant files */
+  console.log(r, b);
+
+  /* Commit */
+}
+
+function printIndexInfo(status) {
+  for (const file of status) {
+    let entry = index.entry(file);
+    process.stdout.write(`${file.path()}, ${entry.repository}, ${entry.branch}, ${entry.source}\n`);
+  }
+}
+
+// async function getStaged() {
+//   const d = join(process.cwd(), config.get("documentation"));
+//   const r = await Repository.open(d);
+//   const opts = {
+//     flags:
+//       Status.OPT.INCLUDE_UNTRACKED |
+//       Status.OPT.RECURSE_UNTRACKED_DIRS |
+//       Status.OPT.RENAMES_HEAD_TO_INDEX |
+//       Status.OPT.RENAMES_FROM_REWRITES,
+//     show: Status.SHOW.INDEX_ONLY
+//   };
+//   return await r.getStatusExt(opts);
+// }
+
+function getStagedBranches(status, repo, branches) {
+  let stagedBranches = status
+    .filter(file => {
+      let entry = index.entry(file);
+      return repo.name === entry.repository;
+    })
+    .map(file => {
+      let entry = index.entry(file);
+      return entry.branch;
+    });
+  return branches.filter(branch => stagedBranches.includes(branch));
+}
 
 function verifyOptions(options) {
   let validAuthor = false,
