@@ -1,15 +1,18 @@
-import { join } from "path";
-import { Repository, Status } from "nodegit";
+import { copyFileSync, exists, unlink } from "fs";
+import { join, relative, dirname } from "path";
+import { Repository, Branch, Checkout, Status, Signature } from "nodegit";
 import { error } from "./shared/logger.js";
 import { ask, hasUntracked, resolveUntracked, promptSelection } from "./shared/untracked.js";
 import { Index } from "./shared/index.js";
 import { getStaged, getUnstaged, getUntracked } from "./shared/status.js";
 // import { getIndex } from "./shared/util.js";
 import { getBranchesOfRepository } from "./shared/util.js";
+import { mkdirp } from "@asterics/node-utils";
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
-const repositories = config.get("repositories");
+// const repositories = config.get("repositories");
+const submodules = config.get("submodules");
 let index = null;
 
 const envConfigPath = join(process.cwd(), "src/config/.env");
@@ -79,9 +82,9 @@ async function commit(index) {
   console.log("\n");
 
   // Iterate repo
-  for (const repo of repositories) {
+  for (const repo of submodules) {
     const b = await getBranchesOfRepository(repo.name);
-    const branches = getStagedBranches(staged, repo, b);
+    const branches = getStagedBranches(repo, b, staged);
     // Iterate branch
     // console.log(repo.name, branches);
     for (const branch of branches) {
@@ -90,17 +93,114 @@ async function commit(index) {
   }
 }
 
-async function commitFiles(r, b, status) {
-  /* Get relevant files */
-  console.log(r, b);
+async function commitFiles(repo, branch, status) {
+  try {
+    const location = join(process.cwd(), repo.location);
+    const r = await Repository.open(location);
 
-  /* Commit */
+    /* Get relevant files */
+    const files = getStagedFilesOfRepositoryBranch(repo, branch, status);
+
+    /* Checkout */
+    await checkoutBranch(r, branch);
+
+    /* NOTE:
+     * - delete file from index (if renamed) / not necessary?
+     * - load entry configuration from index
+     */
+
+    for (const file of files) {
+      let src = null;
+      let dest = null;
+      const entry = index.entry(file);
+      /* Copy files */
+      if (file.isRenamed()) {
+        const delta = file["headToIndex"]();
+        const oldFile = delta.oldFile();
+        const oldFolder = dirname(oldFile.path());
+        const newFile = delta.newFile();
+
+        src = join(process.cwd(), config.get("documentation"), newFile.path());
+        const test = relative(entry.destination, oldFile.path());
+        const newSource = relative(oldFolder, newFile.path());
+        const newSourceFile = join(oldFolder, newSource);
+        dest = join(process.cwd(), repo.location, entry.source, newSourceFile);
+        console.log(dest, "\t", test);
+
+        /* Create parent directory at source repository */
+        // const parent = dirname(dest);
+        // if (!(await exist(parent))) mkdirp(parent);
+        // /* Delete old file */
+        const oldDest = join(process.cwd(), repo.location, entry.source, oldFile.path());
+        // if (await exists(oldDest)) await unlink(oldDest);
+      } else {
+        // src = join(process.cwd(), config.get("documentation"), file.path());
+        // dest = join(process.cwd(), entry.source, file.path());
+      }
+      // copyFileSync(src, dest);
+    }
+
+    /* Add */
+    // const idx = await r.refreshIndex();
+    // await idx.addAll();
+    // await idx.write();
+    // const oid = await idx.writeTree();
+
+    // /* Commit */
+    // const author = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
+    // const committer = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
+    // await r.createCommit("HEAD", author, committer, "new commit", oid, []);
+  } catch (err) {
+    console.log(err);
+  }
 }
+
+async function checkoutBranch(repo, branch) {
+  const opts = {
+    checkoutStrategy:
+      Checkout.STRATEGY.SAFE || Checkout.STRATEGY.RECREATE_MISSING || Checkout.STRATEGY.ALLOW_CONFLICTS || Checkout.STRATEGY.USE_THEIRS
+  };
+
+  /* Get remote branch */
+  const remoteBranch = await repo.getBranch(`origin/${branch}`);
+  /* Get commit of remote branch */
+  const remoteCommit = await repo.getCommit(remoteBranch.target());
+  /* Get local branch */
+  let localBranch;
+  try {
+    localBranch = await repo.getBranch(branch);
+  } catch (err) {
+    if (typeof localBranch === "undefined") {
+      localBranch = await repo.createBranch(branch, remoteCommit, false);
+      await Branch.setUpstream(localBranch, `origin/${branch}`);
+    }
+  }
+  /* Get commit of local branch */
+  const localCommit = await repo.getCommit(localBranch.target());
+  /* Get tree object */
+  const tree = await repo.getTree(localCommit.treeId());
+  /* Checkout tree */
+  await Checkout.tree(repo, tree, opts);
+  /* Set HEAD to branch */
+  await repo.setHead(`refs/heads/${branch}`);
+}
+
+// async function checkoutBranch(repo, branch) {
+//   const opts = {
+//     checkoutStrategy:
+//       Checkout.STRATEGY.SAFE || Checkout.STRATEGY.RECREATE_MISSING || Checkout.STRATEGY.ALLOW_CONFLICTS || Checkout.STRATEGY.USE_THEIRS
+//   };
+//   const remote = await repo.getBranch(`origin/${branch}`);
+//   const commit = await repo.getCommit(remote.target());
+//   const tree = await repo.getTree(commit.treeId());
+//   await Checkout.tree(repo, tree, opts);
+//   await repo.setHead(`refs/heads/${branch}`);
+// }
 
 function printIndexInfo(status) {
   for (const file of status) {
     let entry = index.entry(file);
-    process.stdout.write(`${file.path()}, ${entry.repository}, ${entry.branch}, ${entry.source}\n`);
+    process.stdout.write(`${file.path()}, ${entry.repository}, ${entry.branch}, ${join(entry.source, entry.file)}\n`);
   }
 }
 
@@ -118,7 +218,7 @@ function printIndexInfo(status) {
 //   return await r.getStatusExt(opts);
 // }
 
-function getStagedBranches(status, repo, branches) {
+function getStagedBranches(repo, branches, status) {
   let stagedBranches = status
     .filter(file => {
       let entry = index.entry(file);
@@ -129,6 +229,13 @@ function getStagedBranches(status, repo, branches) {
       return entry.branch;
     });
   return branches.filter(branch => stagedBranches.includes(branch));
+}
+
+function getStagedFilesOfRepositoryBranch(repo, branch, status) {
+  return status.filter(file => {
+    let entry = index.entry(file);
+    return repo.name === entry.repository && branch === entry.branch;
+  });
 }
 
 function verifyOptions(options) {
