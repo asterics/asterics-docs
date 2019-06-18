@@ -56,7 +56,7 @@ async function logStaged(r) {
     process.stdout.write("Changes to be committed:\n");
 
     /* Log indexed files */
-    for (const repo of config.get("repositories")) {
+    for (const repo of config.get("submodules")) {
       if (hasCandidate(staged, repo.name)) {
         process.stdout.write(info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" }));
         for (const file of staged) {
@@ -98,7 +98,7 @@ async function logUnstaged(r) {
     process.stdout.write("Changes not staged for commit:\n");
 
     /* Log indexed files */
-    for (const repo of config.get("repositories")) {
+    for (const repo of config.get("submodules")) {
       if (hasCandidate(unstaged, repo.name, "indexToWorkdir")) {
         process.stdout.write(info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" }));
         for (const file of unstaged) {
@@ -187,7 +187,7 @@ function hasUnindexed(status) {
   for (const file of status) {
     let found = false;
 
-    for (const repo of config.get("repositories")) {
+    for (const repo of config.get("submodules")) {
       if (hasCandidate([file], repo.name)) {
         found = true;
       }
@@ -209,7 +209,7 @@ function isInRepository(file, repository, changes = "headToIndex") {
 }
 
 function isInNoneRepository(file) {
-  for (const repo of config.get("repositories")) {
+  for (const repo of config.get("submodules")) {
     if (isInRepository(file, repo.name)) {
       return false;
     }

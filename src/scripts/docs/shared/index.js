@@ -19,7 +19,9 @@ export class Index {
   get entry() {
     return file => {
       let path = "";
-      if (file.isRenamed()) {
+      if (typeof file === "string") {
+        path = file;
+      } else if (file.isRenamed()) {
         const oldFile = file["headToIndex"]().oldFile();
         path = oldFile.path();
       } else {
@@ -107,9 +109,18 @@ function addToIndex(index, identical, dependency, file, branch, version) {
   let path = join(version, dependency.destination, file);
   if (typeof index[path] === "undefined") {
     index[path] = {
+      /* Repository name */
       repository: dependency.repository,
-      source: join(dependency.source, file),
-      branch
+      /* Repository branch */
+      branch,
+      /* Filename */
+      file,
+      /* File location in asterics-docs */
+      destination: dependency.destination,
+      /* File location in repository */
+      source: dependency.source,
+      /* File indexed */
+      indexed: true
     };
   } else {
     identical.add(path);

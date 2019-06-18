@@ -76,11 +76,12 @@ function ensureParentDir(path) {
 
 async function copyFile(path, entry) {
   try {
-    const { repository, source, branch } = entry;
-    const { location } = config.get("repositories").find(r => r.name === repository);
+    const { repository, source, file, branch } = entry;
+    // const { location } = config.get("repositories").find(r => r.name === repository);
+    const { location } = config.get("submodules").find(r => r.name === repository);
     const r = await Repository.open(join(process.cwd(), location));
     const c = await r.getBranchCommit(`origin/${branch}`);
-    const e = await c.getEntry(source);
+    const e = await c.getEntry(join(source, file));
     const b = await e.getBlob();
     const destination = join(process.cwd(), config.get("documentation"), path);
     const content = b.isBinary() ? b.content() : b.toString();

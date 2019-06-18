@@ -24,8 +24,9 @@ const config = require(configPath);
 // }
 
 export async function getBranchesOfRepository(repository) {
-  const repositories = config.get("repositories");
-  const repo = repositories.filter(e => e.name === repository);
+  // const repositories = config.get("repositories");
+  const submodules = config.get("submodules");
+  const repo = submodules.filter(e => e.name === repository);
   const d = join(process.cwd(), repo[0].location);
   const r = await Repository.open(d);
   const refs = await r.getReferenceNames(Reference.TYPE.LISTALL);

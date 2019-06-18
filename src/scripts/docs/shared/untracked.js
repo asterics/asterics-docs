@@ -8,7 +8,8 @@ import { getBranchesOfRepository } from "./util.js";
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
-const repositories = config.get("repositories");
+// const repositories = config.get("repositories");
+const submodules = config.get("submodules");
 let index = null;
 
 export async function hasUntracked(index) {
@@ -107,7 +108,7 @@ function getColumnWidth(entries, idx, min) {
 
 async function getBranches() {
   let branches = [];
-  for (const repo of repositories) {
+  for (const repo of submodules) {
     const d = join(process.cwd(), repo.location);
     const r = await Repository.open(d);
     const refs = await r.getReferenceNames(Reference.TYPE.LISTALL);
@@ -263,7 +264,7 @@ async function getRepository(selection) {
 
 function promptRepository() {
   const header = ["# ", "repository"];
-  const entries = repositories.map((repo, idx) => {
+  const entries = submodules.map((repo, idx) => {
     return [`${idx + 1}`, repo.name];
   });
   const opts = getTableOptions(header, entries);
@@ -276,9 +277,9 @@ function isValidRepository(repository) {
   let result = false;
   if (Number.isInteger(parseInt(repository))) {
     const idx = parseInt(repository);
-    if (idx > 0 && idx <= repositories.length) result = true;
+    if (idx > 0 && idx <= submodules.length) result = true;
   } else {
-    for (const repo of repositories) {
+    for (const repo of submodules) {
       if (repository === repo.name) {
         result = true;
         break;
@@ -291,8 +292,8 @@ function isValidRepository(repository) {
 async function updateRepository(selection, repository) {
   if (Number.isInteger(parseInt(repository))) {
     const idx = parseInt(repository);
-    if (idx > 0 && idx <= repositories.length) {
-      repository = repositories[idx - 1].name;
+    if (idx > 0 && idx <= submodules.length) {
+      repository = submodules[idx - 1].name;
     }
   }
   for (let entry of await filterUntrackedSelection(selection)) {

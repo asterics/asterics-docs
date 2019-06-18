@@ -30,6 +30,7 @@ function getDependencyConfiguration(dependency) {
   const repository = s.length === 2 ? s[0] : dependency.repository;
   const source = s.length === 2 ? s[1] : dependency.source;
   const filter = dependency.filter ? dependency.filter : /.*/;
-  const { location } = config.get("repositories").find(r => r.name === repository);
+  // const { location } = config.get("repositories").find(r => r.name === repository);
+  const { location } = config.get("submodules").find(r => r.name === repository);
   return { repository, source, filter, location };
 }
