@@ -19,6 +19,11 @@ export const builder = yargs => {
     });
 };
 export const handler = async options => {
+  /* TODO:
+   *  - print index information
+   *  - allow regex selection of printed paths
+   */
+
   options.verbose = config.get("verbose") || options.verbose;
   const end = options.verbose ? "\n" : cursorRestorePosition;
 
