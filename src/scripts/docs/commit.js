@@ -1,6 +1,7 @@
-import { copyFileSync, exists, unlink } from "fs";
-import { join, relative, dirname } from "path";
-import { Repository, Branch, Checkout, Status, Signature } from "nodegit";
+import { copyFileSync, existsSync, unlinkSync } from "fs";
+import { join, relative, dirname, sep as pathSep } from "path";
+import { moveCursor, clearScreenDown } from "readline";
+import { Repository, Branch, Checkout, Status, Reference, Signature } from "nodegit";
 import { error } from "./shared/logger.js";
 import { ask, hasUntracked, resolveUntracked, promptSelection } from "./shared/untracked.js";
 import { Index } from "./shared/index.js";
@@ -38,12 +39,22 @@ export const handler = async options => {
     const dependendencies = config.get("dependencies");
     const versions = config.get("versions");
     index = await new Index(dependendencies, versions);
-    // index = await getIndex(false);
 
     /* Verify if author, committer, and message are specified */
     if (!verifyOptions(options)) {
       return false;
     }
+
+    /* Test resolution of renamed files */
+    await verifyRenamedFiles(index, (repo, file) => {
+      const delta = file["headToIndex"]();
+      const oldFile = delta.oldFile();
+      const newFile = delta.newFile();
+      process.stdout.write(error(`renaming ${oldFile.path()} to ${newFile.path()} results target destination outside of repository:\n`));
+      process.stdout.write(error("", { end: "\n", label: `        ${index.moved(file).destination(repo.location)}\n` }));
+      process.stdout.write("Correct renaming or unstage to continue.\n");
+      process.exit();
+    });
 
     /* Verify if any new files were created */
     // while (await hasUntracked(index)) {
@@ -65,6 +76,20 @@ export const handler = async options => {
   }
 };
 
+async function verifyRenamedFiles(index, handler = (idx, f) => {}) {
+  const location = join(process.cwd(), config.get("documentation"));
+  const r = await Repository.open(location);
+  const staged = await getStaged(r);
+  const renamed = staged.filter(file => file.isRenamed());
+  for (const file of renamed) {
+    if (index.moved(file).up() > index.moved(file).available()) {
+      const entry = index.entry(file);
+      const repo = config.get("submodules").find(e => e.name === entry.repository);
+      handler(repo, file);
+    }
+  }
+}
+
 async function proceed() {
   await promptSelection();
   return "n" === (await ask("\nContinue? (Y/n): "));
@@ -74,10 +99,6 @@ async function commit(index) {
   const d = join(process.cwd(), config.get("documentation"));
   const r = await Repository.open(d);
   const staged = await getStaged(r);
-  // printIndexInfo(staged);
-  // for (const file of staged) {
-  //   console.log(file.path());
-  // }
 
   console.log("\n");
 
@@ -86,14 +107,15 @@ async function commit(index) {
     const b = await getBranchesOfRepository(repo.name);
     const branches = getStagedBranches(repo, b, staged);
     // Iterate branch
-    // console.log(repo.name, branches);
     for (const branch of branches) {
-      await commitFiles(repo, branch, staged);
+      await commitFiles(index, repo, branch, staged);
     }
   }
+
+  /* TODO: Commit to temporary repository */
 }
 
-async function commitFiles(repo, branch, status) {
+async function commitFiles(index, repo, branch, status) {
   try {
     const location = join(process.cwd(), repo.location);
     const r = await Repository.open(location);
@@ -102,11 +124,12 @@ async function commitFiles(repo, branch, status) {
     const files = getStagedFilesOfRepositoryBranch(repo, branch, status);
 
     /* Checkout */
-    await checkoutBranch(r, branch);
+    await checkoutBranch(repo.name, r, branch);
 
     /* NOTE:
      * - delete file from index (if renamed) / not necessary?
      * - load entry configuration from index
+     * - load index only once and process multiple times (parameter), decouple funtions using index
      */
 
     for (const file of files) {
@@ -116,49 +139,68 @@ async function commitFiles(repo, branch, status) {
       /* Copy files */
       if (file.isRenamed()) {
         const delta = file["headToIndex"]();
-        const oldFile = delta.oldFile();
-        const oldFolder = dirname(oldFile.path());
         const newFile = delta.newFile();
 
         src = join(process.cwd(), config.get("documentation"), newFile.path());
-        const test = relative(entry.destination, oldFile.path());
-        const newSource = relative(oldFolder, newFile.path());
-        const newSourceFile = join(oldFolder, newSource);
-        dest = join(process.cwd(), repo.location, entry.source, newSourceFile);
-        console.log(dest, "\t", test);
+        dest = index.moved(file).destination(repo.location);
 
-        /* Create parent directory at source repository */
-        // const parent = dirname(dest);
-        // if (!(await exist(parent))) mkdirp(parent);
-        // /* Delete old file */
-        const oldDest = join(process.cwd(), repo.location, entry.source, oldFile.path());
-        // if (await exists(oldDest)) await unlink(oldDest);
+        /* Delete old file */
+        const oldDest = join(process.cwd(), repo.location, entry.source, entry.file);
+        if (existsSync(oldDest)) unlinkSync(oldDest);
+
+        /* TODO: Handle case for NEW file */
       } else {
-        // src = join(process.cwd(), config.get("documentation"), file.path());
-        // dest = join(process.cwd(), entry.source, file.path());
+        src = join(process.cwd(), config.get("documentation"), file.path());
+        dest = join(process.cwd(), entry.source, file.path());
       }
-      // copyFileSync(src, dest);
+      /* Create parent directory at source repository */
+      const parentDir = dirname(dest);
+      if (!existsSync(parentDir)) mkdirp(parentDir);
+      copyFileSync(src, dest);
     }
 
     /* Add */
-    // const idx = await r.refreshIndex();
-    // await idx.addAll();
-    // await idx.write();
-    // const oid = await idx.writeTree();
+    const idx = await r.refreshIndex();
+    await idx.addAll();
+    await idx.write();
+    const oid = await idx.writeTree();
+    const head = await Reference.nameToId(r, "HEAD");
+    const parent = await r.getCommit(head);
 
     // /* Commit */
-    // const author = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
-    // const committer = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
-    // await r.createCommit("HEAD", author, committer, "new commit", oid, []);
+    const author = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
+    const committer = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
+    await r.createCommit("HEAD", author, committer, "new commit", oid, [parent]);
   } catch (err) {
     console.log(err);
   }
 }
 
-async function checkoutBranch(repo, branch) {
+async function checkoutBranch(name, repo, branch) {
   const opts = {
     checkoutStrategy:
-      Checkout.STRATEGY.SAFE || Checkout.STRATEGY.RECREATE_MISSING || Checkout.STRATEGY.ALLOW_CONFLICTS || Checkout.STRATEGY.USE_THEIRS
+      Checkout.STRATEGY.SAFE || Checkout.STRATEGY.RECREATE_MISSING || Checkout.STRATEGY.ALLOW_CONFLICTS || Checkout.STRATEGY.USE_THEIRS,
+    progressCb: (path, checkedOut, total) => {
+      if (total === 0) return;
+      const prefix = "Checking out files: ";
+      const percent = Math.round((checkedOut / total) * 100);
+
+      if (percent === 0) {
+        process.stdout.write(prefix);
+      } else {
+        clearScreenDown(process.stdout);
+      }
+
+      const text = `${percent}% (${checkedOut}/${total})`;
+      process.stdout.write(text);
+
+      if (percent >= 100) {
+        process.stdout.write(", done.\n");
+        process.stdout.write(`Switched repository '${name}' to branch '${branch}'.\n`);
+      } else {
+        moveCursor(process.stdout, -text.length);
+      }
+    }
   };
 
   /* Get remote branch */

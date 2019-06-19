@@ -1,4 +1,4 @@
-import { join, relative } from "path";
+import { join, relative, dirname, sep as pathSep } from "path";
 import { Repository } from "nodegit";
 import { Dependency } from "./config.js";
 
@@ -9,9 +9,10 @@ export class Index {
     /* Process dependency configuration */
     dependencies = dependencies.map(d => Dependency(d));
     return (async () => {
-      const [index, identical] = await loadIndex(dependencies, versions, apply, error);
-      this.index = index;
-      this.identical = identical;
+      // const [index, identical] = await loadIndex(dependencies, versions, apply, error);
+      // this.index = index;
+      // this.identical = identical;
+      [this.index, this.identical] = await loadIndex(dependencies, versions, apply, error);
       return this;
     })();
   }
@@ -42,6 +43,44 @@ export class Index {
   update(path, entry) {
     this.index[path] = entry;
   }
+
+  moved(file) {
+    return {
+      up: () => {
+        return getMovedUpDepth(file);
+      },
+      available: () => {
+        return getAvailableDepth(this, file);
+      },
+      destination: (location = "") => {
+        return getNewDestination(this, location, file);
+      }
+    };
+  }
+}
+
+function getMovedUpDepth(file) {
+  const delta = file["headToIndex"]();
+  const oldFile = delta.oldFile();
+  const newFile = delta.newFile();
+  const moved = relative(dirname(oldFile.path()), newFile.path());
+  const rParentDirs = new RegExp("\\.\\.\\" + pathSep, "g");
+  return (moved.match(rParentDirs) || []).length;
+}
+
+function getAvailableDepth(index, file) {
+  const entry = index.entry(file);
+  const rPathSep = new RegExp("\\" + pathSep, "g");
+  return (join(entry.source, entry.file).match(rPathSep) || []).length;
+}
+
+function getNewDestination(index, location, file) {
+  const entry = index.entry(file);
+  const delta = file["headToIndex"]();
+  const oldFile = delta.oldFile();
+  const newFile = delta.newFile();
+  const dest = relative(oldFile.path(), newFile.path());
+  return join(process.cwd(), location, entry.source, entry.file, dest);
 }
 
 // export async function Index(dependencies, apply = noop, error = noop) {
@@ -80,8 +119,13 @@ async function getFiles(dependency, branch, error = noop) {
     const l = join(process.cwd(), dependency.location);
     const r = await Repository.open(l);
     const c = await r.getBranchCommit(`origin/${branch}`);
-    const e = await c.getEntry(dependency.source);
-    const t = await e.getTree();
+    let t;
+    if (dependency.source === "") {
+      t = await c.getTree();
+    } else {
+      const e = await c.getEntry(dependency.source);
+      t = await e.getTree();
+    }
     files = await walk(dependency.source, dependency.filter, t);
   } catch (err) {
     error(err);
