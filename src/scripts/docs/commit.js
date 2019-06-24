@@ -168,17 +168,29 @@ async function commitFiles(index, repo, branch, status, options) {
     const author = Signature.now(getName(options.author), getEmail(options.author));
     const committer = Signature.now(getName(options.committer), getEmail(options.committer));
     await r.createCommit("HEAD", author, committer, options.message, oid, [parent]);
+    process.stdout.write(`Committing ${files.length} file${files.length === 1 ? "" : "s"}.\n`);
   } catch (err) {
     console.log(err);
   }
 }
 
 async function checkoutBranch(name, repo, branch) {
+  let numFiles;
   const opts = {
     checkoutStrategy:
       Checkout.STRATEGY.SAFE || Checkout.STRATEGY.RECREATE_MISSING || Checkout.STRATEGY.ALLOW_CONFLICTS || Checkout.STRATEGY.USE_THEIRS,
-    progressCb: (path, checkedOut, total, one, two, three) => {
+    perfdataCb: finished => {
+      if (finished) {
+        if (typeof numFiles !== "undefined") process.stdout.write(`100% (${numFiles}/${numFiles}), done.\n`);
+        process.stdout.write(`Switched repository '${name}' to branch '${branch}'.\n`);
+      }
+    },
+    // notifyCb: (one, two, three) => {
+    //   console.log(one, two, three);
+    // },
+    progressCb: (path, checkedOut, total) => {
       if (total === 0) return;
+      numFiles = total;
       const prefix = "Checking out files: ";
       const percent = Math.round((checkedOut / total) * 100);
 
@@ -191,12 +203,13 @@ async function checkoutBranch(name, repo, branch) {
       const text = `${percent}% (${checkedOut}/${total})`;
       process.stdout.write(text);
 
-      if (percent >= 100) {
-        process.stdout.write(", done.\n");
-        process.stdout.write(`Switched repository '${name}' to branch '${branch}'.\n`);
-      } else {
-        moveCursor(process.stdout, -text.length);
-      }
+      // if (percent >= 100) {
+      //   process.stdout.write(", done.\n");
+      //   process.stdout.write(`Switched repository '${name}' to branch '${branch}'.\n`);
+      // } else {
+      //   moveCursor(process.stdout, -text.length);
+      // }
+      moveCursor(process.stdout, -text.length);
     }
   };
 
