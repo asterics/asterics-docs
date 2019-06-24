@@ -68,7 +68,7 @@ export const handler = async options => {
     }
 
     /* Commit all changes to remote submodules */
-    await commit(index);
+    await commit(index, options);
 
     /* Commit all changes to local repository */
   } catch (err) {
@@ -95,12 +95,12 @@ async function proceed() {
   return "n" === (await ask("\nContinue? (Y/n): "));
 }
 
-async function commit(index) {
+async function commit(index, options) {
   const d = join(process.cwd(), config.get("documentation"));
   const r = await Repository.open(d);
   const staged = await getStaged(r);
 
-  console.log("\n");
+  // console.log("\n");
 
   // Iterate repo
   for (const repo of submodules) {
@@ -108,15 +108,18 @@ async function commit(index) {
     const branches = getStagedBranches(repo, b, staged);
     // Iterate branch
     for (const branch of branches) {
-      await commitFiles(index, repo, branch, staged);
+      await commitFiles(index, repo, branch, staged, options);
     }
   }
 
   /* TODO: Commit to temporary repository */
 }
 
-async function commitFiles(index, repo, branch, status) {
+async function commitFiles(index, repo, branch, status, options) {
   try {
+    /* TODO: Get commit message */
+
+    /* Open repository */
     const location = join(process.cwd(), repo.location);
     const r = await Repository.open(location);
 
@@ -151,7 +154,7 @@ async function commitFiles(index, repo, branch, status) {
         /* TODO: Handle case for NEW file */
       } else {
         src = join(process.cwd(), config.get("documentation"), file.path());
-        dest = join(process.cwd(), entry.source, file.path());
+        dest = join(process.cwd(), repo.location, entry.source, entry.file);
       }
       /* Create parent directory at source repository */
       const parentDir = dirname(dest);
@@ -167,9 +170,9 @@ async function commitFiles(index, repo, branch, status) {
     const head = await Reference.nameToId(r, "HEAD");
     const parent = await r.getCommit(head);
 
-    // /* Commit */
-    const author = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
-    const committer = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
+    /* Commit */
+    const author = Signature.now(getName(options.author), getEmail(options.author));
+    const committer = Signature.now(getName(options.committer), getEmail(options.committer));
     await r.createCommit("HEAD", author, committer, "new commit", oid, [parent]);
   } catch (err) {
     console.log(err);
@@ -324,6 +327,7 @@ function verifyOptions(options) {
 }
 
 function isValidUser(name) {
+  /* c.f. https://regex101.com/r/WMGVEF/1 */
   const r = /(?:\s*)?(.*?)(?:\s*)?<(?:\s*)?(.*)(?:\s*)?>/;
   const m = r.exec(name);
   if (m) {
@@ -337,4 +341,16 @@ function isValidUser(name) {
 
 function logInvalidUser(name) {
   process.stdout.write(error(`invalid user: ${name}. Use format: "name <email@domain.org>.`));
+}
+
+function getName(name) {
+  /* c.f. https://regex101.com/r/WMGVEF/1 */
+  const r = /(?:\s*)?(.*?)(?:\s*)?<(?:\s*)?(.*)(?:\s*)?>/;
+  return name.replace(r, (_, name, email) => name);
+}
+
+function getEmail(name) {
+  /* c.f. https://regex101.com/r/WMGVEF/1 */
+  const r = /(?:\s*)?(.*?)(?:\s*)?<(?:\s*)?(.*)(?:\s*)?>/;
+  return name.replace(r, (_, name, email) => email);
 }

@@ -42,6 +42,20 @@ config.load({
       branch: "alija/feature/workflow"
     },
     {
+      repository: "asterics-docs",
+      source: "",
+      destination: ".vuepress/test",
+      filter: /\.(gitignore)$/,
+      branch: "alija/feature/workflow"
+    },
+    {
+      repository: "asterics-docs",
+      source: "src",
+      destination: ".vuepress/tomato",
+      filter: /\.(Jenkinsfile)$/,
+      branch: "alija/feature/workflow"
+    },
+    {
       source: "AsTeRICS:Documentation/docs",
       destination: "",
       filter: /\.(md|jpg|png|svg)$/i,

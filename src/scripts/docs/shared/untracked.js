@@ -1,5 +1,5 @@
 import { createInterface, cursorTo, clearScreenDown } from "readline";
-import { join, isAbsolute, extname, dirname, normalize } from "path";
+import { join, basename, isAbsolute, extname, dirname, normalize } from "path";
 import { Repository, Reference, Status } from "nodegit";
 import { cursorSavePosition, cursorRestorePosition } from "ansi-escapes";
 import { table } from "table";
@@ -415,12 +415,15 @@ function isValidSource(source) {
 }
 
 async function updateSource(selection, source) {
+  let file;
   source = normalize(source);
   if (extname(source) !== "") {
+    file = basename(source);
     source = dirname(source);
   }
   for (let entry of await filterUntrackedSelection(selection)) {
     index[entry.path()] = index[entry.path()] || {};
     index[entry.path()].source = source;
+    index[entry.path()].file = file || basename(entry.path());
   }
 }
