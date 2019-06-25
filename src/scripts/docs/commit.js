@@ -71,6 +71,7 @@ export const handler = async options => {
     await commit(index, options);
 
     /* Commit all changes to local repository */
+    await commitLocal(options);
   } catch (err) {
     process.stdout.write(error(err));
   }
@@ -169,6 +170,24 @@ async function commitFiles(index, repo, branch, status, options) {
     const committer = Signature.now(getName(options.committer), getEmail(options.committer));
     await r.createCommit("HEAD", author, committer, options.message, oid, [parent]);
     process.stdout.write(`Committing ${files.length} file${files.length === 1 ? "" : "s"}.\n`);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function commitLocal(options) {
+  try {
+    const location = join(process.cwd(), config.get("documentation"));
+    const r = await Repository.open(location);
+    const idx = await r.refreshIndex();
+    const oid = await idx.writeTree();
+    const head = await Reference.nameToId(r, "HEAD");
+    const parent = await r.getCommit(head);
+    /* Commit */
+    const author = Signature.now(getName(options.author), getEmail(options.author));
+    const committer = Signature.now(getName(options.committer), getEmail(options.committer));
+    await r.createCommit("HEAD", author, committer, options.message, oid, [parent]);
+    // process.stdout.write(`Committing ${files.length} file${files.length === 1 ? "" : "s"}.\n`);
   } catch (err) {
     console.log(err);
   }
