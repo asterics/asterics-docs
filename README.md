@@ -2,7 +2,6 @@
 
 Documentation of [AsTeRICS](https://github.com/asterics/AsTeRICS.git).
 
-
 ## Dependencies
 
 Install needed dependencies with
@@ -13,107 +12,99 @@ yarn install
 
 ## Release Instructions
 
-Build current release with
+`TODO`: Write instructions
 
-```bash
-yarn run setup
-```
+## Usage Instructions
 
-and locate the result at  `dist/`.
-
-**Note**: enable _verbose_ logging with by setting variable `VERBOSE`
-
-```bash
-VERBOSE=true yarn run setup
-```
-
-## Development Instructions
-
-Setup and build individual versions using the provided `cli` tools (cf. [CLI Reference](#CLI-Reference))
+Setup `asterics-docs` using the provided `docs` tools (cf. [DOCS Reference](#DOCS-Reference))
 
 ```bash
 # Initialize asterics-docs
-$ yarn run cli -- init
+$ yarn docs init
 
-# Index all possible version (cf. src/config/config.js)
-$ yarn run cli -- index
+# Deinitialize asterics-docs
+$ yarn docs init --clean
 
-# Setup docs folder of requested version
-$ yarn run cli -- setup -v 2.3 -o docs/
-
-# Build set up version,..
-$ VERSION=2.3 npx vuepress build docs/ -d dist/
-
-# ..or host it with the development server
-$ VERSION=2.3 npx vuepress dev docs/
+# Setup docs folder
+$ yarn docs setup
 ```
 
-## New Devel (-> Task 135)
+Change and edit files
 
-$ yarn docs init
-$ yarn docs index
-?? $ yarn docs clean aka. yarn docs init --clean
+```bash
+# Show status
+$ yarn docs status
+```
 
-$ yarn docs setup
-$ yarn docs dev
-$ yarn docs build
+Update changes
 
-$ yarn docs diff v2.3 -r AsTeRICS
-$ yarn docs commit v2.3 -r AsTeRICS WebACS
+```bash
+# Add files for commit
+$ yarn docs add <file|folder> [<file|folder> ...]
 
-$ yarn docs convert --html-to-markdown -i file/folder -o file/folder
+# Commit files
+$ yarn docs commit
 
+# Push changes to origin
+$ yarn docs push
+```
 
-* Blog
-* Markdown Syntax Sugar
-* Versions
-* Layouts
-* Fallback for Translation
-* "Help us tranlate..." - Button
-* Rather combine than single versions
+`NOTE`:
+You can inspect and add files without the `docs` tool using `git` in folder setup by the tool.
 
 ## Configuration Reference
 
 Use variables in file `.env` to configure the builds
 
 ```bash
-# Host IP address
+# Deployment
+## Host IP address
 HOST="127.0.0.1"
 
-# Host port number
+## Host port number
 PORT=8000
 
-# Path to documentation on server
+## Path to documentation on server
 ENDPOINT="docs"
+
+# docs tool
+AUTHOR="Max Mustermann <m.mustermann@github.com>"
+COMMITTER="Madeleine Musterfrau <m.musterfrau@github.com>"
 ```
 
-## CLI Reference
+## DOCS Reference
 
-Start CLI tool, either using `yarn`:
+Start `docs` tool using `yarn`:
 
 ```bash
-yarn run cli <command>
+yarn docs <command>
 ```
 
-**Note**: To pass commands and options, use `--` after script command:
+For detailed instructions use:
 
 ```bash
-yarn run cli -- -h
+yarn docs <command> --help
 ```
 
----
-
-Alternatively, launch the script directly, using `node`:
+### DOCS Commands
 
 ```bash
-node src/scripts/cli.js -h
-```
 
-### Commands
+# Main
+yarn docs init
+yarn docs setup
+yarn docs add
+yarn docs commit
+yarn docs push
 
-```bash
-yarn run cli -- init  -h
-yarn run cli -- index -h
-yarn run cli -- setup -h
-yarn run cli -- clean -h
+# Supplementary
+yarn docs status
+yarn docs index
+yarn docs convert
 ```
+### TODO
+
+* yarn docs index: user selected entries
+* yarn docs pull: basic functionality
+* yarn docs push: credential handling
+* yarn docs build/devel: required?
