@@ -2,9 +2,9 @@ const path = require("path");
 const fs = require("fs");
 
 const configPath = path.join(process.cwd(), "src/config/config.js");
-const indexPath = path.join(process.cwd(), "src/config/index.json");
+// const indexPath = path.join(process.cwd(), "src/config/index.json");
 
-const index = require(indexPath);
+// const index = require(indexPath);
 const config = require(configPath);
 
 console.log(`host: ${config.get("host")}`);
@@ -108,8 +108,8 @@ module.exports = {
     editLinks: false,
     store: {
       latest: config.get("latest"),
-      version: config.get("version"),
-      routes: index["routes"]
+      version: config.get("version")
+      // routes: index["routes"]
     },
     nav: [
       { text: "Get Started", link: "/get-started/" },
