@@ -104,7 +104,8 @@ yarn docs convert
 ```
 ### TODO
 
-* yarn docs index: user selected entries
-* yarn docs pull: basic functionality
-* yarn docs push: credential handling
-* yarn docs build/devel: required?
+* `yarn docs index`: user selected entries
+* `yarn docs pull`: basic functionality
+* `yarn docs push`: credential handling
+* `yarn docs build/devel`: required?
+* `config.js`: VERSION mappings
