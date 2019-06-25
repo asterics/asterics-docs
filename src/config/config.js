@@ -42,40 +42,13 @@ config.load({
       branch: "alija/feature/workflow"
     },
     {
-      repository: "asterics-docs",
-      source: "",
-      destination: ".vuepress/test",
-      filter: /\.(gitignore)$/,
-      branch: "alija/feature/workflow"
-    },
-    {
-      repository: "asterics-docs",
-      source: "src",
-      destination: ".vuepress/tomato",
-      filter: /\.(Jenkinsfile)$/,
-      branch: "alija/feature/workflow"
-    },
-    {
       source: "AsTeRICS:Documentation/docs",
       destination: "",
       filter: /\.(md|jpg|png|svg)$/i,
       versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
     },
     {
-      repository: "AsTeRICS",
-      source: "Documentation/docs",
-      destination: "",
-      filter: /\.(md|jpg|png|svg)$/i,
-      versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
-    },
-    {
       source: "AsTeRICS:Documentation/ACS-Help/HTML/ACS",
-      destination: "manuals/ACS",
-      filter: /\.(html?|jpg|png|svg)$/i,
-      versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
-    },
-    {
-      source: "AsTeRICS:Documentation/ACS-Help/HTML/ACCS",
       destination: "manuals/ACS",
       filter: /\.(html?|jpg|png|svg)$/i,
       versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
