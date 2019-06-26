@@ -142,7 +142,7 @@
         </div>
       </b-card>
     </div>
-    <b-toast auto-hide-delay="5000" :id="startInfo.id" variant="info" solid>
+    <b-toast no-auto-hide :id="startInfo.id" variant="info" solid>
       <div slot="toast-title" class="d-flex flex-grow-1 align-items-baseline">
         <b-img blank blank-color="#42b983" class="mr-2" width="12" height="12"></b-img>
         <strong class="mr-auto">Firefox User Information</strong>
