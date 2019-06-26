@@ -148,10 +148,15 @@
         <strong class="mr-auto">Firefox User Information</strong>
       </div>
       <div>
-        Please make sure that you've added an exception for the ARE webserver.
-        Make sure an
-        <strong>ARE</strong> is running and open the link
-        <a :href="areWebserver" target="_blank">{{areWebserver}}</a> to add an exception for the local webserver.
+        Firefox cannot access {{areWebserver}}.
+        To grant access, execute the following steps:
+        <ol>
+          <li>
+            Open link
+            <a :href="areWebserver" target="_blank">{{areWebserver}}</a>
+          </li>
+          <li>Add exception</li>
+        </ol>
       </div>
     </b-toast>
   </div>
