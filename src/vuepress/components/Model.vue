@@ -338,18 +338,12 @@ export default {
           .substr(2, 9);
     },
     osIcon(os) {
-      os = os.toLowerCase();
       let icon = ["fas", "desktop"];
-      if (os === "windows") {
+      if (os.match(/^windows/i)) {
         icon = ["fab", "windows"];
-      } else if (os === "linux") {
+      } else if (os.match(/^(linux|ubuntu|debian)/i)) {
         icon = ["fab", "linux"];
-      } else if (
-        os === "mac" ||
-        os === "apple" ||
-        os === "ios" ||
-        os === "macos"
-      ) {
+      } else if (os.match(/^(mac|apple|ios)/i)) {
         icon = ["fab", "apple"];
       }
       return icon;
