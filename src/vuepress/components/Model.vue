@@ -45,7 +45,7 @@
                     role="button"
                     class="model-title-tag-platform model-text"
                   >
-                    <font-awesome-icon icon="universal-access"/>
+                    <font-awesome-icon :icon="osIcon(sys)"/>
                     <span>{{sys}}</span>
                   </b-badge>
                 </div>
@@ -336,6 +336,23 @@ export default {
         Math.random()
           .toString(36)
           .substr(2, 9);
+    },
+    osIcon(os) {
+      os = os.toLowerCase();
+      let icon = ["fas", "desktop"];
+      if (os === "windows") {
+        icon = ["fab", "windows"];
+      } else if (os === "linux") {
+        icon = ["fab", "linux"];
+      } else if (
+        os === "mac" ||
+        os === "apple" ||
+        os === "ios" ||
+        os === "macos"
+      ) {
+        icon = ["fab", "apple"];
+      }
+      return icon;
     }
   },
   mounted() {
