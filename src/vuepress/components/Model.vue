@@ -165,7 +165,6 @@
 
 <script>
 import bowser from "bowser";
-import platform from "platform";
 import ModelInput from "./ModelInput.vue";
 export default {
   components: {
@@ -291,18 +290,15 @@ export default {
           console.log(status, error);
 
           if (error == "Internal Server Error") {
-            if (!this.os.includes(platform.os.family)) {
-              this.$bvToast.toast(
-                `This plugin is only supported on: ${this.os.join(" ")}. ${
-                  platform.os.family
-                } is unfortunately not included.`,
-                {
-                  title: "Unsupported Operating System",
-                  variant: "info",
-                  solid: true
-                }
-              );
-            }
+            this.$bvToast.toast(
+              `This plugin is only supported on: ${this.os.join(" ")}.
+              Please check the operating system of the computer running the ARE.`,
+              {
+                title: "Potentially unsupported OS (Operating System)",
+                variant: "info",
+                solid: true
+              }
+            );
           }
 
           if (error == "Network Error") {
