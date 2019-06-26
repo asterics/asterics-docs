@@ -41,9 +41,10 @@
                   <b-badge
                     v-for="sys in os"
                     :key="sys"
-                    variant="info"
+                    tabindex="0"
                     role="button"
                     class="model-title-tag-platform model-text"
+                    variant="info"
                   >
                     <font-awesome-icon :icon="osIcon(sys)"/>
                     <span>{{sys}}</span>
@@ -107,7 +108,7 @@
               v-if="modelType === 'model'"
               label="ARE"
               v-model="settings.are"
-              :defaults="settings.default.are"
+              :defaults="securedConnection ? settings.default.areSecure : settings.default.are"
             >
               <template slot="tool-tip">
                 <strong>URL</strong> to use for
