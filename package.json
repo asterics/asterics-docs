@@ -11,7 +11,9 @@
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
     "setup": "node src/scripts/setup.js",
-    "cli": "node src/scripts/cli.js"
+    "cli": "node src/scripts/cli.js",
+    "docs": "babel-node --config-file ./babel.config.js src/scripts/docs.js",
+    "compile": "babel src/scripts --out-dir debug --source-maps --watch"
   },
   "repository": {
     "type": "git",
@@ -32,9 +34,14 @@
   "devDependencies": {
     "@asterics/git-tools": "^0.1.7",
     "@asterics/node-utils": "^0.2.0",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "@vuepress/plugin-active-header-links": "^1.0.0-alpha.0",
     "@vuepress/plugin-back-to-top": "^1.0.0-alpha.0",
     "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.0",
     "@vuepress/plugin-pwa": "^1.0.0-alpha.0",
+    "chalk": "^2.4.2",
     "convict": "^4.4.1",
     "dotenv": "^6.2.0",
     "nodegit": "^0.24.0",
@@ -44,5 +51,10 @@
     "vuepress": "^1.0.0-alpha.0",
     "yargs": "^12.0.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "ansi-escapes": "^4.1.0",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.14",
+    "table": "^5.4.0"
+  }
 }

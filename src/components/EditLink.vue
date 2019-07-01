@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br>
     <a
       target="_blank"
       :href="editLink(decodeURIComponent(this.$route.path))"

@@ -7,88 +7,105 @@ Documentation of [AsTeRICS](https://github.com/asterics/AsTeRICS.git).
 Install needed dependencies with
 
 ```bash
-npm install
+yarn install
 ```
 
 ## Release Instructions
 
-Build current release with
+`TODO`: Write instructions
 
-```bash
-npm run setup
-```
+## Usage Instructions
 
-and locate the result at  `dist/`.
-
-**Note**: enable _verbose_ logging with by setting variable `VERBOSE`
-
-```bash
-VERBOSE=true npm run setup
-```
-
-## Development Instructions
-
-Setup and build individual versions using the provided `cli` tools (cf. [CLI Reference](#CLI-Reference))
+Setup `asterics-docs` using the provided `docs` tools (cf. [DOCS Reference](#DOCS-Reference))
 
 ```bash
 # Initialize asterics-docs
-$ npm run cli -- init
+$ yarn docs init
 
-# Index all possible version (cf. src/config/config.js)
-$ npm run cli -- index
+# Deinitialize asterics-docs
+$ yarn docs init --clean
 
-# Setup docs folder of requested version
-$ npm run cli -- setup -v 2.3 -o docs/
-
-# Build set up version,..
-$ VERSION=2.3 npx vuepress build docs/ -d dist/
-
-# ..or host it with the development server
-$ VERSION=2.3 npx vuepress dev docs/
+# Setup docs folder
+$ yarn docs setup
 ```
+
+Change and edit files
+
+```bash
+# Show status
+$ yarn docs status
+```
+
+Update changes
+
+```bash
+# Add files for commit
+$ yarn docs add <file|folder> [<file|folder> ...]
+
+# Commit files
+$ yarn docs commit
+
+# Push changes to origin
+$ yarn docs push
+```
+
+`NOTE`:
+You can inspect and add files without the `docs` tool using `git` in folder setup by the tool.
 
 ## Configuration Reference
 
 Use variables in file `.env` to configure the builds
 
 ```bash
-# Host IP address
+# Deployment
+## Host IP address
 HOST="127.0.0.1"
 
-# Host port number
+## Host port number
 PORT=8000
 
-# Path to documentation on server
+## Path to documentation on server
 ENDPOINT="docs"
+
+# docs tool
+AUTHOR="Max Mustermann <m.mustermann@github.com>"
+COMMITTER="Madeleine Musterfrau <m.musterfrau@github.com>"
 ```
 
-## CLI Reference
+## DOCS Reference
 
-Start CLI tool, either using `npm`:
+Start `docs` tool using `yarn`:
 
 ```bash
-npm run cli <command>
+yarn docs <command>
 ```
 
-**Note**: To pass commands and options, use `--` after script command:
+For detailed instructions use:
 
 ```bash
-npm run cli -- -h
+yarn docs <command> --help
 ```
 
----
-
-Alternatively, launch the script directly, using `node`:
+### DOCS Commands
 
 ```bash
-node src/scripts/cli.js -h
-```
 
-### Commands
+# Main
+yarn docs init
+yarn docs setup
+yarn docs add
+yarn docs commit
+yarn docs push
 
-```bash
-npm run cli -- init  -h
-npm run cli -- index -h
-npm run cli -- setup -h
-npm run cli -- clean -h
+# Supplementary
+yarn docs status
+yarn docs index
+yarn docs convert
 ```
+### TODO
+
+* `yarn docs index`: user selected entries
+* `yarn docs pull`: basic functionality
+* `yarn docs push`: credential handling
+* `yarn docs build/devel`: required?
+* `config.js`: VERSION mappings
