@@ -1,0 +1,9 @@
+{
+  "name": "@asterics/vuepress-theme-docs",
+  "version": "1.0.0-alpha.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@vuepress/theme-default": "^1.0.0-alpha.47"
+  }
+}

@@ -2,9 +2,9 @@ const path = require("path");
 const fs = require("fs");
 
 const configPath = path.join(process.cwd(), "src/config/config.js");
-// const indexPath = path.join(process.cwd(), "src/config/index.json");
+const indexPath = path.join(process.cwd(), "src/config/index.json");
 
-// const index = require(indexPath);
+const index = require(indexPath);
 const config = require(configPath);
 
 console.log(`host: ${config.get("host")}`);
@@ -20,9 +20,10 @@ module.exports = {
   port: config.get("port"),
   base: config.get("endpoint"),
   dest: config.get("destination"),
+  theme: "@asterics/docs",
   shouldPrefetch: (file, type) => {
     //console.log("shouldPrefetch: " + file);
-    return false;
+    return true;
     // type is inferred based on the file extension.
     // https://fetch.spec.whatwg.org/#concept-request-destination
     if (type === "script" || type === "style") {
@@ -37,7 +38,38 @@ module.exports = {
       return file === "hero.jpg";
     }
   },
-  title: "AsTeRICS",
+  extendMarkdown: md => {
+    md.set({ breaks: true, typographer: true, linkify: true });
+    md.use(require("markdown-it-sub"));
+    md.use(require("markdown-it-sup"));
+    md.use(require("markdown-it-footnote"));
+    md.use(require("markdown-it-deflist"));
+    md.use(require("markdown-it-abbr"));
+    md.use(require("markdown-it-emoji"));
+    // md.use(require("markdown-it-mark"));
+
+    md.use(require("markdown-it-checkbox"));
+    md.use(require("markdown-it-imsize"), { autofill: true });
+    md.use(require("markdown-it-kbd"));
+    // md.use(require("markdown-it-container"), "spoiler", {
+    //   validate: function(params) {
+    //     return params.trim().match(/^spoiler\s+(.*)$/);
+    //   },
+
+    //   render: function(tokens, idx) {
+    //     var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/);
+
+    //     if (tokens[idx].nesting === 1) {
+    //       // opening tag
+    //       return '<details style="background-color: red;"><summary>' + md.utils.escapeHtml(m[1]) + "</summary>\n";
+    //     } else {
+    //       // closing tag
+    //       return "</details>\n";
+    //     }
+    //   }
+    // });
+  },
+  title: "Home",
   description: "Customized Low-Cost Assistive Technologies",
   head: [
     [
@@ -102,20 +134,21 @@ module.exports = {
   themeConfig: {
     // repo: "asterics/AsTeRICS",
     // repoLabel: "Repository!",
+    // logo: "/assets/img/asterics-logo.svg",
     docsRepo: "asterics/AsTeRICS",
     docsDir: "Documentation/docs",
     docsBranch: "master",
     editLinks: false,
     store: {
       latest: config.get("latest"),
-      version: config.get("version")
-      // routes: index["routes"]
+      version: config.get("version"),
+      routes: index["routes"]
     },
     nav: [
       { text: "Get Started", link: "/get-started/" },
       { text: "Solutions", link: "/solutions/" },
       { text: "Customize", link: "/customize/" },
-      { text: "Plugins", link: "/plugins/Introduction" },
+      { text: "Plugins", link: "/plugins/" },
       { text: "Develop", link: "/develop/" },
       {
         text: "More",
@@ -123,9 +156,9 @@ module.exports = {
           {
             text: "Manuals",
             items: [
-              { text: "WebACS", link: "/manuals/WebACS/ACS_Basic_Functions" },
-              { text: "ACS", link: "/manuals/ACS/ACS_Basic_Functions" },
-              { text: "ARE", link: "/manuals/ARE/ARE_Introduction" }
+              { text: "WebACS", link: "/manuals/WebACS/" },
+              { text: "ACS", link: "/manuals/ACS/" }
+              // { text: "ARE", link: "/manuals/ARE/" }
             ]
           },
           {
@@ -133,11 +166,11 @@ module.exports = {
             items: [
               {
                 text: "WebACS",
-                link: "http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081"
+                link: "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081"
               },
               {
                 text: "AsTeRICS Grid",
-                link: "https://asterics.github.io/AsTeRICS-Grid/package/static/#main"
+                link: "https://grid.asterics.eu"
               }
             ]
           },
@@ -146,15 +179,20 @@ module.exports = {
             items: [
               { text: "About us", link: "/get-involved/About-us" },
               { text: "Contact", link: "/get-involved/Contact" },
-              { text: "Contribute", link: "/get-involved/Contribute" }
+              { text: "Contribute", link: "/get-involved/Contribute" },
+              { text: "Legal Notice", link: "/get-involved/Legal-Notice" }
             ]
           }
         ]
       },
-      {
-        text: "Languages",
-        items: [{ text: "English", link: "/" }, { text: "German", link: "/de/" }]
-      },
+      // as long as there is just 1 language, comment it out
+      // {
+      //   text: "Languages",
+      //   items: [
+      //     { text: "English", link: "/" },
+      //     { text: "German", link: "/de/" }
+      //   ]
+      // },
       {
         text: "Download",
         link: "https://github.com/asterics/AsTeRICS/releases/latest"
@@ -167,9 +205,9 @@ module.exports = {
           title: "Get Started",
           collapsable: false,
           children: [
-            ["Development-Environment", "Development Environment"],
-            ["Coding-Guidelines", "Coding Guidelines"],
-            ["Unit-Testing", "Unit Testing"]
+            ["Development-Environment", "Development Environment"]
+            //   ["Coding-Guidelines", "Coding Guidelines"],
+            //   ["Unit-Testing", "Unit Testing"]
           ]
         },
         {
@@ -209,15 +247,27 @@ module.exports = {
         location: path.join(config.get("documentation"), "plugins"),
         pre: [],
         post: [],
-        exclude: []
+        excludeFiles: [/README\.md/]
       }),
       "/manuals/": loadSidebarFrom({
         location: path.join(config.get("documentation"), "manuals"),
         pre: [],
         post: [],
-        exclude: []
+        exclude: [/ARE/],
+        excludeFiles: [/README\.md/]
       }),
-      "/customize/": [["Model-Customization", "Model Customization"], ["Model-Creation", "Model Creation"]]
+      "/customize/": [
+        {
+          title: "Model",
+          collapsable: false,
+          children: [["Model-Customization", "Customization"], ["Model-Creation", "Creation"]]
+        },
+        {
+          title: "AsTeRICS Grid",
+          collapsable: false,
+          children: [["Grid-Customization", "Customization"], ["Grid-Creation", "Creation"]]
+        }
+      ]
     },
     sidebarDepth: 3,
     diplayAllHeaders: true, // default
@@ -225,7 +275,7 @@ module.exports = {
   }
 };
 
-function loadSidebarFrom({ location, pre, post, exclude }) {
+function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
@@ -245,12 +295,15 @@ function loadSidebarFrom({ location, pre, post, exclude }) {
     children = children.filter(child => /.*md$/.test(child));
 
     /* Remove file extension */
+    children = children.filter(e => !excludeFiles.some(r => r.test(e)));
     children = children.map(child => child.replace(/\.md$/, ""));
 
     /* Construct arrays containing link and title */
     children = children.map(child => {
       let title = child.replace(/_/g, " ");
       let link = `${e.title}/${child}`;
+
+      //console.log(`title: ${title}, link: ${link}`);
 
       return [link, capitalize(title)];
     });

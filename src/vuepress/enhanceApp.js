@@ -1,8 +1,8 @@
-import Vue from "vue";
-import BootstrapVue from "bootstrap-vue";
+import "./styles/main.scss";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
+import { store } from "./plugins/store";
+import "./plugins/bootstrap";
+import "./plugins/icons";
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app
@@ -10,5 +10,5 @@ export default ({
   router, // the router instance for the app
   siteData // site metadata
 }) => {
-  Vue.use(BootstrapVue);
+  options.store = store;
 };

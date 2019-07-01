@@ -4,43 +4,14 @@
 .sidebar 
     width 20rem
 
-.content.default 
-    max-width 70%
+@media screen and (max-width: 1024px)
+    .content 
+        max-width 80% !important
+        transition max-width 0.5s ease-out
 
-.myjumbotron 
-    overflow-wrap: break-word
-    word-wrap: break-word
-    hyphens: auto
-    display: inline-block
-    width: 100%
-
-.badge
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.badge-primary
-    background-color: #0ea1d2
-    border-color: #0ea1d2    
-
-.button
-    outline-color: #0ea1d2
-    color: #0ea1d2
-
-.btn
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.btn-primary
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.btn-secondary
-    background-color: #0ea1d2
-    border-color: #0ea1d2
-
-.btn-success
-    background-color: #0ea1d2
-    border-color: #0ea1d2    
+@media screen and (max-width: 768px)
+    .content 
+        max-width 99% !important
 
 .nav-link
     padding: 0
@@ -48,4 +19,8 @@
 :focus 
     outline-width: 3px
     outline-style: solid
-    outline-color: #0ea1d2
+    outline-color: $info
+
+#app > div.theme-container.no-sidebar > header > div.links > nav > div:nth-child(6) > div > ul > li {
+    background-color: white
+}
