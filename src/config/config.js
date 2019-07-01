@@ -10,7 +10,7 @@ const convict = require("convict"),
 
 /* Load configuration */
 config.load({
-  versions: ["2.6", "2.7", "2.8", "3.0", "3.0.1", "4.0"],
+  versions: ["4.0", "latest"],
   submodules: [
     {
       name: "asterics-docs",
@@ -39,19 +39,13 @@ config.load({
       source: "src/vuepress",
       destination: ".vuepress",
       filter: /\.*/,
-      branch: "alija/feature/workflow"
+      branch: "master"
     },
     {
       source: "AsTeRICS:Documentation/docs",
       destination: "",
       filter: /\.(md|jpg|png|svg)$/i,
-      versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
-    },
-    {
-      source: "AsTeRICS:Documentation/ACS-Help/HTML/ACS",
-      destination: "manuals/ACS",
-      filter: /\.(html?|jpg|png|svg)$/i,
-      versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
+      versions: [["4.0", "pre-3.1"], ["latest", "master"]]
     },
     {
       repository: "WebACS",
