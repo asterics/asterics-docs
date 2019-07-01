@@ -10,10 +10,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
+    "build-scripts": "mkdir -p ./.cache/scripts && babel ./src/scripts -d ./.cache/scripts -s",
+    "clean": "rm -rf ./.cache",
     "setup": "node src/scripts/setup.js",
     "cli": "node src/scripts/cli.js",
-    "docs": "babel-node --config-file ./babel.config.js src/scripts/docs.js",
-    "compile": "babel src/scripts --out-dir debug --source-maps --watch"
+    "docsy": "babel-node --config-file ./babel.config.js src/scripts/docs.js",
+    "compile": "babel src/scripts --out-dir debug --source-maps --watch",
+    "docs": "node ./.cache/scripts/docs.js",
+    "build:scripts": "babel ./src/scripts -d ./.cache/scripts -s",
+    "clean:scripts": "rm -rf .cache/",
+    "watch:scripts": "",
+    "preinstall": "yarn clean:scripts",
+    "postinstall": "yarn build:scripts"
   },
   "repository": {
     "type": "git",
@@ -46,7 +54,6 @@
     "dotenv": "^6.2.0",
     "nodegit": "^0.24.0",
     "rimraf": "^2.6.3",
-    "shelljs": "^0.8.3",
     "turndown": "^5.0.3",
     "vuepress": "^1.0.0-alpha.0",
     "yargs": "^12.0.5"

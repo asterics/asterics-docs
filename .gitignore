@@ -1,4 +1,5 @@
 # Ignore
+
 ## Globals
 .audits/
 .certs/
@@ -8,6 +9,7 @@ node_modules/
 ## Root
 /docs*
 /dist*
+/.cache/
 
 ## Configuration
 src/config/.env

@@ -4,6 +4,7 @@ import { sync as rmdir } from "rimraf";
 import chalk from "chalk";
 import { ensureGitSubmodule } from "@asterics/git-tools";
 import { info, success } from "./shared/logger.js";
+import { Repository, Submodule, Checkout } from "nodegit";
 
 const configPath = join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
@@ -19,15 +20,15 @@ export const builder = yargs => {
       describe: "Print processing information to stdout",
       type: "boolean"
     },
-    c: { alias: "clean", describe: "Reset and cleanup asterics-docs." }
+    c: { alias: ["clean", "revert"], describe: "Reset and cleanup asterics-docs." }
   });
 };
-export const handler = options => {
+export const handler = async options => {
   options.verbose = config.get("verbose") || options.verbose;
   if (options.clean) {
     clean(options);
   } else {
-    init(options);
+    await init(options);
   }
 };
 
@@ -52,7 +53,7 @@ function clean(options) {
   log(s, "Deleted");
 }
 
-function init(options) {
+function init2(options) {
   let s = [];
   process.stdout.write(info("Initializing asterics-docs."));
   for (let { name, location, reference, branch } of config.get("submodules")) {
@@ -64,6 +65,33 @@ function init(options) {
   }
 
   log(s, "Updated");
+}
+
+async function init(options) {
+  const location = join(process.cwd());
+  const repo = await Repository.open(location);
+  // const submodules = await repo.getSubmoduleNames();
+  // submodules.map(s => console.log(s));
+  // console.log(submodules);
+
+  Submodule.foreach(repo, submodule => {
+    console.log(`Updating ${submodule.name()}`);
+    submodule
+      .update(1, {
+        // allowFetch: 0,
+        checkoutOpts: {
+          // ancestorLabel: "",
+          // baseline: "",
+          // baselineIndex: "",
+          checkoutStrategy: Checkout.STRATEGY.UPDATE_ONLY
+        }
+        // fetchOpts: "FetchOptions",
+        // version: 0
+      })
+      .then(number => {
+        console.log(number);
+      });
+  });
 }
 
 function reset(options, lines) {
