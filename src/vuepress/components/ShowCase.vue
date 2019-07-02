@@ -53,7 +53,7 @@ export default {
   methods: {
     order: function(placeLeft) {
       if (typeof screen !== "undefined" && screen.width < 789) {
-        return left ? 1 : 2;
+        return this.left ? 1 : 2;
       } else {
         if (placeLeft) {
           return this.left ? 1 : 2;
