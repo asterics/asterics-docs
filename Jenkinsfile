@@ -53,7 +53,7 @@ pipeline {
               yarn
               yarn docs init --verbose
               yarn docs setup --verbose
-              npx vuepress $DOCUMENTATION
+              yarn build
             '''
           }
         }
@@ -79,7 +79,7 @@ pipeline {
               yarn
               yarn docs init --verbose
               yarn docs setup --verbose
-              npx vuepress $DOCUMENTATION
+              yarn build
             '''
           }
         }
@@ -105,7 +105,7 @@ pipeline {
               yarn
               yarn docs init --verbose
               yarn docs setup --verbose
-              npx vuepress $DOCUMENTATION
+              yarn build
             '''
           }
         }
