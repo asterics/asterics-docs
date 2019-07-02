@@ -50,8 +50,10 @@ pipeline {
           }
           steps {
             sh '''
-              yarn install
-              yarn setup
+              yarn
+              yarn docs init --verbose
+              yarn docs setup --verbose
+              yarn build
             '''
           }
         }
@@ -74,8 +76,10 @@ pipeline {
           }
           steps {
             sh '''
-              yarn install
-              yarn setup
+              yarn
+              yarn docs init --verbose
+              yarn docs setup --verbose
+              yarn build
             '''
           }
         }
@@ -98,8 +102,10 @@ pipeline {
           }
           steps {
             sh '''
-              yarn install
-              yarn setup
+              yarn
+              yarn docs init --verbose
+              yarn docs setup --verbose
+              yarn build
             '''
           }
         }
