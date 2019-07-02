@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "[ -z \"${DESTINATION}\" ] && DESTINATION=docs; vuepress dev $DESTINATION",
-    "build": "[ -z \"${DESTINATION}\" ] && DESTINATION=docs; vuepress build $DESTINATION",
+    "dev": "[ -z \"${DOCUMENTATION}\" ] && DOCUMENTATION=docs; vuepress dev $DOCUMENTATION",
+    "build": "[ -z \"${DOCUMENTATION}\" ] && DOCUMENTATION=docs; vuepress build $DOCUMENTATION",
     "setup": "node src/scripts/setup.js",
     "cli": "node src/scripts/cli.js",
     "docs": "babel-node --config-file ./babel.config.js src/scripts/docs.js",
