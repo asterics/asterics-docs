@@ -4,6 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@vuepress/theme-default": "^1.0.0-alpha.47"
+    "@vuepress/theme-default": "^1.0.2"
   }
 }
