@@ -79,7 +79,9 @@ pipeline {
               yarn
               yarn docs init --verbose
               yarn docs setup --verbose
+              env
               yarn build
+              env
             '''
           }
         }
