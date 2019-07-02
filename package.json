@@ -10,8 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "[ -z \"${DOCUMENTATION}\" ] && DOCUMENTATION=docs; vuepress dev $DOCUMENTATION",
     "build": "[ -z \"${DOCUMENTATION}\" ] && DOCUMENTATION=docs; vuepress build $DOCUMENTATION",
-    "setup": "node src/scripts/setup.js",
-    "cli": "node src/scripts/cli.js",
+    "postbuild": "node src/scripts/logBuild.js",
     "docs": "babel-node --config-file ./babel.config.js src/scripts/docs.js",
     "compile": "babel src/scripts --out-dir debug --source-maps --watch"
   },
