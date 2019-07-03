@@ -44,7 +44,7 @@ pipeline {
           environment {
             FATALITY = true
             VERBOSE = true
-            ENDPOINT = ""
+            ENDPOINT = "/"
             DOCUMENTATION = "docs"
             DESTINATION = "dist"
           }
@@ -79,13 +79,7 @@ pipeline {
               yarn
               yarn docs init --verbose
               yarn docs setup --verbose
-              env | grep ENDPOINT
-              env | grep DOCUMENTATION
-              env | grep DESTINATION
               yarn build
-              env | grep ENDPOINT
-              env | grep DOCUMENTATION
-              env | grep DESTINATION
             '''
           }
         }
@@ -102,7 +96,7 @@ pipeline {
           environment {
             FATALITY = true
             VERBOSE = true
-            ENDPOINT = ""
+            ENDPOINT = "/"
             DOCUMENTATION = "docs-deploy-io"
             DESTINATION = "dist-deploy-io"
           }
