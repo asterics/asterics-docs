@@ -70,7 +70,7 @@ pipeline {
           environment {
             FATALITY = true
             VERBOSE = true
-            ENDPOINT = "docs"
+            ENDPOINT = "/docs"
             DOCUMENTATION = "docs-deploy"
             DESTINATION = "dist-deploy"
           }
