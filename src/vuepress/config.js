@@ -69,7 +69,7 @@ module.exports = {
     //   }
     // });
   },
-  title: "Home",
+  title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
   head: [
     [

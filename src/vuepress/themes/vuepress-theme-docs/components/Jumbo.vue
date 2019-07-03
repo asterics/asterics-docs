@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br>
+    <br />
     <!-- <b-jumbotron class="jumbo" bg-variant="info" border-variant="dark" text-variant="white" fluid> -->
     <b-jumbotron class="jumbo" text-variant="black" fluid>
       <template slot="header">
