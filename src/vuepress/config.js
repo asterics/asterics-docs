@@ -126,14 +126,14 @@ module.exports = {
       selector: ".content img"
     },
     "@vuepress/back-to-top": {},
-    // "@vuepress/pwa": {
-    //   serviceWorker: true,
-    //   popupComponent: "AstericsSWUpdatePopup",
-    //   updatePopup: {
-    //     message: "New content is available.",
-    //     buttonText: "Refresh"
-    //   }
-    // },
+    "@vuepress/pwa": {
+      serviceWorker: true,
+      popupComponent: "AstericsSWUpdatePopup",
+      updatePopup: {
+        message: "New content is available.",
+        buttonText: "Refresh"
+      }
+    },
     "@vuepress/active-header-links": {
       sidebarLinkSelector: ".sidebar-link",
       headerAnchorSelector: ".header-anchor",
