@@ -6,14 +6,18 @@
       <template slot="header">
         <span class="jumbo-header">AsTeRICS</span>
       </template>
-      <template
-        slot="lead"
-      >Create Customized Low-Cost Assistive Technologies for People with Disabilities.</template>
+      <template slot="lead">
+        <span
+          class="jumbo-body"
+        >Create Customized Low-Cost Assistive Technologies for People with Disabilities.</span>
+      </template>
 
-      <p>Are you looking for special solutions to use a computer, control your environment or play games?</p>
+      <p
+        class="jumbo-footer"
+      >Are you looking for special solutions to use a computer, control your environment or play games?</p>
       <!-- <b-button-group> -->
-      <b-button variant="primary" href="./solutions/">Discover Solutions</b-button>
-      <b-button variant="info" href="get-started/">Get Started</b-button>
+      <b-button class="jumbo-btn" variant="primary" href="./solutions/">Discover Solutions</b-button>
+      <b-button class="jumbo-btn" variant="info" href="get-started/">Get Started</b-button>
       <!-- </b-button-group> -->
       <!-- <b-img class="logo" left src="/assets/img/asterics-logo.svg" fluid alt="AsTeRICS Logo"></b-img> -->
     </b-jumbotron>
@@ -87,6 +91,32 @@ export default {};
     // width: 55%;
     // transition: width 0.5s ease-out;
     // transition: margin 0.5s ease-out;
+  }
+}
+
+@media screen and (max-width: 456px) {
+  .jumbo-header {
+    display: none;
+  }
+
+  .jumbo-body {
+    font-size: 1.5rem;
+  }
+
+  .jumbo-footer {
+    padding-top: 2rem;
+    font-size: 1.25rem;
+  }
+
+  .jumbo {
+    padding-top: 4rem;
+    padding-bottom: 30rem;
+  }
+
+  .jumbo-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    font-size: 1.45rem;
   }
 }
 </style>
