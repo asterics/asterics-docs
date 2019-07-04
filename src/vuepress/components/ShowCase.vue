@@ -15,6 +15,7 @@
         </b-col>
       </b-row>
     </b-card>
+    <br />
   </b-col>
 </template>
 
@@ -78,7 +79,6 @@ export default {
   padding: 0;
   margin: 0;
   margin-bottom: 2rem;
-  min-width: 600px;
 }
 
 @media screen and (min-width: 1290px) {
