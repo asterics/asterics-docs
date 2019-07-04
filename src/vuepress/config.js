@@ -2,9 +2,6 @@ const path = require("path");
 const fs = require("fs");
 
 const configPath = path.join(process.cwd(), "src/config/config.js");
-// const indexPath = path.join(process.cwd(), "src/config/index.json");
-
-// const index = require(indexPath);
 const config = require(configPath);
 
 console.log(`host: ${config.get("host")}`);
@@ -46,28 +43,9 @@ module.exports = {
     md.use(require("markdown-it-deflist"));
     md.use(require("markdown-it-abbr"));
     md.use(require("markdown-it-emoji"));
-    // md.use(require("markdown-it-mark"));
-
     md.use(require("markdown-it-checkbox"));
     md.use(require("markdown-it-imsize"), { autofill: true });
     md.use(require("markdown-it-kbd"));
-    // md.use(require("markdown-it-container"), "spoiler", {
-    //   validate: function(params) {
-    //     return params.trim().match(/^spoiler\s+(.*)$/);
-    //   },
-
-    //   render: function(tokens, idx) {
-    //     var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/);
-
-    //     if (tokens[idx].nesting === 1) {
-    //       // opening tag
-    //       return '<details style="background-color: red;"><summary>' + md.utils.escapeHtml(m[1]) + "</summary>\n";
-    //     } else {
-    //       // closing tag
-    //       return "</details>\n";
-    //     }
-    //   }
-    // });
   },
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
@@ -112,19 +90,50 @@ module.exports = {
     ["meta", { name: "msapplication-TileColor", content: "#2b5797" }],
     ["meta", { name: "theme-color", content: "#ffffff" }]
   ],
+  chainWebpack: (config, isServer) => {
+    if (!isServer) {
+      // config.module
+      //   .rule("scss")
+      //   .oneOf("normal")
+      //   .uses.store.get("sass-loader")
+      //   .options({
+      //     data: "$env: 455px;"
+      //   });
+      // config.module
+      //   .rule("scss")
+      //   .oneOf("normal")
+      //   .use("scss")
+      //   .loader("sass-loader")
+      //   .tap(() => {
+      //     return {
+      //       data: "env"
+      //     };
+      //   });
+      // config.module
+      //   .rule("stylus")
+      //   .oneOf("normal")
+      //   .use("stylus")
+      //   .loader("string-replace-loader")
+      //   .options({
+      //     search: "$env",
+      //     replace: "455px;"
+      //   });
+      // storeWebpackConfig(config, (isServer ? "server" : "client") + "WebPackConfig.json");
+    }
+  },
   plugins: {
     "@vuepress/medium-zoom": {
       selector: ".content img"
     },
     "@vuepress/back-to-top": {},
-    "@vuepress/pwa": {
-      serviceWorker: true,
-      popupComponent: "AstericsSWUpdatePopup",
-      updatePopup: {
-        message: "New content is available.",
-        buttonText: "Refresh"
-      }
-    },
+    // "@vuepress/pwa": {
+    //   serviceWorker: true,
+    //   popupComponent: "AstericsSWUpdatePopup",
+    //   updatePopup: {
+    //     message: "New content is available.",
+    //     buttonText: "Refresh"
+    //   }
+    // },
     "@vuepress/active-header-links": {
       sidebarLinkSelector: ".sidebar-link",
       headerAnchorSelector: ".header-anchor",
@@ -322,4 +331,19 @@ function capitalize(words) {
     .split(" ")
     .map(word => [word.charAt(0).toUpperCase(), word.slice(1)].join(""))
     .join(" ");
+}
+
+function storeWebpackConfig(config, file) {
+  const filename = path.join(process.cwd(), file);
+  let cfg = config.toConfig();
+  writeWebpackConfigToFile(filename, cfg);
+  console.log("Writing configuration");
+}
+
+function replace(name, val) {
+  return val && val.constructor === RegExp ? val.toString() : val;
+}
+
+function writeWebpackConfigToFile(filename, config) {
+  fs.writeFileSync(filename, JSON.stringify(config, replace, 2), "utf-8");
 }
