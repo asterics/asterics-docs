@@ -1,6 +1,15 @@
 // Define your variable overrides here
 $enable-shadows: true;
 // $enable-gradients: true;
+// responsive breakpoints
+// NOTE:
+// Changes of these breakpoints should be
+// aligned with the breakpoints defined
+// in palette.styl.
+//
+// Because of differing syntax, there is
+// currently no clean and easy solution,
+// except for this comment.
 $grid-breakpoints: (
   xs: 0,
   sm: 456px,
