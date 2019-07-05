@@ -51,6 +51,14 @@ export default {
   data() {
     return {};
   },
+  // watch: {
+  //   screen: {
+  //     handler: function(oldValue, value) {
+  //       console.log(oldValue, value);
+  //     },
+  //     deep: true
+  //   }
+  // },
   methods: {
     order: function(placeLeft) {
       if (typeof screen !== "undefined" && screen.width < 789) {

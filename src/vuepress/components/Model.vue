@@ -3,10 +3,10 @@
     <div id="model">
       <b-card no-body class="overflow-hidden">
         <b-row no-gutters>
-          <b-col :order="left ? 1 : 2">
+          <b-col cols="12" md="6" :order="order(true)">
             <b-card-img-lazy class="model-img" :src="sanitize(image)"></b-card-img-lazy>
           </b-col>
-          <b-col :order="left ? 2 : 1">
+          <b-col cols="12" md="6" :order="order(false)">
             <b-card-body>
               <b-card-title class="model-title-container" style="padding-bottom: 0.5rem;">
                 <span class="model-title-elements model-title model-btn-text">{{title}}</span>
@@ -23,7 +23,7 @@
                     class="model-title-tag model-text"
                     tabindex="0"
                   >
-                    <font-awesome-icon icon="tag"/>
+                    <font-awesome-icon icon="tag" />
                     {{tag.text}}
                   </b-badge>
                   <b-badge
@@ -34,7 +34,7 @@
                     role="button"
                     class="model-title-tag-accessibility model-text"
                   >
-                    <font-awesome-icon icon="universal-access"/>
+                    <font-awesome-icon icon="universal-access" />
                     <span>{{disability.text}}</span>
                   </b-badge>
 
@@ -46,7 +46,7 @@
                     class="model-title-tag-platform model-text"
                     variant="info"
                   >
-                    <font-awesome-icon :icon="osIcon(sys)"/>
+                    <font-awesome-icon :icon="osIcon(sys)" />
                     <span>{{sys}}</span>
                   </b-badge>
                 </div>
@@ -100,7 +100,7 @@
               @click="toggleSettings"
               variant="info"
             >
-              <font-awesome-icon class="fa-2x" icon="cog"/>
+              <font-awesome-icon class="fa-2x" icon="cog" />
             </b-button>
           </div>
           <div v-if="showSettings">
@@ -333,6 +333,17 @@ export default {
         Math.random()
           .toString(36)
           .substr(2, 9);
+    },
+    order: function(placeLeft) {
+      if (typeof screen !== "undefined" && screen.width < 456) {
+        return this.left ? 1 : 2;
+      } else {
+        if (placeLeft) {
+          return this.left ? 1 : 2;
+        } else {
+          return this.left ? 2 : 1;
+        }
+      }
     },
     osIcon(os) {
       let icon = ["fas", "desktop"];
