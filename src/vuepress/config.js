@@ -141,18 +141,10 @@ module.exports = {
     }
   },
   themeConfig: {
-    // repo: "asterics/AsTeRICS",
-    // repoLabel: "Repository!",
-    // logo: "/assets/img/asterics-logo.svg",
     docsRepo: "asterics/AsTeRICS",
     docsDir: "Documentation/docs",
     docsBranch: "master",
     editLinks: false,
-    store: {
-      latest: config.get("latest"),
-      version: config.get("version")
-      // routes: index["routes"]
-    },
     nav: [
       { text: "Get Started", link: "/get-started/" },
       { text: "Solutions", link: "/solutions/" },
