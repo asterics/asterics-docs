@@ -117,8 +117,8 @@ module.exports = {
               {
                 text: "Manuals",
                 items: [
-                  { text: "WebACS", link: "/manuals/WebACS/" },
-                  { text: "ACS", link: "/manuals/ACS/" }
+                  { text: "WebACS", link: "/more/manuals/WebACS/" },
+                  { text: "ACS", link: "/more/manuals/ACS/" }
                   // { text: "ARE", link: "/manuals/ARE/" }
                 ]
               },
@@ -138,10 +138,10 @@ module.exports = {
               {
                 text: "Get Involved",
                 items: [
-                  { text: "About us", link: "/get-involved/About-us" },
-                  { text: "Contact", link: "/get-involved/Contact" },
-                  { text: "Contribute", link: "/get-involved/Contribute" },
-                  { text: "Legal Notice", link: "/get-involved/Legal-Notice" }
+                  { text: "About us", link: "/more/get-involved/About-us" },
+                  { text: "Contact", link: "/more/get-involved/Contact" },
+                  { text: "Contribute", link: "/more/get-involved/Contribute" },
+                  { text: "Legal Notice", link: "/more/get-involved/Legal-Notice" }
                 ]
               }
             ]
