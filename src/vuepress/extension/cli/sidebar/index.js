@@ -1,6 +1,6 @@
 module.exports = (options, ctx) => {
   return {
-    name: "@asterics/vuepress-cli-sidebar",
+    name: "@asterics/vuepress-plugin-cli-sidebar",
     extendCli(cli) {
       registerCommand(cli, options);
     }

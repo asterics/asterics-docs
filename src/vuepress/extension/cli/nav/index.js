@@ -10,7 +10,7 @@ module.exports = (options, ctx) => {
   ctx.themeConfig.nav = nav;
 
   return {
-    name: "@asterics/vuepress-cli-nav",
+    name: "@asterics/vuepress-plugin-cli-nav",
     extendCli(cli) {
       registerCommand(cli, options, nav, sourceDir);
     }
