@@ -152,9 +152,13 @@ async function commitFiles(index, repo, branch, status, options) {
         dest = join(process.cwd(), repo.location, entry.source, entry.file);
       }
       /* Create parent directory at source repository */
-      const parentDir = dirname(dest);
-      if (!existsSync(parentDir)) mkdirp(parentDir);
-      copyFileSync(src, dest);
+      if (file.isDeleted()) {
+        if (existsSync(dest)) unlinkSync(dest);
+      } else {
+        const parentDir = dirname(dest);
+        if (!existsSync(parentDir)) mkdirp(parentDir);
+        copyFileSync(src, dest);
+      }
     }
 
     /* Add */
