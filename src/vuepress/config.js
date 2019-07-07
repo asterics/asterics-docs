@@ -137,7 +137,12 @@ module.exports = {
         ]
       }
     ],
-    [require("./extension/cli/sidebar"), {}],
+    [
+      require("./extension/cli/sidebar"),
+      {
+        subDirLevel: 3
+      }
+    ],
     [require("./extension/markdown"), {}]
   ],
   themeConfig: {
@@ -146,7 +151,7 @@ module.exports = {
     docsBranch: "master",
     editLinks: false,
     sidebar: {
-      "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
+      "/get-started/": [["overview/", "Overview"], ["installation/", "Installation"]],
       "/develop/": [
         {
           title: "Get Started",
