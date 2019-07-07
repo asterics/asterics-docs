@@ -173,7 +173,6 @@ module.exports = {
     docsDir: "Documentation/docs",
     docsBranch: "master",
     editLinks: false,
-    nav: [],
     sidebar: {
       "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
       "/develop/": [
