@@ -18,23 +18,6 @@ module.exports = {
   base: config.get("endpoint"),
   dest: config.get("destination"),
   theme: "@asterics/docs",
-  shouldPrefetch: (file, type) => {
-    //console.log("shouldPrefetch: " + file);
-    return true;
-    // type is inferred based on the file extension.
-    // https://fetch.spec.whatwg.org/#concept-request-destination
-    if (type === "script" || type === "style") {
-      return true;
-    }
-    if (type === "font") {
-      // only preload woff2 fonts
-      return /\.woff2$/.test(file);
-    }
-    if (type === "image") {
-      // only preload important images
-      return file === "hero.jpg";
-    }
-  },
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
   head: [
@@ -213,7 +196,7 @@ module.exports = {
         post: [],
         excludeFiles: [/README\.md/]
       }),
-      "/manuals/": loadSidebarFrom({
+      "/more/manuals/": loadSidebarFrom({
         location: path.join(config.get("documentation"), "more/manuals"),
         pre: [],
         post: [],
