@@ -165,7 +165,8 @@ module.exports = {
           }
         ]
       }
-    ]
+    ],
+    [require("./extension/cli/sidebar"), {}]
   ],
   themeConfig: {
     docsRepo: "asterics/AsTeRICS",
