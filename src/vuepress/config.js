@@ -4,12 +4,12 @@ const fs = require("fs");
 const configPath = path.join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
 
-console.log(`host: ${config.get("host")}`);
-console.log(`port: ${config.get("port")}`);
-console.log(`endpoint: ${config.get("endpoint")}`);
-console.log(`destination: ${config.get("destination")}`);
-console.log(`version: ${config.get("version")}`);
-console.log(`latest: ${config.get("latest")}`);
+// console.log(`host: ${config.get("host")}`);
+// console.log(`port: ${config.get("port")}`);
+// console.log(`endpoint: ${config.get("endpoint")}`);
+// console.log(`destination: ${config.get("destination")}`);
+// console.log(`version: ${config.get("version")}`);
+// console.log(`latest: ${config.get("latest")}`);
 
 module.exports = {
   devtools: true,
@@ -121,25 +121,47 @@ module.exports = {
       // storeWebpackConfig(config, (isServer ? "server" : "client") + "WebPackConfig.json");
     }
   },
-  plugins: {
-    "@vuepress/medium-zoom": {
-      selector: ".content img"
-    },
-    "@vuepress/back-to-top": {},
-    "@vuepress/pwa": {
-      serviceWorker: true,
-      popupComponent: "AstericsSWUpdatePopup",
-      updatePopup: {
-        message: "New content is available.",
-        buttonText: "Refresh"
+  plugins: [
+    [
+      "@vuepress/medium-zoom",
+      {
+        selector: ".content img"
       }
-    },
-    "@vuepress/active-header-links": {
-      sidebarLinkSelector: ".sidebar-link",
-      headerAnchorSelector: ".header-anchor",
-      headerTopOffset: 120
-    }
-  },
+    ],
+    ["@vuepress/back-to-top", {}],
+    [
+      "@vuepress/pwa",
+      {
+        serviceWorker: true,
+        popupComponent: "AstericsSWUpdatePopup",
+        updatePopup: {
+          message: "New content is available.",
+          buttonText: "Refresh"
+        }
+      }
+    ],
+    [
+      "@vuepress/active-header-links",
+      {
+        sidebarLinkSelector: ".sidebar-link",
+        headerAnchorSelector: ".header-anchor",
+        headerTopOffset: 120
+      }
+    ],
+    [
+      require("./extension/cli/nav"),
+      {
+        exclude: /(\.git|\.vuepress)/
+      }
+    ]
+    // [
+    //   (options, ctx) => {
+    //     console.log("new plugin init");
+    //     console.log(ctx.themeConfig.nav);
+    //   },
+    //   {}
+    // ]
+  ],
   themeConfig: {
     docsRepo: "asterics/AsTeRICS",
     docsDir: "Documentation/docs",
