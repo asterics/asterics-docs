@@ -39,7 +39,7 @@ config.load({
       source: "src/vuepress",
       destination: ".vuepress",
       filter: /\.*/,
-      branch: "master"
+      branch: "alija/feature/extensions"
     },
     {
       source: "AsTeRICS:Documentation/docs",
@@ -50,10 +50,32 @@ config.load({
     {
       repository: "WebACS",
       source: "help_files/WebACS",
-      destination: "manuals/WebACS",
+      destination: "more/manuals/WebACS",
       filter: /\.(html?|jpg|png|svg)$/i,
       branch: "master"
-      // versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
+      // version4681a736d7e9745517a4bdacb05fcd43d72a7ff2s: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
+    },
+    {
+      repository: "AsTeRICS.wiki",
+      source: "developer_guide/api",
+      destination: "develop/are-middleware",
+      filter: /(api\/resource\ handling|coding\_instructions\/javacv)\.md$/i,
+      branch: "master"
+    },
+    {
+      repository: "AsTeRICS.wiki",
+      source: "developer_guide/api",
+      destination: "develop/are-remote-api",
+      filter: /api\/asterics\ websocket\.md$/i,
+      branch: "master"
+    },
+
+    {
+      repository: "AsTeRICS.wiki",
+      source: "developer_guide/coding_instructions",
+      destination: "develop/are-middleware",
+      filter: /asterics\ solutions\.md$/i,
+      branch: "master"
     }
   ]
 });
