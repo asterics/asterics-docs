@@ -5,8 +5,8 @@ const toml = require("toml");
 
 module.exports = (options, ctx) => {
   const { sourceDir, themeConfig } = ctx;
-  const oldNav = themeConfig.nav;
-  const nav = loadNav(sourceDir, options);
+  const navConfig = options.nav;
+  const nav = loadNav(sourceDir, options, navConfig);
   ctx.themeConfig.nav = nav;
 
   return {
@@ -27,7 +27,7 @@ function registerCommand(cli, options, nav, sourceDir) {
   });
 }
 
-function loadNav(docsPath, options) {
+function loadNav(docsPath, options, navConfig) {
   const { exclude } = options;
   let nav = fs
     .readdirSync(docsPath)
@@ -40,6 +40,9 @@ function loadNav(docsPath, options) {
     })
     .map(entry => {
       return navEntry(entry, docsPath);
+    })
+    .sort((a, b) => {
+      return a.order > b.order;
     });
 
   for (const [index, entry] of nav.entries()) {
@@ -54,6 +57,14 @@ function loadNav(docsPath, options) {
 
   for (const [index, entry] of nav.entries()) {
     if (entry.order === -1) entry.order = index;
+  }
+
+  for (const entry of navConfig) {
+    if (entry.order > nav.length) {
+      nav.push(entry);
+    } else {
+      nav[entry.order] = entry;
+    }
   }
 
   return nav;
@@ -76,7 +87,7 @@ function navEntry(entry, docsPath) {
   const { navTitle, title, navOrder } = frontmatter ? frontmatter.data : {};
 
   return {
-    order: navOrder || -1,
+    order: navOrder >= 0 ? navOrder : -1,
     text: navTitle || title || entry,
     link: `/${entry}/`
   };

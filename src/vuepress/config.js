@@ -90,37 +90,6 @@ module.exports = {
     ["meta", { name: "msapplication-TileColor", content: "#2b5797" }],
     ["meta", { name: "theme-color", content: "#ffffff" }]
   ],
-  chainWebpack: (config, isServer) => {
-    if (!isServer) {
-      // config.module
-      //   .rule("scss")
-      //   .oneOf("normal")
-      //   .uses.store.get("sass-loader")
-      //   .options({
-      //     data: "$env: 455px;"
-      //   });
-      // config.module
-      //   .rule("scss")
-      //   .oneOf("normal")
-      //   .use("scss")
-      //   .loader("sass-loader")
-      //   .tap(() => {
-      //     return {
-      //       data: "env"
-      //     };
-      //   });
-      // config.module
-      //   .rule("stylus")
-      //   .oneOf("normal")
-      //   .use("stylus")
-      //   .loader("string-replace-loader")
-      //   .options({
-      //     search: "$env",
-      //     replace: "455px;"
-      //   });
-      // storeWebpackConfig(config, (isServer ? "server" : "client") + "WebPackConfig.json");
-    }
-  },
   plugins: [
     [
       "@vuepress/medium-zoom",
@@ -151,76 +120,59 @@ module.exports = {
     [
       require("./extension/cli/nav"),
       {
-        exclude: /(\.git|\.vuepress)/
+        exclude: /(\.git|\.vuepress)/,
+        nav: [
+          {
+            order: 5,
+            text: "More",
+            items: [
+              {
+                text: "Manuals",
+                items: [
+                  { text: "WebACS", link: "/manuals/WebACS/" },
+                  { text: "ACS", link: "/manuals/ACS/" }
+                  // { text: "ARE", link: "/manuals/ARE/" }
+                ]
+              },
+              {
+                text: "Applications",
+                items: [
+                  {
+                    text: "WebACS",
+                    link: "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081"
+                  },
+                  {
+                    text: "AsTeRICS Grid",
+                    link: "https://grid.asterics.eu"
+                  }
+                ]
+              },
+              {
+                text: "Get Involved",
+                items: [
+                  { text: "About us", link: "/get-involved/About-us" },
+                  { text: "Contact", link: "/get-involved/Contact" },
+                  { text: "Contribute", link: "/get-involved/Contribute" },
+                  { text: "Legal Notice", link: "/get-involved/Legal-Notice" }
+                ]
+              }
+            ]
+          },
+          {
+            order: 6,
+            text: "Download",
+            link: "https://github.com/asterics/AsTeRICS/releases/latest"
+          }
+        ]
       }
     ]
-    // [
-    //   (options, ctx) => {
-    //     console.log("new plugin init");
-    //     console.log(ctx.themeConfig.nav);
-    //   },
-    //   {}
-    // ]
   ],
   themeConfig: {
     docsRepo: "asterics/AsTeRICS",
     docsDir: "Documentation/docs",
     docsBranch: "master",
     editLinks: false,
-    nav: [
-      { text: "Get Started", link: "/get-started/" },
-      { text: "Solutions", link: "/solutions/" },
-      { text: "Customize", link: "/customize/" },
-      { text: "Plugins", link: "/plugins/" },
-      { text: "Develop", link: "/develop/" },
-      {
-        text: "More",
-        items: [
-          {
-            text: "Manuals",
-            items: [
-              { text: "WebACS", link: "/manuals/WebACS/" },
-              { text: "ACS", link: "/manuals/ACS/" }
-              // { text: "ARE", link: "/manuals/ARE/" }
-            ]
-          },
-          {
-            text: "Applications",
-            items: [
-              {
-                text: "WebACS",
-                link: "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081"
-              },
-              {
-                text: "AsTeRICS Grid",
-                link: "https://grid.asterics.eu"
-              }
-            ]
-          },
-          {
-            text: "Get Involved",
-            items: [
-              { text: "About us", link: "/get-involved/About-us" },
-              { text: "Contact", link: "/get-involved/Contact" },
-              { text: "Contribute", link: "/get-involved/Contribute" },
-              { text: "Legal Notice", link: "/get-involved/Legal-Notice" }
-            ]
-          }
-        ]
-      },
-      // as long as there is just 1 language, comment it out
-      // {
-      //   text: "Languages",
-      //   items: [
-      //     { text: "English", link: "/" },
-      //     { text: "German", link: "/de/" }
-      //   ]
-      // },
-      {
-        text: "Download",
-        link: "https://github.com/asterics/AsTeRICS/releases/latest"
-      }
-    ],
+    nav: [],
     sidebar: {
       "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
       "/develop/": [
@@ -273,7 +225,7 @@ module.exports = {
         excludeFiles: [/README\.md/]
       }),
       "/manuals/": loadSidebarFrom({
-        location: path.join(config.get("documentation"), "manuals"),
+        location: path.join(config.get("documentation"), "more/manuals"),
         pre: [],
         post: [],
         exclude: [/ARE/],
