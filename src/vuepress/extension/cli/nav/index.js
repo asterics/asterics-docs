@@ -45,19 +45,7 @@ function loadNav(docsPath, options, navConfig) {
       return a.order > b.order;
     });
 
-  for (const [index, entry] of nav.entries()) {
-    if (entry.order > nav.length) {
-      entry.order = -1;
-    } else if (entry.order !== -1 && entry.order !== index) {
-      const swap = nav[entry.order];
-      nav[entry.order] = entry;
-      nav[index] = swap;
-    }
-  }
-
-  for (const [index, entry] of nav.entries()) {
-    if (entry.order === -1) entry.order = index;
-  }
+  sortandPopulateArrayOrder(nav);
 
   for (const entry of navConfig) {
     if (entry.order > nav.length) {
@@ -68,6 +56,22 @@ function loadNav(docsPath, options, navConfig) {
   }
 
   return nav;
+}
+
+function sortandPopulateArrayOrder(array) {
+  for (const [index, entry] of array.entries()) {
+    if (entry.order > array.length) {
+      entry.order = -1;
+    } else if (entry.order !== -1 && entry.order !== index) {
+      const swap = array[entry.order];
+      array[entry.order] = entry;
+      array[index] = swap;
+    }
+  }
+
+  for (const [index, entry] of array.entries()) {
+    if (entry.order === -1) entry.order = index;
+  }
 }
 
 function navEntry(entry, docsPath) {
