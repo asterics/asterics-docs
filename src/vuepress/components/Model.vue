@@ -235,7 +235,7 @@ export default {
           webacs: "http://webacs.asterics.eu/",
           are: "http://127.0.0.1:8081",
           areSecure: "https://127.0.0.1:8083",
-          grid: "https://grid.asterics.eu/package/static/#grid"
+          grid: "https://grid.asterics.eu/app/#grid"
         },
         webacs: null,
         are: null,
@@ -269,9 +269,7 @@ export default {
     },
     edit: function() {
       if (this.model !== "") {
-        return `${this.settings.webacs}?areBaseURI=${
-          this.settings.are
-        }&openFile=${this.model}`;
+        return `${this.settings.webacs}?areBaseURI=${this.settings.are}&openFile=${this.model}`;
       } else {
         return `${this.settings.grid}/edit/${this.grid}`;
       }
