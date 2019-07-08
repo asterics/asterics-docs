@@ -18,13 +18,22 @@ module.exports = (options, ctx) => {
 };
 
 function registerCommand(cli, options, nav, sourceDir) {
-  cli.command("nav [targetDir]", "").action((dir = ".", commandOptions) => {
-    const docsDir = path.join(process.cwd(), dir);
-    if (docsDir !== sourceDir) {
-      console.log("docsDir does not match configured sourceDir");
-    }
-    console.log(nav);
-  });
+  cli
+    .command("nav [targetDir] [selection]", "")
+    .option("-o, --out-file <filename>", "file to store nav entries", {
+      default: null
+    })
+    .action((dir = ".", selection = ".", commandOptions) => {
+      // console.log(selection, commandOptions);
+      // console.log(selection, outFile);
+      // return false;
+      const docsDir = path.join(process.cwd(), dir);
+      if (docsDir !== sourceDir) {
+        console.log("docsDir does not match configured sourceDir");
+      }
+      const navString = JSON.stringify(nav, null, 2);
+      console.log(navString);
+    });
 }
 
 function loadNav(docsPath, options, navConfig) {
