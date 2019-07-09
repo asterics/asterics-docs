@@ -39,7 +39,7 @@ config.load({
       source: "src/vuepress",
       destination: ".vuepress",
       filter: /\.*/,
-      branch: "master"
+      branch: "alija/feature/breadcrumbs"
     },
     {
       source: "AsTeRICS:Documentation/docs",
