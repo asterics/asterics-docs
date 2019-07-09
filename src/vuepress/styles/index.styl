@@ -20,3 +20,14 @@
     outline-width: 3px
     outline-style: solid
     outline-color: $info
+
+.theme-default-content > h1:first-child {
+    padding-top: 0.5rem;
+    transition: padding 0.5s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+    .theme-default-content > h1:first-child {
+        padding-top: 2rem;
+    }
+}
