@@ -154,22 +154,22 @@ export default {
   position: fixed;
   z-index: 2;
   width: 100%;
-  padding: 0;
+  padding: 0 !important;
   display: block;
   left: auto;
 }
 
-.breadcrumbs li {
-  // display: block;
-  // float: left;
-  // margin: 0;
-  // width: 35%;
-  // background-color: gray;
-  // padding: 10px;
-  // white-space: nowrap;
-  // overflow: hidden;
-  // box-sizing: border-box;
-}
+// .breadcrumbs li {
+// display: block;
+// float: left;
+// margin: 0;
+// width: 35%;
+// background-color: gray;
+// padding: 10px;
+// white-space: nowrap;
+// overflow: hidden;
+// box-sizing: border-box;
+// }
 
 .adjust-sidebar {
   left: 0;
