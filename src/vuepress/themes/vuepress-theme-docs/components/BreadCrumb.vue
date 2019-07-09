@@ -81,8 +81,8 @@ export default {
     breadcrumbs: function() {
       return this.getEntries()
         .map((entry, index) => {
-          /* Handle paths containing slugs, e.g. (localhost:8080/index.html#overview) */
           if (entry.slug) {
+            /* Handle paths containing slugs, e.g. (localhost:8080/index.html#overview) */
             if (index === 0) {
               return {
                 text: entry.text,
@@ -90,9 +90,8 @@ export default {
               };
             }
             return entry;
-
-            /* Handle "pure" paths, i.e. those without slugs */
           } else {
+            /* Handle "pure" paths, i.e. those without slugs */
             const page = this.$site.pages.find(
               page => page.path === entry.href
             );
@@ -127,19 +126,13 @@ export default {
             }
           }
         })
+        .map(entry => {
+          const base = this.$site.base;
+          if (!entry.hasOwnProperty("href")) return entry;
+          entry.href = base + entry.href.slice(1);
+          return entry;
+        })
         .reverse();
-    },
-    sidebar: function() {
-      const path = this.$page.path;
-      let hasSidebar = false;
-      for (const entry in this.$themeConfig.sidebar) {
-        const r = new RegExp(`^${entry}`);
-        if (r.exec(path)) {
-          hasSidebar = true;
-          break;
-        }
-      }
-      return hasSidebar;
     }
   }
 };
