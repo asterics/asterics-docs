@@ -1,9 +1,10 @@
 <template>
   <b-container>
     <b-row>
-      <div class="col-12 breadcrumb-container">
-        <b-breadcrumb :items="items"></b-breadcrumb>
-        <span></span>
+      <div
+        :class="{'theme-default-content': true, 'breadcrumb-container': true, 'adjust-sidebar': !sidebar }"
+      >
+        <b-breadcrumb class="breadcrumbs" :items="breadcrumbs"></b-breadcrumb>
       </div>
     </b-row>
   </b-container>
@@ -29,7 +30,8 @@ export default {
     constructTitle: function(entry) {
       return entry
         .replace(/.*\/(.*?)\/$/, (m, title) => this.capitalize(title))
-        .replace(/\-/, " ")
+        .replace(/(\-|\_)/, " ")
+        .replace(/asterics/i, "AsTeRICS")
         .split(" ")
         .map(word => this.capitalize(word))
         .join(" ");
@@ -80,7 +82,7 @@ export default {
     return {};
   },
   computed: {
-    items: function() {
+    breadcrumbs: function() {
       return this.getEntries()
         .map((entry, index) => {
           /* Handle paths containing slugs, e.g. (localhost:8080/index.html#overview) */
@@ -130,6 +132,18 @@ export default {
           }
         })
         .reverse();
+    },
+    sidebar: function() {
+      const path = this.$page.path;
+      let hasSidebar = false;
+      for (const entry in this.$themeConfig.sidebar) {
+        const r = new RegExp(`^${entry}`);
+        if (r.exec(path)) {
+          hasSidebar = true;
+          break;
+        }
+      }
+      return hasSidebar;
     }
   }
 };
@@ -137,8 +151,28 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumb-container {
-  margin-top: 3.5rem;
   position: fixed;
   z-index: 2;
+  width: 100%;
+  padding: 0;
+  display: block;
+  left: auto;
+}
+
+.breadcrumbs li {
+  // display: block;
+  // float: left;
+  // margin: 0;
+  // width: 35%;
+  // background-color: gray;
+  // padding: 10px;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // box-sizing: border-box;
+}
+
+.adjust-sidebar {
+  left: 0;
+  transition: left 3s ease-out;
 }
 </style>
