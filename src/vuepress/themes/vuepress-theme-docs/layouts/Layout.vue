@@ -1,6 +1,6 @@
 <template>
   <ParentLayout>
-    <BreadCrumb class="theme-default-content breadcrumb-container" slot="page-top" />
+    <BreadCrumb class="theme-default-content breadcrumb-container pt-0 mr-2" slot="page-top" />
   </ParentLayout>
 </template>
 
@@ -17,6 +17,6 @@ export default {
 
 <style lang="scss">
 .breadcrumb-container {
-  padding-top: 0 !important;
+  z-index: 2;
 }
 </style>

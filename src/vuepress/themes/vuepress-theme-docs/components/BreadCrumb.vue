@@ -1,9 +1,11 @@
 <template>
-  <b-container>
-    <b-row class="breadcrumb-container">
-      <b-breadcrumb class="col-12 breadcrumbs mx-2" :items="breadcrumbs"></b-breadcrumb>
-    </b-row>
-  </b-container>
+  <div>
+    <b-container fluid>
+      <b-row class="breadcrumb-container">
+        <b-breadcrumb class="col-12" :items="breadcrumbs"></b-breadcrumb>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -141,5 +143,7 @@ export default {
 <style lang="scss" scoped>
 .breadcrumb-container {
   padding: 0;
+  position: fixed;
+  width: 100%;
 }
 </style>
