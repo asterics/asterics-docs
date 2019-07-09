@@ -1,6 +1,6 @@
 <template>
   <ParentLayout>
-    <BreadCrumb class="theme-default-container" slot="page-top" />
+    <BreadCrumb class="theme-default-content breadcrumb-container" slot="page-top" />
   </ParentLayout>
 </template>
 
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-.theme-default-container {
-  margin-bottom: 3.5rem;
+.breadcrumb-container {
+  padding-top: 0 !important;
 }
 </style>

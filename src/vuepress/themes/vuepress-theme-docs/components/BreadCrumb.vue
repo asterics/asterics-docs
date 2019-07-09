@@ -1,11 +1,7 @@
 <template>
   <b-container>
-    <b-row>
-      <div
-        :class="{'theme-default-content': true, 'breadcrumb-container': true, 'adjust-sidebar': !sidebar }"
-      >
-        <b-breadcrumb class="breadcrumbs" :items="breadcrumbs"></b-breadcrumb>
-      </div>
+    <b-row class="breadcrumb-container">
+      <b-breadcrumb class="col-12 breadcrumbs mx-2" :items="breadcrumbs"></b-breadcrumb>
     </b-row>
   </b-container>
 </template>
@@ -151,28 +147,6 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumb-container {
-  position: fixed;
-  z-index: 2;
-  width: 100%;
-  padding: 0 !important;
-  display: block;
-  left: auto;
-}
-
-// .breadcrumbs li {
-// display: block;
-// float: left;
-// margin: 0;
-// width: 35%;
-// background-color: gray;
-// padding: 10px;
-// white-space: nowrap;
-// overflow: hidden;
-// box-sizing: border-box;
-// }
-
-.adjust-sidebar {
-  left: 0;
-  transition: left 3s ease-out;
+  padding: 0;
 }
 </style>
