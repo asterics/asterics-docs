@@ -23,5 +23,6 @@ export default {
   position: sticky;
   top: 3.5rem;
   margin-bottom: 3.5rem;
+  height: 5rem;
 }
 </style>

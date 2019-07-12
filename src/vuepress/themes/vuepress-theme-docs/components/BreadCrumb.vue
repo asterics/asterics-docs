@@ -2,7 +2,7 @@
   <div>
     <b-container fluid>
       <b-row class>
-        <b-breadcrumb class="col-12" :items="breadcrumbs" @click="scrollIntoView"></b-breadcrumb>
+        <b-breadcrumb class="col-12 breadcrumbs" :items="breadcrumbs" @click="scrollIntoView"></b-breadcrumb>
       </b-row>
     </b-container>
   </div>
@@ -151,4 +151,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.breadcrumbs {
+  border-radius: 0;
+}
+
+.breadcrumb-item > a {
+  font-weight: bold;
+}
+
+.breadcrumb-item.active > span {
+  color: black;
+  font-weight: bold;
+}
 </style>
