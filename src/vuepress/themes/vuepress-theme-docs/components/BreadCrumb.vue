@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-container fluid>
-      <b-row class="breadcrumb-container">
-        <b-breadcrumb class="col-12" :items="breadcrumbs"></b-breadcrumb>
+      <b-row class>
+        <b-breadcrumb class="col-12" :items="breadcrumbs" @click="scrollIntoView"></b-breadcrumb>
       </b-row>
     </b-container>
   </div>
@@ -14,11 +14,11 @@ export default {
     getEntries: function() {
       const delimiter = "/";
       let path = this.$page.path;
-      let entries = [...this.loadPageTitles(path), { href: path, title: "" }];
+      let entries = [...this.loadPageTitles(path), { to: path, title: "" }];
       if (path[path.length - 1] === "/") path = path.substr(0, path.length - 1);
       while (path !== "") {
         path = path.substr(0, path.lastIndexOf(delimiter));
-        entries.push({ href: path + delimiter, title: "" });
+        entries.push({ to: path + delimiter, title: "" });
       }
       return entries;
     },
@@ -50,7 +50,7 @@ export default {
           if (header.level === 2 && header.slug === hash) {
             pageTitles.push({
               slug: true,
-              href: basePath + "#" + header.slug,
+              to: basePath + "#" + header.slug,
               text: header.title
             });
             return true;
@@ -60,13 +60,13 @@ export default {
           if (header.level === 3 && header.slug === hash) {
             pageTitles.push({
               slug: true,
-              href: basePath + "#" + header.slug,
+              to: basePath + "#" + header.slug,
               text: header.title
             });
             const { slug, title } = headers[lastLevelTwoIndex];
             pageTitles.push({
               slug: true,
-              href: basePath + "#" + slug,
+              to: basePath + "#" + slug,
               text: title
             });
             return true;
@@ -74,6 +74,18 @@ export default {
           return false;
         });
       return pageTitles;
+    },
+    scrollIntoView(evt) {
+      // console.log(evt);
+      // evt.preventDefault();
+      // const href = evt.target.getAttribute("href");
+      // console.log(evt.target);
+      // const el = href ? document.querySelector(href) : null;
+      // if (el) {
+      //   this.$refs.content.scrollTop = el.offsetTop;
+      //   console.log(this.$refs.content.scrollTop);
+      //   console.log(el.offsetTop);
+      // }
     }
   },
   data() {
@@ -94,9 +106,7 @@ export default {
             return entry;
           } else {
             /* Handle "pure" paths, i.e. those without slugs */
-            const page = this.$site.pages.find(
-              page => page.path === entry.href
-            );
+            const page = this.$site.pages.find(page => page.path === entry.to);
 
             /*
              * If the page does not exist, the title is constructed
@@ -110,7 +120,7 @@ export default {
              */
             if (typeof page === "undefined") {
               return {
-                text: this.constructTitle(entry.href),
+                text: this.constructTitle(entry.to),
                 active: true
               };
             }
@@ -123,15 +133,15 @@ export default {
             } else {
               return {
                 text: page.title,
-                href: page.regularPath
+                to: page.regularPath
               };
             }
           }
         })
         .map(entry => {
           const base = this.$site.base;
-          if (!entry.hasOwnProperty("href")) return entry;
-          entry.href = base + entry.href.slice(1);
+          if (!entry.hasOwnProperty("to")) return entry;
+          entry.to = base + entry.to.slice(1);
           return entry;
         })
         .reverse();
@@ -141,9 +151,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.breadcrumb-container {
-  padding: 0;
-  position: fixed;
-  width: 100%;
-}
 </style>
