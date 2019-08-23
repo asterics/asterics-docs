@@ -31,6 +31,11 @@ config.load({
       name: "AsTeRICS.wiki",
       location: "src/external/asterics-wiki",
       reference: getReferenceInPath(process.cwd(), "AsTeRICS.wiki")
+    },
+    {
+      name: "asterics-grid",
+      location: "src/external/asterics-grid",
+      reference: getReferenceInPath(process.cwd(), "asterics-grid")
     }
   ],
   dependencies: [
@@ -54,6 +59,13 @@ config.load({
       filter: /\.(html?|jpg|png|svg)$/i,
       branch: "master"
       // versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
+    },
+    {
+      repository: "asterics-grid",
+      source: "docs/documentation_user",
+      destination: "manuals/asterics-grid",
+      filter: /\.*/,
+      branch: "master"
     }
   ]
 });
