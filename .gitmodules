@@ -10,3 +10,6 @@
 [submodule "src/external/asterics-docs"]
 	path = src/external/asterics-docs
 	url = https://github.com/asterics/asterics-docs.git
+[submodule "src/external/asterics-grid"]
+	path = src/external/asterics-grid
+	url = https://github.com/asterics/AsTeRICS-Grid.git
