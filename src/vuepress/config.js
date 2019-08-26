@@ -157,9 +157,9 @@ module.exports = {
           {
             text: "Manuals",
             items: [
+              { text: "AsTeRICS Grid", link: "/manuals/asterics-grid/" },
               { text: "WebACS", link: "/manuals/WebACS/" },
-              { text: "ACS", link: "/manuals/ACS/" },
-              { text: "AsTeRICS Grid", link: "/manuals/asterics-grid/" }
+              { text: "ACS", link: "/manuals/ACS/" }
               // { text: "ARE", link: "/manuals/ARE/" }
             ]
           },
@@ -167,13 +167,13 @@ module.exports = {
             text: "Applications",
             items: [
               {
+                text: "AsTeRICS Grid",
+                link: "https://grid.asterics.eu"
+              },
+              {
                 text: "WebACS",
                 link:
                   "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081"
-              },
-              {
-                text: "AsTeRICS Grid",
-                link: "https://grid.asterics.eu"
               }
             ]
           },
@@ -245,7 +245,11 @@ module.exports = {
             ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
           ]
         },
-
+        {
+          title: "AsTeRICS Grid",
+          path: "/develop/asterics-grid/",
+          collapsable: false
+        },
         {
           title: "AT Solution",
           collapsable: false,
