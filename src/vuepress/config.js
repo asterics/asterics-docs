@@ -245,7 +245,11 @@ module.exports = {
             ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
           ]
         },
-
+        {
+          title: "AsTeRICS Grid",
+          path: "/develop/asterics-grid/",
+          collapsable: false
+        },
         {
           title: "AT Solution",
           collapsable: false,
