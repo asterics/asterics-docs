@@ -66,6 +66,13 @@ config.load({
       destination: "manuals/asterics-grid",
       filter: /\.*/,
       branch: "master"
+    },
+    {
+      repository: "asterics-grid",
+      source: "docs/documentation_dev",
+      destination: "develop/asterics-grid",
+      filter: /\.*/,
+      branch: "master"
     }
   ]
 });
