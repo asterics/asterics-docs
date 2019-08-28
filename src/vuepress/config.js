@@ -248,7 +248,16 @@ module.exports = {
         {
           title: "AsTeRICS Grid",
           path: "/develop/asterics-grid/",
-          collapsable: false
+          collapsable: false,
+          children: [
+            ["asterics-grid/01_structure.md", "01 Structure"],
+            ["asterics-grid/02_tools.md", "02 Tools"],
+            ["asterics-grid/03_grid.md", "03 Grid"],
+            ["asterics-grid/04_vuejs.md", "04 Vuejs"],
+            ["asterics-grid/05_datamodel.md", "05 Datamodel"],
+            ["asterics-grid/06_data_storage.md", "06 Data storage"],
+            ["asterics-grid/07_i18n.md", "07 I18n"]
+          ]
         },
         {
           title: "AT Solution",
