@@ -54,9 +54,9 @@ config.load({
     },
     {
       repository: "WebACS",
-      source: "help_files/WebACS",
+      source: "docs/manuals/WebACS",
       destination: "manuals/WebACS",
-      filter: /\.(html?|jpg|png|svg)$/i,
+      filter: /\.*/,
       branch: "master"
       // versions: [["2.6", "2.6"], ["2.7", "2.7"], ["2.8", "2.8"], ["3.0", "3.0"], ["3.0.1", "3.0.1"], ["4.0", "pre-3.1"]]
     },
@@ -64,6 +64,13 @@ config.load({
       repository: "asterics-grid",
       source: "docs/documentation_user",
       destination: "manuals/asterics-grid",
+      filter: /\.*/,
+      branch: "master"
+    },
+    {
+      repository: "asterics-grid",
+      source: "docs/documentation_dev",
+      destination: "develop/asterics-grid",
       filter: /\.*/,
       branch: "master"
     }
