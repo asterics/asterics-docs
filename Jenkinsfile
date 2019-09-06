@@ -145,7 +145,7 @@ pipeline {
             script {
               def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
               sshRemove remote: remote, path: "/var/www/html/${params.dest}", failOnError: false
-              sshPut remote: remote, from: '../dist-deploy', into: "/var/www/html/${params.dest}"
+              sshPut remote: remote, from: 'dist-deploy', into: "/var/www/html/${params.dest}"
             }
           }
         }
