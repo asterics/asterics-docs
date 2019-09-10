@@ -13,10 +13,7 @@ pipeline {
   //   //cron('* * * * *')
   // }
   agent {
-    docker {
-      image 'node:10'
       label 'Linux'
-    }
   }
   stages {
     stage('Cleanup') {
@@ -27,6 +24,12 @@ pipeline {
     stage('Build') {
           when {
             equals expected: true, actual: params.deploy
+          }
+          agent {
+            docker {
+              image 'node:10'
+              label 'Linux'
+            }
           }
           environment {
             FATALITY = true
