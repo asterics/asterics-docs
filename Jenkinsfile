@@ -1,20 +1,20 @@
 pipeline {
   parameters {
     booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome')
-    booleanParam(name: 'deploy_io', defaultValue: false, description: 'Deploy build to github.io')
+    // booleanParam(name: 'deploy_io', defaultValue: false, description: 'Deploy build to github.io')
     booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
-    booleanParam(name: 'store', defaultValue: false, description: 'Store build')
-    booleanParam(name: 'release', defaultValue: false, description: 'Release build')
-    booleanParam(name: 'release_comment', defaultValue: true, description: 'Add comment to each issue and pull request resolved')
+    // booleanParam(name: 'store', defaultValue: false, description: 'Store build')
+    // booleanParam(name: 'release', defaultValue: false, description: 'Release build')
+    // booleanParam(name: 'release_comment', defaultValue: true, description: 'Add comment to each issue and pull request resolved')
     password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
     choice(name: 'dest', description: 'Destination folder', choices: ['asterics-web-devlinux', 'asterics-web-devwindows', 'asterics-web-production' ])
-    choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
-    choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
+    // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
+    // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
   }
   triggers {
     // pollSCM('H/15 * * * *')
-    pollSCM('* * * * *')
+    cron('* * * * *')
   }
   agent none
   stages {
@@ -28,35 +28,35 @@ pipeline {
     }
     stage('Build') {
       parallel {
-        stage('Build for Release/Store') {
-          when { 
-            anyOf { 
-              equals expected: true, actual: params.release
-              equals expected: true, actual: params.store
-            }
-          }
-          agent {
-            docker {
-              image params.image
-              label params.agent
-            }
-          }
-          environment {
-            FATALITY = true
-            VERBOSE = true
-            ENDPOINT = "/"
-            DOCUMENTATION = "docs"
-            DESTINATION = "dist"
-          }
-          steps {
-            sh '''
-              yarn
-              yarn docs init --verbose
-              yarn docs setup --verbose
-              yarn build
-            '''
-          }
-        }
+        // stage('Build for Release/Store') {
+        //   when { 
+        //     anyOf { 
+        //       equals expected: true, actual: params.release
+        //       equals expected: true, actual: params.store
+        //     }
+        //   }
+        //   agent {
+        //     docker {
+        //       image params.image
+        //       label params.agent
+        //     }
+        //   }
+        //   environment {
+        //     FATALITY = true
+        //     VERBOSE = true
+        //     ENDPOINT = "/"
+        //     DOCUMENTATION = "docs"
+        //     DESTINATION = "dist"
+        //   }
+        //   steps {
+        //     sh '''
+        //       yarn
+        //       yarn docs init --verbose
+        //       yarn docs setup --verbose
+        //       yarn build
+        //     '''
+        //   }
+        // }
         stage('Build for Deployment') {
           when {
             equals expected: true, actual: params.deploy
@@ -83,48 +83,48 @@ pipeline {
             '''
           }
         }
-        stage('Build for Github IO') {
-          when {
-            equals expected: true, actual: params.deploy_io
-          }
-          agent {
-            docker {
-              image params.image
-              label params.agent
-            }
-          }
-          environment {
-            FATALITY = true
-            VERBOSE = true
-            ENDPOINT = "/"
-            DOCUMENTATION = "docs-deploy-io"
-            DESTINATION = "dist-deploy-io"
-          }
-          steps {
-            sh '''
-              yarn
-              yarn docs init --verbose
-              yarn docs setup --verbose
-              yarn build
-            '''
-          }
-        }
+        // stage('Build for Github IO') {
+        //   when {
+        //     equals expected: true, actual: params.deploy_io
+        //   }
+        //   agent {
+        //     docker {
+        //       image params.image
+        //       label params.agent
+        //     }
+        //   }
+        //   environment {
+        //     FATALITY = true
+        //     VERBOSE = true
+        //     ENDPOINT = "/"
+        //     DOCUMENTATION = "docs-deploy-io"
+        //     DESTINATION = "dist-deploy-io"
+        //   }
+        //   steps {
+        //     sh '''
+        //       yarn
+        //       yarn docs init --verbose
+        //       yarn docs setup --verbose
+        //       yarn build
+        //     '''
+        //   }
+        // }
       }
     }
-    stage('Prepare: Release/Store') {
-      when { 
-        anyOf { 
-          equals expected: true, actual: params.release
-          equals expected: true, actual: params.store
-        }
-      }
-      agent {
-        label params.agent
-      }
-      steps {
-        sh 'cd dist && zip -r ../asterics-docs.zip *'
-      }
-    }
+    // stage('Prepare: Release/Store') {
+    //   when { 
+    //     anyOf { 
+    //       equals expected: true, actual: params.release
+    //       equals expected: true, actual: params.store
+    //     }
+    //   }
+    //   agent {
+    //     label params.agent
+    //   }
+    //   steps {
+    //     sh 'cd dist && zip -r ../asterics-docs.zip *'
+    //   }
+    // }
     stage('Output') {
       parallel {
         stage('Deploy') {
@@ -184,46 +184,46 @@ pipeline {
             '''
           }
         }
-        stage('Store') {
-          when {
-            equals expected: true, actual: params.store
-          }
-          agent {
-            label params.agent
-          }
-          environment {
-            DESTINATION = "dist"
-          }
-          steps {
-            archiveArtifacts artifacts: 'asterics-docs.zip', fingerprint: true
-            archiveArtifacts artifacts: "$DESTINATION/build.json", fingerprint: true
-          }
-        }
-        stage('Release') {
-          when {
-            // branch 'master'
-            // changeset 'assets'
-            equals expected: true, actual: params.release
-          }
-          agent {
-            docker {
-              image params.image
-              label params.agent
-            }
-          }
-          environment {
-            GIT_BRANCH = "$BRANCH"
-          }
-          steps {
-            sh '''
-              git checkout $BRANCH
-              git pull
-              rm -rf src/external/* .git/modules/src/external/*
-              yarn release:prepare
-              yarn release --branch $BRANCH
-            '''
-          }
-        }
+        // stage('Store') {
+        //   when {
+        //     equals expected: true, actual: params.store
+        //   }
+        //   agent {
+        //     label params.agent
+        //   }
+        //   environment {
+        //     DESTINATION = "dist"
+        //   }
+        //   steps {
+        //     archiveArtifacts artifacts: 'asterics-docs.zip', fingerprint: true
+        //     archiveArtifacts artifacts: "$DESTINATION/build.json", fingerprint: true
+        //   }
+        // }
+        // stage('Release') {
+        //   when {
+        //     // branch 'master'
+        //     // changeset 'assets'
+        //     equals expected: true, actual: params.release
+        //   }
+        //   agent {
+        //     docker {
+        //       image params.image
+        //       label params.agent
+        //     }
+        //   }
+        //   environment {
+        //     GIT_BRANCH = "$BRANCH"
+        //   }
+        //   steps {
+        //     sh '''
+        //       git checkout $BRANCH
+        //       git pull
+        //       rm -rf src/external/* .git/modules/src/external/*
+        //       yarn release:prepare
+        //       yarn release --branch $BRANCH
+        //     '''
+        //   }
+        // }
       }
     }
   }
