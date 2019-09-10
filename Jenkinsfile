@@ -12,11 +12,12 @@ pipeline {
   //   // pollSCM('H/15 * * * *')
   //   //cron('* * * * *')
   // }
-  agent {
-      label 'Linux'
-  }
+  agent none
   stages {
     stage('Cleanup') {
+      agent {
+        label 'Linux'
+      }
       steps {
         deleteDir()
       }
@@ -51,6 +52,9 @@ pipeline {
       when {
         equals expected: true, actual: params.deploy
       }
+      agent {
+        label 'Linux'
+      }
       environment {
         SERVER = credentials('server')
       }
@@ -67,6 +71,9 @@ pipeline {
     stage('Deploy: Github IO') {
       when {
         equals expected: true, actual: params.deploy_io_exchange
+      }
+      agent {
+        label 'Linux'
       }
       environment {
         SERVER = credentials('server')
