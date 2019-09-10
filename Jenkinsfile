@@ -1,6 +1,6 @@
 pipeline {
   parameters {
-    choice(name: 'deploy_selection', description: 'Deploy build to studyathome.technikum-wien.at:8090-8092 or github.io', choices: ['studyathome.technikum-wien.at','github.io'])
+    choice(name: 'deploy_selection', description: 'Build and deploy build to studyathome.technikum-wien.at:8090-8092 or Deploy from studyathome.technikum-wien.at to github.io', choices: ['studyathome.technikum-wien.at','github.io'])
     // booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
     // booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
     password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
@@ -9,10 +9,11 @@ pipeline {
     // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
   }
-  // triggers {
-  //   // pollSCM('H/15 * * * *')
-  //   //cron('* * * * *')
-  // }
+  triggers {
+    // pollSCM('H/15 * * * *')
+    //should be trigger from 6 to 18 every 6hours (at 6h at 12h at 18h)
+    cron('H H(6-18)/6 * * *')
+  }
   agent none
   stages {
     stage('Cleanup') {
