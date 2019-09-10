@@ -1,9 +1,9 @@
 pipeline {
   parameters {
-    booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome')
+    booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
     booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
     password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
-    choice(name: 'dest', description: 'Destination folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
+    choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
     choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
@@ -81,7 +81,7 @@ pipeline {
       steps {
         script {
           def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-          sshCommand remote: remote, command: "DEPLOY_SOURCE=/var/www/html/${params.dest}/ DEPLOY_REPO_PATH=asterics/asterics-docs.git DEPLOY_CNAME=www.asterics.eu DEPLOY_GH_TOKEN=${params.GH_TOKEN} /home/study/deploy-ghpages.sh"
+          sshCommand remote: remote, command: "DEPLOY_SOURCE=/var/www/html/${params.dest}/ DEPLOY_REPO_PATH=asterics/asterics-docs.git DEPLOY_CNAME=www.asterics.eu DEPLOY_GH_TOKEN=${params.GH_TOKEN} /home/study/deployment-utils/deploy-ghpages.sh"
         }
       }
     }    
