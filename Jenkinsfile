@@ -87,4 +87,12 @@ pipeline {
       }
     }    
   }
+  post {
+      failure {
+          mail to: studyathome@technikum-wien.at, subject: "The asterics-docs Pipeline with build id ${BUILD_ID} failed :("
+      }
+      success {
+          mail to: studyathome@technikum-wien.at, subject: "The asterics-docs Pipeline with build id ${BUILD_ID} was successful :-)"
+      }      
+  }  
 }
