@@ -48,44 +48,42 @@ pipeline {
             '''
           }
     }
-    stage('Output') {
-        stage('Deploy studyathome:8090-8092') {
-          when {
-            equals expected: true, actual: params.deploy
-          }
-          agent {
-            label params.agent
-          }
-          environment {
-            SERVER = credentials('server')
-          }
-          steps {
-            script {
-              def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-              sshRemove remote: remote, path: "/var/www/html/dist-deploy", failOnError: false
-              sshRemove remote: remote, path: "/var/www/html/${params.dest}", failOnError: false
-              sshPut remote: remote, from: 'dist-deploy', into: "/var/www/html/"
-              sshCommand remote: remote, command: "mv /var/www/html/dist-deploy /var/www/html/${params.dest}"
-            }
-          }
+    stage('Deploy studyathome:8090-8092') {
+      when {
+        equals expected: true, actual: params.deploy
+      }
+      agent {
+        label params.agent
+      }
+      environment {
+        SERVER = credentials('server')
+      }
+      steps {
+        script {
+          def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
+          sshRemove remote: remote, path: "/var/www/html/dist-deploy", failOnError: false
+          sshRemove remote: remote, path: "/var/www/html/${params.dest}", failOnError: false
+          sshPut remote: remote, from: 'dist-deploy', into: "/var/www/html/"
+          sshCommand remote: remote, command: "mv /var/www/html/dist-deploy /var/www/html/${params.dest}"
         }
-        stage('Deploy: Github IO') {
-          when {
-            equals expected: true, actual: params.deploy_io
-          }
-          agent {
-            label params.agent
-          }
-          environment {
-            SERVER = credentials('server')
-          }
-          steps {
-            script {
-              def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-              sshCommand remote: remote, command: "DEPLOY_SOURCE=/var/www/html/${params.dest}/ DEPLOY_REPO_PATH=asterics/asterics-docs.git DEPLOY_CNAME=www.asterics.eu DEPLOY_GH_TOKEN=${params.GH_TOKEN} /home/study/deploy-ghpages.sh"
-            }
-          }
-        }    
+      }
     }
+    stage('Deploy: Github IO') {
+      when {
+        equals expected: true, actual: params.deploy_io
+      }
+      agent {
+        label params.agent
+      }
+      environment {
+        SERVER = credentials('server')
+      }
+      steps {
+        script {
+          def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
+          sshCommand remote: remote, command: "DEPLOY_SOURCE=/var/www/html/${params.dest}/ DEPLOY_REPO_PATH=asterics/asterics-docs.git DEPLOY_CNAME=www.asterics.eu DEPLOY_GH_TOKEN=${params.GH_TOKEN} /home/study/deploy-ghpages.sh"
+        }
+      }
+    }    
   }
 }
