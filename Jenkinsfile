@@ -14,7 +14,7 @@ pipeline {
   }
   triggers {
     // pollSCM('H/15 * * * *')
-    cron('* * * * *')
+    //cron('* * * * *')
   }
   agent none
   stages {
