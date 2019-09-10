@@ -12,7 +12,7 @@ pipeline {
   triggers {
     // pollSCM('H/15 * * * *')
     //should be trigger from 6 to 18 every 6hours (at 6h at 12h at 18h)
-    cron('H H(6-18)/6 * * *')
+    cron('0 6-18/6 * * *')
   }
   agent none
   stages {
