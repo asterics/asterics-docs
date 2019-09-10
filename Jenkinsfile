@@ -8,8 +8,8 @@ pipeline {
     // booleanParam(name: 'release_comment', defaultValue: true, description: 'Add comment to each issue and pull request resolved')
     password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
     choice(name: 'dest', description: 'Destination folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
-    // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
-    // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
+    choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
+    choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
   }
   // triggers {
