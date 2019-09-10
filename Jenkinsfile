@@ -1,7 +1,8 @@
 pipeline {
   parameters {
-    booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
-    booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
+    choice(name: 'deploy_selection', description: 'Deploy build to studyathome.technikum-wien.at:8090-8092 or github.io', choices: ['studyathome.technikum-wien.at','github.io'])
+    // booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
+    // booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
     password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
     choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
     // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
@@ -24,7 +25,7 @@ pipeline {
     }
     stage('Build') {
           when {
-            equals expected: true, actual: params.deploy
+            equals expected: 'studyathome.technikum-wien.at', actual: params.deploy_selection
           }
           agent {
             docker {
@@ -50,7 +51,7 @@ pipeline {
     }
     stage('Deploy studyathome:8090-8092') {
       when {
-        equals expected: true, actual: params.deploy
+        equals expected: 'studyathome.technikum-wien.at', actual: params.deploy_selection
       }
       agent {
         label 'Linux'
@@ -70,7 +71,7 @@ pipeline {
     }
     stage('Deploy: Github IO') {
       when {
-        equals expected: true, actual: params.deploy_io_exchange
+        equals expected: 'github.io', actual: params.deploy_selection
       }
       agent {
         label 'Linux'
