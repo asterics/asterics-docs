@@ -4,20 +4,22 @@ pipeline {
     booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
     password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
     choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
-    choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
-    choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
+    // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
+    // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
   }
   // triggers {
   //   // pollSCM('H/15 * * * *')
   //   //cron('* * * * *')
   // }
-  agent none
+  agent {
+    docker {
+      image 'node:10'
+      label 'Linux'
+    }
+  }
   stages {
     stage('Cleanup') {
-      agent {
-        label params.agent
-      }
       steps {
         deleteDir()
       }
@@ -25,12 +27,6 @@ pipeline {
     stage('Build') {
           when {
             equals expected: true, actual: params.deploy
-          }
-          agent {
-            docker {
-              image params.image
-              label params.agent
-            }
           }
           environment {
             FATALITY = true
@@ -52,9 +48,6 @@ pipeline {
       when {
         equals expected: true, actual: params.deploy
       }
-      agent {
-        label params.agent
-      }
       environment {
         SERVER = credentials('server')
       }
@@ -71,9 +64,6 @@ pipeline {
     stage('Deploy: Github IO') {
       when {
         equals expected: true, actual: params.deploy_io_exchange
-      }
-      agent {
-        label params.agent
       }
       environment {
         SERVER = credentials('server')
