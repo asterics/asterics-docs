@@ -70,7 +70,7 @@ pipeline {
     }
     stage('Deploy: Github IO') {
       when {
-        equals expected: true, actual: params.deploy_io
+        equals expected: true, actual: params.deploy_io_exchange
       }
       agent {
         label params.agent
