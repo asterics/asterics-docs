@@ -3,7 +3,7 @@ pipeline {
     choice(name: 'deploy_selection', description: 'Build and deploy build to studyathome.technikum-wien.at:8090-8092 or Deploy from studyathome.technikum-wien.at to github.io', choices: ['studyathome.technikum-wien.at','github.io'])
     // booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
     // booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
-    choice(name: 'GH_TOKEN_ID', defaultValue: 'GH-TOKEN-DEINHOFER', description: 'Id of github user token credential stored in Jenkins credentials. Required for deployent to github.io', choices:['GH-TOKEN-DEINHOFER'])
+    choice(name: 'GH_TOKEN_ID', description: 'Id of github user token credential stored in Jenkins credentials. Required for deployent to github.io', choices:['GH-TOKEN-DEINHOFER'])
     choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
     // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
