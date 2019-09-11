@@ -4,7 +4,7 @@ pipeline {
     // booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
     // booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
     choice(name: 'GH_TOKEN_ID', description: 'Id of github user token credential stored in Jenkins credentials. Required for deployent to github.io', choices:['GH-TOKEN-DEINHOFER'])
-    choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
+    choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092, The ports map to the choices in the given order', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
     // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
