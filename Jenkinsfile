@@ -79,7 +79,7 @@ pipeline {
       }
       environment {
         SERVER = credentials('server')
-        GH-TOKEN=credentials("${params.GH_TOKEN_ID}")
+        GH_TOKEN=credentials("${params.GH_TOKEN_ID}")
       }
       steps {
         script {
