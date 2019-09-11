@@ -3,7 +3,7 @@ pipeline {
     choice(name: 'deploy_selection', description: 'Build and deploy build to studyathome.technikum-wien.at:8090-8092 or Deploy from studyathome.technikum-wien.at to github.io', choices: ['studyathome.technikum-wien.at','github.io'])
     // booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
     // booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
-    password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
+    choice(name: 'GH_TOKEN', defaultValue: 'GH-TOKEN-DEINHOFER', description: 'Id of github user token credential stored in Jenkins credentials. Required for deployent to github.io', choices:['GH-TOKEN-DEINHOFER'])
     choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
     // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
     // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
@@ -79,11 +79,12 @@ pipeline {
       }
       environment {
         SERVER = credentials('server')
+        GH-TOKEN=credentials(${params.GH_TOKEN})
       }
       steps {
         script {
           def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-          sshCommand remote: remote, command: "DEPLOY_SOURCE=/var/www/html/${params.dest}/ DEPLOY_REPO_PATH=asterics/asterics-docs.git DEPLOY_CNAME=www.asterics.eu DEPLOY_GH_TOKEN=${params.GH_TOKEN} /home/study/deployment-utils/deploy-ghpages.sh"
+          sshCommand remote: remote, command: "DEPLOY_SOURCE=/var/www/html/${params.dest}/ DEPLOY_REPO_PATH=asterics/asterics-docs.git DEPLOY_CNAME=www.asterics.eu DEPLOY_GH_TOKEN=${GH_TOKEN} /home/study/deployment-utils/deploy-ghpages.sh"
         }
       }
     }    
