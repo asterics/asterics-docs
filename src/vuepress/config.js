@@ -17,7 +17,7 @@ module.exports = {
   port: config.get("port"),
   base: config.get("endpoint"),
   dest: config.get("destination"),
-  theme: "@asterics/docs",
+  theme: "@asterics-docs/docs",
   shouldPrefetch: (file, type) => {
     //console.log("shouldPrefetch: " + file);
     return true;
@@ -172,8 +172,7 @@ module.exports = {
               },
               {
                 text: "WebACS",
-                link:
-                  "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081"
+                link: "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081"
               }
             ]
           },
@@ -202,10 +201,7 @@ module.exports = {
       }
     ],
     sidebar: {
-      "/get-started/": [
-        ["Overview.md", "Overview"],
-        ["Installation.md", "Installation"]
-      ],
+      "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
       "/develop/": [
         {
           title: "Get Started",
@@ -265,10 +261,7 @@ module.exports = {
           children: [
             ["AT_solution_development", "Introduction"],
             ["AT-solution-demos", "Demos"],
-            [
-              "asterics-wiki/coding_instructions/AsTeRICS Solutions",
-              "Tutorial"
-            ],
+            ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
             ["APE", "AsTeRICS Packaging Environment (APE)"]
           ]
         }
@@ -290,18 +283,12 @@ module.exports = {
         {
           title: "Model",
           collapsable: false,
-          children: [
-            ["Model-Customization", "Customization"],
-            ["Model-Creation", "Creation"]
-          ]
+          children: [["Model-Customization", "Customization"], ["Model-Creation", "Creation"]]
         },
         {
           title: "AsTeRICS Grid",
           collapsable: false,
-          children: [
-            ["Grid-Customization", "Customization"],
-            ["Grid-Creation", "Creation"]
-          ]
+          children: [["Grid-Customization", "Customization"], ["Grid-Creation", "Creation"]]
         }
       ]
     },
@@ -311,19 +298,11 @@ module.exports = {
   }
 };
 
-function loadSidebarFrom({
-  location,
-  pre,
-  post,
-  exclude = [],
-  excludeFiles = []
-}) {
+function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e =>
-    fs.statSync(path.join(location, e)).isDirectory()
-  );
+  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
