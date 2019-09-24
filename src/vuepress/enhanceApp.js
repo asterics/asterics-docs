@@ -1,8 +1,4 @@
-import "./styles/main.scss";
-
 import { store } from "./plugins/store";
-import "./plugins/bootstrap";
-import "./plugins/icons";
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app
