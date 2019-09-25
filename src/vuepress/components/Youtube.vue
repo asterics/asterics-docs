@@ -1,28 +1,22 @@
 <template>
-  <b-col :class="{'element': true, 'group-element': !single}" :xl="single ? 12 : 6" cols="12">
-    <b-card no-body class="overflow-hidden">
-      <b-row no-gutters>
-        <b-col cols="12" md="6" :order="order(true)">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe
-              class="embed-responsive-item"
-              :src="`https://www.youtube${nocookie ? '-nocookie' : ''}.com/embed/${code}?rel=0`"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </b-col>
-        <b-col cols="12" md="6" :order="order(false)">
-          <b-card-body>
-            <b-card-title>
-              <a target="_blank" :href="`https://www.youtube.com/watch?v=${code}`">{{title}}</a>
-            </b-card-title>
-            <b-card-text>{{description}}</b-card-text>
-          </b-card-body>
-        </b-col>
-      </b-row>
-    </b-card>
-    <br />
-  </b-col>
+  <b-card no-body>
+    <b-row no-gutters class="video-placer">
+      <div slot="header" class="video-container">
+        <iframe
+          frameborder="0"
+          class
+          :src="`https://www.youtube${nocookie ? '-nocookie' : ''}.com/embed/${code}?rel=0`"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <b-card-body>
+        <b-card-title>
+          <a target="_blank" :href="`https://www.youtube.com/watch?v=${code}`">{{title}}</a>
+        </b-card-title>
+        <b-card-text class="card-text">{{description}}</b-card-text>
+      </b-card-body>
+    </b-row>
+  </b-card>
 </template>
 
 <script>
@@ -78,19 +72,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.element {
-  padding: 0;
-  margin: 0;
-  margin-bottom: 2rem;
+.card-body {
+  padding-top: 220px;
 }
 
-@media screen and (min-width: 1290px) {
-  .group-element {
-    padding: 0 20px 0 0;
-  }
+.video-container > iframe {
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  border-radius: calc(0.25rem - 1px);
+}
 
-  .group-element:nth-child(2n) {
-    padding: 0 0 0 20px;
-  }
+.card-title {
+  height: 2rem;
 }
 </style>

@@ -1,22 +1,17 @@
 <template>
-  <b-col :class="{'element': true, 'group-element': !single}" :xl="single ? 12 : 6" cols="12">
-    <b-card no-body class="overflow-hidden">
-      <b-row no-gutters>
-        <b-col cols="12" md="6" :order="order(true)">
-          <b-card-img-lazy :src="sanitize(image)"></b-card-img-lazy>
-        </b-col>
-        <b-col cols="12" md="6" :order="order(false)">
-          <b-card-body>
-            <b-card-title>
-              <a :href="sanitize(link)">{{title}}</a>
-            </b-card-title>
-            <b-card-text>{{description}}</b-card-text>
-          </b-card-body>
-        </b-col>
-      </b-row>
-    </b-card>
-    <br />
-  </b-col>
+  <b-card no-body>
+    <b-row no-gutters>
+      <div slot="header" class="header">
+        <b-card-img-lazy class="card-image" :src="sanitize(image)"></b-card-img-lazy>
+      </div>
+      <b-card-body>
+        <b-card-title class="card-text">
+          <a :href="sanitize(link)">{{title}}</a>
+        </b-card-title>
+        <b-card-text>{{description}}</b-card-text>
+      </b-card-body>
+    </b-row>
+  </b-card>
 </template>
 
 <script>
@@ -51,14 +46,6 @@ export default {
   data() {
     return {};
   },
-  // watch: {
-  //   screen: {
-  //     handler: function(oldValue, value) {
-  //       console.log(oldValue, value);
-  //     },
-  //     deep: true
-  //   }
-  // },
   methods: {
     order: function(placeLeft) {
       if (typeof screen !== "undefined" && screen.width < 789) {
@@ -83,19 +70,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.element {
-  padding: 0;
-  margin: 0;
-  margin-bottom: 2rem;
+.header {
+  width: 100%;
 }
 
-@media screen and (min-width: 1290px) {
-  .group-element {
-    padding: 0 20px 0 0;
-  }
-
-  .group-element:nth-child(2n) {
-    padding: 0 0 0 20px;
-  }
+.card-image {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
 }
+
+.card-title {
+  height: 2rem;
+}
+
+p.card-text {
+  white-space: wrap !important;
+}
+
+// .element {
+//   padding: 0;
+//   margin: 0;
+//   margin-bottom: 2rem;
+// }
+
+// @media screen and (min-width: 1290px) {
+//   .group-element {
+//     padding: 0 20px 0 0;
+//   }
+
+//   .group-element:nth-child(2n) {
+//     padding: 0 0 0 20px;
+//   }
+// }
 </style>

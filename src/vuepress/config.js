@@ -21,6 +21,7 @@ module.exports = {
   description: "Customized Low-Cost Assistive Technologies",
   head: require("./config/head.js"),
   plugins: require("./config/plugins.js"),
+  extraWatchFiles: [".vuepress/config/**/*.js"],
   themeConfig: {
     logo: "/assets/img/asterics-logo.svg",
     nav: require("./config/nav/en.js"),

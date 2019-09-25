@@ -4,7 +4,7 @@ const fs = require("fs");
 const configPath = path.join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
 
-module.exports = {
+const sidebar = {
   "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
   "/develop/": [
     {
@@ -76,13 +76,36 @@ module.exports = {
     post: [],
     excludeFiles: [/README\.md/]
   }),
-  "/manuals/": loadSidebarFrom({
-    location: path.join(config.get("documentation"), "manuals"),
-    pre: [],
-    post: [],
-    exclude: [/ARE/],
-    excludeFiles: [/README\.md/]
-  }),
+  // "/manuals/": loadSidebarFrom({
+  //   location: path.join(config.get("documentation"), "manuals"),
+  //   path: "/manuals/asterics-grid",
+  //   pre: [],
+  //   post: [],
+  //   exclude: [/ARE/],
+  //   excludeFiles: [/README\.md/]
+  // }),
+  "/manuals/": [
+    loadSidebarFromWithPath({
+      location: path.join(config.get("documentation"), "manuals/ACS"),
+      title: "ACS",
+      titlePath: "/manuals/ACS"
+    }),
+    // loadSidebarFromWithPath({
+    //   location: path.join(config.get("documentation"), "manuals/ARE"),
+    //   title: "ARE",
+    //   titlePath: "/manuals/ARE",
+    // }),
+    loadSidebarFromWithPath({
+      location: path.join(config.get("documentation"), "manuals/asterics-grid"),
+      title: "AsTeRICS Grid",
+      titlePath: "/manuals/asterics-grid"
+    }),
+    loadSidebarFromWithPath({
+      location: path.join(config.get("documentation"), "manuals/WebACS"),
+      title: "WebACS",
+      titlePath: "/manuals/WebACS"
+    })
+  ],
   "/customize/": [
     {
       title: "Model",
@@ -96,6 +119,8 @@ module.exports = {
     }
   ]
 };
+
+module.exports = sidebar;
 
 function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] }) {
   let sidebar = fs.readdirSync(location);
@@ -124,9 +149,6 @@ function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] 
     children = children.map(child => {
       let title = child.replace(/_/g, " ");
       let link = `${e.title}/${child}`;
-
-      //console.log(`title: ${title}, link: ${link}`);
-
       return [link, capitalize(title)];
     });
 
@@ -137,6 +159,27 @@ function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] 
   sidebar = sidebar.map(e => ({ ...e, title: capitalize(e.title) }));
 
   return [...pre, ...sidebar, ...post];
+}
+
+function loadSidebarFromWithPath({ location, title, titlePath }) {
+  const children = fs
+    .readdirSync(location)
+    .map(child => child.replace(/\.md$/, ""))
+    .filter(child => child !== "img")
+    .filter(child => child !== "README")
+    .map(child => {
+      let title = child.replace(/_/g, " ");
+      let link = `${titlePath}/${child}`;
+      return [link, capitalize(title)];
+    });
+
+  return {
+    title,
+    path: titlePath,
+    collapsable: true,
+    sidebarDepth: 1,
+    children
+  };
 }
 
 function capitalize(words) {
