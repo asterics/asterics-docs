@@ -84,27 +84,31 @@ const sidebar = {
   //   exclude: [/ARE/],
   //   excludeFiles: [/README\.md/]
   // }),
-  "/manuals/": [
-    loadSidebarFromWithPath({
-      location: path.join(config.get("documentation"), "manuals/ACS"),
+  "/manuals/ACS/": [
+    loadSingleSidebar({
       title: "ACS",
-      titlePath: "/manuals/ACS"
-    }),
-    // loadSidebarFromWithPath({
-    //   location: path.join(config.get("documentation"), "manuals/ARE"),
-    //   title: "ARE",
-    //   titlePath: "/manuals/ARE",
-    // }),
-    loadSidebarFromWithPath({
-      location: path.join(config.get("documentation"), "manuals/asterics-grid"),
-      title: "AsTeRICS Grid",
-      titlePath: "/manuals/asterics-grid"
-    }),
-    loadSidebarFromWithPath({
-      location: path.join(config.get("documentation"), "manuals/WebACS"),
-      title: "WebACS",
-      titlePath: "/manuals/WebACS"
+      titlePath: "/manuals/ACS/",
+      location: path.join(config.get("documentation"), "manuals/ACS")
     })
+  ],
+  "/manuals/asterics-grid/": [
+    loadSingleSidebar({
+      title: "AsTeRICS Grid",
+      titlePath: "/manuals/asterics-grid/",
+      location: path.join(config.get("documentation"), "manuals/asterics-grid")
+    })
+  ],
+  "/manuals/WebACS/": [
+    loadSingleSidebar({
+      title: "WebACS",
+      titlePath: "/manuals/WebACS/",
+      location: path.join(config.get("documentation"), "manuals/WebACS")
+    })
+  ],
+  "/manuals/": [
+    ["/manuals/ACS/", "ACS"],
+    ["/manuals/asterics-grid/", "AsTeRICS Grid"],
+    ["/manuals/WebACS/", "WebACS"]
   ],
   "/customize/": [
     {
@@ -161,7 +165,7 @@ function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] 
   return [...pre, ...sidebar, ...post];
 }
 
-function loadSidebarFromWithPath({ location, title, titlePath }) {
+function loadSidebarFromWithPath({ location, title, titlePath, pre }) {
   const children = fs
     .readdirSync(location)
     .map(child => child.replace(/\.md$/, ""))
@@ -169,14 +173,34 @@ function loadSidebarFromWithPath({ location, title, titlePath }) {
     .filter(child => child !== "README")
     .map(child => {
       let title = child.replace(/_/g, " ");
-      let link = `${titlePath}/${child}`;
+      let link = `${titlePath}${child}`;
       return [link, capitalize(title)];
     });
 
   return {
     title,
     path: titlePath,
-    collapsable: true,
+    collapsable: false,
+    sidebarDepth: 1,
+    children
+  };
+}
+
+function loadSingleSidebar({ title, titlePath, location }) {
+  const children = fs
+    .readdirSync(location)
+    .map(child => child.replace(/\.md$/, ""))
+    .filter(child => child !== "img")
+    .filter(child => child !== "README")
+    .map(child => {
+      let title = child.replace(/_/g, " ");
+      let link = `${titlePath}${child}`;
+      return [link, capitalize(title)];
+    });
+  return {
+    title,
+    path: titlePath,
+    collapsable: false,
     sidebarDepth: 1,
     children
   };
