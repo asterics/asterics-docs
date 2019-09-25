@@ -1,9 +1,7 @@
 <template>
-  <!-- <b-container fluid> -->
   <div class="flex-container">
     <slot></slot>
   </div>
-  <!-- </b-container> -->
 </template>
 
 <script>
@@ -12,18 +10,13 @@ export default {};
 
 <style lang="scss" scoped>
 .flex-container {
-  // background-color: red !important;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  // white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 
   & > div {
-    height: 33vh;
+    height: 43vh;
     width: 48%;
-    // margin-bottom: 4%;
     margin: 0.4rem auto;
   }
 }

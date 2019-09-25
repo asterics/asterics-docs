@@ -1,16 +1,16 @@
 <template>
-  <b-card no-body>
-    <b-row no-gutters>
-      <div slot="header" class="header">
-        <b-card-img-lazy class="card-image" :src="sanitize(image)"></b-card-img-lazy>
+  <b-card>
+    <div slot="header">
+      <b-card-img-lazy class="image" :src="sanitize(image)"></b-card-img-lazy>
+    </div>
+    <b-card-title>
+      <div class="title">
+        <a :href="sanitize(link)">{{title}}</a>
       </div>
-      <b-card-body>
-        <b-card-title class="card-text">
-          <a :href="sanitize(link)">{{title}}</a>
-        </b-card-title>
-        <b-card-text>{{description}}</b-card-text>
-      </b-card-body>
-    </b-row>
+    </b-card-title>
+    <b-card-text>
+      <div class="text">{{description}}</div>
+    </b-card-text>
   </b-card>
 </template>
 
@@ -70,37 +70,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  width: 100%;
+.card-header {
+  padding: 0;
+  border: none;
 }
 
-.card-image {
-  height: 200px;
+.image {
+  height: 300px;
   width: 100%;
   object-fit: cover;
 }
 
-.card-title {
-  height: 2rem;
+.title {
+  height: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-p.card-text {
-  white-space: wrap !important;
+.text {
+  height: 50px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-// .element {
-//   padding: 0;
-//   margin: 0;
-//   margin-bottom: 2rem;
-// }
-
-// @media screen and (min-width: 1290px) {
-//   .group-element {
-//     padding: 0 20px 0 0;
-//   }
-
-//   .group-element:nth-child(2n) {
-//     padding: 0 0 0 20px;
-//   }
-// }
 </style>

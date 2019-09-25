@@ -1,21 +1,22 @@
 <template>
-  <b-card no-body>
-    <b-row no-gutters class="video-placer">
-      <div slot="header" class="video-container">
-        <iframe
-          frameborder="0"
-          class
-          :src="`https://www.youtube${nocookie ? '-nocookie' : ''}.com/embed/${code}?rel=0`"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <b-card-body>
-        <b-card-title>
+  <b-card>
+    <div slot="header" class="video-container">
+      <iframe
+        frameborder="0"
+        :src="`https://www.youtube${nocookie ? '-nocookie' : ''}.com/embed/${code}?rel=0`"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="body">
+      <b-card-title>
+        <div class="title">
           <a target="_blank" :href="`https://www.youtube.com/watch?v=${code}`">{{title}}</a>
-        </b-card-title>
-        <b-card-text class="card-text">{{description}}</b-card-text>
-      </b-card-body>
-    </b-row>
+        </div>
+      </b-card-title>
+      <b-card-text>
+        <div class="text">{{description}}</div>
+      </b-card-text>
+    </div>
   </b-card>
 </template>
 
@@ -72,18 +73,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-body {
-  padding-top: 220px;
+.card-header {
+  padding: 0;
+  border: none;
 }
 
 .video-container > iframe {
-  height: 200px;
+  height: 300px;
   width: 100%;
   position: absolute;
   border-radius: calc(0.25rem - 1px);
 }
 
-.card-title {
-  height: 2rem;
+.body {
+  padding-top: 300px;
+}
+
+.title {
+  height: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text {
+  height: 50px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
