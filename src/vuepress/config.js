@@ -29,7 +29,6 @@ module.exports = {
     sidebarDepth: 3,
     lastUpdated: "Last Updated",
     editLinks: false,
-    repo: "asterics/asterics-docs",
     docsRepo: "asterics/asterics-docs",
     docsDir: "docs",
     docsBranch: "master"
