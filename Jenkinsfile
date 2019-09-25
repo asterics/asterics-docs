@@ -1,76 +1,43 @@
 pipeline {
   parameters {
-    booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome')
-    booleanParam(name: 'deploy_io', defaultValue: false, description: 'Deploy build to github.io')
-    booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
-    booleanParam(name: 'store', defaultValue: false, description: 'Store build')
-    booleanParam(name: 'release', defaultValue: false, description: 'Release build')
-    booleanParam(name: 'release_comment', defaultValue: true, description: 'Add comment to each issue and pull request resolved')
-    password(name: 'GH_TOKEN', defaultValue: '', description: 'Github user token. Note: don\'t use a password, will be logged to console on error. Required for: deploy_io, release.')
-    choice(name: 'dest', description: 'Destination folder', choices: ['asterics-web-devlinux/docs', 'asterics-web-devwindows/docs', 'asterics-web-production/docs' ])
-    choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
-    choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
+    choice(name: 'deploy_selection', description: 'Build and deploy build to studyathome.technikum-wien.at:8090-8092 or Deploy from studyathome.technikum-wien.at to github.io', choices: ['studyathome.technikum-wien.at','github.io'])
+    // booleanParam(name: 'deploy', defaultValue: true, description: 'Deploy build to studyathome.technikum-wien.at:8090-8092')
+    // booleanParam(name: 'deploy_io_exchange', defaultValue: false, description: 'Exchange deployed build to github.io with previous commit')
+    choice(name: 'GH_TOKEN_ID', description: 'Id of github user token credential stored in Jenkins credentials. Required for deployent to github.io', choices:['GH-TOKEN-DEINHOFER'])
+    choice(name: 'dest', description: 'Destination/Source folder: studyathome.technikum-wien.at:8090-8092, The ports map to the choices in the given order', choices: ['asterics-web-production','asterics-web-devlinux', 'asterics-web-devwindows'])
+    // choice(name: 'agent', description: 'Agent', choices: ['Linux', 'Win'])
+    // choice(name: 'image', description: 'Docker Image', choices: ['node:10', 'node:11'])
     gitParameter(name: 'BRANCH', branchFilter: 'origin.*?/(.*)', defaultValue: 'master', type: 'PT_BRANCH_TAG', useRepository: 'asterics-docs')
   }
   triggers {
     // pollSCM('H/15 * * * *')
-    pollSCM('* * * * *')
+    //should be trigger from 6 to 18 every 6hours (at 6h at 12h at 18h)
+    cron('0 6-18/6 * * *')
   }
   agent none
   stages {
     stage('Cleanup') {
       agent {
-        label params.agent
+        label 'Linux'
       }
       steps {
         deleteDir()
       }
     }
     stage('Build') {
-      parallel {
-        stage('Build for Release/Store') {
-          when { 
-            anyOf { 
-              equals expected: true, actual: params.release
-              equals expected: true, actual: params.store
-            }
+          when {
+            equals expected: 'studyathome.technikum-wien.at', actual: params.deploy_selection
           }
           agent {
             docker {
-              image params.image
-              label params.agent
+              image 'node:10'
+              label 'Linux'
             }
           }
           environment {
             FATALITY = true
             VERBOSE = true
             ENDPOINT = "/"
-            DOCUMENTATION = "docs"
-            DESTINATION = "dist"
-          }
-          steps {
-            sh '''
-              yarn
-              yarn docs init --verbose
-              yarn docs setup --verbose
-              yarn build
-            '''
-          }
-        }
-        stage('Build for Deployment') {
-          when {
-            equals expected: true, actual: params.deploy
-          }
-          agent {
-            docker {
-              image params.image
-              label params.agent
-            }
-          }
-          environment {
-            FATALITY = true
-            VERBOSE = true
-            ENDPOINT = "/docs/"
             DOCUMENTATION = "docs-deploy"
             DESTINATION = "dist-deploy"
           }
@@ -82,147 +49,52 @@ pipeline {
               yarn build
             '''
           }
-        }
-        stage('Build for Github IO') {
-          when {
-            equals expected: true, actual: params.deploy_io
-          }
-          agent {
-            docker {
-              image params.image
-              label params.agent
-            }
-          }
-          environment {
-            FATALITY = true
-            VERBOSE = true
-            ENDPOINT = "/"
-            DOCUMENTATION = "docs-deploy-io"
-            DESTINATION = "dist-deploy-io"
-          }
-          steps {
-            sh '''
-              yarn
-              yarn docs init --verbose
-              yarn docs setup --verbose
-              yarn build
-            '''
-          }
-        }
-      }
     }
-    stage('Prepare: Release/Store') {
-      when { 
-        anyOf { 
-          equals expected: true, actual: params.release
-          equals expected: true, actual: params.store
-        }
+    stage('Deploy studyathome:8090-8092') {
+      when {
+        equals expected: 'studyathome.technikum-wien.at', actual: params.deploy_selection
       }
       agent {
-        label params.agent
+        label 'Linux'
+      }
+      environment {
+        SERVER = credentials('server')
       }
       steps {
-        sh 'cd dist && zip -r ../asterics-docs.zip *'
-      }
-    }
-    stage('Output') {
-      parallel {
-        stage('Deploy') {
-          when {
-            equals expected: true, actual: params.deploy
-          }
-          agent {
-            label params.agent
-          }
-          environment {
-            SERVER = credentials('server')
-          }
-          steps {
-            sh '''
-              mkdir build
-              ln -s ../dist-deploy build/docs
-            '''
-            script {
-              def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-              sshRemove remote: remote, path: "/var/www/html/${params.dest}", failOnError: false
-              sshPut remote: remote, from: 'build/docs', into: "/var/www/html/${params.dest.replace("/docs", "")}"
-            }
-          }
-        }
-        stage('Deploy: Github IO') {
-          when {
-            equals expected: true, actual: params.deploy_io
-          }
-          agent {
-            label params.agent
-          }
-          steps {
-            sh '''
-              git clone -b gh-pages --single-branch https://github.com/asterics/asterics-docs.git gh-pages
-            '''
-            script {
-              if (params.deploy_io_exchange) {
-                sh '''
-                  cd gh-pages
-                  git log
-                  git reset --hard HEAD~1
-                  git log
-                '''
-              }
-            }
-            sh '''
-              rm -rf gh-pages/*
-              cp -r dist-deploy-io/* gh-pages/
-              cd gh-pages
-              echo "www.asterics.eu" >> ./CNAME
-              git add .
-              git add -u .
-              git -c user.name='Mr. Jenkins' -c user.email='studyathome@technikum-wien.at' commit -m 'docs: release asterics-docs'
-              git push -f https://$GH_TOKEN@github.com/asterics/asterics-docs.git
-            '''
-          }
-        }
-        stage('Store') {
-          when {
-            equals expected: true, actual: params.store
-          }
-          agent {
-            label params.agent
-          }
-          environment {
-            DESTINATION = "dist"
-          }
-          steps {
-            archiveArtifacts artifacts: 'asterics-docs.zip', fingerprint: true
-            archiveArtifacts artifacts: "$DESTINATION/build.json", fingerprint: true
-          }
-        }
-        stage('Release') {
-          when {
-            // branch 'master'
-            // changeset 'assets'
-            equals expected: true, actual: params.release
-          }
-          agent {
-            docker {
-              image params.image
-              label params.agent
-            }
-          }
-          environment {
-            GIT_BRANCH = "$BRANCH"
-          }
-          steps {
-            sh '''
-              git checkout $BRANCH
-              git pull
-              rm -rf src/external/* .git/modules/src/external/*
-              yarn release:prepare
-              yarn release --branch $BRANCH
-            '''
-          }
+        script {
+          def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
+          sshRemove remote: remote, path: "/var/www/html/dist-deploy", failOnError: false
+          sshRemove remote: remote, path: "/var/www/html/${params.dest}", failOnError: false
+          sshPut remote: remote, from: 'dist-deploy', into: "/var/www/html/"
+          sshCommand remote: remote, command: "mv /var/www/html/dist-deploy /var/www/html/${params.dest}"
         }
       }
     }
+    stage('Deploy: Github IO') {
+      when {
+        equals expected: 'github.io', actual: params.deploy_selection
+      }
+      agent {
+        label 'Linux'
+      }
+      environment {
+        SERVER = credentials('server')
+        GH_TOKEN=credentials("${params.GH_TOKEN_ID}")
+      }
+      steps {
+        script {
+          def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
+          sshCommand remote: remote, command: "DEPLOY_SOURCE=/var/www/html/${params.dest}/ DEPLOY_REPO_PATH=asterics/asterics-docs.git DEPLOY_CNAME=www.asterics.eu DEPLOY_GH_TOKEN=${GH_TOKEN} /home/study/deployment-utils/deploy-ghpages.sh"
+        }
+      }
+    }    
   }
+  // post {
+  //     failure {
+  //         mail to: studyathome@technikum-wien.at, subject: "The asterics-docs Pipeline with build id ${BUILD_ID} failed :("
+  //     }
+  //     success {
+  //         mail to: studyathome@technikum-wien.at, subject: "The asterics-docs Pipeline with build id ${BUILD_ID} was successful :-)"
+  //     }      
+  // }  
 }
