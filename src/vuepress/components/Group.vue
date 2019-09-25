@@ -15,7 +15,6 @@ export default {};
   justify-content: space-between;
 
   & > div {
-    height: 43vh;
     min-height: 425px;
     width: 48%;
     margin: 0.4rem auto;
