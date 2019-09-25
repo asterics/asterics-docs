@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../asterics-docs.js"
+    },
+    {
+      "path": "../asterics-docs.js/packages/@asterics-docs/vuepress-theme-docs"
+    }
+  ],
+  "settings": {
+    "debug.node.autoAttach": "on"
+  }
+}
