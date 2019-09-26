@@ -43,7 +43,7 @@ pipeline {
           }
           steps {
             sh '''
-              yarn
+              yarn --no-lockfile
               yarn docs init --verbose
               yarn docs setup --verbose
               yarn build
