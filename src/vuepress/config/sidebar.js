@@ -5,7 +5,10 @@ const configPath = path.join(process.cwd(), "src/config/config.js");
 const config = require(configPath);
 
 const sidebar = {
-  "/get-started/": [["Overview.md", "Overview"], ["Installation.md", "Installation"]],
+  "/get-started/": [
+    ["Overview.md", "Overview"],
+    ["Installation.md", "Installation"]
+  ],
   "/develop/": [
     {
       title: "Get Started",
@@ -18,18 +21,21 @@ const sidebar = {
     },
     {
       title: "Plugin",
+      path: "/develop/plugin/",
       collapsable: false,
       children: [
-        ["Plugin-Introduction", "Introduction"],
-        ["Plugin-Tutorial", "Tutorial"],
-        ["Plugin-Advanced", "Advanced"]
+        ["plugin/Plugin-Averager", "Averager Example"],
+        ["plugin/Plugin-Advanced", "Advanced"],
+        ["plugin/Resource-Handling", "Resource Handling"],
+        ["plugin/Computer-Vision", "Computer Vision"]
       ]
     },
     {
-      title: "ARE Middleware",
+      title: "ARE",
+      path: "/develop/ARE/",
       collapsable: false,
       children: [
-        ["ARE.md", "Advanced"]
+        ["ARE/ARE-Development-Manual.md", "Development Manual"]
         // ["asterics-wiki/api/Resource Handling.md", "Resource handling"],
         // ["ARE-Keyboard-Mouse-Services.md", "Keyboard/Mouse"],
         // ["asterics-wiki/coding_instructions/JavaCV.md", "Computer Vision"],
@@ -38,11 +44,12 @@ const sidebar = {
     },
     {
       title: "ARE Remote APIs",
+      path: "/develop/are-remote-apis/",
       collapsable: false,
       children: [
-        ["ARE-Webserver.md", "Webserver"],
-        ["REST-API", "REST"],
-        ["asterics-wiki/api/AsTeRICS Websocket.md", "Websocket"]
+        ["are-remote-apis/Webserver", "Webserver"],
+        ["are-remote-apis/REST-API", "REST"],
+        ["are-remote-apis/Websocket", "Websocket"]
       ]
     },
     {
@@ -114,23 +121,37 @@ const sidebar = {
     {
       title: "Model",
       collapsable: false,
-      children: [["Model-Customization", "Customization"], ["Model-Creation", "Creation"]]
+      children: [
+        ["Model-Customization", "Customization"],
+        ["Model-Creation", "Creation"]
+      ]
     },
     {
       title: "AsTeRICS Grid",
       collapsable: false,
-      children: [["Grid-Customization", "Customization"], ["Grid-Creation", "Creation"]]
+      children: [
+        ["Grid-Customization", "Customization"],
+        ["Grid-Creation", "Creation"]
+      ]
     }
   ]
 };
 
 module.exports = sidebar;
 
-function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] }) {
+function loadSidebarFrom({
+  location,
+  pre,
+  post,
+  exclude = [],
+  excludeFiles = []
+}) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
+  sidebar = sidebar.filter(e =>
+    fs.statSync(path.join(location, e)).isDirectory()
+  );
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
