@@ -10,7 +10,7 @@ const convict = require("convict"),
 
 /* Load configuration */
 config.load({
-  versions: ["4.0"],
+  versions: ["4.0.x"],
   submodules: [
     {
       name: "asterics-docs",
@@ -50,7 +50,7 @@ config.load({
       source: "AsTeRICS:Documentation/docs",
       destination: "",
       filter: /\.(md|jpg|png|svg)$/i,
-      versions: [["4.0", "pre-3.1"]]
+      versions: [["4.0.x", "4.0.x"]]
     },
     {
       repository: "WebACS",
