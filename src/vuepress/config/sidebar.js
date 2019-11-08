@@ -14,8 +14,8 @@ const sidebar = {
       title: "Get Started",
       collapsable: false,
       children: [
-        ["Development-Environment", "Development Environment"]
-        //   ["Coding-Guidelines", "Coding Guidelines"],
+        ["Development-Environment", "Development Environment"],
+        ["Coding-Guidelines", "Coding Guidelines"]
         //   ["Unit-Testing", "Unit Testing"]
       ]
     },
