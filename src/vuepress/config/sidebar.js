@@ -120,18 +120,20 @@ const sidebar = {
   "/customize/": [
     {
       title: "Model",
+      path: "/customize/model/",
       collapsable: false,
       children: [
-        ["Model-Customization", "Customization"],
-        ["Model-Creation", "Creation"]
+        ["model/Model-Customization", "Customization"],
+        ["model/Model-Creation", "Creation"]
       ]
     },
     {
       title: "AsTeRICS Grid",
+      path: "/customize/grid/",
       collapsable: false,
       children: [
-        ["Grid-Customization", "Customization"],
-        ["Grid-Creation", "Creation"]
+        ["grid/Grid-Customization", "Customization"],
+        ["grid/Grid-Creation", "Creation"]
       ]
     }
   ]
