@@ -12,10 +12,11 @@ const sidebar = {
   "/develop/": [
     {
       title: "Get Started",
+      path: "/develop/get-started/",
       collapsable: false,
       children: [
-        ["Development-Environment", "Development Environment"],
-        ["Coding-Guidelines", "Coding Guidelines"]
+        ["get-started/Development-Environment", "Development Environment"],
+        ["get-started/Coding-Guidelines", "Coding Guidelines"]
         //   ["Unit-Testing", "Unit Testing"]
       ]
     },
@@ -68,12 +69,11 @@ const sidebar = {
     },
     {
       title: "AT Solution",
+      path: "/develop/at-solution/",
       collapsable: false,
       children: [
-        ["AT_solution_development", "Introduction"],
-        ["AT-solution-demos", "Demos"],
-        ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
-        ["APE", "AsTeRICS Packaging Environment (APE)"]
+        ["at-solution/AT-solution-tutorial.md", "Tutorial"],
+        ["at-solution/APE", "APE"]
       ]
     }
   ],
