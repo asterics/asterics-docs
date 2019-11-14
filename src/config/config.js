@@ -28,11 +28,6 @@ config.load({
       reference: getReferenceInPath(process.cwd(), "WebACS")
     },
     {
-      name: "AsTeRICS.wiki",
-      location: "src/external/asterics-wiki",
-      reference: getReferenceInPath(process.cwd(), "AsTeRICS.wiki")
-    },
-    {
       name: "asterics-grid",
       location: "src/external/asterics-grid",
       reference: getReferenceInPath(process.cwd(), "asterics-grid")
