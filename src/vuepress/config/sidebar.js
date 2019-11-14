@@ -12,10 +12,11 @@ const sidebar = {
   "/develop/": [
     {
       title: "Get Started",
+      path: "/develop/get-started/",
       collapsable: false,
       children: [
-        ["Development-Environment", "Development Environment"],
-        ["Coding-Guidelines", "Coding Guidelines"]
+        ["get-started/Development-Environment", "Development Environment"],
+        ["get-started/Coding-Guidelines", "Coding Guidelines"]
         //   ["Unit-Testing", "Unit Testing"]
       ]
     },
@@ -71,7 +72,7 @@ const sidebar = {
       path: "/develop/at-solution/",
       collapsable: false,
       children: [
-        ["at-solution/AT-solutions.md", "Tutorial"],
+        ["at-solution/AT-solution-tutorial.md", "Tutorial"],
         ["at-solution/APE", "APE"]
       ]
     }
