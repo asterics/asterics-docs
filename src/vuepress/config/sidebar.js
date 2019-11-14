@@ -68,12 +68,11 @@ const sidebar = {
     },
     {
       title: "AT Solution",
+      path: "/develop/at-solution/",
       collapsable: false,
       children: [
-        ["AT_solution_development", "Introduction"],
-        ["AT-solution-demos", "Demos"],
-        ["asterics-wiki/coding_instructions/AsTeRICS Solutions", "Tutorial"],
-        ["APE", "AsTeRICS Packaging Environment (APE)"]
+        ["at-solution/AT-solutions.md", "Tutorial"],
+        ["at-solution/APE", "APE"]
       ]
     }
   ],
