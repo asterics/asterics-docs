@@ -16,3 +16,6 @@
 [submodule "src/external/asterics-solution-template"]
 	path = src/external/asterics-solution-template
 	url = https://github.com/asterics/asterics-solution-template.git
+[submodule "src/external/asterics-camerainput-eyecontrol"]
+	path = src/external/asterics-camerainput-eyecontrol
+	url = https://github.com/asterics/asterics-camerainput-eyecontrol.git

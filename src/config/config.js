@@ -41,6 +41,14 @@ config.load({
       )
     },
     {
+      name: "asterics-camerainput-eyecontrol",
+      location: "src/external/asterics-camerainput-eyecontrol",
+      reference: getReferenceInPath(
+        process.cwd(),
+        "asterics-camerainput-eyecontrol"
+      )
+    },
+    {
       name: "asterics-solution-template",
       location: "src/external/asterics-solution-template",
       reference: getReferenceInPath(process.cwd(), "asterics-solution-template")
@@ -86,6 +94,13 @@ config.load({
       repository: "asterics-camerainput-cameramouse",
       source: "custom/bin/ARE/web/webapps/asterics-camerainput-cameramouse",
       destination: ".vuepress/public/webapps/asterics-camerainput-cameramouse",
+      filter: /\.*/,
+      branch: "master"
+    },
+    {
+      repository: "asterics-camerainput-eyecontrol",
+      source: "custom/bin/ARE/web/webapps/asterics-camerainput-eyecontrol",
+      destination: ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
       filter: /\.*/,
       branch: "master"
     },
