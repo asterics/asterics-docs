@@ -37,5 +37,12 @@ module.exports = [
   ["meta", { name: "apple-mobile-web-app-title", content: "AsTeRICS Docs" }],
   ["meta", { name: "application-name", content: "AsTeRICS Docs" }],
   ["meta", { name: "msapplication-TileColor", content: "#2b5797" }],
-  ["meta", { name: "theme-color", content: "#ffffff" }]
+  ["meta", { name: "theme-color", content: "#ffffff" }],
+  [
+    "meta",
+    {
+      name: "google-site-verification",
+      content: "FuUwJLLJcBGeCw84D05phyWRmWYIlT-q3HttcdwThtg"
+    }
+  ]
 ];
