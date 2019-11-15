@@ -1,6 +1,3 @@
-[submodule "src/external/asterics-wiki"]
-	path = src/external/asterics-wiki
-	url = https://github.com/asterics/AsTeRICS.wiki.git
 [submodule "src/external/asterics"]
 	path = src/external/asterics
 	url = https://github.com/asterics/AsTeRICS.git
@@ -13,3 +10,9 @@
 [submodule "src/external/asterics-grid"]
 	path = src/external/asterics-grid
 	url = https://github.com/asterics/AsTeRICS-Grid.git
+[submodule "src/external/asterics-camerainput-cameramouse"]
+	path = src/external/asterics-camerainput-cameramouse
+	url = https://github.com/asterics/asterics-camerainput-cameramouse.git
+[submodule "src/external/asterics-solution-template"]
+	path = src/external/asterics-solution-template
+	url = https://github.com/asterics/asterics-solution-template.git

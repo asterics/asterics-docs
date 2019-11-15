@@ -31,6 +31,19 @@ config.load({
       name: "asterics-grid",
       location: "src/external/asterics-grid",
       reference: getReferenceInPath(process.cwd(), "asterics-grid")
+    },
+    {
+      name: "asterics-camerainput-cameramouse",
+      location: "src/external/asterics-camerainput-cameramouse",
+      reference: getReferenceInPath(
+        process.cwd(),
+        "asterics-camerainput-cameramouse"
+      )
+    },
+    {
+      name: "asterics-solution-template",
+      location: "src/external/asterics-solution-template",
+      reference: getReferenceInPath(process.cwd(), "asterics-solution-template")
     }
   ],
   dependencies: [
@@ -66,6 +79,38 @@ config.load({
       repository: "asterics-grid",
       source: "docs/documentation_dev",
       destination: "develop/asterics-grid",
+      filter: /\.*/,
+      branch: "master"
+    },
+    {
+      repository: "asterics-camerainput-cameramouse",
+      source: "custom/bin/ARE/web/webapps/asterics-camerainput-cameramouse",
+      destination: ".vuepress/public/webapps/asterics-camerainput-cameramouse",
+      filter: /\.*/,
+      branch: "master"
+    },
+    //provides modelManipulation.js and webAppUtils.js
+    //TODO: use npm libs
+    {
+      repository: "asterics-solution-template",
+      source: "custom/bin/ARE/web/webapps/startpage",
+      destination: ".vuepress/public/webapps/startpage",
+      filter: /\.*/,
+      branch: "master"
+    },
+    //provides areCommunicator.js, JSMap.js and jquery
+    //TODO: use npm libs
+    {
+      source: "AsTeRICS:ARE_RestAPIlibraries/clientExample",
+      destination: ".vuepress/public/webapps/startpage/clientExample",
+      filter: /\.*/,
+      branch: "master"
+    },
+    //provides jquery at another path: startpage/lib
+    //TODO: use npm libs, cleanup
+    {
+      source: "AsTeRICS:ARE_RestAPIlibraries/clientExample/javascript",
+      destination: ".vuepress/public/webapps/startpage/lib",
       filter: /\.*/,
       branch: "master"
     }
