@@ -85,7 +85,7 @@
               :disabled="webapp === ''"
               class="model-btn model-btn-text"
               variant="info"
-              :href="sanitize(webapp)"
+              :href="settingsURL"
               target="_blank"
             >Settings</b-button>
             <b-button
@@ -266,6 +266,13 @@ export default {
     },
     open: function() {
       return `${this.settings.grid}/${this.grid}`;
+    },
+    settingsURL: function() {
+      let value = this.sanitize(
+        `${this.webapp}?areBaseURI=${this.settings.are}`
+      );
+      console.log(value);
+      return value;
     },
     edit: function() {
       if (this.model !== "") {
