@@ -58,7 +58,9 @@ async function logStaged(r) {
     /* Log indexed files */
     for (const repo of config.get("submodules")) {
       if (hasCandidate(staged, repo.name)) {
-        process.stdout.write(info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" }));
+        process.stdout.write(
+          info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" })
+        );
         for (const file of staged) {
           if (isInRepository(file, repo.name)) {
             log(success, file);
@@ -70,7 +72,9 @@ async function logStaged(r) {
     /* Log unindexed files */
     const unindexed = staged.filter(e => e.isNew());
     if (unindexed.length > 0) {
-      process.stdout.write(info("\n" + " ".repeat(ident.repository) + "*".repeat(6), { end: "\n", label: "" }));
+      process.stdout.write(
+        info("\n" + " ".repeat(ident.repository) + "*".repeat(6), { end: "\n", label: "" })
+      );
       for (const file of unindexed) {
         log(success, file);
       }
@@ -100,7 +104,9 @@ async function logUnstaged(r) {
     /* Log indexed files */
     for (const repo of config.get("submodules")) {
       if (hasCandidate(unstaged, repo.name, "indexToWorkdir")) {
-        process.stdout.write(info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" }));
+        process.stdout.write(
+          info("\n" + " ".repeat(ident.repository) + repo.name, { end: "\n", label: "" })
+        );
         for (const file of unstaged) {
           if (isInRepository(file, repo.name, "indexToWorkdir")) {
             log(error, file, "indexToWorkdir");
@@ -111,7 +117,9 @@ async function logUnstaged(r) {
 
     /* Log unindexed files */
     if (hasUnindexed(unstaged)) {
-      process.stdout.write(info("\n" + " ".repeat(ident.repository) + "*".repeat(6), { end: "\n", label: "" }));
+      process.stdout.write(
+        info("\n" + " ".repeat(ident.repository) + "*".repeat(6), { end: "\n", label: "" })
+      );
       for (const file of unstaged) {
         if (isInNoneRepository(file)) {
           log(error, file);
@@ -125,7 +133,10 @@ async function logUnstaged(r) {
 
 async function getUnstaged(r) {
   const opts = {
-    flags: Status.OPT.RENAMES_HEAD_TO_INDEX | Status.OPT.RENAMES_INDEX_TO_WORKDIR | Status.OPT.RENAMES_FROM_REWRITES,
+    flags:
+      Status.OPT.RENAMES_HEAD_TO_INDEX |
+      Status.OPT.RENAMES_INDEX_TO_WORKDIR |
+      Status.OPT.RENAMES_FROM_REWRITES,
     show: Status.SHOW.WORKDIR_ONLY
   };
   return await r.getStatusExt(opts);
@@ -162,7 +173,12 @@ function log(logger, file, changes = "headToIndex") {
   } else if (file.isRenamed()) {
     const oldFile = file[changes]().oldFile();
     const newFile = file[changes]().newFile();
-    process.stdout.write(logger("", { end: "\n", label: prefix + `renamed:    ${oldFile.path()} -> ${newFile.path()}` }));
+    process.stdout.write(
+      logger("", {
+        end: "\n",
+        label: prefix + `renamed:    ${oldFile.path()} -> ${newFile.path()}`
+      })
+    );
   } else if (file.isIgnored()) {
   } else if (file.isModified()) {
     process.stdout.write(logger("", { end: "\n", label: prefix + `modified:   ${file.path()}` }));
@@ -201,7 +217,7 @@ function hasUnindexed(status) {
 
 function isInRepository(file, repository, changes = "headToIndex") {
   const path = file.isRenamed() ? getOldFilePath(file, changes) : file.path();
-  const entry = index.entry(path);
+  const entry = index.get(path);
   if (entry && entry.repository === repository) {
     return true;
   }

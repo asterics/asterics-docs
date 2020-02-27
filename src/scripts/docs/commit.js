@@ -54,8 +54,14 @@ export const handler = async options => {
       const delta = file["headToIndex"]();
       const oldFile = delta.oldFile();
       const newFile = delta.newFile();
-      process.stdout.write(error(`renaming ${oldFile.path()} to ${newFile.path()} results target destination outside of repository:\n`));
-      process.stdout.write(error("", { end: "\n", label: `        ${index.moved(file).destination(repo.location)}\n` }));
+      process.stdout.write(
+        error(
+          `renaming ${oldFile.path()} to ${newFile.path()} results target destination outside of repository:\n`
+        )
+      );
+      process.stdout.write(
+        error("", { end: "\n", label: `        ${index.moved(file).destination(repo.location)}\n` })
+      );
       process.stdout.write("Correct renaming or unstage to continue.\n");
       process.exit();
     });
@@ -84,7 +90,7 @@ async function verifyRenamedFiles(index, handler = (idx, f) => {}) {
   const renamed = staged.filter(file => file.isRenamed());
   for (const file of renamed) {
     if (index.moved(file).up() > index.moved(file).available()) {
-      const entry = index.entry(file);
+      const entry = index.get(file);
       const repo = config.get("submodules").find(e => e.name === entry.repository);
       handler(repo, file);
     }
@@ -135,7 +141,7 @@ async function commitFiles(index, repo, branch, status, options) {
     for (const file of files) {
       let src = null;
       let dest = null;
-      const entry = index.entry(file);
+      const entry = index.get(file);
       /* Copy files */
       if (file.isRenamed()) {
         const delta = file["headToIndex"]();
@@ -201,10 +207,14 @@ async function checkoutBranch(name, repo, branch) {
   let numFiles;
   const opts = {
     checkoutStrategy:
-      Checkout.STRATEGY.SAFE || Checkout.STRATEGY.RECREATE_MISSING || Checkout.STRATEGY.ALLOW_CONFLICTS || Checkout.STRATEGY.USE_THEIRS,
+      Checkout.STRATEGY.SAFE ||
+      Checkout.STRATEGY.RECREATE_MISSING ||
+      Checkout.STRATEGY.ALLOW_CONFLICTS ||
+      Checkout.STRATEGY.USE_THEIRS,
     perfdataCb: finished => {
       if (finished) {
-        if (typeof numFiles !== "undefined") process.stdout.write(`100% (${numFiles}/${numFiles}), done.\n`);
+        if (typeof numFiles !== "undefined")
+          process.stdout.write(`100% (${numFiles}/${numFiles}), done.\n`);
         process.stdout.write(`Switched repository '${name}' to branch '${branch}'.\n`);
       }
     },
@@ -263,11 +273,11 @@ async function checkoutBranch(name, repo, branch) {
 function getStagedBranches(repo, branches, status) {
   let stagedBranches = status
     .filter(file => {
-      let entry = index.entry(file);
+      let entry = index.get(file);
       return repo.name === entry.repository;
     })
     .map(file => {
-      let entry = index.entry(file);
+      let entry = index.get(file);
       return entry.branch;
     });
   return branches.filter(branch => stagedBranches.includes(branch));
@@ -275,7 +285,7 @@ function getStagedBranches(repo, branches, status) {
 
 function getStagedFilesOfRepositoryBranch(repo, branch, status) {
   return status.filter(file => {
-    let entry = index.entry(file);
+    let entry = index.get(file);
     return repo.name === entry.repository && branch === entry.branch;
   });
 }
@@ -299,7 +309,9 @@ function verifyOptions(options) {
       logInvalidUser(process.env.AUTHOR);
     }
   } else {
-    process.stdout.write(info("username and email of commit author have to be specified (--author, env: AUTHOR)."));
+    process.stdout.write(
+      info("username and email of commit author have to be specified (--author, env: AUTHOR).")
+    );
   }
 
   /* Committer */
@@ -317,7 +329,9 @@ function verifyOptions(options) {
       logInvalidUser(COMMITTER);
     }
   } else {
-    process.stdout.write(info("username and email of committer have to specified (--committer, env: COMMITTER)."));
+    process.stdout.write(
+      info("username and email of committer have to specified (--committer, env: COMMITTER).")
+    );
   }
 
   return validAuthor && validCommitter;

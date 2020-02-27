@@ -15,7 +15,7 @@ let index = null;
 export async function hasUntracked(index) {
   const untracked = await getUntracked();
   for (const file of untracked) {
-    const entry = index.entry(file);
+    const entry = index.get(file);
     if (entry === undefined) {
       return true;
     }

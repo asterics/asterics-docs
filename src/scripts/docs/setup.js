@@ -2,9 +2,10 @@ import { existsSync, writeFileSync } from "fs";
 import { join, dirname, relative } from "path";
 import { clearScreenDown } from "readline";
 import { Index } from "./shared/index.js";
+import { init, commit } from "./shared/repository.js";
 import { error, info } from "./shared/logger.js";
 import { cursorSavePosition, cursorRestorePosition } from "ansi-escapes";
-import { Repository, Signature } from "nodegit";
+import { Repository } from "nodegit";
 import { mkdirp } from "@asterics/node-utils";
 
 const configPath = join(process.cwd(), "src/config/config.js");
@@ -34,26 +35,33 @@ export const handler = async options => {
   opts = options;
 
   /* Check existance of local `docs` repository */
-  const d = join(process.cwd(), config.get("documentation"));
-  if (!existsSync(d)) {
+  const docsPath = join(process.cwd(), config.get("documentation"));
+  if (!existsSync(docsPath)) {
     /* Load index */
-    const dependencies = config.get("dependencies");
-    const versions = config.get("versions");
-    const index = await new Index(dependencies, versions);
+    const index = await new Index();
 
     process.stdout.write(cursorSavePosition);
 
     /* Load indexed files */
-    for (const path in index.entries) {
-      const entry = index.entry(path);
-      await loadFile(path, entry);
-    }
+    await index.setup();
+    // for (const path of index.all) {
+    //   const entries = index.get(path);
+    //   await loadFile(
+    //     path,
+    //     entries.find(({ indexed }) => indexed)
+    //   );
+    // }
     clearScreenDown(process.stdout);
 
-    /* Create local `docs` repository */
-    await setupWorkingRepository();
+    /* Create local `docs` repository and commit initial state */
+    await init(docsPath);
+    await commit(docsPath, "robot", "noreply+studyathome@technikum-wien.at");
   } else {
-    process.stdout.write(error(`cannot setup asterics-docs. folder '${relative(process.cwd(), d)}' exists already.`));
+    process.stdout.write(
+      error(
+        `cannot setup asterics-docs. folder '${relative(process.cwd(), docsPath)}' exists already.`
+      )
+    );
   }
 };
 
@@ -86,25 +94,10 @@ async function copyFile(path, entry) {
     const destination = join(process.cwd(), config.get("documentation"), path);
     const content = b.isBinary() ? b.content() : b.toString();
     clearScreenDown(process.stdout);
-    process.stdout.write(info(path, { end: opts.verbose ? "\n" : cursorRestorePosition, label: "loading" }));
+    process.stdout.write(
+      info(path, { end: opts.verbose ? "\n" : cursorRestorePosition, label: "loading" })
+    );
     writeFileSync(destination, content);
-  } catch (err) {
-    process.stdout.write(error(err));
-  }
-}
-
-async function setupWorkingRepository() {
-  try {
-    const r = await Repository.init(join(process.cwd(), config.get("documentation")), 0);
-
-    const index = await r.refreshIndex();
-    await index.addAll();
-    await index.write();
-    const oid = await index.writeTree();
-
-    const author = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
-    const committer = Signature.now("robot", "noreply+studyathome@technikum-wien.at");
-    await r.createCommit("HEAD", author, committer, "Initial commit", oid, []);
   } catch (err) {
     process.stdout.write(error(err));
   }
