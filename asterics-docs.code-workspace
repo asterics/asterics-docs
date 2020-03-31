@@ -8,6 +8,12 @@
     },
     {
       "path": "../asterics-docs.js/packages/@asterics-docs/vuepress-theme-docs"
+    },
+    {
+      "path": "../asterics-docs.js/packages/@asterics-docs/tool"
+    },
+    {
+      "path": "../asterics-docs.js/packages/@asterics-docs/vuepress-plugin-asterics-docs-tool"
     }
   ],
   "settings": {
