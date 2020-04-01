@@ -1,21 +1,21 @@
-[submodule "src/external/asterics"]
-	path = src/external/asterics
+[submodule "AsTeRICS"]
+	path = submodules/asterics
 	url = https://github.com/asterics/AsTeRICS.git
-[submodule "src/external/webacs"]
-	path = src/external/webacs
+[submodule "WebACS"]
+	path = submodules/webacs
 	url = https://github.com/asterics/WebACS.git
-[submodule "src/external/asterics-docs"]
-	path = src/external/asterics-docs
+[submodule "asterics-docs"]
+	path = submodules/asterics-docs
 	url = https://github.com/asterics/asterics-docs.git
-[submodule "src/external/asterics-grid"]
-	path = src/external/asterics-grid
+[submodule "AsTeRICS-Grid"]
+	path = submodules/asterics-grid
 	url = https://github.com/asterics/AsTeRICS-Grid.git
-[submodule "src/external/asterics-camerainput-cameramouse"]
-	path = src/external/asterics-camerainput-cameramouse
+[submodule "asterics-camerainput-cameramouse"]
+	path = submodules/asterics-camerainput-cameramouse
 	url = https://github.com/asterics/asterics-camerainput-cameramouse.git
-[submodule "src/external/asterics-solution-template"]
-	path = src/external/asterics-solution-template
-	url = https://github.com/asterics/asterics-solution-template.git
-[submodule "src/external/asterics-camerainput-eyecontrol"]
-	path = src/external/asterics-camerainput-eyecontrol
+[submodule "asterics-camerainput-eyecontrol"]
+	path = submodules/asterics-camerainput-eyecontrol
 	url = https://github.com/asterics/asterics-camerainput-eyecontrol.git
+[submodule "asterics-solution-template"]
+	path = submodules/asterics-solution-template
+	url = https://github.com/asterics/asterics-solution-template.git
