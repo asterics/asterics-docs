@@ -1,8 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
-const configPath = path.join(process.cwd(), "src/config/config.js");
-const config = require(configPath);
+const { source } = require("../../../docs.config.js");
 
 const sidebar = {
   "/get-started/": [
@@ -78,13 +77,13 @@ const sidebar = {
     }
   ],
   "/plugins/": loadSidebarFrom({
-    location: path.join(config.get("documentation"), "plugins"),
+    location: path.join(source, "plugins"),
     pre: [],
     post: [],
     excludeFiles: [/README\.md/]
   }),
   // "/manuals/": loadSidebarFrom({
-  //   location: path.join(config.get("documentation"), "manuals"),
+  //   location: path.join(source, "manuals"),
   //   path: "/manuals/asterics-grid",
   //   pre: [],
   //   post: [],
@@ -95,21 +94,21 @@ const sidebar = {
     loadSingleSidebar({
       title: "ACS",
       titlePath: "/manuals/ACS/",
-      location: path.join(config.get("documentation"), "manuals/ACS")
+      location: path.join(source, "manuals/ACS")
     })
   ],
   "/manuals/asterics-grid/": [
     loadSingleSidebar({
       title: "AsTeRICS Grid",
       titlePath: "/manuals/asterics-grid/",
-      location: path.join(config.get("documentation"), "manuals/asterics-grid")
+      location: path.join(source, "manuals/asterics-grid")
     })
   ],
   "/manuals/WebACS/": [
     loadSingleSidebar({
       title: "WebACS",
       titlePath: "/manuals/WebACS/",
-      location: path.join(config.get("documentation"), "manuals/WebACS")
+      location: path.join(source, "manuals/WebACS")
     })
   ],
   "/manuals/": [
@@ -141,19 +140,11 @@ const sidebar = {
 
 module.exports = sidebar;
 
-function loadSidebarFrom({
-  location,
-  pre,
-  post,
-  exclude = [],
-  excludeFiles = []
-}) {
+function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] }) {
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e =>
-    fs.statSync(path.join(location, e)).isDirectory()
-  );
+  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
 
   /* Filter exclude */
   sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));

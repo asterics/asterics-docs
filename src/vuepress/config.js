@@ -1,21 +1,10 @@
-const path = require("path");
-
-const configPath = path.join(process.cwd(), "src/config/config.js");
-const config = require(configPath);
-
-console.log(`host: ${config.get("host")}`);
-console.log(`port: ${config.get("port")}`);
-console.log(`endpoint: ${config.get("endpoint")}`);
-console.log(`destination: ${config.get("destination")}`);
-console.log(`version: ${config.get("version")}`);
-console.log(`latest: ${config.get("latest")}`);
+const { base, port, dest } = require("../../docs.config.js");
 
 module.exports = {
   devtools: true,
-  host: config.get("host"),
-  port: config.get("port"),
-  base: config.get("endpoint"),
-  dest: config.get("destination"),
+  port,
+  base,
+  dest,
   theme: "@asterics-docs/docs",
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
