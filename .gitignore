@@ -1,15 +1,10 @@
 # Ignore
+
 ## Globals
-.audits/
-.certs/
-.vscode/
 node_modules/
 
 ## Root
 /docs*
 /dist*
-
-## Configuration
-src/config/.env
 
 # Allow
