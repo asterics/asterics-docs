@@ -122,8 +122,8 @@ const sidebar = {
       path: "/customize/model/",
       collapsable: false,
       children: [
-        ["model/Model-Customization", "Customization"],
-        ["model/Model-Creation", "Creation"]
+        ["Model-Customization", "Customization"],
+        ["Model-Creation", "Creation"]
       ]
     },
     {
@@ -131,8 +131,8 @@ const sidebar = {
       path: "/customize/grid/",
       collapsable: false,
       children: [
-        ["grid/Grid-Customization", "Customization"],
-        ["grid/Grid-Creation", "Creation"]
+        ["Grid-Customization", "Customization"],
+        ["Grid-Creation", "Creation"]
       ]
     }
   ]

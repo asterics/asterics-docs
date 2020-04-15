@@ -1,4 +1,4 @@
-const { base, port, dest } = require("../../docs.config.js");
+const { base, port, dest, versions } = require("../../docs.config.js");
 
 module.exports = {
   devtools: true,
@@ -12,6 +12,8 @@ module.exports = {
   plugins: require("./config/plugins.js"),
   extraWatchFiles: [".vuepress/config/**/*.js"],
   themeConfig: {
+    versions,
+    editLinks: false,
     logo: "/assets/img/asterics-logo.svg",
     nav: require("./config/nav/en.js"),
     sidebar: require("./config/sidebar.js"),
