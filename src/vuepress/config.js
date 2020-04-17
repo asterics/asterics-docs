@@ -13,7 +13,7 @@ module.exports = {
   extraWatchFiles: [".vuepress/config/**/*.js"],
   themeConfig: {
     versions,
-    editLinks: false,
+    editLinks: true,
     logo: "/assets/img/asterics-logo.svg",
     nav: require("./config/nav/en.js"),
     sidebar: require("./config/sidebar.js"),
@@ -22,6 +22,6 @@ module.exports = {
     editLinks: false,
     docsRepo: "asterics/asterics-docs",
     docsDir: "docs",
-    docsBranch: "master"
-  }
+    docsBranch: "master",
+  },
 };
