@@ -19,7 +19,6 @@ module.exports = {
     sidebar: require("./config/sidebar.js"),
     sidebarDepth: 3,
     lastUpdated: "Last Updated",
-    editLinks: false,
     docsRepo: "asterics/asterics-docs",
     docsDir: "docs",
     docsBranch: "master",
