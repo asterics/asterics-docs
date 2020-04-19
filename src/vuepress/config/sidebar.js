@@ -6,7 +6,7 @@ const { source } = require("../../../docs.config.js");
 const sidebar = {
   "/get-started/": [
     ["Overview.md", "Overview"],
-    ["Installation.md", "Installation"]
+    ["Installation.md", "Installation"],
   ],
   "/develop/": [
     {
@@ -15,9 +15,9 @@ const sidebar = {
       collapsable: false,
       children: [
         ["get-started/Development-Environment", "Development Environment"],
-        ["get-started/Coding-Guidelines", "Coding Guidelines"]
+        ["get-started/Coding-Guidelines", "Coding Guidelines"],
         //   ["Unit-Testing", "Unit Testing"]
-      ]
+      ],
     },
     {
       title: "Plugin",
@@ -27,20 +27,20 @@ const sidebar = {
         ["plugin/Plugin-Averager", "Averager Example"],
         ["plugin/Plugin-Advanced", "Advanced"],
         ["plugin/Resource-Handling", "Resource Handling"],
-        ["plugin/Computer-Vision", "Computer Vision"]
-      ]
+        ["plugin/Computer-Vision", "Computer Vision"],
+      ],
     },
     {
       title: "ARE",
       path: "/develop/ARE/",
       collapsable: false,
       children: [
-        ["ARE/ARE-Development-Manual.md", "Development Manual"]
+        ["ARE/ARE-Development-Manual.md", "Development Manual"],
         // ["asterics-wiki/api/Resource Handling.md", "Resource handling"],
         // ["ARE-Keyboard-Mouse-Services.md", "Keyboard/Mouse"],
         // ["asterics-wiki/coding_instructions/JavaCV.md", "Computer Vision"],
         // ["ARE-HW-Interfacing-CIM.md", "Interfacing Peripherals (CIM)"]
-      ]
+      ],
     },
     {
       title: "ARE Remote APIs",
@@ -49,8 +49,8 @@ const sidebar = {
       children: [
         ["are-remote-apis/Webserver", "Webserver"],
         ["are-remote-apis/REST-API", "REST"],
-        ["are-remote-apis/Websocket", "Websocket"]
-      ]
+        ["are-remote-apis/Websocket", "Websocket"],
+      ],
     },
     {
       title: "AsTeRICS Grid",
@@ -63,8 +63,8 @@ const sidebar = {
         ["asterics-grid/04_vuejs.md", "04 Vuejs"],
         ["asterics-grid/05_datamodel.md", "05 Datamodel"],
         ["asterics-grid/06_data_storage.md", "06 Data storage"],
-        ["asterics-grid/07_i18n.md", "07 I18n"]
-      ]
+        ["asterics-grid/07_i18n.md", "07 I18n"],
+      ],
     },
     {
       title: "AT Solution",
@@ -72,15 +72,15 @@ const sidebar = {
       collapsable: false,
       children: [
         ["at-solution/AT-solution-tutorial.md", "Tutorial"],
-        ["at-solution/APE", "APE"]
-      ]
-    }
+        ["at-solution/APE", "APE"],
+      ],
+    },
   ],
   "/plugins/": loadSidebarFrom({
     location: path.join(source, "plugins"),
     pre: [],
     post: [],
-    excludeFiles: [/README\.md/]
+    excludeFiles: [/README\.md/],
   }),
   // "/manuals/": loadSidebarFrom({
   //   location: path.join(source, "manuals"),
@@ -94,27 +94,27 @@ const sidebar = {
     loadSingleSidebar({
       title: "ACS",
       titlePath: "/manuals/ACS/",
-      location: path.join(source, "manuals/ACS")
-    })
+      location: path.join(source, "manuals/ACS"),
+    }),
   ],
   "/manuals/asterics-grid/": [
     loadSingleSidebar({
       title: "AsTeRICS Grid",
       titlePath: "/manuals/asterics-grid/",
-      location: path.join(source, "manuals/asterics-grid")
-    })
+      location: path.join(source, "manuals/asterics-grid"),
+    }),
   ],
   "/manuals/WebACS/": [
     loadSingleSidebar({
       title: "WebACS",
       titlePath: "/manuals/WebACS/",
-      location: path.join(source, "manuals/WebACS")
-    })
+      location: path.join(source, "manuals/WebACS"),
+    }),
   ],
   "/manuals/": [
     ["/manuals/ACS/", "ACS"],
     ["/manuals/asterics-grid/", "AsTeRICS Grid"],
-    ["/manuals/WebACS/", "WebACS"]
+    ["/manuals/WebACS/", "WebACS"],
   ],
   "/customize/": [
     {
@@ -122,20 +122,20 @@ const sidebar = {
       path: "/customize/model/",
       collapsable: false,
       children: [
-        ["Model-Customization", "Customization"],
-        ["Model-Creation", "Creation"]
-      ]
+        ["model/Model-Customization", "Customization"],
+        ["model/Model-Creation", "Creation"],
+      ],
     },
     {
       title: "AsTeRICS Grid",
       path: "/customize/grid/",
       collapsable: false,
       children: [
-        ["Grid-Customization", "Customization"],
-        ["Grid-Creation", "Creation"]
-      ]
-    }
-  ]
+        ["grid/Grid-Customization", "Customization"],
+        ["grid/Grid-Creation", "Creation"],
+      ],
+    },
+  ],
 };
 
 module.exports = sidebar;
@@ -144,27 +144,27 @@ function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] 
   let sidebar = fs.readdirSync(location);
 
   /* First level only directories */
-  sidebar = sidebar.filter(e => fs.statSync(path.join(location, e)).isDirectory());
+  sidebar = sidebar.filter((e) => fs.statSync(path.join(location, e)).isDirectory());
 
   /* Filter exclude */
-  sidebar = sidebar.filter(e => !exclude.some(r => r.test(e)));
+  sidebar = sidebar.filter((e) => !exclude.some((r) => r.test(e)));
 
   /* Map to first level entry */
-  sidebar = sidebar.map(e => ({ title: e, collapsable: true, children: null })); //abs: path.join(location, e) }));
+  sidebar = sidebar.map((e) => ({ title: e, collapsable: true, children: null })); //abs: path.join(location, e) }));
 
   /* Append children for each entry */
-  sidebar.forEach(e => {
+  sidebar.forEach((e) => {
     let children = fs.readdirSync(path.join(location, e.title));
 
     /* Filter markdown files, only */
-    children = children.filter(child => /.*md$/.test(child));
+    children = children.filter((child) => /.*md$/.test(child));
 
     /* Remove file extension */
-    children = children.filter(e => !excludeFiles.some(r => r.test(e)));
-    children = children.map(child => child.replace(/\.md$/, ""));
+    children = children.filter((e) => !excludeFiles.some((r) => r.test(e)));
+    children = children.map((child) => child.replace(/\.md$/, ""));
 
     /* Construct arrays containing link and title */
-    children = children.map(child => {
+    children = children.map((child) => {
       let title = child.replace(/_/g, " ");
       let link = `${e.title}/${child}`;
       return [link, capitalize(title)];
@@ -174,7 +174,7 @@ function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] 
   });
 
   /* Capitalize titles */
-  sidebar = sidebar.map(e => ({ ...e, title: capitalize(e.title) }));
+  sidebar = sidebar.map((e) => ({ ...e, title: capitalize(e.title) }));
 
   return [...pre, ...sidebar, ...post];
 }
@@ -182,10 +182,10 @@ function loadSidebarFrom({ location, pre, post, exclude = [], excludeFiles = [] 
 function loadSidebarFromWithPath({ location, title, titlePath, pre }) {
   const children = fs
     .readdirSync(location)
-    .map(child => child.replace(/\.md$/, ""))
-    .filter(child => child !== "img")
-    .filter(child => child !== "README")
-    .map(child => {
+    .map((child) => child.replace(/\.md$/, ""))
+    .filter((child) => child !== "img")
+    .filter((child) => child !== "README")
+    .map((child) => {
       let title = child.replace(/_/g, " ");
       let link = `${titlePath}${child}`;
       return [link, capitalize(title)];
@@ -196,17 +196,17 @@ function loadSidebarFromWithPath({ location, title, titlePath, pre }) {
     path: titlePath,
     collapsable: false,
     sidebarDepth: 1,
-    children
+    children,
   };
 }
 
 function loadSingleSidebar({ title, titlePath, location }) {
   const children = fs
     .readdirSync(location)
-    .map(child => child.replace(/\.md$/, ""))
-    .filter(child => child !== "img")
-    .filter(child => child !== "README")
-    .map(child => {
+    .map((child) => child.replace(/\.md$/, ""))
+    .filter((child) => child !== "img")
+    .filter((child) => child !== "README")
+    .map((child) => {
       let title = child.replace(/_/g, " ");
       let link = `${titlePath}${child}`;
       return [link, capitalize(title)];
@@ -216,13 +216,13 @@ function loadSingleSidebar({ title, titlePath, location }) {
     path: titlePath,
     collapsable: false,
     sidebarDepth: 1,
-    children
+    children,
   };
 }
 
 function capitalize(words) {
   return words
     .split(" ")
-    .map(word => [word.charAt(0).toUpperCase(), word.slice(1)].join(""))
+    .map((word) => [word.charAt(0).toUpperCase(), word.slice(1)].join(""))
     .join(" ");
 }
