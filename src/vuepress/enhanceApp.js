@@ -1,15 +1,18 @@
-import pageComponents from "@internal/page-components";
-
-export default ({
+// async function is also supported, too
+export default async ({
   Vue, // the version of Vue being used in the VuePress app
   options, // the options for the root Vue instance
   router, // the router instance for the app
   siteData, // site metadata
+  isServer, // is this enhancement applied in server-rendering or client
 }) => {
-  // Quick-fix/Workaround for following error messages in development mode:
-  // > [Vue warn]: Unknown custom element: <v-00c136c4> - did you register the component correctly?
-  // > For recursive components, make sure to provide the "name" option.
-  for (const [name, component] of Object.entries(pageComponents)) {
-    Vue.component(name, component);
+  if (process.env.NODE_ENV === "development" && !isServer) {
+    // const pageComponents = await import("@internal/page-components");
+    const { default: pageComponents } = await import("@internal/page-components");
+    // Hot reload page components,  in development mode, due to custom theme.
+    // > [Vue warn]: Unknown custom element: <v-xxxxxxxx> - did you register the component correctly?
+    for (const name in pageComponents) {
+      Vue.component(name, pageComponents[name]);
+    }
   }
 };
