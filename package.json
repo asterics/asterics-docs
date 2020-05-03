@@ -7,8 +7,8 @@
     "yarn": "^1.0.0"
   },
   "scripts": {
-    "dev": "vuepress dev --no-clear-screen --no-cache docs",
-    "build": "vuepress build docs",
+    "dev": "vuepress dev docs",
+    "build": "node --max-old-space-size=12288 node_modules/.bin/vuepress build docs",
     "postbuild": "node src/scripts/logBuild.js",
     "docs": "asterics-docs"
   },
@@ -31,11 +31,10 @@
   "devDependencies": {
     "@asterics-docs/tool": "canary",
     "@asterics/web-app-utils": "0.0.1-alpha.6",
-    "@vuepress/plugin-pwa": "^1.1.0",
-    "vuepress": "^1.4.0"
+    "@vuepress/plugin-pwa": "^1.4.1",
+    "vuepress": "^1.4.1"
   },
   "dependencies": {
-    "bowser": "^2.9.0",
     "@asterics-docs/vuepress-theme-docs": "canary"
   }
 }

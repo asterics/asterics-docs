@@ -1,9 +1,10 @@
 module.exports = {
-  base: "/",
+  base: "/next/",
   port: 8080,
   source: "docs",
   dest: "dist",
-  versions: ["4.0.x", "2.8"],
+  host: "https://www.asterics.eu/",
+  versions: ["4.0", "3.0.1", "3.0", "2.8", "2.7", "2.6", "2.5", "2.3"],
   sources: [
     {
       repository: "asterics-docs",
@@ -12,9 +13,9 @@ module.exports = {
         {
           source: "src/vuepress",
           destination: ".vuepress",
-          branch: "alija/feature/versioning"
-        }
-      ]
+          branch: "alija/feature/versioning",
+        },
+      ],
     },
     {
       repository: "AsTeRICS",
@@ -22,24 +23,31 @@ module.exports = {
       files: [
         {
           source: "Documentation/docs",
-          destination: "",
+          destination: ".",
           filter: /\.(md|jpg|png|svg)$/i,
+          exclude: /(Documentation\/docs\/acs)/i,
           versions: [
-            ["4.0.x", "master"],
-            ["2.8", "docs/2.8"]
-          ]
+            ["4.0", "4.0.x"],
+            ["3.0.1", "docs/3.0.1"],
+            ["3.0", "docs/3.0"],
+            ["2.8", "docs/2.8"],
+            ["2.7", "docs/2.7"],
+            ["2.6", "docs/2.6"],
+            ["2.5", "docs/2.5"],
+            ["2.3", "docs/2.3"],
+          ],
         },
         {
           source: "ARE_RestAPIlibraries/clientExample",
           destination: ".vuepress/public/webapps/startpage/clientExample",
-          branch: "master"
+          branch: "master",
         },
         {
           source: "ARE_RestAPIlibraries/clientExample/javascript",
           destination: ".vuepress/public/webapps/startpage/lib",
-          branch: "master"
-        }
-      ]
+          branch: "master",
+        },
+      ],
     },
     {
       repository: "WebACS",
@@ -48,9 +56,9 @@ module.exports = {
         {
           source: "docs/manuals/WebACS",
           destination: "manuals/WebACS",
-          branch: "master"
-        }
-      ]
+          branch: "master",
+        },
+      ],
     },
     {
       repository: "AsTeRICS-Grid",
@@ -59,14 +67,14 @@ module.exports = {
         {
           source: "docs/documentation_user",
           destination: "manuals/asterics-grid",
-          branch: "master"
+          branch: "master",
         },
         {
           source: "docs/documentation_dev",
           destination: "develop/asterics-grid",
-          branch: "master"
-        }
-      ]
+          branch: "master",
+        },
+      ],
     },
     {
       repository: "asterics-camerainput-cameramouse",
@@ -74,9 +82,9 @@ module.exports = {
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-cameramouse",
           destination: ".vuepress/public/webapps/asterics-camerainput-cameramouse",
-          branch: "master"
-        }
-      ]
+          branch: "master",
+        },
+      ],
     },
     {
       repository: "asterics-camerainput-eyecontrol",
@@ -84,9 +92,9 @@ module.exports = {
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-eyecontrol",
           destination: ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
-          branch: "master"
-        }
-      ]
+          branch: "master",
+        },
+      ],
     },
     {
       repository: "asterics-solution-template",
@@ -94,9 +102,9 @@ module.exports = {
         {
           source: "custom/bin/ARE/web/webapps/startpage",
           destination: ".vuepress/public/webapps/startpage",
-          branch: "master"
-        }
-      ]
-    }
-  ]
+          branch: "master",
+        },
+      ],
+    },
+  ],
 };
