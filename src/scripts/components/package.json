@@ -1,0 +1,10 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "xml2js": "^0.4.23",
+    "yargs": "^15.3.1"
+  }
+}
