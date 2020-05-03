@@ -27,7 +27,7 @@ module.exports = {
           filter: /\.(md|jpg|png|svg)$/i,
           exclude: /(Documentation\/docs\/acs)/i,
           versions: [
-            ["4.0", "4.0.x"],
+            ["4.0", "master"],
             ["3.0.1", "docs/3.0.1"],
             ["3.0", "docs/3.0"],
             ["2.8", "docs/2.8"],
