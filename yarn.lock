@@ -3,9 +3,9 @@
 
 
 "@asterics-docs/tool@canary":
-  version "0.0.1-beta.31"
-  resolved "https://registry.yarnpkg.com/@asterics-docs/tool/-/tool-0.0.1-beta.31.tgz#8fb415573865738035c8d9dc7982a8b1f3440169"
-  integrity sha512-YHT4+GWiI8PQk210nSBgA8BUcgAYLU7DHSfaY4ZHcr0HQAWXvqSGWrK59gTacvRq/r97vIIPahT+5NB8SReNZQ==
+  version "0.0.1-beta.34"
+  resolved "https://registry.yarnpkg.com/@asterics-docs/tool/-/tool-0.0.1-beta.34.tgz#e1ebaf83eee13671e5c0ec7c8b92b8b4c01e9936"
+  integrity sha512-mMby7PzzjTRq/pTeZqUgy+jZpM9rRuJ9NwNtY41XJcLJob5fn/+x33waL6npISrVYfZ710iu++Dtn+9q84D4Lg==
   dependencies:
     ansi-escapes "^4.3.1"
     chalk "^3.0.0"
@@ -13,9 +13,9 @@
     yargs "^15.1.0"
 
 "@asterics-docs/vuepress-theme-docs@canary":
-  version "0.0.1-beta.33"
-  resolved "https://registry.yarnpkg.com/@asterics-docs/vuepress-theme-docs/-/vuepress-theme-docs-0.0.1-beta.33.tgz#8bd26c6ffde6c94cf71be129fdbf84989725cf21"
-  integrity sha512-k1aBzXlITNAA4BZJEAdrOCGws/dR9fBtX80Cr56494HXI+XPtzfvkOgkumBEyT6uz34pcMJXqLeOlmz6pNwUDQ==
+  version "0.0.1-beta.35"
+  resolved "https://registry.yarnpkg.com/@asterics-docs/vuepress-theme-docs/-/vuepress-theme-docs-0.0.1-beta.35.tgz#f78c6dcb772cda1357d15e8763c4bc75dde64d3f"
+  integrity sha512-gTwcDekkXvLQ/punpbhNaC5HBw7PeeRsPMqOVjErjeOcMq4P83JbbHqA9VvUy7YGBW9v2hU8cVIfz5Ar6WxVOA==
   dependencies:
     "@asterics/web-app-utils" "^0.0.1-alpha.6"
     "@fortawesome/fontawesome-free" "^5.13.0"
@@ -7338,9 +7338,9 @@ safe-regex@^1.1.0:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 sass-graph@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"
-  integrity sha1-E/vWPNHK8JCLn9k0dq1DpR0eC0k=
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.2.6.tgz#09fda0e4287480e3e4967b72a2d133ba09b8d827"
+  integrity sha512-MKuEYXFSGuRSi8FZ3A7imN1CeVn9Gpw0/SFJKdL1ejXJneI9a5rwlEZrKejhEFAA3O6yr3eIyl/WuvASvlT36g==
   dependencies:
     glob "^7.0.0"
     lodash "^4.0.0"
