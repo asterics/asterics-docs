@@ -19,3 +19,6 @@
 [submodule "asterics-solution-template"]
 	path = submodules/asterics-solution-template
 	url = https://github.com/asterics/asterics-solution-template.git
+[submodule "submodules/asterics-docs-js"]
+	path = submodules/asterics-docs-js
+	url = https://github.com/asterics/asterics-docs.js.git

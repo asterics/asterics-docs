@@ -106,5 +106,20 @@ module.exports = {
         },
       ],
     },
+    {
+      repository: "asterics-docs.js",
+      files: [
+        {
+          source: "packages/@asterics-docs/vuepress-theme-docs/README.md",
+          destination: "guide/editor.md",
+          branch: "master",
+        },
+        {
+          source: "packages/@asterics-docs/tool/README.md",
+          destination: "guide/docs.md",
+          branch: "master",
+        },
+      ],
+    },
   ],
 };
