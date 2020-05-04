@@ -5,7 +5,7 @@ module.exports = {
   dest: "dist",
   host: "https://www.asterics.eu/",
   // versions: ["4.0", "3.0.1", "3.0", "2.8", "2.7", "2.6", "2.5", "2.3"],
-  versions: ["4.0"],
+  versions: ["4.1"],
   sources: [
     {
       repository: "asterics-docs",
@@ -28,7 +28,8 @@ module.exports = {
           filter: /\.(md|jpg|png|svg)$/i,
           exclude: /(Documentation\/docs\/acs)/i,
           versions: [
-            ["4.0", "master"],
+            ["4.1", "master"],
+            ["4.0", "docs/4.0.x"],
             ["3.0.1", "docs/3.0.1"],
             ["3.0", "docs/3.0"],
             ["2.8", "docs/2.8"],
@@ -82,7 +83,8 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-cameramouse",
-          destination: ".vuepress/public/webapps/asterics-camerainput-cameramouse",
+          destination:
+            ".vuepress/public/webapps/asterics-camerainput-cameramouse",
           branch: "master",
         },
       ],
@@ -92,7 +94,8 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-eyecontrol",
-          destination: ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
+          destination:
+            ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
           branch: "master",
         },
       ],
