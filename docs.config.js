@@ -4,7 +4,8 @@ module.exports = {
   source: "docs",
   dest: "dist",
   host: "https://www.asterics.eu/",
-  versions: ["4.0", "3.0.1", "3.0", "2.8", "2.7", "2.6", "2.5", "2.3"],
+  // versions: ["4.0", "3.0.1", "3.0", "2.8", "2.7", "2.6", "2.5", "2.3"],
+  versions: ["4.0"],
   sources: [
     {
       repository: "asterics-docs",
