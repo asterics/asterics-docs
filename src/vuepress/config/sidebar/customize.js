@@ -17,4 +17,24 @@ module.exports = [
       ["grid/Grid-Creation", "Creation"],
     ],
   },
+  {
+    title: "Environmental Control",
+    path: "/customize/environmental-control/",
+    collapsable: false,
+  },
+  {
+    title: "Gaming, Toys & Music",
+    path: "/customize/gaming-toys-music/",
+    collapsable: false,
+  },
+  {
+    title: "Bioelectrical Input",
+    path: "/customize/bioelectrical-input/",
+    collapsable: false,
+  },
+  {
+    title: "Other",
+    path: "/customize/other/",
+    collapsable: false,
+  },
 ];
