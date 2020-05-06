@@ -34,17 +34,11 @@ pipeline {
               label 'Linux'
             }
           }
-          environment {
-            FATALITY = true
-            VERBOSE = true
-            ENDPOINT = "/"
-            DOCUMENTATION = "docs-deploy"
-            DESTINATION = "dist-deploy"
-          }
           steps {
             sh '''
               yarn --no-lockfile
-              yarn docs init --verbose
+              yarn docs clean
+              yarn docs init
               yarn docs setup --verbose
               yarn build
             '''
