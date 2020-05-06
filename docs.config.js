@@ -28,7 +28,7 @@ module.exports = {
           filter: /\.(md|jpg|png|svg)$/i,
           exclude: /(Documentation\/docs\/acs)/i,
           versions: [
-            ["4.1", "master"],
+            ["4.1", "ki-i/easyreading-plugins"],
             ["4.0", "docs/4.0.x"],
             ["3.0.1", "docs/3.0.1"],
             ["3.0", "docs/3.0"],
@@ -74,7 +74,7 @@ module.exports = {
         {
           source: "docs/documentation_dev",
           destination: "develop/asterics-grid",
-          branch: "master",
+          branch: "alija/fix/interpolated-strings",
         },
       ],
     },
@@ -83,8 +83,7 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-cameramouse",
-          destination:
-            ".vuepress/public/webapps/asterics-camerainput-cameramouse",
+          destination: ".vuepress/public/webapps/asterics-camerainput-cameramouse",
           branch: "master",
         },
       ],
@@ -94,8 +93,7 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-eyecontrol",
-          destination:
-            ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
+          destination: ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
           branch: "master",
         },
       ],
