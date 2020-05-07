@@ -74,7 +74,7 @@ module.exports = {
         {
           source: "docs/documentation_dev",
           destination: "develop/asterics-grid",
-          branch: "master",
+          branch: "alija/fix/interpolated-strings",
         },
       ],
     },
@@ -83,8 +83,7 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-cameramouse",
-          destination:
-            ".vuepress/public/webapps/asterics-camerainput-cameramouse",
+          destination: ".vuepress/public/webapps/asterics-camerainput-cameramouse",
           branch: "master",
         },
       ],
@@ -94,8 +93,7 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-eyecontrol",
-          destination:
-            ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
+          destination: ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
           branch: "master",
         },
       ],
@@ -112,6 +110,7 @@ module.exports = {
     },
     {
       repository: "asterics-docs.js",
+      reference: "../asterics-docs.js",
       files: [
         {
           source: "packages/@asterics-docs/vuepress-theme-docs/README.md",

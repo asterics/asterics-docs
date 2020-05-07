@@ -34,17 +34,11 @@ pipeline {
               label 'Linux'
             }
           }
-          environment {
-            FATALITY = true
-            VERBOSE = true
-            ENDPOINT = "/"
-            DOCUMENTATION = "docs-deploy"
-            DESTINATION = "dist-deploy"
-          }
           steps {
             sh '''
               yarn --no-lockfile
-              yarn docs init --verbose
+              yarn docs clean
+              yarn docs init
               yarn docs setup --verbose
               yarn build
             '''
@@ -63,10 +57,10 @@ pipeline {
       steps {
         script {
           def remote = [ name: 'studyathome', host: 'studyathome.technikum-wien.at', user: env.SERVER_USR, password: env.SERVER_PSW, allowAnyHosts: true ]
-          sshRemove remote: remote, path: "/var/www/html/dist-deploy", failOnError: false
+          sshRemove remote: remote, path: "/var/www/html/dist", failOnError: false
           sshRemove remote: remote, path: "/var/www/html/${params.dest}", failOnError: false
-          sshPut remote: remote, from: 'dist-deploy', into: "/var/www/html/"
-          sshCommand remote: remote, command: "mv /var/www/html/dist-deploy /var/www/html/${params.dest}"
+          sshPut remote: remote, from: 'dist', into: "/var/www/html/"
+          sshCommand remote: remote, command: "mv /var/www/html/dist /var/www/html/${params.dest}"
         }
       }
     }
