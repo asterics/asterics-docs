@@ -18,7 +18,7 @@ module.exports = {
     host,
     translate: mapLanguageCodes(languageCodes, ["de", "en", "fr", "it", "es", "pt", "zh-CN", "ar"]),
     editLinks: true,
-    smoothScroll: false,
+    smoothScroll: true,
     logo: "/assets/img/asterics-logo.svg",
     nav: require("./config/nav/en.js"),
     sidebar: loadSidebar(versions),
