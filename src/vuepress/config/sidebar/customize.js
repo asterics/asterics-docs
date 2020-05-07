@@ -27,11 +27,11 @@ module.exports = [
     path: "/customize/gaming-toys-music/",
     collapsable: false,
   },
-  {
-    title: "Bioelectrical Input",
-    path: "/customize/bioelectrical-input/",
-    collapsable: false,
-  },
+  // {
+  //   title: "Bioelectrical Input",
+  //   path: "/customize/bioelectrical-input/",
+  //   collapsable: false,
+  // },
   {
     title: "Other",
     path: "/customize/other/",
