@@ -28,7 +28,7 @@ module.exports = {
           filter: /\.(md|jpg|png|svg)$/i,
           exclude: /(Documentation\/docs\/acs)/i,
           versions: [
-            ["4.1", "ki-i/easyreading-plugins"],
+            ["4.1", "master"],
             ["4.0", "docs/4.0.x"],
             ["3.0.1", "docs/3.0.1"],
             ["3.0", "docs/3.0"],
@@ -110,6 +110,7 @@ module.exports = {
     },
     {
       repository: "asterics-docs.js",
+      reference: "../asterics-docs.js",
       files: [
         {
           source: "packages/@asterics-docs/vuepress-theme-docs/README.md",
