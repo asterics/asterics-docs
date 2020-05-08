@@ -1,5 +1,5 @@
 module.exports = {
-  base: "/next/",
+  base: "/",
   port: 8080,
   source: "docs",
   dest: "dist",
@@ -83,7 +83,8 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-cameramouse",
-          destination: ".vuepress/public/webapps/asterics-camerainput-cameramouse",
+          destination:
+            ".vuepress/public/webapps/asterics-camerainput-cameramouse",
           branch: "master",
         },
       ],
@@ -93,7 +94,8 @@ module.exports = {
       files: [
         {
           source: "custom/bin/ARE/web/webapps/asterics-camerainput-eyecontrol",
-          destination: ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
+          destination:
+            ".vuepress/public/webapps/asterics-camerainput-eyecontrol",
           branch: "master",
         },
       ],
