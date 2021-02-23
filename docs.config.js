@@ -14,7 +14,7 @@ module.exports = {
         {
           source: "src/vuepress",
           destination: ".vuepress",
-          branch: "alija/feature/versioning",
+          branch: "next",
         },
       ],
     },

@@ -23,7 +23,7 @@ Setup `asterics-docs` using the provided `docs` tools (cf. [DOCS Reference](#DOC
 $ yarn docs init
 
 # Deinitialize asterics-docs
-$ yarn docs init --clean
+$ yarn docs deinit
 
 # Setup docs folder
 $ yarn docs setup
