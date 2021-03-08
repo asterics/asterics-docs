@@ -1,5 +1,5 @@
 module.exports = {
-  base: "/next/",
+  base: "/",
   port: 8080,
   source: "docs",
   dest: "dist",
