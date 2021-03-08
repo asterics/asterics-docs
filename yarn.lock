@@ -12,10 +12,10 @@
     nodegit "^0.26.5"
     yargs "^15.1.0"
 
-"@asterics-docs/vuepress-theme-docs@0.0.1-beta.50":
-  version "0.0.1-beta.50"
-  resolved "https://registry.yarnpkg.com/@asterics-docs/vuepress-theme-docs/-/vuepress-theme-docs-0.0.1-beta.50.tgz#256729da8cc86bb0a14e5e90cab1c5577889085b"
-  integrity sha512-0Z564arSVaudszfQEJ9rmWAOT8PxBjq3PtchLbQ6B5/jIyQZb4eaIlZHwrxnzAJgvLPS0YflAh4BLX+Nyas0og==
+"@asterics-docs/vuepress-theme-docs@0.0.1-beta.51":
+  version "0.0.1-beta.51"
+  resolved "https://registry.yarnpkg.com/@asterics-docs/vuepress-theme-docs/-/vuepress-theme-docs-0.0.1-beta.51.tgz#6161ee43a4e37362ab77690d0dde87b04f41ee13"
+  integrity sha512-mfJ5tsQyFQBLuhextrkvunsFVLf9bFB1DMzQyKWdEqEmv6KnOUC8WNh259G0TExeToARF8aNwTYM8lGZ/bGTqw==
   dependencies:
     "@asterics/web-app-utils" "^0.0.1-alpha.6"
     "@fortawesome/fontawesome-free" "^5.13.0"

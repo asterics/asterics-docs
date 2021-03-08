@@ -14,7 +14,7 @@ module.exports = {
         {
           source: "src/vuepress",
           destination: ".vuepress",
-          branch: "next",
+          branch: "master",
         },
       ],
     },
