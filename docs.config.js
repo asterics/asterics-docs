@@ -25,7 +25,7 @@ module.exports = {
         {
           source: "Documentation/docs",
           destination: ".",
-          filter: /\.(md|jpg|png|svg)$/i,
+          filter: /\.(md|jpg|png|svg|gif)$/i,
           exclude: /(Documentation\/docs\/acs)/i,
           versions: [
             ["4.1", "master"],
