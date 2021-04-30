@@ -3,6 +3,13 @@
 BASEPATH="/"
 DOMAIN="www.asterics.eu"
 
+if [ ! -d gh-pages ] ; then 
+    echo "gh-pages does not exist, cloning" 
+    git clone --single-branch --branch gh-pages https://github.com/asterics/asterics-docs.git gh-pages
+else
+    echo "gh-pages branch exists"
+fi
+
 if [[ -z "$1" ]] ; then
     rm -rf dist/ 
     BASE=$BASEPATH yarn build 
