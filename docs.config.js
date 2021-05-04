@@ -1,5 +1,5 @@
 module.exports = {
-  base: "/",
+  base: require("./docs/.vuepress/config/base.js"),
   port: 8080,
   source: "docs",
   dest: "dist",
@@ -115,6 +115,11 @@ module.exports = {
         {
           source: "packages/@asterics-docs/vuepress-theme-docs/README.md",
           destination: "guide/editor.md",
+          branch: "master",
+        },
+        {
+          source: "packages/@asterics-docs/vuepress-theme-docs/MARKDOWN.md",
+          destination: "guide/markdown.md",
           branch: "master",
         },
         {
