@@ -1,5 +1,5 @@
 module.exports = {
-  base: require("./docs/.vuepress/config/base.js"),
+  base: require("./src/vuepress/config/base.js"),
   port: 8080,
   source: "docs",
   dest: "dist",
