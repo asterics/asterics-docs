@@ -127,6 +127,11 @@ module.exports = {
           destination: "guide/docs.md",
           branch: "master",
         },
+        {
+          source: "packages/@asterics-docs/vuepress-theme-docs/pictures",
+          destination: "guide",
+          branch: "master",
+        },
       ],
     },
   ],
