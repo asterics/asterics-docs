@@ -29,7 +29,7 @@ else
         rm -rf gh-pages/next
         cp -r dist gh-pages/next
         cd gh-pages/next
-        echo $DOMAIN > CNAME
+        # echo $DOMAIN > CNAME
         git add . 
         git commit -m "docs: release" 
         git push
