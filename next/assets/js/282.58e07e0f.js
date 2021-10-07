@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[282],{1310:function(e,n,t){"use strict";t.r(n);var a={name:"Label"},u=t(3),l=Object(u.a)(a,(function(){var e=this,n=e.$createElement;return(e._self._c||n)("div",[e._t("default",(function(){return[e._v("DefaultLabel")]}))],2)}),[],!1,null,"210b1baf",null);n.default=l.exports}}]);
