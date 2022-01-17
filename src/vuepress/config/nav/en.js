@@ -1,37 +1,45 @@
 module.exports = [
   { text: "Get Started", link: "/get-started/" },
   { text: "Solutions", link: "/solutions/" },
-  { text: "Customize", link: "/customize/" },
+  { text: "Tutorials", link: "/customize/" },
   { text: "Plugins", link: "/plugins/" },
-  { text: "Contribute", link: "/guide/editor.html" },
+  {
+    text: "Web Applications",
+    items: [
+      {
+        text: "AsTeRICS Grid",
+        link: "https://grid.asterics.eu",
+      },
+      {
+        text: "WebACS",
+        link: "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081",
+      },
+      {
+        text: "FABI WebUI",
+        link: "https://fabi.asterics.eu",
+      },
+      {
+        text: "FLipMouse WebUI",
+        link: "https://flipmouse.asterics.eu",
+      }
+    ],
+  },
+  {
+    text: "Manuals",
+    items: [
+      { text: "AsTeRICS Grid", link: "/manuals/asterics-grid/" },
+      { text: "WebACS", link: "/manuals/WebACS/" },
+      { text: "ACS", link: "/manuals/ACS/" },
+      // { text: "ARE", link: "/manuals/ARE/" }
+    ],
+  },
+  { text: "Website Editors Guide", link: "/guide/editor.html" },
   {
     text: "More",
     items: [
       {
-        text: "Develop",
+        text: "Developer Guide",
         link: "/develop/",
-      },
-      {
-        text: "Manuals",
-        items: [
-          { text: "AsTeRICS Grid", link: "/manuals/asterics-grid/" },
-          { text: "WebACS", link: "/manuals/WebACS/" },
-          { text: "ACS", link: "/manuals/ACS/" },
-          // { text: "ARE", link: "/manuals/ARE/" }
-        ],
-      },
-      {
-        text: "Applications",
-        items: [
-          {
-            text: "AsTeRICS Grid",
-            link: "https://grid.asterics.eu",
-          },
-          {
-            text: "WebACS",
-            link: "http://webacs.asterics.eu/?areBaseURI=http://127.0.0.1:8081",
-          },
-        ],
       },
       {
         text: "Get Involved",
