@@ -1,10 +1,10 @@
-name: Prerelease
+name: Release
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *" # At 00:00 (daily)
+    - cron: "0 0 * * 0" # At 00:00 on Sunday (weekly)
 env:
-  BASE: /next/
+  BASE: /
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,8 +36,11 @@ jobs:
           git config --global user.email ""
       - name: Deploy
         run: |
-          rm -rf gh-pages/next
-          cp -r dist/* gh-pages/next/
+          mv gh-pages/next next
+          rm -rf gh-pages/*
+          cp -r dist/* gh-pages/
+          mv next gh-pages/next
+          echo "www.asterics.eu" > gh-pages/CNAME
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ add .
-          git --git-dir=gh-pages/.git --work-tree=gh-pages/ commit -m "docs: prerelease"
+          git --git-dir=gh-pages/.git --work-tree=gh-pages/ commit -m "docs: release"
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ push
