@@ -9,7 +9,7 @@ module.exports = {
   sources: [
     {
       repository: "asterics-docs",
-      reference: ".",
+      // reference: ".",
       files: [
         {
           source: "src/vuepress",
