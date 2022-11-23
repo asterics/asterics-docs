@@ -1,18 +1,35 @@
 name: Prerelease
 on: workflow_dispatch
+env:
+  BASE: /next/
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Log Version
-        run: |
-          node -v
-          npm -v
       - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 12
-      - name: Log Version
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install yarn
+        run: npm -g i yarn
+      - name: Install Dependencies
+        run: yarn
+      - name: Initialize asterics-docs
+        run: yarn docs init
+      - name: Setup docs
+        run: yarn docs setup
+      - name: Build
+        run: yarn build
+      - name: Get Code (gh-pages)
+        uses: actions/checkout@v3
+        with:
+          ref: "gh-pages"
+          path: "gh-pages"
+      - name: Deploy
         run: |
-          node -v
-          npm -v
+          rm -rf gh-pages/next
+          cp -r dist gh-pages/next
+          git add --git-dir=gh-pages/.git .
+          git status --git-dir=gh-pages/.git
