@@ -17,7 +17,7 @@ jobs:
       - name: Install Dependencies
         run: yarn
       - name: Initialize asterics-docs
-        run: yarn docs init
+        run: yarn docs init --no-reference
       - name: Setup docs
         run: yarn docs setup
       - name: Build
@@ -31,8 +31,10 @@ jobs:
         run: |
           rm -rf gh-pages/next
           cp -r dist gh-pages/next
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "<>"
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ add .
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ status
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ commit -m "docs: prerelease"
-          git --git-dir=gh-pages/.git --work-tree=gh-pages/ log -1
+          git --git-dir=gh-pages/.git --work-tree=gh-pages/ log -2
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ push
