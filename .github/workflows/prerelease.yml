@@ -31,5 +31,8 @@ jobs:
         run: |
           rm -rf gh-pages/next
           cp -r dist gh-pages/next
-          git add --git-dir=gh-pages/.git .
-          git status --git-dir=gh-pages/.git
+          git --git-dir=gh-pages/.git --work-tree=gh-pages/ add .
+          git --git-dir=gh-pages/.git --work-tree=gh-pages/ status
+          git --git-dir=gh-pages/.git --work-tree=gh-pages/ commit -m "docs: prerelease"
+          git --git-dir=gh-pages/.git --work-tree=gh-pages/ log -1
+          git --git-dir=gh-pages/.git --work-tree=gh-pages/ push
