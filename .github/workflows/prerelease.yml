@@ -37,7 +37,7 @@ jobs:
       - name: Deploy
         run: |
           rm -rf gh-pages/next
-          cp -r dist/* gh-pages/next/
+          cp -r dist gh-pages/next
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ add .
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ commit -m "docs: prerelease"
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ push
