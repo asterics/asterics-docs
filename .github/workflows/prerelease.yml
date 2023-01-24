@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
+      - name: Install NodeGit Build Dependencies
+        run: sudo apt install libkrb5-dev
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -20,10 +22,6 @@ jobs:
         with:
           node-version: 14
           cache: "pnpm"
-      # - name: Install pnpm
-      #   run: npm -g i pnpm
-      - name: Install NodeGit Build Dependencies
-        run: sudo apt install libkrb5-dev
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Initialize asterics-docs
