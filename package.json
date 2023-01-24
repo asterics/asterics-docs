@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
+    "build": "NODE_OPTIONS=\"--max-old-space-size=12288\" vuepress build docs",
     "postbuild": "node src/scripts/logBuild.js",
     "docs": "asterics-docs"
   },
