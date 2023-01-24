@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-          cache: "pnpm"
+          cache: pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Initialize asterics-docs
