@@ -29,6 +29,8 @@ jobs:
       - name: Setup docs
         run: pnpm run docs setup
       - name: Build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=12288"
         run: pnpm run build
       - name: Get Code (gh-pages)
         uses: actions/checkout@v3
