@@ -12,19 +12,19 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 14
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Install yarn
-        run: npm -g i yarn
+      - name: Install pnpm
+        run: npm -g i pnpm
       - name: Install Dependencies
-        run: yarn
+        run: pnpm install
       - name: Initialize asterics-docs
-        run: yarn docs init --no-reference
+        run: pnpm run docs init --no-reference
       - name: Setup docs
-        run: yarn docs setup
+        run: pnpm run docs setup
       - name: Build
-        run: yarn build
+        run: pnpm run build
       - name: Get Code (gh-pages)
         uses: actions/checkout@v3
         with:
