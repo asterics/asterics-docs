@@ -11,7 +11,6 @@ module.exports = {
   title: "AsTeRICS",
   description: "Customized Low-Cost Assistive Technologies",
   head: require("./config/head.js"),
-  plugins: require("./config/plugins.js"),
   extraWatchFiles: [".vuepress/config/**/*.js"],
   themeConfig: {
     versions,
