@@ -1,0 +1,33 @@
+name: Algolia
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.25.1
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+      - name: Install algoliasearch
+        run: pnpm install --global algoliasearch
+      - name: Delete Index
+        env:
+          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
+        run: node ./src/scripts/algolia/delete.js
+      - name: Crawl Website
+        uses: darrenjennings/algolia-docsearch-action@master
+        with:
+          algolia_application_id: ${{ secrets.APPLICATION_ID }}
+          algolia_api_key: ${{ secrets.API_KEY }}
+          file: "./src/vuepress/config/algolia.json"
