@@ -25,7 +25,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Initialize asterics-docs
-        run: pnpm run docs init init --no-reference
+        run: pnpm run docs init --no-reference
       - name: Setup docs
         run: pnpm run docs setup
       - name: Build
