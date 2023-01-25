@@ -2,6 +2,23 @@
 
 Documentation of [AsTeRICS](https://github.com/asterics/AsTeRICS.git).
 
+## Algolia
+
+To update the search index of algolia run following command:
+
+```bash
+docker run -it --env-file=.env -e "CONFIG=$(cat ./src/vuepress/config/algolia.json | jq -r tostring)" algolia/docsearch-scraper
+```
+
+To run this command, you need following tools installed: `docker`, `jq`.
+Additionally, create a file `.env` and specify following variables:
+
+```bash
+APPLICATION_ID=<APP_ID>
+API_KEY=<API_KEY>
+```
+
+
 ## Dependencies
 
 Install needed dependencies with
