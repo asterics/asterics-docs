@@ -1,5 +1,6 @@
 # Ignore
 src/config/.env
+.env
 
 ## Globals
 node_modules/
