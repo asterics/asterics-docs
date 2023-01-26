@@ -16,10 +16,12 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 14
           cache: pnpm
       - name: Install algoliasearch
-        run: pnpm install --global algoliasearch
+        run: |
+          pnpm add algoliasearch
+          pnpm install
       - name: Delete Index
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
