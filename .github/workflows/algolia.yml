@@ -1,8 +1,19 @@
 name: Algolia
 on:
   workflow_call:
+    inputs:
+      delete_index:
+        description: "Delete Algolia Index"
+        required: false
+        type: boolean
+        default: true
   workflow_dispatch:
-
+    inputs:
+      delete_index:
+        description: "Delete Algolia Index"
+        required: false
+        type: boolean
+        default: true
 jobs:
   crawl:
     runs-on: ubuntu-latest
@@ -10,19 +21,23 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
       - name: Install pnpm
+        if: ${{ inputs.delete_index == true }}
         uses: pnpm/action-setup@v2
         with:
           version: 7.25.1
       - name: Install Node
+        if: ${{ inputs.delete_index == true }}
         uses: actions/setup-node@v3
         with:
           node-version: 14
           cache: pnpm
       - name: Install algoliasearch
+        if: ${{ inputs.delete_index == true }}
         run: |
           pnpm add algoliasearch
           pnpm install
       - name: Delete Index
+        if: ${{ inputs.delete_index == true }}
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           API_KEY: ${{ secrets.API_KEY }}
@@ -32,4 +47,4 @@ jobs:
         with:
           algolia_application_id: ${{ secrets.APPLICATION_ID }}
           algolia_api_key: ${{ secrets.API_KEY }}
-          file: "./src/vuepress/config/algolia.json"
+          file: ./src/vuepress/config/algolia.json
