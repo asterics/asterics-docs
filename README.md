@@ -2,9 +2,21 @@
 
 Documentation of [AsTeRICS](https://github.com/asterics/AsTeRICS.git).
 
+## GitHub Workflows
+
+This repository provides following workflows:
+
+* [Release](https://github.com/asterics/asterics-docs/actions/workflows/release.yml): builds and deploys website to https://www.asterics.eu/
+* [Prerelease](https://github.com/asterics/asterics-docs/actions/workflows/prerelease.yml): builds and deploys website to https://www.asterics.eu/next/
+* [Algolia](https://github.com/asterics/asterics-docs/actions/workflows/algolia.yml): deletes previous, creates and uploads new index to Algolia
+
+NOTE: Workflow `Release` runs `Algolia` after building the website automatically.
+Don't run workflow `Algolia` after running `Prerelease` since it won't have any effect.
+When running workflow `Algolia` manually, enable deletion of the previous index to avoid execeeding the allowed amount of index records.
+
 ## Algolia
 
-To update the search index of algolia run following command:
+To update the search index of Algolia manually, run following command:
 
 ```bash
 docker run -it --env-file=.env -e "CONFIG=$(cat ./src/vuepress/config/algolia.json | jq -r tostring)" algolia/docsearch-scraper
