@@ -32,19 +32,32 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=12288"
         run: pnpm run build
+      - name: Upload Build Result
+        uses: actions/upload-artifact@v3
+        with:
+          name: asterics-docs
+          path: dist
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download Build Result
+        uses: actions/download-artifact@v3
+        with:
+          name: asterics-docs
+          path: asterics-docs
       - name: Get Code (gh-pages)
         uses: actions/checkout@v3
         with:
           ref: "gh-pages"
           path: "gh-pages"
-      - name: Set User
+      - name: Merge Builds
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email ""
-      - name: Deploy
-        run: |
           rm -rf gh-pages/next
-          cp -r dist gh-pages/next
+          cp -r asterics-docs gh-pages/next
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ add .
           git --git-dir=gh-pages/.git --work-tree=gh-pages/ commit -m "docs: prerelease"
-          git --git-dir=gh-pages/.git --work-tree=gh-pages/ push
+      - name: Upload to GitHub
+        run: git --git-dir=gh-pages/.git --work-tree=gh-pages/ push
