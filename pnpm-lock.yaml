@@ -2,11 +2,11 @@ lockfileVersion: 5.4
 
 specifiers:
   '@asterics-docs/tool': 0.0.1
-  '@asterics-docs/vuepress-theme-docs': 0.0.7
+  '@asterics-docs/vuepress-theme-docs': 0.0.8
   vuepress: ^1.9.8
 
 dependencies:
-  '@asterics-docs/vuepress-theme-docs': 0.0.7
+  '@asterics-docs/vuepress-theme-docs': 0.0.8
 
 devDependencies:
   '@asterics-docs/tool': 0.0.1
@@ -144,8 +144,8 @@ packages:
       - supports-color
     dev: true
 
-  /@asterics-docs/vuepress-theme-docs/0.0.7:
-    resolution: {integrity: sha512-6yNJ0uhP08hbDl8LLBqt5D36tG4y9xD2R75YCv0l0uB+/KByQQ7+KGlMfw4G4/XTo5I3k/y+kHZnzJTrGa5N5A==}
+  /@asterics-docs/vuepress-theme-docs/0.0.8:
+    resolution: {integrity: sha512-gVHKSPtEo78PKM1sWIlli9YxL/h3Br8cHaao4lUa3qZ+vXnnn0OzwPuxPU/jacvgzMMa5LL4QsKkgsmqMetmFw==}
     engines: {node: '>14.0.0 <15.0.0'}
     dependencies:
       '@asterics/web-app-utils': 0.0.1-alpha.6
