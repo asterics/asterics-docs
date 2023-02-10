@@ -2,11 +2,11 @@ lockfileVersion: 5.4
 
 specifiers:
   '@asterics-docs/tool': 0.0.1
-  '@asterics-docs/vuepress-theme-docs': 0.0.8
+  '@asterics-docs/vuepress-theme-docs': 0.0.9
   vuepress: ^1.9.8
 
 dependencies:
-  '@asterics-docs/vuepress-theme-docs': 0.0.8
+  '@asterics-docs/vuepress-theme-docs': 0.0.9
 
 devDependencies:
   '@asterics-docs/tool': 0.0.1
@@ -144,8 +144,8 @@ packages:
       - supports-color
     dev: true
 
-  /@asterics-docs/vuepress-theme-docs/0.0.8:
-    resolution: {integrity: sha512-gVHKSPtEo78PKM1sWIlli9YxL/h3Br8cHaao4lUa3qZ+vXnnn0OzwPuxPU/jacvgzMMa5LL4QsKkgsmqMetmFw==}
+  /@asterics-docs/vuepress-theme-docs/0.0.9:
+    resolution: {integrity: sha512-N29nh5+puglatlL+cEJ+UM5JBsPu3RcqB8MTJU/ZF8hGIepPo4fOxfKE8jZvelitJA43CfNaznf8Ytp56gxOqQ==}
     engines: {node: '>14.0.0 <15.0.0'}
     dependencies:
       '@asterics/web-app-utils': 0.0.1-alpha.6
@@ -155,7 +155,7 @@ packages:
       '@fortawesome/free-regular-svg-icons': 6.2.1
       '@fortawesome/free-solid-svg-icons': 6.2.1
       '@fortawesome/vue-fontawesome': 2.0.9_tsskomtn7pjpp6fcwzu7ca2rbe
-      '@studyathome-internationally/vuepress-plugin-pwa-autoload': 0.0.1
+      '@studyathome-internationally/vuepress-plugin-pwa-autoload': 0.0.2
       '@studyathome-internationally/vuepress-plugin-searchbox': 0.0.2
       '@vuepress/plugin-back-to-top': 1.9.8
       '@vuepress/plugin-medium-zoom': 1.9.8
@@ -1554,8 +1554,8 @@ packages:
     resolution: {integrity: sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==}
     engines: {node: '>=6'}
 
-  /@studyathome-internationally/vuepress-plugin-pwa-autoload/0.0.1:
-    resolution: {integrity: sha512-5RMr08WTidHjKazDIHty+2KEaxztIGo1bDvVeluE2HJ0nnZLhmHyRadeY+NDG4+DMsujEmZ32fIL8DZ9/G3yEA==}
+  /@studyathome-internationally/vuepress-plugin-pwa-autoload/0.0.2:
+    resolution: {integrity: sha512-DQ+5fLvWkeQFwibfzPBQs4grCS54QLzFX6znfqVJaQ1xjdI2o9N/ECVQh+zCM7GX31XHeeHtuWPkM6vaDl2+Dg==}
     dev: false
 
   /@studyathome-internationally/vuepress-plugin-searchbox/0.0.2:
