@@ -79,6 +79,38 @@ module.exports = {
       ],
     },
     {
+      repository: "FLipMouse",
+      reference: "../FLipMouse",
+      files: [
+        {
+          source: "Documentation/UserManual/Markdown/FLipMouseUserManual.md",
+          destination: "manuals/flipmouse/README.md",
+          branch: "master",
+        },
+        {
+          source: "Documentation/UserManual/Markdown/Bilder",
+          destination: "manuals/flipmouse/Bilder",
+          branch: "master",
+        },
+      ],
+    },
+    {
+      repository: "FABI",
+      reference: "../FABI",
+      files: [
+        {
+          source: "Documentation/UserManual/Markdown/Fabi User Manual.md",
+          destination: "manuals/fabi/README.md",
+          branch: "master",
+        },
+        {
+          source: "Documentation/UserManual/Markdown/Bilder",
+          destination: "manuals/fabi/Bilder",
+          branch: "master",
+        },
+      ],
+    },
+    {
       repository: "asterics-camerainput-cameramouse",
       files: [
         {
