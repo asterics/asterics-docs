@@ -22,3 +22,9 @@
 [submodule "submodules/asterics-docs-js"]
 	path = submodules/asterics-docs-js
 	url = https://github.com/asterics/asterics-docs.js.git
+[submodule "submodules/flipmouse"]
+	path = submodules/flipmouse
+	url = https://github.com/asterics/FLipMouse.git
+[submodule "submodules/fabi"]
+	path = submodules/fabi
+	url = https://github.com/asterics/FABI.git
