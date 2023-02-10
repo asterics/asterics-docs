@@ -25,15 +25,17 @@ module.exports = [
           {
             text: "FLipMouse WebUI",
             link: "https://flipmouse.asterics.eu",
-          }
+          },
         ],
       },
       {
         text: "Documentation",
         items: [
-          { text: "AsTeRICS Grid User Manual", link: "/manuals/asterics-grid/" },
-          { text: "WebACS User Manual", link: "/manuals/WebACS/" },
           { text: "ACS User Manual", link: "/manuals/ACS/" },
+          { text: "WebACS User Manual", link: "/manuals/WebACS/" },
+          { text: "FABI User Manual", link: "/manuals/fabi/" },
+          { text: "FLipMouse User Manual", link: "/manuals/flipmouse/" },
+          { text: "AsTeRICS Grid User Manual", link: "/manuals/asterics-grid/" },
           // { text: "ARE", link: "/manuals/ARE/" }
           { text: "Website Editors Guide", link: "/guide/editor.html" },
           {
@@ -50,7 +52,7 @@ module.exports = [
           { text: "Contribute", link: "/get-involved/Contribute" },
           { text: "Legal Notice", link: "/get-involved/Legal-Notice" },
         ],
-      },    
+      },
     ],
   },
   // as long as there is just 1 language, comment it out

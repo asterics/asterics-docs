@@ -35,7 +35,9 @@ module.exports = {
   ],
   "/manuals/": [
     ["/manuals/ACS/", "ACS"],
-    ["/manuals/asterics-grid/", "AsTeRICS Grid"],
     ["/manuals/WebACS/", "WebACS"],
+    ["/manuals/fabi/", "FABI"],
+    ["/manuals/flipmouse/", "FLipMouse"],
+    ["/manuals/asterics-grid/", "AsTeRICS Grid"],
   ],
 };
