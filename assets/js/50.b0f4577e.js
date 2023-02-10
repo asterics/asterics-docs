@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[50],{351:function(n,t,u){},811:function(n,t,u){"use strict";u(351)},854:function(n,t,u){"use strict";u.r(t);var i={name:"Funding"},s=(u(811),u(2)),e=Object(s.a)(i,(function(){return(0,this._self._c)("ul",{attrs:{id:"funding"}},[this._t("default")],2)}),[],!1,null,"6d61d3b7",null);t.default=e.exports}}]);
