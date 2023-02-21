@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "65409cae9803cc3b3b80abe1da976833"
+    "revision": "1a150d502344ffa2ab1e76943be0268d"
   },
   {
     "url": "assets/css/0.styles.14330c41.css",
@@ -2878,16 +2878,16 @@ self.__precacheManifest = [
     "revision": "f0967e2d23dc48aa841b7f0e0ce2b948"
   },
   {
-    "url": "assets/js/354.34d1c0c4.js",
-    "revision": "f4e29d178275946ef0680150396d977a"
+    "url": "assets/js/354.8bf3467a.js",
+    "revision": "3855e228ea66d86d3d7258f5ce737075"
   },
   {
-    "url": "assets/js/355.9869a620.js",
-    "revision": "581be6aa1f689ea8e7b785322e6c1b34"
+    "url": "assets/js/355.ce191ebe.js",
+    "revision": "c542f479d10827bd1aa41686f0de4dac"
   },
   {
-    "url": "assets/js/356.10dc6bce.js",
-    "revision": "356dba555dc0287c69fe84e46a9704e8"
+    "url": "assets/js/356.bfa8469b.js",
+    "revision": "8f75e8168fa937d9eb32fc4d9012ff58"
   },
   {
     "url": "assets/js/357.aad099c9.js",
@@ -3275,51 +3275,51 @@ self.__precacheManifest = [
   },
   {
     "url": "customize/bioelectrical-input/index.html",
-    "revision": "b19b5e48363a80ff341d481260f4faf0"
+    "revision": "886d1ac59bed13812cb90e94a18c5c62"
   },
   {
     "url": "customize/environmental-control/index.html",
-    "revision": "1789818911eea2b0c8b10d19d1dbbcb7"
+    "revision": "7367b1529f15387804a62c8d4455cd3d"
   },
   {
     "url": "customize/gaming-toys-music/index.html",
-    "revision": "d9a632a5e2cf3d33acf80ab64fd19156"
+    "revision": "9a18240c71e07a41b700909fe27bd902"
   },
   {
     "url": "customize/grid/Grid-Creation.html",
-    "revision": "9ecfc203bc120f8e7624eb393a987f33"
+    "revision": "770f50534bf8e92c6113921a8c11f254"
   },
   {
     "url": "customize/grid/Grid-Customization.html",
-    "revision": "9162273cbc039668a7010141b49bc5d5"
+    "revision": "42a18e69a9b531871a98ef8725841be3"
   },
   {
     "url": "customize/grid/index.html",
-    "revision": "65dbd4a891a7804eba3b7fafc5e114e2"
+    "revision": "35da5c0936d40fa92bd9692070d5277d"
   },
   {
     "url": "customize/index.html",
-    "revision": "346376a57a9e5cb0f46e570ce82c293f"
+    "revision": "502e297ac8e38089ecb1479ac44daa7d"
   },
   {
     "url": "customize/model/index.html",
-    "revision": "aab02aea4c35868f3213dec88ec6556b"
+    "revision": "5c0f27aa5b89496cb46f691dd9fcc6b8"
   },
   {
     "url": "customize/model/Model-Creation.html",
-    "revision": "c343cebad49d67e83058f2423eee449d"
+    "revision": "9709e79752f790c4167feb9b5dec1bec"
   },
   {
     "url": "customize/model/Model-Customization.html",
-    "revision": "89e7a29e965536d524347ad0fe78d371"
+    "revision": "77c31f599f0ade04622743412726985c"
   },
   {
     "url": "customize/other/index.html",
-    "revision": "afd2dcc0bbf8c4792f52fa7cc291fae8"
+    "revision": "451c1ce3e6c219dc10e2ba5c761c1cea"
   },
   {
     "url": "develop/APE.html",
-    "revision": "6275f9226e8b2c54e26ca44143ce3bbc"
+    "revision": "0240b3c6fd18da2863ff7bf1bb5d5472"
   },
   {
     "url": "develop/APIs/js-modelManipulation_webAppUtils/fonts/OpenSans-Bold-webfont.eot",
@@ -3435,139 +3435,139 @@ self.__precacheManifest = [
   },
   {
     "url": "develop/ARE API.html",
-    "revision": "47452a5a1f499250a90cc1e6271f2048"
+    "revision": "d0d12a80252c1ebda02565c42188fe96"
   },
   {
     "url": "develop/ARE-HW-Interfacing-CIM.html",
-    "revision": "06f24385123142d45a2cb2fb7726fb62"
+    "revision": "ac8097cb23857f5c588ac848706e3c96"
   },
   {
     "url": "develop/ARE-Keyboard-Mouse-Services.html",
-    "revision": "c0bd76154f049cb42200ecf20f4d0b78"
+    "revision": "6fe860c6f816f3422d7d23e07c3fe809"
   },
   {
     "url": "develop/are-remote-apis/index.html",
-    "revision": "ee61d8c476988a4afa881c7be9d88b66"
+    "revision": "7c0512e93e9ff82d0b54019073b8d8e5"
   },
   {
     "url": "develop/are-remote-apis/REST-API.html",
-    "revision": "f1e8d84fbd61dbd0f39a38eaacebe333"
+    "revision": "44a30179090187b82a137139bb09f40f"
   },
   {
     "url": "develop/are-remote-apis/REST-demos.html",
-    "revision": "840b171cc90ea3426cc83fcb069b8dd4"
+    "revision": "2a09ac47e68dfede55b9746f67f1dffa"
   },
   {
     "url": "develop/are-remote-apis/Webserver.html",
-    "revision": "08caafae552f74227505647b8430211b"
+    "revision": "01c2275a8fb41bafc8902116ddd0e405"
   },
   {
     "url": "develop/are-remote-apis/Websocket.html",
-    "revision": "798ffc5cb3d888c5979da55fecb84b7f"
+    "revision": "b2e35890740837bd00565f396afcd5e7"
   },
   {
     "url": "develop/ARE-Webserver.html",
-    "revision": "003f1cfba2bbeb6ce4cbe62f1901b17c"
+    "revision": "caaa7bc482b7cc6d34992a9c205d641c"
   },
   {
     "url": "develop/ARE.html",
-    "revision": "33a275486065c2157096d99c8a459628"
+    "revision": "46e7e77a81cff87da0e45e246c5b75bb"
   },
   {
     "url": "develop/ARE/ARE-Development-Manual.html",
-    "revision": "9d593a3ad15f2c53161b4759f1ae8562"
+    "revision": "84f36eb2c1045bb255a9c10b93fe8833"
   },
   {
     "url": "develop/ARE/index.html",
-    "revision": "a8e7ce64958c8900e575ebb6ac37db04"
+    "revision": "cd3adfdfa3ed9b63267a29e2b76325d2"
   },
   {
     "url": "develop/asterics-grid/01_structure.html",
-    "revision": "d6f9f76cf217e07dd49a51da9d1e7330"
+    "revision": "2dd3c658865e08cb204b31ac896ba6e0"
   },
   {
     "url": "develop/asterics-grid/02_tools.html",
-    "revision": "ac996a5dcbd090e7a8c869b9e15cccd3"
+    "revision": "7824e8f6c5a56e3ced47acc85baafd6d"
   },
   {
     "url": "develop/asterics-grid/03_grid.html",
-    "revision": "15ac8e6b5ac231acc08bb7004629843b"
+    "revision": "9d15f8eea5fa3e194f479134482e29d8"
   },
   {
     "url": "develop/asterics-grid/04_vuejs.html",
-    "revision": "4037a0f43f5ae44568fd6bf0eedc2707"
+    "revision": "68dc3c7633a6bd12cfe29079b7f6efab"
   },
   {
     "url": "develop/asterics-grid/05_datamodel.html",
-    "revision": "ac5ab396f9565b7638cafc8060d3d488"
+    "revision": "e1ea3cb1ec1466719125746357329d02"
   },
   {
     "url": "develop/asterics-grid/06_data_storage.html",
-    "revision": "06b63aaa2967fdedde6125ea6e0850b1"
+    "revision": "eaf12ceadcf34bf7eff7bb290120b649"
   },
   {
     "url": "develop/asterics-grid/07_i18n.html",
-    "revision": "0847901c935dda23295fedcf7fef2815"
+    "revision": "d85fb33ab47f44644f207633112fd6be"
   },
   {
     "url": "develop/asterics-grid/index.html",
-    "revision": "2e11a90662ccb0657ba3da18ca807583"
+    "revision": "7c7641c86ce26e08a1b911c3719fa241"
   },
   {
     "url": "develop/asterics-wiki/api/AsTeRICS Websocket.html",
-    "revision": "2e13dedd9abdeb9f343d19aff2b04d37"
+    "revision": "b6472d85940b22574d787bb38c09ff95"
   },
   {
     "url": "develop/asterics-wiki/api/Resource Handling.html",
-    "revision": "ff009b669b7072495464434c996e5d89"
+    "revision": "e2238ff1b9bb6a6dbeffd195089904ae"
   },
   {
     "url": "develop/asterics-wiki/api/REST-API.html",
-    "revision": "f49e320598df9c33d4b2e2af50cc80b2"
+    "revision": "264afd66b48cfc1dcc4a3a887f747753"
   },
   {
     "url": "develop/asterics-wiki/coding_instructions/AsTeRICS Solutions.html",
-    "revision": "5fb8f7dea593095a70d1ed84d5c52459"
+    "revision": "ebe992ad8124b75f3345e236f5c9ff96"
   },
   {
     "url": "develop/asterics-wiki/coding_instructions/AsTeRICS Webserver Document Root.html",
-    "revision": "1131b935205f8d849b15c7ce35a9662b"
+    "revision": "0a161a53ba9a7b4ddb419f6eca9d6e67"
   },
   {
     "url": "develop/asterics-wiki/coding_instructions/JavaCV.html",
-    "revision": "0da8531472aad4eb35e4e5a8c7ecf6d0"
+    "revision": "af5b3c449fe75a087eb5f9becdbb1ef1"
   },
   {
     "url": "develop/asterics-wiki/coding_instructions/Unit Tests.html",
-    "revision": "e63df44cbd4d73aa886745926fc9d14d"
+    "revision": "084f7ffd6ec431d82bdda9dc0920d2ed"
   },
   {
     "url": "develop/asterics-wiki/components/AsTeRICS Plugins.html",
-    "revision": "691189ebb526146e9dffd135ca81b26d"
+    "revision": "6dc73c7e723bd8c9b74636a099ef8dc9"
   },
   {
     "url": "develop/AT_solution_development.html",
-    "revision": "4189727ddd3374eb91d87d66ebbc3d0d"
+    "revision": "fe42852d81018629c0f2f26a0fee67ef"
   },
   {
     "url": "develop/AT-solution-demos.html",
-    "revision": "4550114be2fb4fb20a3906ecffb88ee2"
+    "revision": "e259d1af8054d8ca96d9a68d98b7f89e"
   },
   {
     "url": "develop/at-solution/APE.html",
-    "revision": "a61417b3dc258038c7dd23d0b41b45c0"
+    "revision": "e50cfa01558d8be7bb64f06103544787"
   },
   {
     "url": "develop/at-solution/AT-solution-tutorial.html",
-    "revision": "d67108eaa0dda15f3137649f02624c1e"
+    "revision": "4344756d9fa318b8fcbcf23a37ca8be0"
   },
   {
     "url": "develop/at-solution/index.html",
-    "revision": "7a2d194706aa5ffb5a300ba23da4f3c9"
+    "revision": "8016be1490cb73462ab971aa623fb591"
   },
   {
     "url": "develop/Coding-Guidelines.html",
-    "revision": "956d900eac7beb99003354af7086e82e"
+    "revision": "3c1219a05adbe27d2cc57647223bf989"
   },
   {
     "url": "develop/demos/clientExample/are_repository.html",
@@ -3627,79 +3627,79 @@ self.__precacheManifest = [
   },
   {
     "url": "develop/Development-Environment.html",
-    "revision": "ad508a5cc8070e878985991f8a51c199"
+    "revision": "4cfc8f6dd8ffa730f1d20c49ff5fcfdf"
   },
   {
     "url": "develop/get-started/Coding-Guidelines.html",
-    "revision": "2b936dce12265eddd201eaf8591e7e92"
+    "revision": "6699bbc657612ef5cdaa67e6a001bb60"
   },
   {
     "url": "develop/get-started/Development-Environment.html",
-    "revision": "49706e713e8311d0ab8222ddd7eeb520"
+    "revision": "5eaab9d875abeda2b827eb8ecae93d6d"
   },
   {
     "url": "develop/get-started/index.html",
-    "revision": "bd6baa9fc7097274881bd460ab261e95"
+    "revision": "fb8d3e0ab32108732a14b80f87d2b2f0"
   },
   {
     "url": "develop/index.html",
-    "revision": "b5a07cad7a5d678e41c17ab566b453e1"
+    "revision": "6217ec1ba0c54be3f7e904245cb47202"
   },
   {
     "url": "develop/Plugin-Advanced.html",
-    "revision": "d3bc7b74147eee8e87d09c5d71a77e3c"
+    "revision": "1e6b3d41ae0b24b97c60c513d1afe9f5"
   },
   {
     "url": "develop/Plugin-Introduction.html",
-    "revision": "133050cc4edab72a350e336b9bac412c"
+    "revision": "6ab62ee799a7e502cacafc8630c67f29"
   },
   {
     "url": "develop/Plugin-Tutorial.html",
-    "revision": "1a1de21a9952430a00a20e6efde621ca"
+    "revision": "52d1815bde6fbb46b732bd1e133c70e1"
   },
   {
     "url": "develop/plugin/Computer-Vision.html",
-    "revision": "0ec5f318638d43f58bf8f91900eb4a7a"
+    "revision": "1970fc7673d04b65d272c58668e8a7f8"
   },
   {
     "url": "develop/plugin/index.html",
-    "revision": "cf601fef825c51de8673e8449f35be8f"
+    "revision": "1734afcf9287d7d267f9a7890f0f3246"
   },
   {
     "url": "develop/plugin/Plugin-Advanced.html",
-    "revision": "b8d1118b730e73098fe7980e2d9df0a9"
+    "revision": "10a45a248b0e646ae17434d4e1e5f278"
   },
   {
     "url": "develop/plugin/Plugin-Averager.html",
-    "revision": "6265fc60c939c87709f0f396294ba837"
+    "revision": "57c7f604572135e6f9ff3bc5ec9f74ed"
   },
   {
     "url": "develop/plugin/Resource-Handling.html",
-    "revision": "4e8d21ee2f3703f8f8a906178434803b"
+    "revision": "1ee27f9f540c4b4819c6eaa7a01dc149"
   },
   {
     "url": "develop/REST-API-java-client.html",
-    "revision": "244efbbdc701d7f03a6cb27b7cc3ec16"
+    "revision": "3bb7dfd804a7c282b8ed779fff4defe7"
   },
   {
     "url": "develop/REST-API-js-areCommunicator.html",
-    "revision": "61badfd9b7a082f47ed86d86e62fbfe7"
+    "revision": "1aa1fbdee818e0835f4b05184ed4cd77"
   },
   {
     "url": "develop/REST-API-js-wrapper-ext.html",
-    "revision": "35f0ffbfbd6624946cb8abec47778573"
+    "revision": "96cbaeb395ca2109c4982943fc71f1ab"
   },
   {
     "url": "develop/REST-API.html",
-    "revision": "8945c14470d0bf2d384bfa88dd1b8624"
+    "revision": "5309c27fd801338a78da76b351800e20"
   },
   {
     "url": "develop/REST-demos.html",
-    "revision": "2708e9de6d9b3094a59d02158ffaa40a"
+    "revision": "8c5c20d1e0c27bb6c88eb111ed497433"
   },
   {
     "url": "develop/Unit-Testing.html",
-    "revision": "928b1432599888d20ec5d3510c7288b4"
+    "revision": "95848b4a335c6801b2005ae4ce7ea8ad"
   },
   {
     "url": "favicon/android-chrome-192x192.png",
@@ -3739,51 +3739,51 @@ self.__precacheManifest = [
   },
   {
     "url": "get-involved/About-us.html",
-    "revision": "82179956080c74c946155e609c12625e"
+    "revision": "26454c5a238ce20ef51a174adf069c1d"
   },
   {
     "url": "get-involved/Contact.html",
-    "revision": "582e316b1fb93420a97411762a082fd3"
+    "revision": "b14806e93b82f802ee75c0bce5eee611"
   },
   {
     "url": "get-involved/Contribute.html",
-    "revision": "740b5269f19ea255c683026141eece1e"
+    "revision": "cc7d6ec598e431a7964264f7db053211"
   },
   {
     "url": "get-involved/index.html",
-    "revision": "0c788b971c050c7d26950c124eb76a5b"
+    "revision": "693005d3732eba11fee810d4c1dcde31"
   },
   {
     "url": "get-involved/Legal-Notice.html",
-    "revision": "ce44a72f20daf89d40a475d272882c9e"
+    "revision": "a11d9947f55403ee8a375e844fe95743"
   },
   {
     "url": "get-started/Demos.html",
-    "revision": "20d7400597a3cea4735bfdb020e907de"
+    "revision": "b515e092b1252de4e903648a2629546e"
   },
   {
     "url": "get-started/index.html",
-    "revision": "dea27c750ea00a42a66f0a38bf66adc0"
+    "revision": "b9fca92902c3f73b9f465a9364325983"
   },
   {
     "url": "get-started/Installation.html",
-    "revision": "e58dc2baedfa971b4ce8d442a03ce777"
+    "revision": "1164b2cad8d4437f04312dc2cd189b0a"
   },
   {
     "url": "get-started/Overview.html",
-    "revision": "960c37e91a94fa1fd2f080a7d706c2e9"
+    "revision": "83c4d7ed17ca5db5936ff798ddee163f"
   },
   {
     "url": "guide/docs.html",
-    "revision": "8b170715478417671062e9045cf0f1eb"
+    "revision": "9f498d4971e165e791d909d9d23968c7"
   },
   {
     "url": "guide/editor.html",
-    "revision": "6586c8d7f5879cb2da162da3588fbaea"
+    "revision": "6b4c5372626ffda0977d3f35ae025f0d"
   },
   {
     "url": "guide/markdown.html",
-    "revision": "62f92dbb7bcd33da5e8575d16659cc47"
+    "revision": "b7de5530db708b457db10b23c8df3266"
   },
   {
     "url": "img/AsTeRICS-Ergo_Grid_en-1-768x592.jpg",
@@ -3875,7 +3875,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "2bb4e8b2ffec55022d603d45ae15796c"
+    "revision": "fb1f3646bb5d9480f9be8f43275e9643"
   },
   {
     "url": "index.php.html",
@@ -3883,243 +3883,243 @@ self.__precacheManifest = [
   },
   {
     "url": "manuals/ACS/Actuators.html",
-    "revision": "496a607ed3ff8308fc40f2923155d32e"
+    "revision": "1dd3577d0db56069bff64151c1d15607"
   },
   {
     "url": "manuals/ACS/Channels.html",
-    "revision": "bf1506858ad7b6d4de99ad3742d698d4"
+    "revision": "498d6a5632184f8adb6269f8df79046c"
   },
   {
     "url": "manuals/ACS/Colours_settings.html",
-    "revision": "2e59dbc66c7cb05328f8c4028f173ff4"
+    "revision": "26ac2e4fd97b67e9b327b07ca3237a44"
   },
   {
     "url": "manuals/ACS/Component_Collection_Manager.html",
-    "revision": "d0ec0a730a841c33598df803cfc9b818"
+    "revision": "4c8dd0f6f57c9206a600fbcf66543b67"
   },
   {
     "url": "manuals/ACS/Component_Context_Menu.html",
-    "revision": "f121c677164eda7893fa818148b3e27c"
+    "revision": "e5d1abd730d67416d68ca9a7606bd8cf"
   },
   {
     "url": "manuals/ACS/Connected.html",
-    "revision": "b490b1b921f49b124c20dc4bc85018f7"
+    "revision": "94eac02539fac4cf2622f3aae633f61f"
   },
   {
     "url": "manuals/ACS/Control_the_ARE.html",
-    "revision": "eb9a8b2271386fb1b7fdef37182878fe"
+    "revision": "4e9c3186c9a8da1e7227f4e48275a9ea"
   },
   {
     "url": "manuals/ACS/Create_and_Edit_a_Model.html",
-    "revision": "87dc592284571ac105180fb8f83f8d0e"
+    "revision": "535e303af0cc2584f08d650380dc3cb8"
   },
   {
     "url": "manuals/ACS/Dialogs_settings.html",
-    "revision": "c20053255e4ab9cec7a346e704f4e118"
+    "revision": "4c8b96632b641b5a5b03094c1d9a7833"
   },
   {
     "url": "manuals/ACS/Disconnected.html",
-    "revision": "3e9c3aa8bd13b77dc5d2f03a0063e9ae"
+    "revision": "2a8479c352685940cb441ac4140a8df8"
   },
   {
     "url": "manuals/ACS/Events.html",
-    "revision": "6f26f12b9655fcbba55c66493392722a"
+    "revision": "841ec87783b08b84612bff5a4d2c17f1"
   },
   {
     "url": "manuals/ACS/External_Tools_Options.html",
-    "revision": "60940d2272f45c6603e8a535b155de5e"
+    "revision": "af45e922058e4188f4ccf7f019ed16b8"
   },
   {
     "url": "manuals/ACS/External_Tools.html",
-    "revision": "609c9dbe651c0b26cbffd85f49e2bf0f"
+    "revision": "047dc517aea2ad3f9e32d4e30c2ab124"
   },
   {
     "url": "manuals/ACS/General_settings.html",
-    "revision": "5074883da6b6719d06cc965e92557128"
+    "revision": "d6985c8c72236dd5166e388dcf33c01e"
   },
   {
     "url": "manuals/ACS/GUI_Designer.html",
-    "revision": "6c5d202a2b7499b3dd95c9ccaf4ec199"
+    "revision": "e4e1670d5a5107829ed4b96370a3e2e4"
   },
   {
     "url": "manuals/ACS/index.html",
-    "revision": "3fb422cc0d1d4a99aeb442e2a5531c97"
+    "revision": "4f4a6ea344efa31a152623503969c5f2"
   },
   {
     "url": "manuals/ACS/Keyboard_control.html",
-    "revision": "fac9001e2f7267434d8319cdf77b94cc"
+    "revision": "1dd6056ca2fe796274e2b736af586c4e"
   },
   {
     "url": "manuals/ACS/Load_and_Save_Models.html",
-    "revision": "7f5c0791c50c7f6ffa9a0094c3681cf2"
+    "revision": "677363c386558743e2b8b6a847a8dff1"
   },
   {
     "url": "manuals/ACS/Miscellaneous.html",
-    "revision": "4c874574b63f09dfe941d5df3c2869c2"
+    "revision": "1990d84d944e083102a330125be8e036"
   },
   {
     "url": "manuals/ACS/Modes.html",
-    "revision": "43356325cf7684ec7108ecdf0cca83c8"
+    "revision": "5b579dc370e823ce8b9551b18c6f831a"
   },
   {
     "url": "manuals/ACS/Options.html",
-    "revision": "a05aabf9b600c7c9b26eb13a6f6a8734"
+    "revision": "91ed4e02ffd5071b3bb8c6e7e5a8973c"
   },
   {
     "url": "manuals/ACS/Pause.html",
-    "revision": "84c11c90040ff256df138b2836eb6919"
+    "revision": "5aea156c416067dfcc1ba2802f2b6ffe"
   },
   {
     "url": "manuals/ACS/Print.html",
-    "revision": "d6a8e2477af842ab5e023265c0271870"
+    "revision": "fdbd933d9cd0a1cd1ab3b125c4807dd7"
   },
   {
     "url": "manuals/ACS/Processors.html",
-    "revision": "5cdbd1b809b4510ee590b78dcae2815f"
+    "revision": "4068545c0c940f75a79ff190706eb809"
   },
   {
     "url": "manuals/ACS/Running.html",
-    "revision": "a33a1ee5269322085f16a2454c01ff32"
+    "revision": "5c03ace1a44d2a6d96e1d1fe1b4cf29a"
   },
   {
     "url": "manuals/ACS/Sensors.html",
-    "revision": "e5be98dad6fa9980d2900ceadcc9da29"
+    "revision": "23845e367d9988d5a0d40781038b66d2"
   },
   {
     "url": "manuals/ACS/Setting_the_Properties.html",
-    "revision": "adf33ed66af5b4048320e33952bf938f"
+    "revision": "9922bdfada661a1bba520693638fcd0a"
   },
   {
     "url": "manuals/ACS/Status_Reporting_and_Error_Logging.html",
-    "revision": "5d07d8179e8c3f50450dc88888127934"
+    "revision": "1e32693280364a9b02c5697e4a408c0b"
   },
   {
     "url": "manuals/ACS/Synchronized.html",
-    "revision": "e8b49708fe89ccc2bb0c2a84f84c95ff"
+    "revision": "4543a837cb06c1bb1c04fc2dc1ba0344"
   },
   {
     "url": "manuals/ACS/The_Edit_Tab.html",
-    "revision": "19f5d44b1c7d85c9e544e2444d12604a"
+    "revision": "e17fc41bad2a06c2190d6f335d8db203"
   },
   {
     "url": "manuals/ACS/Tooltips.html",
-    "revision": "20163d1fe2af9a4a7fd3ebac4196b53d"
+    "revision": "de4539fe3dcb77f440ca4489a737e323"
   },
   {
     "url": "manuals/ARE/index.html",
-    "revision": "750f4ab3c35af57a9fc13850904fb95b"
+    "revision": "915531a957d2848338bcff4a4ed411c1"
   },
   {
     "url": "manuals/asterics-grid/01_terms.html",
-    "revision": "54864d65e49798d7371cd2f0cd8d1471"
+    "revision": "6233f11d5dec95059fa48ff32d531ac4"
   },
   {
     "url": "manuals/asterics-grid/02_navigation.html",
-    "revision": "dd7702358dc11aed71e413ddb957c495"
+    "revision": "6e2deba51752858b8c46c88e9cc14116"
   },
   {
     "url": "manuals/asterics-grid/03_appearance_layout.html",
-    "revision": "caac1cfd6e2fd19cffbb6a6bed338f9a"
+    "revision": "95edac31fdd3a42ada717461ba024b34"
   },
   {
     "url": "manuals/asterics-grid/04_input_options.html",
-    "revision": "6d749af3b2f7b4863d7e7b8e366a7fb9"
+    "revision": "f5053269ce5b9a1a3d344efac20a45bc"
   },
   {
     "url": "manuals/asterics-grid/05_actions.html",
-    "revision": "e0ae575f960c51f83df26426cb2946ee"
+    "revision": "0dbdac97a4a0a8ee7e633bf6985fbd44"
   },
   {
     "url": "manuals/asterics-grid/06_users.html",
-    "revision": "91bced74ee3ea30e28b14afb90e935fb"
+    "revision": "ae13f973c0b8ab38241e8870232373f0"
   },
   {
     "url": "manuals/asterics-grid/07_dictionaries.html",
-    "revision": "d9665acf4c2a08121a04c4e0bb25a275"
+    "revision": "b59be342c9096fdf8306056297b1920b"
   },
   {
     "url": "manuals/asterics-grid/08_keyboard_shortcuts.html",
-    "revision": "dce20661d7810e4a64867c7e030c27fb"
+    "revision": "94aeb9808f3f82a6e7e553022fd0702d"
   },
   {
     "url": "manuals/asterics-grid/09_translation.html",
-    "revision": "b7cf4c9cfc72e0944f4f9bb10c1d6ba6"
+    "revision": "6072bd22a701df8957acb36f8afd225f"
   },
   {
     "url": "manuals/asterics-grid/index.html",
-    "revision": "b79d09a2ff71f9eb38cd0b40ad62d7f2"
+    "revision": "66bc77baa2e199e5c576a236853ba073"
   },
   {
     "url": "manuals/fabi/index.html",
-    "revision": "8a30a4d3946a83f4301e97b2954fecd8"
+    "revision": "8e3be04795656258531597a653b77ba4"
   },
   {
     "url": "manuals/flipmouse/index.html",
-    "revision": "5528c6856c9fa40c47ff464e5585cf10"
+    "revision": "22d9225b84610c9c9f58d91fc7333a2c"
   },
   {
     "url": "manuals/index.html",
-    "revision": "5d4bc40731e840f22a6570b70b7fb563"
+    "revision": "74d25a3eda528323d4801d264617d3f3"
   },
   {
     "url": "manuals/WebACS/AREStatus.html",
-    "revision": "02d477be14b2dd1516b42142b7de9703"
+    "revision": "cabf083224f501948edc9203617c64b7"
   },
   {
     "url": "manuals/WebACS/Channels.html",
-    "revision": "b179c4e216b90cad60e7197e06c3fc0e"
+    "revision": "3e62f5564375685ea1504d4692a1ac8b"
   },
   {
     "url": "manuals/WebACS/Control_the_ARE.html",
-    "revision": "e76a1f886ec1b4353eaac18457af034c"
+    "revision": "550012afb9e52b99811a3ebf9f694707"
   },
   {
     "url": "manuals/WebACS/Create_and_Edit_a_Model.html",
-    "revision": "bd36ab544729192566aa6eabe63e85b1"
+    "revision": "a98ff92029cbd97b1d33fd3b402c8a1a"
   },
   {
     "url": "manuals/WebACS/Events.html",
-    "revision": "4974fe896bdfdfa6ff7b4695b94a0a2f"
+    "revision": "993d12ea0ca2562db233e13ee9ac78c7"
   },
   {
     "url": "manuals/WebACS/GUI_Designer.html",
-    "revision": "1506e7ff859af69dcaa1ef1de5482263"
+    "revision": "ebc9e61a1e595b38e78c89f2ca26df8e"
   },
   {
     "url": "manuals/WebACS/index.html",
-    "revision": "2fa7e33b499dd9e0d2e53e940c6b0e8d"
+    "revision": "7b0ea8046103c047c27a37b5b2b096a4"
   },
   {
     "url": "manuals/WebACS/Keyboard_control.html",
-    "revision": "2778649a71a7b470ea6a6e23e43fff3d"
+    "revision": "1a654a62d0a8f127b031366d0c634171"
   },
   {
     "url": "manuals/WebACS/List_View.html",
-    "revision": "ec3d5f92f709ad7eb6457ab40b4ba38e"
+    "revision": "09510a31b4ecc50e7892a1eb2b24ba60"
   },
   {
     "url": "manuals/WebACS/Miscellaneous.html",
-    "revision": "83694f0982d59869889a08d60442efc4"
+    "revision": "d6a078a428a14b23f28f37f4183d218d"
   },
   {
     "url": "manuals/WebACS/Open_and_Save_Models.html",
-    "revision": "7dcdee1617e7346dd0b9eecc6df5017d"
+    "revision": "bdb4889abf08155fc9062343b47fbf24"
   },
   {
     "url": "manuals/WebACS/Setting_the_Properties.html",
-    "revision": "7116c89c9d34aa7d3222a62065fff14d"
+    "revision": "cc333973428af991e7dc5712dc18e7fe"
   },
   {
     "url": "manuals/WebACS/The_Edit_Tab.html",
-    "revision": "bebea0fdf7e128838889ed141bf394da"
+    "revision": "4fdb1efa5ca57c1dc385a4a636b0f322"
   },
   {
     "url": "plugins/actuators/AnalogOut.html",
-    "revision": "b4b958d4cc550b5c663f7fedc9c8def9"
+    "revision": "6e7b1b5a402785cd0e4a7158a9ca9b29"
   },
   {
     "url": "plugins/actuators/Android_connection.html",
-    "revision": "c1580b959c25f93a411d82fe5420d10e"
+    "revision": "daae9d72b992283fd2e6c11119263ba7"
   },
   {
     "url": "plugins/actuators/android.svg",
@@ -4127,55 +4127,55 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/AndroidPhoneControl.html",
-    "revision": "9c56d22494d062f3f7f658fe0d1933f7"
+    "revision": "e22942281ea3eb7177803b6450d28e1e"
   },
   {
     "url": "plugins/actuators/AngularCursorControl.html",
-    "revision": "19e239aee98a6e4edd009332e2c906ff"
+    "revision": "320037e8c08c7e9052552dcb4c34b2e8"
   },
   {
     "url": "plugins/actuators/ApplicationLauncher.html",
-    "revision": "0331685a65c43b44f3772912b5a8885f"
+    "revision": "a229f0966ac76f77898f7522f74b8b9c"
   },
   {
     "url": "plugins/actuators/AREWindow.html",
-    "revision": "5c57c0e9f155126a2d63fad258ea92e7"
+    "revision": "5de3e1fd7ca5d88701a524b4d1194e78"
   },
   {
     "url": "plugins/actuators/BarDisplay.html",
-    "revision": "0b101195c60ff885f97b9439b301ef42"
+    "revision": "8399c954a55db352274394eefc88ea9c"
   },
   {
     "url": "plugins/actuators/CrosshairCursorControl.html",
-    "revision": "1d2031bee80dc107bfea4f5792443df6"
+    "revision": "aa0b61ece343c708e8508c5012e61840"
   },
   {
     "url": "plugins/actuators/DialogBox.html",
-    "revision": "355c488c6974fecc53e0415917a5c4c6"
+    "revision": "4cc646a0ae4e5c4da814ed2d20d79bf7"
   },
   {
     "url": "plugins/actuators/DigitalOut.html",
-    "revision": "fb1f6878a22a52c13686359299e5e14b"
+    "revision": "e99cc903cfe8effd92db9faff10eac1d"
   },
   {
     "url": "plugins/actuators/DotMeter.html",
-    "revision": "ce87b022b2e60bf18bc192673256f8f7"
+    "revision": "adcb078fdbf4726f4300d61c69691f72"
   },
   {
     "url": "plugins/actuators/EasyHomeControl.html",
-    "revision": "9297f074b72cbef02b3f4fc0aff76132"
+    "revision": "e2f7f9ec9ade7a1470a913d91bc84fce"
   },
   {
     "url": "plugins/actuators/EmulateFaultyPlugin.html",
-    "revision": "52420eabb2ffd3e3c68c864e993a2dcb"
+    "revision": "425e6b8534252281c2673878dd7cf709"
   },
   {
     "url": "plugins/actuators/EnobioDisplay.html",
-    "revision": "912ef1b3a30008722810cc2341ab2fe0"
+    "revision": "ab2075bf27fe72a3192810d96fcaa1c7"
   },
   {
     "url": "plugins/actuators/Enocean.html",
-    "revision": "2d9e1e45d7c0cb8448ecb2b822dcd28b"
+    "revision": "86cfe37692cb12cfbc88f16134a6e319"
   },
   {
     "url": "plugins/actuators/enocean.svg",
@@ -4183,19 +4183,19 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/EventVisualizer.html",
-    "revision": "866c8e2705e3c394974f06adf1bb7bf6"
+    "revision": "71307638d82b5a8b1ec3ee1f1942a2d5"
   },
   {
     "url": "plugins/actuators/FileWriter.html",
-    "revision": "046cf7d26e363fa0e8e11d360507562d"
+    "revision": "9af0b981f09d0cf14f46f9f24b53abe2"
   },
   {
     "url": "plugins/actuators/FlickeringLightStimulator.html",
-    "revision": "b9dc7b28f4db9691ad9cefac97428e51"
+    "revision": "96e925a4807a2d90884463051561c33f"
   },
   {
     "url": "plugins/actuators/FS20Sender.html",
-    "revision": "d3c7cb7679ffd127bc3e91940343f046"
+    "revision": "32989488d95aaf515100e17f4979d614"
   },
   {
     "url": "plugins/actuators/gmail.svg",
@@ -4203,15 +4203,15 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/GMailShortcuts.html",
-    "revision": "a67b1c77f11089b2733fe5ada571d60d"
+    "revision": "5daa00a05f8ea6ec8ec3f43b3a3bf81e"
   },
   {
     "url": "plugins/actuators/GSMModem.html",
-    "revision": "c3bf3bbb28a7cb3fefd3c3c376012ee2"
+    "revision": "1b940ee812a2b08200a76ef3f899183b"
   },
   {
     "url": "plugins/actuators/ImageBox.html",
-    "revision": "d623bf7dc6cd353a62b1a8b78dc6eafc"
+    "revision": "f1dd7e40b2c4f4aad458395812b7f93e"
   },
   {
     "url": "plugins/actuators/infrared.svg",
@@ -4219,15 +4219,15 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/IRTrans.html",
-    "revision": "1ddc5e4af8b0d81d53af741fb30ee0d2"
+    "revision": "da0b7603c67d8841a7accbb0e1d83213"
   },
   {
     "url": "plugins/actuators/Keyboard.html",
-    "revision": "9ff581f0bfc764f27302e59f5081c9fd"
+    "revision": "4fd365edd55d8b77dabc1efaad0510ac"
   },
   {
     "url": "plugins/actuators/Knx.html",
-    "revision": "510d9e40e7bbd78904a8ebaec8b01186"
+    "revision": "e22d741e218cf04088909d8d96d40c9e"
   },
   {
     "url": "plugins/actuators/knx.svg",
@@ -4235,35 +4235,35 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/LegacyDigitalOut.html",
-    "revision": "7ced9668866466edba5f47663b854756"
+    "revision": "3a4b09624cc7b15d64b4067cb7f1e0ce"
   },
   {
     "url": "plugins/actuators/LineWriter.html",
-    "revision": "ab12c6d75861be98fe3b211fc355a1ed"
+    "revision": "41eee2b79a5762fb7d4fd21974aca1c4"
   },
   {
     "url": "plugins/actuators/MediaPlayer.html",
-    "revision": "bd4e231be7c00d2635ee8fba6e51322b"
+    "revision": "a358a8b187123e15696f063774b41929"
   },
   {
     "url": "plugins/actuators/MidiPlayer.html",
-    "revision": "58d8433a8c86fb5582b5e2d2227d0e99"
+    "revision": "b9181ea26cf15a562a4df4037c87df64"
   },
   {
     "url": "plugins/actuators/ModelSwitcher.html",
-    "revision": "e5e4bafc33b8d8dd758fd1d94c9a2ef6"
+    "revision": "8cd67c4aeb42d3888f3fe160120b5295"
   },
   {
     "url": "plugins/actuators/Mouse.html",
-    "revision": "91b0440ce699233dc70cd6306a735857"
+    "revision": "f42aa3d3e77ee2b88ddcf06c3f249427"
   },
   {
     "url": "plugins/actuators/MousecursorIcon.html",
-    "revision": "ed6d30db244d831b671e0543dbca3b8d"
+    "revision": "97974cbbda55cefbc4716ed969a239c9"
   },
   {
     "url": "plugins/actuators/NetConnection.html",
-    "revision": "4c7dd9d10c3059e229e72f597524473e"
+    "revision": "976571796cae52ca05c88ccd0cf597d9"
   },
   {
     "url": "plugins/actuators/osci.svg",
@@ -4271,11 +4271,11 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/Oscilloscope.html",
-    "revision": "485aac2b7217461d36fcf89ca522245b"
+    "revision": "1b1a90565de61d8ddb4938a8bfb1ea6c"
   },
   {
     "url": "plugins/actuators/OscOutClient.html",
-    "revision": "277fc6d02bd8de2bc368062080b44eb1"
+    "revision": "2bbf5dfd45804d889f193067b545e8b6"
   },
   {
     "url": "plugins/actuators/philips-hue.png",
@@ -4283,23 +4283,23 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/PhilipsHue.html",
-    "revision": "6e753f9a95120508df1f51917641a808"
+    "revision": "0eae35dd31a39d0f28e84e9430684f1e"
   },
   {
     "url": "plugins/actuators/PhoneControl.html",
-    "revision": "2bc96fd1b7a6d6493545f08a64d723cd"
+    "revision": "f8bbf51cc8f52b3a990b52a092a8dfd7"
   },
   {
     "url": "plugins/actuators/PicoTTS.html",
-    "revision": "f721e14ab01e133164e7383343fb56b8"
+    "revision": "f194ae5c491544581cd3b07c41f8584d"
   },
   {
     "url": "plugins/actuators/PlatformDigitalOut.html",
-    "revision": "3bd51b9f3f0ad210fa4787194bddaad5"
+    "revision": "67d6a0afbaddf3379819897e32787cf6"
   },
   {
     "url": "plugins/actuators/PlatformLCD.html",
-    "revision": "8af6637207963dd6e04002c2670f53f5"
+    "revision": "afc6b0b870a6c40135e25677c26f4e3e"
   },
   {
     "url": "plugins/actuators/pong.svg",
@@ -4307,99 +4307,99 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/actuators/PongGame.html",
-    "revision": "58cac3039299033bf19310f5507bb6ab"
+    "revision": "b91ce42b1236473e8523c146e76a187b"
   },
   {
     "url": "plugins/actuators/RemoteJoystick.html",
-    "revision": "f33b230eb07446fb1cac1e6b9b8da85e"
+    "revision": "c923aad212cc0174ac3ef644fea6b90e"
   },
   {
     "url": "plugins/actuators/RemoteKeyboard.html",
-    "revision": "cb1b795d23218690ed456c6f1fc1fe16"
+    "revision": "0641ae558bc9f4ae5c2bc3e0873c136e"
   },
   {
     "url": "plugins/actuators/RemoteMouse.html",
-    "revision": "6cd507aa25848d27d36e149339631945"
+    "revision": "4712a18de21ae4ff529b1ba27e43a8d3"
   },
   {
     "url": "plugins/actuators/RemoteTablet.html",
-    "revision": "0e790452b30cfc072d7c91f1592cc1de"
+    "revision": "dab9a327c5a569846118c7413d08faaf"
   },
   {
     "url": "plugins/actuators/RemoteWindow.html",
-    "revision": "94f1f105796b42cbeb031555c8df578f"
+    "revision": "fbbdd898d66a8859ca50f65e4971f190"
   },
   {
     "url": "plugins/actuators/SerialSender.html",
-    "revision": "4e0cf05c45ca6ec3865432641ab9d244"
+    "revision": "a58892fc412edc4cf03a71ded54ccaea"
   },
   {
     "url": "plugins/actuators/SkyWatcherMount.html",
-    "revision": "f58dc8056a072d49ef311b1fa5bde124"
+    "revision": "0251bbec5ccf4dd0d89c4851b7b591fa"
   },
   {
     "url": "plugins/actuators/SSVEPFileWriter.html",
-    "revision": "f9177d57c9910fde80a39e06b31cece2"
+    "revision": "2c5c22662b1d3578a3f8eac0cff2f6aa"
   },
   {
     "url": "plugins/actuators/SSVEPStimulator.html",
-    "revision": "9fdd8e35943ae083599318853a444448"
+    "revision": "04da9c41e5baeb455648a87bfadbb230"
   },
   {
     "url": "plugins/actuators/SyntheticVoice.html",
-    "revision": "e74263dd9c6b98d95d66cd01997b8710"
+    "revision": "7830e572f0b9e7584f89ad92793d3e96"
   },
   {
     "url": "plugins/actuators/TeensyRCPrototype.html",
-    "revision": "c5058fc88a7fb9866c8fa9371deaca66"
+    "revision": "6e8637b117cdf6e46853dd33d19572ec"
   },
   {
     "url": "plugins/actuators/TextArea.html",
-    "revision": "50857c944882a69fd688b311ba0f0d7a"
+    "revision": "68c299acf262ff7b58a8e5b537b9a05c"
   },
   {
     "url": "plugins/actuators/TextDisplay.html",
-    "revision": "e69cc904990e3a2630ebe477773f34b9"
+    "revision": "94d0109f16d0193bed01ff7024fc6304"
   },
   {
     "url": "plugins/actuators/ToneGenerator.html",
-    "revision": "5c308a9ebe590d898c92edf2f3246ae2"
+    "revision": "70480662698d023804a8865ea2325654"
   },
   {
     "url": "plugins/actuators/Tooltip.html",
-    "revision": "049bfd5fc9b6fe966d3bbed2b68996b7"
+    "revision": "a4362b822e20912f6b6931eac1234e73"
   },
   {
     "url": "plugins/actuators/WavefilePlayer.html",
-    "revision": "b33d0fde93b94bca3aaddd580f27bbe4"
+    "revision": "3d0d58e7196c3353668487c83be84850"
   },
   {
     "url": "plugins/actuators/WriteCSV.html",
-    "revision": "b746b8988c528f31d7e4bb268475399b"
+    "revision": "a7cb0258e0a0141cee0fe6b3a0cbdb9a"
   },
   {
     "url": "plugins/actuators/WriteEDF.html",
-    "revision": "eb81eb7d7aac158362570d913b6fad02"
+    "revision": "7878d9d7652257568b0e351c408abf00"
   },
   {
     "url": "plugins/index.html",
-    "revision": "2f60e3b01e6e532cd602d5922d0aea79"
+    "revision": "03b19ce2e2748274cf88e366aebb824c"
   },
   {
     "url": "plugins/processors/AcousticScanning.html",
-    "revision": "94517523423a958d839211e06c37e7cf"
+    "revision": "a4dc33b37ce37a704ffe0a286fe6362d"
   },
   {
     "url": "plugins/processors/AdjustmentCurve.html",
-    "revision": "cb2cb9afa105d56de5a1a67c4f62a06a"
+    "revision": "b8a221af3d2f40248ecb0224ba9f421f"
   },
   {
     "url": "plugins/processors/AmazonEchoControl.html",
-    "revision": "796726da67cf6bea3dc20a2d6a67b35a"
+    "revision": "f5b3c94d5f244a43df3df77b5707727e"
   },
   {
     "url": "plugins/processors/Amplifier.html",
-    "revision": "e4c5767857d2346116c1432252f3e4b4"
+    "revision": "12840b78c636f0106691964b6d8e382a"
   },
   {
     "url": "plugins/processors/arduino-uno.svg",
@@ -4407,7 +4407,7 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/processors/Arduino.html",
-    "revision": "6a8dd32f175ebd545cf8f44af722ba14"
+    "revision": "d39b40e90b6994c5ee80d24d1f11d0ba"
   },
   {
     "url": "plugins/processors/arduino.svg",
@@ -4415,167 +4415,167 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/processors/AudioSelector.html",
-    "revision": "2f434b521ea508bd66336be67a5fee60"
+    "revision": "5fe0dfc53b36c7ca80a92e56e52ad621"
   },
   {
     "url": "plugins/processors/Averager.html",
-    "revision": "f2a0e828f69c8805a1b0f2e158311a6c"
+    "revision": "16f3c55d1c87316a67b8999fe712c9c0"
   },
   {
     "url": "plugins/processors/BasicTRalgorithms.html",
-    "revision": "387bd5ce1eee568f5f69ae917d01ab46"
+    "revision": "45cc5ef8a5ea30a9d9070ac19723063a"
   },
   {
     "url": "plugins/processors/Benchmark.html",
-    "revision": "20125e7f252f8efe1a42c029fa587dcb"
+    "revision": "9f9c64bb3856cca45d395f5eecc9e32c"
   },
   {
     "url": "plugins/processors/BlinkChangeDetector.html",
-    "revision": "4c237df3a6ae3eaefa33573ae9a020ea"
+    "revision": "5d675926d7e88984350216c6da822d64"
   },
   {
     "url": "plugins/processors/BlinkDetection.html",
-    "revision": "105b2a2940cb98b08a4a2a68cb392db6"
+    "revision": "c093bcdb5440dac0183a07a001dcad86"
   },
   {
     "url": "plugins/processors/BlinkDetector.html",
-    "revision": "8974f10649be6ffa8937a41acc4d1ec2"
+    "revision": "fee3a34ff23e12429130211c592660b8"
   },
   {
     "url": "plugins/processors/BlinkDetectorTrainer.html",
-    "revision": "8afc40b958abfa970291e47c87003fe1"
+    "revision": "7067e7e530d0342b5032b3f9249b5864"
   },
   {
     "url": "plugins/processors/Comparator.html",
-    "revision": "a29094937d15972edd32efc3f2482dfc"
+    "revision": "cee13315d85ab5e4901c86313422f241"
   },
   {
     "url": "plugins/processors/ComPort.html",
-    "revision": "f5533272d1bfea43de94cfdb5a655775"
+    "revision": "aeefc00bdd343929adce454363faf717"
   },
   {
     "url": "plugins/processors/ComputeBandpower.html",
-    "revision": "0b9c4ee90020ff4224653ec05412ab0a"
+    "revision": "e9741ef81e1c40a0ceafc1e11e913d45"
   },
   {
     "url": "plugins/processors/ConstantDispatcher.html",
-    "revision": "5251e4101d1bd961a042b7cc93a10cc2"
+    "revision": "3a0aa0e1745997cdebb87532d0d49b13"
   },
   {
     "url": "plugins/processors/DataType.html",
-    "revision": "2a6f7ed35a060d78d0232a135b99d87a"
+    "revision": "33105155aa9344863dc3ae5558a5981e"
   },
   {
     "url": "plugins/processors/DateToDouble.html",
-    "revision": "a6e6b8f891c576880d5a5528ffe874eb"
+    "revision": "d35dd76cd5c1924ca11408d91fda4f33"
   },
   {
     "url": "plugins/processors/Deadzone.html",
-    "revision": "bc19ba230e27cf9dcc1ba68b88586d31"
+    "revision": "a4d106f1b1ac82ce39240334516b1f18"
   },
   {
     "url": "plugins/processors/Decimation.html",
-    "revision": "3afedb46e9ef54c606f02018579ed940"
+    "revision": "5ff81a4a4127428685d9092bb41988b3"
   },
   {
     "url": "plugins/processors/Delay.html",
-    "revision": "39bae28dd342facf3494dcb70d89d9d0"
+    "revision": "d5cd61a7048d1189a59ed1b31b061cd0"
   },
   {
     "url": "plugins/processors/Derivative.html",
-    "revision": "17ddb811664ffc79b0c7f4f2c6553363"
+    "revision": "b2c952003676bf455347cb0ffdef6976"
   },
   {
     "url": "plugins/processors/Differentiate.html",
-    "revision": "6d33155be0b6cf28c1bd88f80c0d5226"
+    "revision": "571720252ea4a4eab862d48bb3776a7c"
   },
   {
     "url": "plugins/processors/Dissimilarity.html",
-    "revision": "f4b001dd0a7d2fd17d51e8eacccf2b6c"
+    "revision": "9c7bc8c29b7991f3853ab195b7fc68e6"
   },
   {
     "url": "plugins/processors/DoubleToString.html",
-    "revision": "cdea363ac02677d66a86d060aaf997a8"
+    "revision": "bba6f6659a5b084f285877f7e00f860e"
   },
   {
     "url": "plugins/processors/ECMAScriptInterpreter.html",
-    "revision": "145a6cbd53e410d0d5b25ac0d574b8ac"
+    "revision": "0551df2225a005ef36c536eabfb866c5"
   },
   {
     "url": "plugins/processors/eg_example.html",
-    "revision": "3f15f04778a143b75417efbad1f5f39f"
+    "revision": "149eda5ff74814857b2c5259f5df96e6"
   },
   {
     "url": "plugins/processors/EventBlock.html",
-    "revision": "1e63304566abd91e1735c786aed16c06"
+    "revision": "3810fd7d7434a73e9e97990cbacba932"
   },
   {
     "url": "plugins/processors/EventCascade.html",
-    "revision": "685fdeb57ee52672817a4ce0d103a48e"
+    "revision": "86caa26e4fd17965a42dda12f22b1d03"
   },
   {
     "url": "plugins/processors/EventCounter.html",
-    "revision": "26165febd433305a1cf673ead31e3c89"
+    "revision": "924cc5fa1db93f4035eb166c63b876fa"
   },
   {
     "url": "plugins/processors/EventDelay.html",
-    "revision": "61f36c846ed84f42b4a3d782f62557a6"
+    "revision": "edc3986d382bb375bd7cf560919cacc0"
   },
   {
     "url": "plugins/processors/EventDispatcher.html",
-    "revision": "3d5127e628c8021886f06efdc1ccf1c5"
+    "revision": "197df19df25bde938e5b1d2ade53be9a"
   },
   {
     "url": "plugins/processors/EventFlipFlop.html",
-    "revision": "4f5874c6c0147f68c4fecdf2e7a6bea1"
+    "revision": "06a39553cfe2a4748d40572934f95f1e"
   },
   {
     "url": "plugins/processors/EventRouter.html",
-    "revision": "5938d8a712d6648a019cb0a1abe59a60"
+    "revision": "c55f22c472bfac87db7293304ad1c7cc"
   },
   {
     "url": "plugins/processors/EventStateMachine.html",
-    "revision": "77d2a1ada51ac47dedad6070fe57287e"
+    "revision": "bd88de126d0d5d3368a3ad8ab1cbb9f7"
   },
   {
     "url": "plugins/processors/FABI.html",
-    "revision": "ffcef721ebea2f9a4c3398c240c02d34"
+    "revision": "65573e3a928e2d3cf1b9823d06ad5665"
   },
   {
     "url": "plugins/processors/FabiCronusMax.html",
-    "revision": "387b269f25dcf14149f805cd84a74846"
+    "revision": "9978fda30479bf53cdc3917d6b6ed3ae"
   },
   {
     "url": "plugins/processors/Filter.html",
-    "revision": "ec2666cab5705a6f21f25e88439a5a34"
+    "revision": "ed72bebb43edbdc5275119bca34a832a"
   },
   {
     "url": "plugins/processors/FS20CommandInterpreter.html",
-    "revision": "9e5ed41c2dae6f51546a16750d5814ef"
+    "revision": "40867fe7e156c78ed0d1abba571be2cd"
   },
   {
     "url": "plugins/processors/HRVAnalysis.html",
-    "revision": "5eacb3ab96510d870760dd4735a16a5a"
+    "revision": "43b24f13ad5ea7d355cd9b8a605ca6d5"
   },
   {
     "url": "plugins/processors/HRVRmssdFromRR.html",
-    "revision": "fbc43d64abe6e8057f06428936ac1444"
+    "revision": "7a45071db3bd32b2936cee6e11aa37b6"
   },
   {
     "url": "plugins/processors/IIRFilter.html",
-    "revision": "46d6297b2fbc47505545f3cd45f1ddb0"
+    "revision": "95ed58ad756395a4de8aa04e43d1d27d"
   },
   {
     "url": "plugins/processors/Integrate.html",
-    "revision": "e0778bceb5f5532dc47d65a1137a5598"
+    "revision": "9ff81cfab4ee2866263951666374b76b"
   },
   {
     "url": "plugins/processors/IntToString.html",
-    "revision": "a5f8d3d78622ce3dd2a64276bc0817b5"
+    "revision": "262a11c8772227aebeedaa632ed385d2"
   },
   {
     "url": "plugins/processors/IrMicro.html",
-    "revision": "5ccd7c90f39a9e010261c188776530c2"
+    "revision": "47b2696e5a5a4c84154828ae934f176a"
   },
   {
     "url": "plugins/processors/javascript.svg",
@@ -4583,43 +4583,43 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/processors/JsonParser.html",
-    "revision": "80a5f404c0b7ef9b6d10b4a1ee93ef12"
+    "revision": "6cb028f16a9f1ade2a9926f158513110"
   },
   {
     "url": "plugins/processors/MathEvaluator.html",
-    "revision": "18d30cbdf69f6d903d090a055199cb68"
+    "revision": "98969cbce479dcc726118a25933bfa4d"
   },
   {
     "url": "plugins/processors/MinMax.html",
-    "revision": "0f0b6269e1f9db0440ff4adf342cbcc9"
+    "revision": "3f32324d7b2f65b0985befa14e134407"
   },
   {
     "url": "plugins/processors/MotionAnalysis.html",
-    "revision": "be56da8a4f36d81b48e986b8b53b9cb1"
+    "revision": "1c050df492f69c339682febf41f53759"
   },
   {
     "url": "plugins/processors/MultiSource.html",
-    "revision": "c159f1e31c3faa63c2199861c5ad5314"
+    "revision": "e3705fb0b962396479213aa4fcc35fea"
   },
   {
     "url": "plugins/processors/MultiSourceString.html",
-    "revision": "cf261117159056f573fa26b1d9f5bd8c"
+    "revision": "5a8d62432d434f931f9a5eb59dab808c"
   },
   {
     "url": "plugins/processors/NeuralNetworkLoader.html",
-    "revision": "74a3d1cd058ff83d3fe3e58381c56250"
+    "revision": "71a2ee5b660fd8d1dfe44f3a1fe2d4f4"
   },
   {
     "url": "plugins/processors/NexusConnector.html",
-    "revision": "4ee1bcdb0bdc73846efcc9c85824a1da"
+    "revision": "15672739309eb20dbf1c041fcc97d71b"
   },
   {
     "url": "plugins/processors/OneEventManyActions.html",
-    "revision": "05c343076ce9734503e8dc1e46b014bf"
+    "revision": "5e5517481715b2ae05b433b919686db6"
   },
   {
     "url": "plugins/processors/OpenHAB.html",
-    "revision": "f097c7fa74ee163a9970f4fa6b6effae"
+    "revision": "886651da73d0ed004267691f109fb236"
   },
   {
     "url": "plugins/processors/openhab.svg",
@@ -4627,247 +4627,247 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/processors/OscGestureFollower.html",
-    "revision": "5a9520d0db4b4f31179b5e897740390e"
+    "revision": "277bcb68b61009128b7b2d4c855aed2c"
   },
   {
     "url": "plugins/processors/OskaExternalScanning1D.html",
-    "revision": "aecb2bb62371ae1ce561aea91e0422eb"
+    "revision": "db266985c437ea66b4d1268dad169857"
   },
   {
     "url": "plugins/processors/OskaExternalScanning2D.html",
-    "revision": "82fabac4a56d7a6b93c3b4ecdcf69904"
+    "revision": "69f04731d8118a0c5d4603d19893c7d4"
   },
   {
     "url": "plugins/processors/OskaInternalScanning.html",
-    "revision": "77a08e03a365d51b5d3b3accbfaa2d02"
+    "revision": "9f3e7ab9470593051bb5f0fa097d4b8d"
   },
   {
     "url": "plugins/processors/PathMultiplexer.html",
-    "revision": "0fd8f73ca9925492fc51943d1034766e"
+    "revision": "20c86e4a533d26edadf4b408ea620514"
   },
   {
     "url": "plugins/processors/Pathselector.html",
-    "revision": "9e7bdc1b54e09c3b09a902efd0dbc8fe"
+    "revision": "f0b4ac199693ad078edfe2c28e6cff18"
   },
   {
     "url": "plugins/processors/PeakDetector.html",
-    "revision": "cdb05da5f7d1a7f05863ce4445ea8d3e"
+    "revision": "300c8d9fe1fed5a38c18ff68cf390f32"
   },
   {
     "url": "plugins/processors/ProtocolSSVEPTrain.html",
-    "revision": "aad1736002e7eb5869fefad222300a37"
+    "revision": "f33f0617133f86b00591100b880d75a7"
   },
   {
     "url": "plugins/processors/Quantizer.html",
-    "revision": "bb9ae7395dd2e7c5f69f0bbdbd5749e8"
+    "revision": "f078eb308a216424183aaf7a93061caf"
   },
   {
     "url": "plugins/processors/RegularExpression.html",
-    "revision": "ff4feb4e68ec867da355aa7b1cad7541"
+    "revision": "4ef5e26acfbee827bee4ceef4edc9a11"
   },
   {
     "url": "plugins/processors/RelativeMoveSampler.html",
-    "revision": "f6ad5cb0520cc136aa26649a8f66b5a0"
+    "revision": "c407a485ff497dd25ab68d8e6879cd12"
   },
   {
     "url": "plugins/processors/SampleAndHold.html",
-    "revision": "1096f08558e8b56b48c9b29ddf662f33"
+    "revision": "074d695e6d5955d071d57b6ce44b694e"
   },
   {
     "url": "plugins/processors/Sampler.html",
-    "revision": "e53ed4d0d196b9f297b2546be12c393a"
+    "revision": "be2100ddfea63c5a94b0a76045787933"
   },
   {
     "url": "plugins/processors/SerialPort.html",
-    "revision": "1a70a0bfea53da0b1563d889fdae3a21"
+    "revision": "d657605b0a9c579d6bbecbee4e33396c"
   },
   {
     "url": "plugins/processors/SerialSender.html",
-    "revision": "bb8107e5d2705c107636ead4a1121f30"
+    "revision": "d9eb934cc4e54598c48768705ea429f4"
   },
   {
     "url": "plugins/processors/SignalTranslation.html",
-    "revision": "5c3692ca88d6d794df9eab2131c8a5a9"
+    "revision": "35df26438b75e7d54e8e253d247d463d"
   },
   {
     "url": "plugins/processors/SpeechProcessor.html",
-    "revision": "ea269fea5214d609ac5e7a7357f64eaa"
+    "revision": "125ab75376e100aec2dcd6c89ecf1194"
   },
   {
     "url": "plugins/processors/SSVEPDetect.html",
-    "revision": "fc24e5a36bf86cc564439f490eb4d740"
+    "revision": "424b35040fe7e0858e92f5989bcf420e"
   },
   {
     "url": "plugins/processors/StringAppend.html",
-    "revision": "25dad34d68546979bbfd72f380424533"
+    "revision": "8f14d3cb9c4ffbfd4505594da79f0a19"
   },
   {
     "url": "plugins/processors/StringDelay.html",
-    "revision": "68fac6811ae995a121de129109aff0bb"
+    "revision": "14dd688bd5c4b0daa761651d8320f20c"
   },
   {
     "url": "plugins/processors/StringDispatcher.html",
-    "revision": "8e40f837e849c6688117bfcba0314fef"
+    "revision": "e73c60f00c3c98190d241fe753516987"
   },
   {
     "url": "plugins/processors/StringExpander.html",
-    "revision": "5adef26320bdec88c7fdf943584c43cc"
+    "revision": "24550d2f20936bc1dca525178bb95948"
   },
   {
     "url": "plugins/processors/StringExtractor.html",
-    "revision": "dd408bda3115214fe8246f412f104f4d"
+    "revision": "0f8310f092ffc4516b405125b0bf80f5"
   },
   {
     "url": "plugins/processors/StringFilter.html",
-    "revision": "6125ba14c17ded8bc6e42e44a9d4d3c0"
+    "revision": "e8888a2a1e54ffa9c665cd5cf2f4ea80"
   },
   {
     "url": "plugins/processors/StringFormatter.html",
-    "revision": "660008ffa45e135fa51889701710cb9e"
+    "revision": "6989fdf4140119da37d9abe6469648af"
   },
   {
     "url": "plugins/processors/StringPathMultiplexer.html",
-    "revision": "31703c41f8334013afdaa8c42238a967"
+    "revision": "9c821fb8f469c648389ee413c4ade55a"
   },
   {
     "url": "plugins/processors/StringPathSelector.html",
-    "revision": "1a6fd6ad89d29f853d58b9cdd10d7c79"
+    "revision": "dff0c0f6832c051fa98222e564bc2a98"
   },
   {
     "url": "plugins/processors/StringSplitter.html",
-    "revision": "3ee15e51a258ec5f9efa00edef262fa2"
+    "revision": "6d5441a3c7fd65ddd4333a5ab4d0b2fe"
   },
   {
     "url": "plugins/processors/StringToDouble.html",
-    "revision": "8791651663ac41bc29659ffacefdc8d6"
+    "revision": "e26d57f1eb48e50e2621f82c81c7a18f"
   },
   {
     "url": "plugins/processors/StringToInt.html",
-    "revision": "a0e2f41c4c4aa79378d56a7ef84e5572"
+    "revision": "b82ed62d91251af4ab6ed8d2345d515a"
   },
   {
     "url": "plugins/processors/TextSender.html",
-    "revision": "1023e83d00537ef2c23d2a8fd6508b5d"
+    "revision": "100ed6c2d3f48fbab51372b9d5c419bc"
   },
   {
     "url": "plugins/processors/Threshold.html",
-    "revision": "18c7e26484df8fd5eddfab203e12d64a"
+    "revision": "e0b2ce24bcce0cfa35704d7ab004a4d4"
   },
   {
     "url": "plugins/processors/TimestampWriter.html",
-    "revision": "5c45e4e2f1df7482a9fb3302e42b0ca0"
+    "revision": "cc4e512b1be8cbc31a2cbee2f095315f"
   },
   {
     "url": "plugins/processors/UniversalRemoteControl.html",
-    "revision": "9c1837364247d3734a4d3a6c691d2a26"
+    "revision": "d4553573870edd125357409fafc3f320"
   },
   {
     "url": "plugins/processors/WebSocket.html",
-    "revision": "f6d89056bec772b1721b60d5bf1a6138"
+    "revision": "bd7c133e735df6c969aecd2206734247"
   },
   {
     "url": "plugins/processors/Yaak.html",
-    "revision": "a744b7f1e7450969c1754cca8a9c7afb"
+    "revision": "9d8b957d13c23a7f55c89cf14f20d378"
   },
   {
     "url": "plugins/sensors/Acceleration.html",
-    "revision": "c4b22ba0ccdf5a8db8901422930a1900"
+    "revision": "21ec57e097709569005d5fea40c31222"
   },
   {
     "url": "plugins/sensors/AnalogIn.html",
-    "revision": "df843d7f1d542843919368e10fea167f"
+    "revision": "33fe9f647e947fd80c7d2b4c7a4c455f"
   },
   {
     "url": "plugins/sensors/AutostartEvent.html",
-    "revision": "d5fe0cd934db756d089ba90d859392b9"
+    "revision": "6fa1a6717adc99b97968eb1ed7ac0549"
   },
   {
     "url": "plugins/sensors/ButtonGrid.html",
-    "revision": "828c5723ea527d0f8a373c57e2bed569"
+    "revision": "8a18f5f139a38d9b4b12b60ea901eb59"
   },
   {
     "url": "plugins/sensors/CellBoard.html",
-    "revision": "1505d55a79e451d60235cef4986aba82"
+    "revision": "1db8b049be348aca1a2290f345bdb4ab"
   },
   {
     "url": "plugins/sensors/DigitalIn.html",
-    "revision": "15af41336f5acaf7c79d94b1b53cdb07"
+    "revision": "455c86d134ab635a837072c733496e8d"
   },
   {
     "url": "plugins/sensors/EditBox.html",
-    "revision": "5325859827a5fcdb5390906958765bed"
+    "revision": "96cd703a3d4ea885593a16ebbc183d37"
   },
   {
     "url": "plugins/sensors/Enobio.html",
-    "revision": "805c7d81cf8524d6d8c903c41522d92a"
+    "revision": "31673336e0995e084070bcc22fb0b7cd"
   },
   {
     "url": "plugins/sensors/EOG.html",
-    "revision": "5222e9c8549bcfafa754e26103f99206"
+    "revision": "51c594281f2a559aeafe6f2d7cf5f4ad"
   },
   {
     "url": "plugins/sensors/EShoe.html",
-    "revision": "78082ee341b275bfc74b9dd81aadf299"
+    "revision": "695b60cec704fe016c7a6cc0feca6280"
   },
   {
     "url": "plugins/sensors/EventGenerator.html",
-    "revision": "c133e3efadc550bff310d73efada5b09"
+    "revision": "ac8e5907f16bc8bbc2d9570d66a90804"
   },
   {
     "url": "plugins/sensors/Eyetracker.html",
-    "revision": "05c8743c4b1fe8e68de03b61a06828be"
+    "revision": "4960360c7f13efc7c620ff5c078b7fb4"
   },
   {
     "url": "plugins/sensors/EyeTribe.html",
-    "revision": "5b9605ad8eff667216867953d4db8345"
+    "revision": "039b621942c7a5484448ab76af4cd4d8"
   },
   {
     "url": "plugins/sensors/EyeX.html",
-    "revision": "40fb7b1171a249c0ac164c97a8f77fdc"
+    "revision": "4ca431cb1980b3b233b92914a0260885"
   },
   {
     "url": "plugins/sensors/FacetrackerCLM.html",
-    "revision": "1e4902a14042eb57b501f028bd4ee16b"
+    "revision": "aeeb5255904f658f5920e15d508ec0dd"
   },
   {
     "url": "plugins/sensors/FacetrackerLK.html",
-    "revision": "2496f6bb0bf09ef9d2ec70c7f1541535"
+    "revision": "3dd0c21ed5709dd651e8c37e7cf6266e"
   },
   {
     "url": "plugins/sensors/FolderBrowser.html",
-    "revision": "2c88827e64c3d78c8af1181192b368ca"
+    "revision": "9169fa06f4af2cd357bbe1faf6a4fe74"
   },
   {
     "url": "plugins/sensors/FS20Receiver.html",
-    "revision": "4c7b2f438e758ed3e2ca2a4083d7d24f"
+    "revision": "d02674234d86801742202e552b72c7e7"
   },
   {
     "url": "plugins/sensors/HeadPositionHC.html",
-    "revision": "88cc3115208853eb57094725ef8e0f64"
+    "revision": "18f24776c04476f886b9f435ef736017"
   },
   {
     "url": "plugins/sensors/HoverPanel.html",
-    "revision": "8c9e333795237b24c2ff427ecc83ac04"
+    "revision": "9fba3ccf08c83669bede34039dc85481"
   },
   {
     "url": "plugins/sensors/IntelRealSense.html",
-    "revision": "682137fce5249cdd571704daa831f0c0"
+    "revision": "3b965aaca0e4b16868d96c42ed4c1c1c"
   },
   {
     "url": "plugins/sensors/JoystickCapture.html",
-    "revision": "290e7e254f180e5a45af9d93f4f745ef"
+    "revision": "36c6e52e35b9832ef8d2bd337baac148"
   },
   {
     "url": "plugins/sensors/KeyboardCapture.html",
-    "revision": "c3699175a2f5579aa0d04760c0067b14"
+    "revision": "9593b26408251cd4d1903340840b9e00"
   },
   {
     "url": "plugins/sensors/KeyCapture.html",
-    "revision": "4b5914c116f9685130d59d009e99bf24"
+    "revision": "1a12eb91f7bff54d4874a4c27dd4a2a0"
   },
   {
     "url": "plugins/sensors/Kinect.html",
-    "revision": "e331bd5416f7bf6d1c741583fc084b95"
+    "revision": "aaa4939baab2636cb0bfc354a3095fea"
   },
   {
     "url": "plugins/sensors/kinect.png",
@@ -4875,7 +4875,7 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/sensors/KinectJ4K.html",
-    "revision": "af8a3c3f41de4a0547b0f3e8079868b3"
+    "revision": "3f342c40b61ce171151807b6078214fe"
   },
   {
     "url": "plugins/sensors/kinectj4k.png",
@@ -4883,19 +4883,19 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/sensors/LegacyAnalogIn.html",
-    "revision": "1b651539061bbd2ab49456c0f0e3b26c"
+    "revision": "0a4b93c4253c8e74e9747a8945c327e6"
   },
   {
     "url": "plugins/sensors/LegacyDigitalIn.html",
-    "revision": "1ecf13c968c36c983e0cd0fdc61d3339"
+    "revision": "1e1deee894efeeb778d28fdf28786e32"
   },
   {
     "url": "plugins/sensors/Lightscore.html",
-    "revision": "cbfd638ec4a6ec28150548e103884da7"
+    "revision": "585bc87a2fab4ac9f33575083e08140b"
   },
   {
     "url": "plugins/sensors/LineReader.html",
-    "revision": "65927032b90aed3b781f880273aa3a86"
+    "revision": "8a411eec9eec32ffec3f07a8b3264c7f"
   },
   {
     "url": "plugins/sensors/lipmouse-ir.svg",
@@ -4903,7 +4903,7 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/sensors/Lipmouse.html",
-    "revision": "9f8ca194ff92ae74cfa2a76f8efc250f"
+    "revision": "82d4f5fa914e976b71dc839cb8184653"
   },
   {
     "url": "plugins/sensors/lipmouse.png",
@@ -4911,31 +4911,31 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/sensors/LipmouseIR.html",
-    "revision": "334f0bde928d230cbc0a5a7489246072"
+    "revision": "01693c56834294f48c4fc71e81a9c502"
   },
   {
     "url": "plugins/sensors/MicGPI.html",
-    "revision": "c41ae7b6ee4761b124c124db6fda9939"
+    "revision": "0d31584aaaad63e6e440af68a4760562"
   },
   {
     "url": "plugins/sensors/MouseCapture.html",
-    "revision": "391e9781be870112a3bc23c59642da88"
+    "revision": "9293fb65b8339ddda4d362b11098da8c"
   },
   {
     "url": "plugins/sensors/OpenBCI.html",
-    "revision": "ead1942fb4a4a473f111d87b09123699"
+    "revision": "7b450cc2b47967683e9f2db3563e8004"
   },
   {
     "url": "plugins/sensors/OpenVibe.html",
-    "revision": "da3d4660d70f27e27dbf2da556427a4e"
+    "revision": "60d2247608ec0551d7ed5c6a5516168b"
   },
   {
     "url": "plugins/sensors/OscServer.html",
-    "revision": "d790b01e5e40d6b107e2e12596ce31e6"
+    "revision": "25224bbf64f14f52a1785a607370fe18"
   },
   {
     "url": "plugins/sensors/P2_Parser.html",
-    "revision": "81c981f5efee11f07c251701f96621b7"
+    "revision": "35e672575fd08f78efac3e0a7ec39644"
   },
   {
     "url": "plugins/sensors/philips-hue.png",
@@ -4943,67 +4943,67 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/sensors/PhilipsHueSensor.html",
-    "revision": "23230a218567d65463f66d70acd93cbb"
+    "revision": "5f80f89a5b62154230be8d3f382b1058"
   },
   {
     "url": "plugins/sensors/PlatformAnalogIn.html",
-    "revision": "020e9dde13c31a43d48fbdb0c54fd36c"
+    "revision": "61e614794233fbae3ce94b8d19975218"
   },
   {
     "url": "plugins/sensors/PlatformDigitalIn.html",
-    "revision": "b884cd5e7de7bdeaf33c8fd38d558930"
+    "revision": "cf3a9f2ee53b0459e2d5faec7ebcb1b7"
   },
   {
     "url": "plugins/sensors/Proximity.html",
-    "revision": "7ae8543173e2b21ba54409c03280c240"
+    "revision": "138733b128689c662222bc8da98836f4"
   },
   {
     "url": "plugins/sensors/RandomNumber.html",
-    "revision": "37c7be76ca8033fe6f74ab01f53edef7"
+    "revision": "addc0a6878081b27961505a0fb93e577"
   },
   {
     "url": "plugins/sensors/RazorIMU.html",
-    "revision": "81583aaad1d046b37007127086be42d0"
+    "revision": "3aa9bf10d511f8630bec8ed12fd3eaba"
   },
   {
     "url": "plugins/sensors/ReadCSV.html",
-    "revision": "43e1d88cf2819069f9464dd9ac13f41c"
+    "revision": "724ecf2bfd212b3cef3c9dffe9346873"
   },
   {
     "url": "plugins/sensors/ReadEDF.html",
-    "revision": "40586d2fc16318340e63ee1ac27752a2"
+    "revision": "49bb8ea134c6bb2922bb1e1f47d0c5ef"
   },
   {
     "url": "plugins/sensors/RFIDReader.html",
-    "revision": "908c588c2d0a89f0ee4e6e7da96e2817"
+    "revision": "e64345efe3026213021f2ffec1e0bf7a"
   },
   {
     "url": "plugins/sensors/Sensorboard.html",
-    "revision": "f722a5832ffb8ab05b720c503d0516ee"
+    "revision": "1660e7c863cea6b50f8294a9deb9035d"
   },
   {
     "url": "plugins/sensors/SignalGenerator.html",
-    "revision": "ee8659733d594c465b90db84d6a1c7f9"
+    "revision": "63f568a057465f65be442857a9855b47"
   },
   {
     "url": "plugins/sensors/SignalShaper.html",
-    "revision": "b6befac89b7abb336216edf936212dc0"
+    "revision": "b2a67f3f3c2367fc631b07b1905a0b75"
   },
   {
     "url": "plugins/sensors/Slider.html",
-    "revision": "5aed62da0d29456344f0cf1db7a793e1"
+    "revision": "226796384e581ae09bba8097dd84bb2d"
   },
   {
     "url": "plugins/sensors/SpaceNavigator3DMouse.html",
-    "revision": "77a4f7e477e59e90409dda0b10abb7b7"
+    "revision": "4bb37731fc0ade6f634e8118b6b596f9"
   },
   {
     "url": "plugins/sensors/TextfieldReader.html",
-    "revision": "73040fe654dd9d198c45c960fbf2df43"
+    "revision": "1986adec5d01ef92867bc9995889f178"
   },
   {
     "url": "plugins/sensors/Timer.html",
-    "revision": "df24736abe10cb4be34cfe63392d31e6"
+    "revision": "9f6543425c6d1bccf7ee12994a8737b3"
   },
   {
     "url": "plugins/sensors/tobi4c.png",
@@ -5011,19 +5011,19 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/sensors/Tobii4CHeadTracker.html",
-    "revision": "7b610fb488e662a4a3fecdb58fecef48"
+    "revision": "a511b72901f6de22b9b1d88ad481ebb8"
   },
   {
     "url": "plugins/sensors/TobiTic.html",
-    "revision": "a6fd974ba7af8af9b9cef77c4d2e3678"
+    "revision": "530ff238e6f3934735fff701b1323bd4"
   },
   {
     "url": "plugins/sensors/TuioReactivision.html",
-    "revision": "bfd8596989382b9594c0893f3082bf8c"
+    "revision": "00e7973129f5d172c5d1412dcc8a40ef"
   },
   {
     "url": "plugins/sensors/WiiMote.html",
-    "revision": "d01a02a2a423a9b66e0c228fc702188f"
+    "revision": "13b638d272b8a85f57bf4ee1742aa354"
   },
   {
     "url": "plugins/sensors/wiimote.png",
@@ -5031,31 +5031,31 @@ self.__precacheManifest = [
   },
   {
     "url": "plugins/sensors/XFacetrackerLK.html",
-    "revision": "053849f4850ea296c0fa240a45df2364"
+    "revision": "9c11695ca8792f2c356105ff2813200e"
   },
   {
     "url": "solutions/AAC-Basic.html",
-    "revision": "0ff3184b2b52984c9e1719ef19f2e169"
+    "revision": "fc368af208c320c8a43bdff07e223191"
   },
   {
     "url": "solutions/Camera-Mouse.html",
-    "revision": "bf015f57ec1bdba81db93450757ce880"
+    "revision": "26401593b7b4ac2c3d5ec538d82c1039"
   },
   {
     "url": "solutions/Eye-Tracking-Mouse.html",
-    "revision": "618d15e11412666b1611644dda00ec60"
+    "revision": "780f66625ff4f0fbac4501510b39b40b"
   },
   {
     "url": "solutions/Head-Sound.html",
-    "revision": "601d6e4df18585ef3af3376143a45add"
+    "revision": "21fd39cf57239445945e2257975f4e00"
   },
   {
     "url": "solutions/index.html",
-    "revision": "f80cc7f9add089c9903fcbe0c94fd167"
+    "revision": "a1e0250095846d1ca3dd7e4dfee5dff4"
   },
   {
     "url": "solutions/Switch-Mouse.html",
-    "revision": "f4deb2ea544df4acf83dc821acc0eb6c"
+    "revision": "8adb1eda21d0b033bdf9ff419a13ce75"
   },
   {
     "url": "webapps/asterics-camerainput-cameramouse/img/facetrackerLK-videoframe.png",
@@ -5066,20 +5066,12 @@ self.__precacheManifest = [
     "revision": "361ca6fe670dcbd7e8dfaebab9a95830"
   },
   {
-    "url": "webapps/asterics-camerainput-eyecontrol/img/facetrackerLK-videoframe.png",
-    "revision": "5e64e4665821406c59fcf982c586ca34"
-  },
-  {
-    "url": "webapps/asterics-camerainput-eyecontrol/index.html",
-    "revision": "6a783c8b21727c1edd3f6369b5da42f0"
-  },
-  {
     "url": "webapps/AT-solution-IDE.html",
-    "revision": "7b43b93ea35f6ec1baffc30779fec2a5"
+    "revision": "52b490339f11a61acf72ddca9a9e3b47"
   },
   {
     "url": "webapps/Plugin-IDE.html",
-    "revision": "3f401f5a89e51ea6542b150ee2b16c06"
+    "revision": "957440f38295defe4bc1ff99f9e79bbf"
   },
   {
     "url": "webapps/startpage/clientExample/are_repository.html",
@@ -5148,18 +5140,6 @@ self.__precacheManifest = [
   {
     "url": "webapps/startpage/lib/JSmap.js",
     "revision": "272858dc7166fa8dad29e55323cbb540"
-  },
-  {
-    "url": "webapps/startpage/lib/modelManipulation.js",
-    "revision": "1880d1f5225ff8cd7751f1b5c8244cd1"
-  },
-  {
-    "url": "webapps/startpage/lib/webAppUtils.js",
-    "revision": "39a2713ad05ac3943fe6b6c00274891e"
-  },
-  {
-    "url": "webapps/startpage/start.html",
-    "revision": "8dd457e771c16179dab0712a3e6e0655"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
