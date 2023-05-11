@@ -2,15 +2,15 @@ lockfileVersion: 5.4
 
 specifiers:
   '@asterics-docs/tool': 0.0.1
-  '@asterics-docs/vuepress-theme-docs': 0.0.10
-  vuepress: ^1.9.8
+  '@asterics-docs/vuepress-theme-docs': 0.0.12
+  vuepress: ^1.9.9
 
 dependencies:
-  '@asterics-docs/vuepress-theme-docs': 0.0.10
+  '@asterics-docs/vuepress-theme-docs': 0.0.12
 
 devDependencies:
   '@asterics-docs/tool': 0.0.1
-  vuepress: 1.9.8
+  vuepress: 1.9.9
 
 packages:
 
@@ -144,23 +144,23 @@ packages:
       - supports-color
     dev: true
 
-  /@asterics-docs/vuepress-theme-docs/0.0.10:
-    resolution: {integrity: sha512-sExKMBxHrp26L2zpas49fqn4efVODzZ2v8XEiLCDaq2156/9ESXplRKE6JJpHQ0WQIGxsF55MzxWVEhc0J11Bw==}
+  /@asterics-docs/vuepress-theme-docs/0.0.12:
+    resolution: {integrity: sha512-l4ZFaMCz4I8uSrt7H9vn+5pqTgH3eHznO4lksUcDk/LMBA82t6JDshmCqnsWz3yKQ3HZ8F4+msj91PRMZ5C5aA==}
     engines: {node: '>14.0.0 <15.0.0'}
     dependencies:
       '@asterics/web-app-utils': 0.0.1-alpha.6
-      '@fortawesome/fontawesome-free': 6.3.0
-      '@fortawesome/fontawesome-svg-core': 6.3.0
-      '@fortawesome/free-brands-svg-icons': 6.3.0
-      '@fortawesome/free-regular-svg-icons': 6.3.0
-      '@fortawesome/free-solid-svg-icons': 6.3.0
-      '@fortawesome/vue-fontawesome': 2.0.10_o733sqecwwreo43htppogsmk44
+      '@fortawesome/fontawesome-free': 6.4.0
+      '@fortawesome/fontawesome-svg-core': 6.4.0
+      '@fortawesome/free-brands-svg-icons': 6.4.0
+      '@fortawesome/free-regular-svg-icons': 6.4.0
+      '@fortawesome/free-solid-svg-icons': 6.4.0
+      '@fortawesome/vue-fontawesome': 2.0.10_ns3tanzake47edvtuk73yvnw7a
       '@studyathome-internationally/vuepress-plugin-pwa-autoload': 0.0.2
       '@studyathome-internationally/vuepress-plugin-searchbox': 0.0.2
-      '@vuepress/plugin-back-to-top': 1.9.8
-      '@vuepress/plugin-medium-zoom': 1.9.8
-      '@vuepress/plugin-pwa': 1.9.8
-      '@vuepress/theme-default': 1.9.8
+      '@vuepress/plugin-back-to-top': 1.9.9
+      '@vuepress/plugin-medium-zoom': 1.9.9
+      '@vuepress/plugin-pwa': 1.9.9
+      '@vuepress/theme-default': 1.9.9
       bowser: 2.11.0
       fuzzy-search: 3.2.1
       lodash.debounce: 4.0.8
@@ -176,12 +176,12 @@ packages:
       markdown-it-sub: 1.0.0
       markdown-it-sup: 1.0.0
       node-sass: 7.0.3
-      sass-loader: 13.2.0_node-sass@7.0.3
+      sass-loader: 13.2.2_node-sass@7.0.3
       smoothscroll-polyfill: 0.4.4
       swiper: 5.4.5
       twemoji: 12.1.6
       vue-awesome-swiper: 4.1.1_swiper@5.4.5
-      vuepress: 1.9.8
+      vuepress: 1.9.9
       vuepress-plugin-directory-classifier: 0.1.0
       vuex: 3.6.2
       youtube-player: 5.6.0
@@ -1402,57 +1402,57 @@ packages:
       - '@algolia/client-search'
     dev: false
 
-  /@fortawesome/fontawesome-common-types/6.3.0:
-    resolution: {integrity: sha512-4BC1NMoacEBzSXRwKjZ/X/gmnbp/HU5Qqat7E8xqorUtBFZS+bwfGH5/wqOC2K6GV0rgEobp3OjGRMa5fK9pFg==}
+  /@fortawesome/fontawesome-common-types/6.4.0:
+    resolution: {integrity: sha512-HNii132xfomg5QVZw0HwXXpN22s7VBHQBv9CeOu9tfJnhsWQNd2lmTNi8CSrnw5B+5YOmzu1UoPAyxaXsJ6RgQ==}
     engines: {node: '>=6'}
     requiresBuild: true
     dev: false
 
-  /@fortawesome/fontawesome-free/6.3.0:
-    resolution: {integrity: sha512-qVtd5i1Cc7cdrqnTWqTObKQHjPWAiRwjUPaXObaeNPcy7+WKxJumGBx66rfSFgK6LNpIasVKkEgW8oyf0tmPLA==}
+  /@fortawesome/fontawesome-free/6.4.0:
+    resolution: {integrity: sha512-0NyytTlPJwB/BF5LtRV8rrABDbe3TdTXqNB3PdZ+UUUZAEIrdOJdmABqKjt4AXwIoJNaRVVZEXxpNrqvE1GAYQ==}
     engines: {node: '>=6'}
     requiresBuild: true
     dev: false
 
-  /@fortawesome/fontawesome-svg-core/6.3.0:
-    resolution: {integrity: sha512-uz9YifyKlixV6AcKlOX8WNdtF7l6nakGyLYxYaCa823bEBqyj/U2ssqtctO38itNEwXb8/lMzjdoJ+aaJuOdrw==}
-    engines: {node: '>=6'}
-    requiresBuild: true
-    dependencies:
-      '@fortawesome/fontawesome-common-types': 6.3.0
-    dev: false
-
-  /@fortawesome/free-brands-svg-icons/6.3.0:
-    resolution: {integrity: sha512-xI0c+a8xnKItAXCN8rZgCNCJQiVAd2Y7p9e2ND6zN3J3ekneu96qrePieJ7yA7073C1JxxoM3vH1RU7rYsaj8w==}
+  /@fortawesome/fontawesome-svg-core/6.4.0:
+    resolution: {integrity: sha512-Bertv8xOiVELz5raB2FlXDPKt+m94MQ3JgDfsVbrqNpLU9+UE2E18GKjLKw+d3XbeYPqg1pzyQKGsrzbw+pPaw==}
     engines: {node: '>=6'}
     requiresBuild: true
     dependencies:
-      '@fortawesome/fontawesome-common-types': 6.3.0
+      '@fortawesome/fontawesome-common-types': 6.4.0
     dev: false
 
-  /@fortawesome/free-regular-svg-icons/6.3.0:
-    resolution: {integrity: sha512-cZnwiVHZ51SVzWHOaNCIA+u9wevZjCuAGSvSYpNlm6A4H4Vhwh8481Bf/5rwheIC3fFKlgXxLKaw8Xeroz8Ntg==}
+  /@fortawesome/free-brands-svg-icons/6.4.0:
+    resolution: {integrity: sha512-qvxTCo0FQ5k2N+VCXb/PZQ+QMhqRVM4OORiO6MXdG6bKolIojGU/srQ1ptvKk0JTbRgaJOfL2qMqGvBEZG7Z6g==}
     engines: {node: '>=6'}
     requiresBuild: true
     dependencies:
-      '@fortawesome/fontawesome-common-types': 6.3.0
+      '@fortawesome/fontawesome-common-types': 6.4.0
     dev: false
 
-  /@fortawesome/free-solid-svg-icons/6.3.0:
-    resolution: {integrity: sha512-x5tMwzF2lTH8pyv8yeZRodItP2IVlzzmBuD1M7BjawWgg9XAvktqJJ91Qjgoaf8qJpHQ8FEU9VxRfOkLhh86QA==}
+  /@fortawesome/free-regular-svg-icons/6.4.0:
+    resolution: {integrity: sha512-ZfycI7D0KWPZtf7wtMFnQxs8qjBXArRzczABuMQqecA/nXohquJ5J/RCR77PmY5qGWkxAZDxpnUFVXKwtY/jPw==}
     engines: {node: '>=6'}
     requiresBuild: true
     dependencies:
-      '@fortawesome/fontawesome-common-types': 6.3.0
+      '@fortawesome/fontawesome-common-types': 6.4.0
     dev: false
 
-  /@fortawesome/vue-fontawesome/2.0.10_o733sqecwwreo43htppogsmk44:
+  /@fortawesome/free-solid-svg-icons/6.4.0:
+    resolution: {integrity: sha512-kutPeRGWm8V5dltFP1zGjQOEAzaLZj4StdQhWVZnfGFCvAPVvHh8qk5bRrU4KXnRRRNni5tKQI9PBAdI6MP8nQ==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.4.0
+    dev: false
+
+  /@fortawesome/vue-fontawesome/2.0.10_ns3tanzake47edvtuk73yvnw7a:
     resolution: {integrity: sha512-OTETSXz+3ygD2OK2/vy82cmUBpuJqeOAg4gfnnv+f2Rir1tDIhQg026Q3NQxznq83ZLz8iNqGG9XJm26inpDeg==}
     peerDependencies:
       '@fortawesome/fontawesome-svg-core': ~1 || ~6
       vue: ~2
     dependencies:
-      '@fortawesome/fontawesome-svg-core': 6.3.0
+      '@fortawesome/fontawesome-svg-core': 6.4.0
     dev: false
 
   /@gar/promisify/1.1.3:
@@ -1940,18 +1940,18 @@ packages:
       - walrus
       - whiskers
 
-  /@vuepress/core/1.9.8:
-    resolution: {integrity: sha512-ZDm253vcjKlWIxd6c18aZWJZkWCmhBUXRT/X5eKFEoDO3aQatb+OpFYP6eH3zufD2VXjZwE5kV4MAMwtBHK+DQ==}
+  /@vuepress/core/1.9.9:
+    resolution: {integrity: sha512-Ekgu409ZSgvAV9n14F3DaEWtgkwrEicg1nWs0gbxGgUCdREeX/7rwxSfKwWwBjCwfCUKR2L3+6pXGjzxex0t+g==}
     engines: {node: '>=8.6'}
     dependencies:
       '@babel/core': 7.20.12
       '@vue/babel-preset-app': 4.5.19_vue@2.7.14
-      '@vuepress/markdown': 1.9.8
-      '@vuepress/markdown-loader': 1.9.8
-      '@vuepress/plugin-last-updated': 1.9.8
-      '@vuepress/plugin-register-components': 1.9.8
-      '@vuepress/shared-utils': 1.9.8
-      '@vuepress/types': 1.9.8
+      '@vuepress/markdown': 1.9.9
+      '@vuepress/markdown-loader': 1.9.9
+      '@vuepress/plugin-last-updated': 1.9.9
+      '@vuepress/plugin-register-components': 1.9.9
+      '@vuepress/shared-utils': 1.9.9
+      '@vuepress/types': 1.9.9
       autoprefixer: 9.8.8
       babel-loader: 8.3.0_nwtvwtk5tmh22l2urnqucz7kqu
       bundle-require: 2.1.8_esbuild@0.14.7
@@ -2047,19 +2047,19 @@ packages:
       - webpack-command
       - whiskers
 
-  /@vuepress/markdown-loader/1.9.8:
-    resolution: {integrity: sha512-rurhMqwq5h32nXlJG/ezrgzp7twkJtExBxh3bH+iUeuuPKoyTzd5+YI8lrOELXPsRXlvPoMZ9KQioW/D8xAmvA==}
+  /@vuepress/markdown-loader/1.9.9:
+    resolution: {integrity: sha512-nyY+sytuQaDLEIk6Yj9JFUfSQpe9/sz30xQFkGCYqi0lQTRGQM6IcRDgfcTS7b25A0qRlwpDGBfKQiGGMZKSfg==}
     dependencies:
-      '@vuepress/markdown': 1.9.8
+      '@vuepress/markdown': 1.9.9
       loader-utils: 1.4.2
       lru-cache: 5.1.1
     transitivePeerDependencies:
       - supports-color
 
-  /@vuepress/markdown/1.9.8:
-    resolution: {integrity: sha512-7OaCXp2SMtf9pFf513U52aUtDf5gWWe8pT+NQA8hOU6jCNSJGex3izEEve1sPmLmsJWGjmVEAeKesGNg4wQE0A==}
+  /@vuepress/markdown/1.9.9:
+    resolution: {integrity: sha512-JzFdBdGe5aoiKSaEgF+h3JLDXNVfWPI5DJWXrIt7rhhkMJesF6HowIznPLdXqukzHfXHcPvo9oQ4o6eT0YmVGA==}
     dependencies:
-      '@vuepress/shared-utils': 1.9.8
+      '@vuepress/shared-utils': 1.9.9
       markdown-it: 8.4.2
       markdown-it-anchor: 5.3.0_markdown-it@8.4.2
       markdown-it-chain: 1.3.0_markdown-it@8.4.2
@@ -2069,53 +2069,53 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@vuepress/plugin-active-header-links/1.9.8:
-    resolution: {integrity: sha512-yyUwn/DOF5Gbxc5fFbiBNqz7XmRAVHyYZNTgsJooQX+E11DH9XCuJ0sWN3HHee1aVwmz2w94KYsoueiBTgfJ8g==}
+  /@vuepress/plugin-active-header-links/1.9.9:
+    resolution: {integrity: sha512-lTnIhbuALjOjFts33jJD8r4ScNBxnZ6MtmePKEwvYlC3J9uvngs1Htpb1JzLEX9QCydt+bhLmZ92bTXn/PdTpg==}
     dependencies:
-      '@vuepress/types': 1.9.8
+      '@vuepress/types': 1.9.9
       lodash.debounce: 4.0.8
     transitivePeerDependencies:
       - debug
 
-  /@vuepress/plugin-back-to-top/1.9.8:
-    resolution: {integrity: sha512-Unl8HMVPsqyt4q/1TIcaMH1XkQri43rjVdXKpPbC1nWTKVi1nvJpxbLfscInodX9Jlniju4Xo/uKxmugfFF1Dg==}
+  /@vuepress/plugin-back-to-top/1.9.9:
+    resolution: {integrity: sha512-8bNsdZ0Dr96OdcoJ67dxCx1ysXpeTHma8w+YSsqBJoWGEOucBr0nW9oaDH85yoOtpiriWBlhUO32/Q0ojJtMfA==}
     dependencies:
-      '@vuepress/types': 1.9.8
+      '@vuepress/types': 1.9.9
       lodash.debounce: 4.0.8
     transitivePeerDependencies:
       - debug
     dev: false
 
-  /@vuepress/plugin-last-updated/1.9.8:
-    resolution: {integrity: sha512-tMmqKEEXV9Ask/MErJrVSDxRW6uEYm7UvUmfo6SbIoYjyLiNV8UCzmLPT+hAEixNuxuMReoI3rn/v60JiYPUZA==}
+  /@vuepress/plugin-last-updated/1.9.9:
+    resolution: {integrity: sha512-MV4csmM0/lye83VtkOc+b8fs0roi7mvE7BmCCOE39Z6t8nv/ZmEPOwKeHD0+hXPT+ZfoATYvDcsYU7uxbdw0Pw==}
     dependencies:
-      '@vuepress/types': 1.9.8
+      '@vuepress/types': 1.9.9
       cross-spawn: 6.0.5
     transitivePeerDependencies:
       - debug
 
-  /@vuepress/plugin-medium-zoom/1.9.8:
-    resolution: {integrity: sha512-qs7N8w/48d6t8fYXa/0QUyaGnZAWjZdLfk+5AwBaS7iub2kIFHRI1bs7yBgUmuCo7CFAltMuD46HZJIug6xg0w==}
+  /@vuepress/plugin-medium-zoom/1.9.9:
+    resolution: {integrity: sha512-P8UfqUv0l28Td2COhvhVinBMiHyams8KKQVwnr6ZboFcRVG5xOsghtDbO++jn78rnszOz8OsLXilPMoiJ8iECQ==}
     dependencies:
-      '@vuepress/types': 1.9.8
+      '@vuepress/types': 1.9.9
       medium-zoom: 1.0.8
     transitivePeerDependencies:
       - debug
     dev: false
 
-  /@vuepress/plugin-nprogress/1.9.8:
-    resolution: {integrity: sha512-RW2n2VTnc36zPUMlQ9+uOu57ao9RKDvOIGoFqTPqvORiTI56VnyAipOv+79EqTky6DqXSG+ixzq+oE9gSJ8cXA==}
+  /@vuepress/plugin-nprogress/1.9.9:
+    resolution: {integrity: sha512-+3fLxjwTLH8MeU54E7i1ovRu9KzBom2lvSeUsu9B8PuLyrETAqW7Pe1H66awEEALEe0ZnnEU4d7SeVe9ljsLAQ==}
     dependencies:
-      '@vuepress/types': 1.9.8
+      '@vuepress/types': 1.9.9
       nprogress: 0.2.0
     transitivePeerDependencies:
       - debug
 
-  /@vuepress/plugin-pwa/1.9.8:
-    resolution: {integrity: sha512-XQRLZNTUi9S7Gieo92K9FBxMPCIxJ8gx+i7MFiLnn39todjDtjUC1buuN9vuu3cKbNqUPDhu68g1D9qhDIK+kQ==}
+  /@vuepress/plugin-pwa/1.9.9:
+    resolution: {integrity: sha512-69kTlTl/mdWSD/+odz73oXvi2SuT8GO+e7YlPZFloeZR3kffC6ywYMip6m4MOalKOSUf0XzD3hCqCNVha6vo8Q==}
     dependencies:
-      '@vuepress/shared-utils': 1.9.8
-      '@vuepress/types': 1.9.8
+      '@vuepress/shared-utils': 1.9.9
+      '@vuepress/types': 1.9.9
       register-service-worker: 1.7.2
       workbox-build: 4.3.1
     transitivePeerDependencies:
@@ -2123,24 +2123,24 @@ packages:
       - supports-color
     dev: false
 
-  /@vuepress/plugin-register-components/1.9.8:
-    resolution: {integrity: sha512-TPa+HDKSevhXKvAh7zboGlGCaGXY/vzx/b7YtHzxKwHJE3Orj/aGNimG8ZvILjDXhzmrPCX+WghquiwYeco5Nw==}
+  /@vuepress/plugin-register-components/1.9.9:
+    resolution: {integrity: sha512-tddnAiSmJsIWWPzE7TcbGU8xzndXf4a8i4BfIev2QzSUnIOQFZDGXUAsCkw4/f9N9UFxQSObjFPzTeUUxb7EvA==}
     dependencies:
-      '@vuepress/shared-utils': 1.9.8
-      '@vuepress/types': 1.9.8
+      '@vuepress/shared-utils': 1.9.9
+      '@vuepress/types': 1.9.9
     transitivePeerDependencies:
       - debug
       - supports-color
 
-  /@vuepress/plugin-search/1.9.8:
-    resolution: {integrity: sha512-LLZag4Rj1ZF679ubmkqvDyXv5/o0uxbvHFZjD7d+xWRRV6PZrw47Idep8HXlVcmL43BLdxQ//STiibPJpbWdXQ==}
+  /@vuepress/plugin-search/1.9.9:
+    resolution: {integrity: sha512-W/FE+YHoXDD4qk2wu5yRMkti271TA4y+7UBMrmCavvVAGrLIRnaZfswRUgIiDlEthBc+Pn8/As/Dy1jFTLBa9A==}
     dependencies:
-      '@vuepress/types': 1.9.8
+      '@vuepress/types': 1.9.9
     transitivePeerDependencies:
       - debug
 
-  /@vuepress/shared-utils/1.9.8:
-    resolution: {integrity: sha512-34VfkChKRrs0waWEXugDPcBB4Cp6TnKwNQaTpa8GwpLFfQw627/mWi2IiuSwTyFNZdSXxZJV6e5blejmUlGh0g==}
+  /@vuepress/shared-utils/1.9.9:
+    resolution: {integrity: sha512-qhk/7QF5LgMEXhEB1hlqreGFgkz4p2pmaBBNFxnAnYmSwmyO+u/oFOpZLI16QRx9Wg6ekR2ENmByQLxV7y4lJg==}
     dependencies:
       chalk: 2.4.2
       escape-html: 1.0.3
@@ -2154,13 +2154,13 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@vuepress/theme-default/1.9.8:
-    resolution: {integrity: sha512-j0wC6fvRtlRRCg0chbYzNlTTeov36ASxfRaE+r/9kKZAFM0NDCQr3N79jYVx2vEVvlgrjq51moe1WgFqjjFPUg==}
+  /@vuepress/theme-default/1.9.9:
+    resolution: {integrity: sha512-de0FiOwM/h3rFTBSZK0NNBB117lA/e3IHusU7Xm2XeZRiZ/EE3yvbWclZnbbRNt3YjDMmrWXEW/kBTBxfiMuWQ==}
     dependencies:
-      '@vuepress/plugin-active-header-links': 1.9.8
-      '@vuepress/plugin-nprogress': 1.9.8
-      '@vuepress/plugin-search': 1.9.8
-      '@vuepress/types': 1.9.8
+      '@vuepress/plugin-active-header-links': 1.9.9
+      '@vuepress/plugin-nprogress': 1.9.9
+      '@vuepress/plugin-search': 1.9.9
+      '@vuepress/types': 1.9.9
       docsearch.js: 2.6.3
       lodash: 4.17.21
       stylus: 0.54.8
@@ -2171,8 +2171,8 @@ packages:
       - debug
       - supports-color
 
-  /@vuepress/types/1.9.8:
-    resolution: {integrity: sha512-ygRFqILi4SQjExxvpVUFXB/h76dN+k8GrDWYhAgmox1zhWEEzsskbqewXGKWE48RW9EJDYGgh8jy+CWvm7ILXg==}
+  /@vuepress/types/1.9.9:
+    resolution: {integrity: sha512-ukGW49ILzLhIc7CltHMr+BeIjWKloJNN1mrvbDz3beycp9b9kgH+DXNdRIK9QCKr4fJsy7x08vNMwZr9Nq/PTQ==}
     dependencies:
       '@types/markdown-it': 10.0.3
       '@types/webpack-dev-server': 3.11.6
@@ -4993,7 +4993,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -8347,8 +8347,8 @@ packages:
       yargs: 17.6.2
     dev: false
 
-  /sass-loader/13.2.0_node-sass@7.0.3:
-    resolution: {integrity: sha512-JWEp48djQA4nbZxmgC02/Wh0eroSUutulROUusYJO9P9zltRbNN80JCBHqRGzjd4cmZCa/r88xgfkjGD0TXsHg==}
+  /sass-loader/13.2.2_node-sass@7.0.3:
+    resolution: {integrity: sha512-nrIdVAAte3B9icfBiGWvmMhT/D+eCDwnk+yA7VE/76dp/WkHX+i44Q/pfo71NYbwj0Ap+PGsn0ekOuU1WFJ2AA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       fibers: '>= 3.1.0'
@@ -9686,7 +9686,7 @@ packages:
   /vuepress-plugin-container/2.1.5:
     resolution: {integrity: sha512-TQrDX/v+WHOihj3jpilVnjXu9RcTm6m8tzljNJwYhxnJUW0WWQ0hFLcDTqTBwgKIFdEiSxVOmYE+bJX/sq46MA==}
     dependencies:
-      '@vuepress/shared-utils': 1.9.8
+      '@vuepress/shared-utils': 1.9.9
       markdown-it-container: 2.0.0
     transitivePeerDependencies:
       - supports-color
@@ -9694,7 +9694,7 @@ packages:
   /vuepress-plugin-directory-classifier/0.1.0:
     resolution: {integrity: sha512-vShwcN0xy87LGvSKKKklA0zGcfS0d4sesZsUafEMGXLjCsb6wy+UVdyBNORGzBiBLa7PQDZJOSilFHckVDWacQ==}
     dependencies:
-      vuepress: 1.9.8
+      vuepress: 1.9.9
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - arc-templates
@@ -9763,15 +9763,15 @@ packages:
     dependencies:
       smoothscroll-polyfill: 0.4.4
 
-  /vuepress/1.9.8:
-    resolution: {integrity: sha512-bjfSSRHlpxsZIrJo4Ds0mjt01lwC5H/a7ynDqub4zgXl7/osSsM6GmEgIqlc8oMAQ7j3nY7EBsHdAyrQamPjwA==}
+  /vuepress/1.9.9:
+    resolution: {integrity: sha512-CU94W3EdWaCavGx2VSvQJMI/hyv+m/YMdrvJJw67EVfmmJJDb1iTGrilDgLd0qsyrXzBy0Ru9Qi6rkf4IwcOTg==}
     engines: {node: '>=8.6'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@vuepress/core': 1.9.8
-      '@vuepress/theme-default': 1.9.8
-      '@vuepress/types': 1.9.8
+      '@vuepress/core': 1.9.9
+      '@vuepress/theme-default': 1.9.9
+      '@vuepress/types': 1.9.9
       cac: 6.7.14
       envinfo: 7.8.1
       opencollective-postinstall: 2.0.3
