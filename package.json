@@ -29,9 +29,9 @@
   "homepage": "https://github.com/asterics/asterics-docs#readme",
   "devDependencies": {
     "@asterics-docs/tool": "0.0.1",
-    "vuepress": "^1.9.8"
+    "vuepress": "^1.9.9"
   },
   "dependencies": {
-    "@asterics-docs/vuepress-theme-docs": "0.0.10"
+    "@asterics-docs/vuepress-theme-docs": "0.0.11"
   }
 }
