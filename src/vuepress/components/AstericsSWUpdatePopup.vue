@@ -3,7 +3,7 @@
     <div slot-scope="{ enabled, reload, message, buttonText }">
       <div v-if="enabled" class="asterics-sw-update-popup">
         {{ message }}
-        <br>
+        <br />
         <button @click="reload">{{ buttonText }}</button>
       </div>
     </div>
@@ -14,7 +14,7 @@
 import SWUpdatePopup from "@vuepress/plugin-pwa/lib/SWUpdatePopup.vue";
 
 export default {
-  components: { SWUpdatePopup }
+  components: { SWUpdatePopup },
 };
 </script>
 
@@ -55,7 +55,7 @@ export default {
 
 .asterics-sw-update-popup-enter,
 .asterics-sw-update-popup-leave-to {
-  opacit: 0;
+  opacity: 0;
   transform: translate(0, 50%) scale(0.5);
 }
 </style>
