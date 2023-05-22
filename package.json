@@ -32,6 +32,6 @@
     "vuepress": "^1.9.9"
   },
   "dependencies": {
-    "@asterics-docs/vuepress-theme-docs": "0.1.0"
+    "@asterics-docs/vuepress-theme-docs": "0.2.0"
   }
 }
