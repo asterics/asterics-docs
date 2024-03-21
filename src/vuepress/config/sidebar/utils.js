@@ -66,6 +66,7 @@ function loadSingleSidebar({ title, titlePath, location }) {
     .readdirSync(location)
     .map((child) => child.replace(/\.md$/, ""))
     .filter((child) => child !== "img")
+    .filter((child) => child !== "files")
     .filter((child) => child !== "README")
     .map((child) => {
       let title = child.replace(/_/g, " ");
