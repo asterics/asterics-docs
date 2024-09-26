@@ -32,7 +32,7 @@ jobs:
           cache: pnpm
       - name: Install algoliasearch
         run: |
-          pnpm add algoliasearch
+          pnpm add algoliasearch@4.24.0
           pnpm install
       - name: Delete Index
         env:
