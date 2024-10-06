@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="../startpage/styles/main.css">
+    
+
+	<!-- provided from AsTeRICS 3.0 -->
+	<script type="text/javascript" src="../startpage/lib/jquery-3.2.1.min.js"></script>
+    <script src="../startpage/clientExample/javascript/JSmap.js"></script>
+    <script src="../startpage/clientExample/javascript/areCommunicator.js"></script>
+	<!-- provided by this repository, should be part of the framework later -->
+	<script src="../startpage/lib/webAppUtils.js"></script>
+	<script src="../startpage/lib/modelManipulation.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+	<script type="text/javascript">
+		initAreBaseURI();
+
+		var modelFilePathOnWebserver='webapps/asterics-camerainput-cameramouse/models/XFaceTrackerMouse(WLM).acs';
+
+		function applyAndStart() {
+			/* 
+			Normally you can just call applySettingsInXMLModelAndStart(modelFilePathOnWebserver);
+			But to assign the switches to certain events we have to trigger the respective routing event (select1-select7) of
+			the EventRouter plugin.
+			*/
+			applySettingsInXMLModelAndStart(modelFilePathOnWebserver, function(data,HTTPStatus){
+				//We now have to manually change the event routes from the swith inputs to the assigned mouse events.			
+				triggerEvent(function(data,HTTPStatus){
+					triggerEvent(defaultSuccessCallback,defaultErrorCallback,"KeySwitch2EventRouter",$("#switch2Action").val());
+				},defaultErrorCallback,"KeySwitch1EventRouter",$("#switch1Action").val());
+			});
+		}
+		
+		window.onload=updateWidgetsFromDeployedModel;		
+	</script>
+
+    <title>AsTeRICS Camera Mouse</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>AsTeRICS Camera Mouse</h1>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+			<h2>Objective</h2>Mouse control (moving mouse cursor, clicking and dragging) by head movements.
+			<h2>Description</h2>By moving the head up/down or left/right the mouse cursor should move accordingly. A left click is performed by dwelling (stopping movement and waiting for some time). To do a right, double or drag click select the respective button in the ARE GUI and move the cursor to the location where the click should be performed at. The mouse speed can be changed by using the slider. Click on the On/Off button to toggle mouse control. 
+			<p>
+
+			<div>
+			<img src="img/facetrackerLK-videoframe.png" alt="Video frame showing face with tracked nose and chin"/>
+			</div>
+			<h2>Requirements</h2>
+			<ul>
+				<li>Integrated Webcam or USB camera</li>
+				<li><a href="https://github.com/asterics/AsTeRICS/releases/tag/v3.0" target="_blank">AsTeRICS 3.0</a> installed and ARE running</li>
+				<li>OS: Windows, Linux (incl. RPi), Mac OSX</li>
+			</ul>
+			<h2>Start Model</h2>							
+				<ol>
+					<li>Start AsTeRICS Runtime Environment (ARE)</li>
+					<ul>
+						<li>Windows: ARE.exe</li>
+						<li>Linux / Mac OSX: asterics-are</li>
+					</ul>
+					<li><button onclick="applyAndStart()" title="Description: Applies all settings and starts the model" class="button"> Start Model </button></li>
+				</ol>				
+				
+				You can adjust the many settings below and save them as default for the next ARE start.
+				<p>
+		 		<button onclick="saveSettingsAsAutostartModel()" title="Description: Applies all settings and sets the model as autostart model" class="button"> Save Settings as Autostart </button>	
+			<h3>General Settings</h3>
+			<p>
+			<label for="cameraSource">Camera: </label>
+			<select id="cameraSource" data-asterics-model-binding-1='{"componentKey": "XFacetrackerLK.1","propertyKey": "cameraSelection"}'>
+			  <option value="0">First camera</option>
+			  <option value="1">Second camera</option>
+			  <option value="2">Third camera</option>
+			  <option value="3">Fourth camera</option>
+			</select>
+			<p>
+			<h4>Mouse Movement</h4>
+			<label for="speed">Mouse Speed: </label>
+			1 <input title="Mouse speed" type="range" id="speed" value="60" min="1" max="100" data-asterics-model-binding-1='{"componentKey": "Slider.1","propertyKey": "default"}'> 100
+			<p>
+			<label for="averager">Smoothing Degree: </label>
+			1 <input title="Smoothing Degree" type="range" id="averager" value="5" min="1" max="50" data-asterics-model-binding-1='{"componentKey": "AveragerX","propertyKey": "bufferSize"}' data-asterics-model-binding-2='{"componentKey": "AveragerY","propertyKey": "bufferSize"}'> 50
+			<p>
+			<h4>Clicking</h4>
+			<label for="deadzone">Movement Radius: </label>
+			1 <input title="Movement Radius" type="range" id="deadzone" value="3" min="1" max="20" data-asterics-model-binding-1='{"componentKey": "Deadzone.1","propertyKey": "radius"}'> 20
+			<p>
+			<label for="dwelltime">Dwell Time [ms]: </label>
+			1 <input title="Dwell Time [ms]" type="range" id="dwelltime" value="500" min="100" max="5000" data-asterics-model-binding-1='{"componentKey": "DwellTimer","propertyKey": "timePeriod"}'> 5000	
+			<h4>Mouse Activation Pattern</h4>
+			Click on screen quadrants to create a mouse activation pattern.
+			<p>
+			<!-- Use svg to draw 4 quadrants to create unlock pattern  -->
+			<svg width="100" height="100">
+			  <a onclick="document.getElementById('unlockPattern').value+='1,'">
+			  <rect width="50" height="50" 
+			  style="fill:rgb(255,255,255);stroke-width:5;stroke:rgb(0,0,0)" />
+			  <text x="17" y="35" font-size="32">1</text>
+			  </a>
+			  
+			  <a onclick="document.getElementById('unlockPattern').value+='2,'">
+			  <rect width="50" height="50" x="51"
+			  style="fill:rgb(255,255,255);stroke-width:5;stroke:rgb(0,0,0)" />
+			  <text x="67" y="35" font-size="32">2</text>
+			  </a>
+			  
+			  <a onclick="document.getElementById('unlockPattern').value+='3,'">
+			  <rect width="50" height="50" y="51"
+			  style="fill:rgb(255,255,255);stroke-width:5;stroke:rgb(0,0,0)" />
+			  <text x="17" y="85" font-size="32">3</text>
+			  </a>
+			  
+			  <a onclick="document.getElementById('unlockPattern').value+='4,'">
+			  <rect width="50" height="50" x="51" y="51"
+			  style="fill:rgb(255,255,255);stroke-width:5;stroke:rgb(0,0,0)" />
+			  <text x="67" y="85" font-size="32">4</text>
+			  </a>
+			Sorry, your browser does not support inline SVG.
+			</svg>
+			<p>
+			<button onclick="$('#unlockPattern').val('');" title="Clears the current activation pattern." class="button"> Clear pattern </button>
+			<p>
+			<label for="unlockPattern" title="Enter sequence of screen quadrant numbers, e.g. 1,2,3">Mouse Activation Pattern: </label>
+			<input id="unlockPattern" type="text" placeholder="1,2,4,3" value="1,2,4,3" data-asterics-model-binding-1='{"componentKey": "PatternRecognition","propertyKey": "stateSequence"}' data-asterics-model-binding-2='{"componentKey": "PatternVisualization","propertyKey": "default"}'>			
+			<h3>Switch Inputs</h3>
+			<label for="switch1Key">Switch1 Key: </label>
+			<select id="switch1Key" data-asterics-model-binding-1='{"componentKey": "KeySwitch1","propertyKey": "keyCode"}'>
+			  <option value="0" selected>-----</option>
+			  <option value="57">SPACE</option>
+			  <option value="28">ENTER</option>
+			  <option value="67">F9</option>
+			  <option value="68">F10</option>
+			  <option value="87">F11</option>
+			  <option value="88">F12</option>
+			  <option value="91">F13</option>
+			  <option value="92">F14</option>
+			  <option value="93">F15</option>
+			  <option value="99">F16</option>
+			  <option value="100">F17</option>
+			  <option value="101">F18</option>
+			  <option value="102">F19</option>
+			  <option value="103">F20</option>
+			  <option value="104">F21</option>
+			  <option value="105">F22</option>
+			  <option value="106">F23</option>
+			  <option value="107">F24</option>
+			</select>
+			<label for="switch1Action">Switch1 Action: </label>
+			<select id="switch1Action">
+			  <option value="select1">Left Click</option>
+			  <option value="select2">Double Click</option>			
+			  <option value="select3">Middle Click</option>			
+			  <option value="select4">Right Click</option>			
+			  <option value="select5">Wheel Up</option>
+			  <option value="select6">Wheel Down</option>			
+			  <option value="select7">Toggle Mouse On/Off</option>			
+			</select>
+			<p>
+			<label for="switch2Key">Switch1 Key: </label>
+			<select id="switch2Key" data-asterics-model-binding-1='{"componentKey": "KeySwitch2","propertyKey": "keyCode"}'>
+			  <option value="0">-----</option>
+			  <option value="57">SPACE</option>
+			  <option value="28">ENTER</option>
+			  <option value="67">F9</option>
+			  <option value="68">F10</option>
+			  <option value="87">F11</option>
+			  <option value="88">F12</option>
+			  <option value="91">F13</option>
+			  <option value="92">F14</option>
+			  <option value="93">F15</option>
+			  <option value="99">F16</option>
+			  <option value="100">F17</option>
+			  <option value="101">F18</option>
+			  <option value="102">F19</option>
+			  <option value="103">F20</option>
+			  <option value="104">F21</option>
+			  <option value="105">F22</option>
+			  <option value="106">F23</option>
+			  <option value="107">F24</option>
+			</select>
+			<label for="switch2Action">Switch1 Action: </label>
+			<select id="switch2Action">
+			  <option value="select1">Left Click</option>
+			  <option value="select2">Double Click</option>			
+			  <option value="select3">Middle Click</option>			
+			  <option value="select4">Right Click</option>			
+			  <option value="select5">Wheel Up</option>
+			  <option value="select6">Wheel Down</option>			
+			  <option value="select7">Toggle Mouse On/Off</option>
+			</select>
+			
+			<h3>Button Actions</h3>
+			<h4>On-Screen Keyboard</h4>
+			Install an On-Screen Keyboard of your choice and enter the path of the executable here.
+			<p>
+			Recommendations:
+			<ul>
+				<li><a href="https://support.microsoft.com/de-at/help/10762/windows-use-on-screen-keyboard">osk.exe</a>: Windows default On-Screen Keyboard. <button onclick="$('#cmdPanelBtn5LaunchCmd').val('C:\\Windows\\Sysnative\\osk.exe');"> Use Windows default </button></li>
+				<li><a href="https://github.com/OptiKey/OptiKey/wiki">OptiKey</a>: On-Screen Keyboard optimized for Eyetracking.</li>
+				<li><a href="http://www.staggeredspeech.org/">Staggered Speech</a>: On-Screen Keyboard from Boston College.</li>
+				<li><a href="http://www.midastouch.org/">Midas Touch</a>: On-Screen Keyboard from Boston College.</li>				
+			</ul>
+			<label for="cmdPanelBtn5LaunchCmd">Launch Command: </label>
+			<input id="cmdPanelBtn5LaunchCmd" type="text" placeholder="C:\Windows\Sysnative\osk.exe" value="C:\Windows\Sysnative\osk.exe" data-asterics-model-binding-1='{"componentKey": "Launch-OSK","propertyKey": "defaultApplication"}'>
+			<label for="cmdPanelBtn5LaunchArgs">Launch Arguments: </label>
+			<input id="cmdPanelBtn5LaunchArgs" type="text" placeholder="e.g. URL" data-asterics-model-binding-1='{"componentKey": "Launch-OSK","propertyKey": "arguments"}'>
+			<p>
+			<label for="cmdPanelBtn5CloseCmd">Close Command: </label>
+			<input id="cmdPanelBtn5CloseCmd" type="text" placeholder="taskkill /im osk.exe" value="taskkill /im osk.exe" data-asterics-model-binding-1='{"componentKey": "Launch-OSK","propertyKey": "closeCmd"}'>	
+			<h3>Button Labels</h3>
+			<label for="cmdPanelBtn1">Button1 Text: </label>
+			<input id="cmdPanelBtn1" type="text" placeholder="Right Click" value="Right Click" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText1"}'>
+			<p>
+			<label for="cmdPanelBtn2">Button2 Text: </label>
+			<input id="cmdPanelBtn2" type="text" placeholder="Double Click" value="Double Click" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText2"}'>
+			<p>
+			<label for="cmdPanelBtn3">Button3 Text: </label>
+			<input id="cmdPanelBtn3" type="text" placeholder="Drag Click" value="Drag Click" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText3"}'>
+			<p>
+			<label for="cmdPanelBtn4">Button4 Text: </label>
+			<input id="cmdPanelBtn4" type="text" placeholder="Middle Click" value="Middle Click" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText4"}'>
+			<p>
+			<label for="cmdPanelBtn5">Button5 Text: </label>
+			<input id="cmdPanelBtn5" type="text" placeholder="Keyboard On/Off" value="Keyboard On/Off" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText5"}'>
+			<p>
+			<label for="cmdPanelBtn6">Button6 Text: </label>
+			<input id="cmdPanelBtn6" type="text" placeholder="<-- -->" value="<-- -->" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText6"}'>
+			<p>
+			<label for="cmdPanelBtn7">Button7 Text: </label>
+			<input id="cmdPanelBtn7" type="text" placeholder="Settings" value="Settings" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText7"}'>
+			<p>
+			<label for="cmdPanelBtn8">Button8 Text: </label>
+			<input id="cmdPanelBtn8" type="text" placeholder="Mouse On/Off" value="Mouse On/Off" data-asterics-model-binding-1='{"componentKey": "CommandPanel","propertyKey": "cellText8"}'>
+						
+
+			
+			<p>
+			<button onclick="applyAndStart()" title="Description: Applies all settings and starts the model" class="button"> Start Model </button>
+	 		<button onclick="saveSettingsAsAutostartModel()" title="Description: Applies all settings and sets the model as autostart model" class="button"> Save Settings as Autostart </button>	
+			<p>
+			<h2>Major Plugins</h2>
+			<ul>
+				<li><a target="_blank" href="http://asterics.github.io/AsTeRICS/webapps/WebACS/help/index.html?plugins&sensors/XFacetrackerLK.htm">XFacetrackerLK</a></li>
+				<li><a target="_blank" href="http://asterics.github.io/AsTeRICS/webapps/WebACS/help/index.html?plugins&actuators/Mouse.htm">Mouse</a></li>
+			</ul>
+			<h2>Edit Model</h2>
+			<a target="_blank" href="http://asterics.github.io/AsTeRICS/webapps/WebACS/?areBaseURI=http://localhost:8081&openFile=http://asterics.github.io/AsTeRICS/webapps/asterics-camerainput-cameramouse/models/XFaceTrackerMouse(WLM).acs">Open in WebACS</a>
+			<h2>Source Repository</h2>
+				You can fork and modify this <a target="_blank" href="https://github.com/asterics/asterics-camerainput-cameramouse">repository</a>.
+			<h2>Related Videos</h2>
+			<a target="_blank" href="https://youtu.be/P9qJAWegkFM?t=1955">Camera Mouse Demo Screencast</a>
+			<p>
+			<a target="_blank" href="https://youtu.be/P9qJAWegkFM?t=2228">Camera Mouse Model Creation Screencast</a>
+			<h2>Related Tutorials</h2>
+			<a target="_blank" href="https://github.com/asterics/AsTeRICS/blob/master/Documentation/AsTeRICS_CameraMouseCreation_StepbyStep_Tutorial.pdf">Camera Mouse Creation StepbyStep Tutorial</a>
+			</section>
+      </div>
+    </div>
+  </body>
+</html>
