@@ -64,9 +64,8 @@ function loadSidebarFromWithPath({ location, title, titlePath, pre }) {
 function loadSingleSidebar({ title, titlePath, location }) {
   const children = fs
     .readdirSync(location)
+    .filter((child) => !fs.statSync(path.join(location, child)).isDirectory())
     .map((child) => child.replace(/\.md$/, ""))
-    .filter((child) => child !== "img")
-    .filter((child) => child !== "files")
     .filter((child) => child !== "README")
     .map((child) => {
       let title = child.replace(/_/g, " ");
