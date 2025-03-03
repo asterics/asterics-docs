@@ -2,6 +2,32 @@
 
 Documentation of [AsTeRICS](https://github.com/asterics/AsTeRICS.git).
 
+## Configuration
+
+`asterics-docs` is a [VuePress](https://vuepress.vuejs.org/) based project that uses a theme based on the [Default Theme](https://ecosystem.vuejs.press/themes/default/config.html).
+Hence, all configuration provided by the *Default Theme* of *VuePress* is available in the custom theme.
+
+::: warning
+
+The (true) sources of all VuePress configuration files are located at `src/vuepress/`and `src/vuepress/config`.
+
+After setting up the project for editing, building and releasing, `asterics-docs` copies all relevant files in the folder `docs/`.
+The source files for the VuePress configuration are copied to `docs/.vuepress` during this process.
+
+:::
+
+### Sidebar
+
+The configration for the sidebar is specified in `src/vuepress/config.js` and in the folder `src/vuepress/config/sidebar/`.
+
+In addition to the [sidebar configuration of the VuePress Default Theme](https://ecosystem.vuejs.press/themes/default/config.html#sidebar), this project contains helper function to assist or automate this process:
+
+* `loadSingleSidebar`: Loads markdown files from a single directory (excluding subdirectories)
+* `loadSidebarFrom`: Creates multi-level navigation for directories with nested content
+* `loadSidebarFromWithPath`: Creates a flat list of links from a single directory
+
+For better understanding, compare their usage within the existing configuration.
+
 ## GitHub Workflows
 
 This repository provides following workflows:
