@@ -33,10 +33,20 @@ API_KEY=<API_KEY>
 
 ## Dependencies
 
+::: warning
+Make sure you use [Node.js v14](https://nodejs.org/download/release/v14.21.3/) before for this setup.
+:::
+
 Install needed dependencies with
 
 ```bash
 yarn install
+```
+
+or (better)
+
+```bash
+pnpm install
 ```
 
 ## Release Instructions
@@ -50,12 +60,15 @@ Setup `asterics-docs` using the provided `docs` tools (cf. [DOCS Reference](#DOC
 ```bash
 # Initialize asterics-docs
 $ yarn docs init
+$ pnpm run docs init
 
 # Deinitialize asterics-docs
 $ yarn docs deinit
+$ pnpm run docs deinit
 
 # Setup docs folder
 $ yarn docs setup
+$ pnpm run docs setup
 ```
 
 Change and edit files
@@ -63,6 +76,7 @@ Change and edit files
 ```bash
 # Show status
 $ yarn docs status
+$ pnpm run docs status
 ```
 
 Update changes
@@ -70,12 +84,15 @@ Update changes
 ```bash
 # Add files for commit
 $ yarn docs add <file|folder> [<file|folder> ...]
+$ pnpm run docs add <file|folder> [<file|folder> ...]
 
 # Commit files
 $ yarn docs commit
+$ pnpm run docs commit
 
 # Push changes to origin
 $ yarn docs push
+$ pnpm run docs push
 ```
 
 `NOTE`:
