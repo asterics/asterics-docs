@@ -46,8 +46,6 @@ module.exports = {
         ["/manuals/asterics-grid/10_dictionaries", "Dictionaries"],
         ["/manuals/asterics-grid/11_voices", "Voices"],
         ["/manuals/asterics-grid/12_multilingual-grid-sets", "Multilingual Grid Sets"],
-        ["/manuals/asterics-grid/faq", "FAQ"],
-        ["/manuals/asterics-grid/contributing-to-ag", "Contribution"],
       ],
     },
     {
