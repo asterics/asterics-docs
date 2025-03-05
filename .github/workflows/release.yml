@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Update package archive
         run: sudo apt-get update
       - name: Install NodeGit Build Dependencies
@@ -20,7 +20,7 @@ jobs:
         with:
           version: 7.25.1
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 14
           cache: pnpm
@@ -44,12 +44,12 @@ jobs:
     needs: build
     steps:
       - name: Download Build Result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: asterics-docs
           path: asterics-docs
       - name: Get Code (gh-pages)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: "gh-pages"
           path: "gh-pages"

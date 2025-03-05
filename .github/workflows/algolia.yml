@@ -20,13 +20,13 @@ jobs:
     if: ${{ inputs.delete_index == true }}
     steps:
       - name: Get Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 7.25.1
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 14
           cache: pnpm
@@ -44,7 +44,7 @@ jobs:
     needs: delete
     steps:
       - name: Get Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Crawl Website
         uses: darrenjennings/algolia-docsearch-action@master
         with:
