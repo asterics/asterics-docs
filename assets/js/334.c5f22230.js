@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[334],{494:function(t,n,u){"use strict";u.r(n);var e={name:"JumboTron",props:{id:{type:String,default:"jumbotron"}}},r=u(2),o=Object(r.a)(e,(function(){var t=this;return(0,t._self._c)("div",{attrs:{id:t.id}},[t._t("default",(function(){return[t._v("Default")]}))],2)}),[],!1,null,"5f7c6d6c",null);n.default=o.exports}}]);
