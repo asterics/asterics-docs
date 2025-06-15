@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[88],{346:function(t,n,s){},367:function(t,n,s){"use strict";s(346)},377:function(t,n,s){"use strict";s.r(n);var a={name:"Badge"},e=(s(367),s(2)),i=Object(e.a)(a,(function(){var t=this._self._c;return t("div",{staticClass:"badge"},[t("span",[this._t("default")],2)])}),[],!1,null,"7ad3e67f",null);n.default=i.exports}}]);
