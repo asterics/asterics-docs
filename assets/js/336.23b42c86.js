@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[336],{395:function(t,n,e){"use strict";e.r(n);var i={name:"GridIcon",props:{icon:{type:String,required:!0},type:{type:String,default:"fas"}}},o=e(2),s=Object(o.a)(i,(function(){return(0,this._self._c)("font-awesome-icon",{attrs:{icon:[this.type,this.icon],size:"8x"}})}),[],!1,null,"39ffa63a",null);n.default=s.exports}}]);
