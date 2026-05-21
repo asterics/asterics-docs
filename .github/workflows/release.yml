@@ -25,7 +25,13 @@ jobs:
           node-version: 18
           cache: pnpm
       - name: Install Dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --force --no-frozen-lockfile
+      - name: cleanup asterics-docs submodule to save space
+        run: git submodule deinit -f submodules/asterics-docs
+      - name: Force recursive update/checkout of submodules to have clean state
+        run: git submodule update --init --force
+      - name: De-Initialize asterics-docs (clean starting state for git submodules)
+        run: pnpm run docs deinit
       - name: Initialize asterics-docs
         run: pnpm run docs init --no-reference
       - name: Setup docs
