@@ -24,6 +24,8 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
       - name: cleanup asterics-docs submodule to save space
         run: git submodule deinit -f submodules/asterics-docs
       - name: Force update/checkout of submodules to have clean state
