@@ -99,12 +99,12 @@ module.exports = {
       reference: "../FABI",
       files: [
         {
-          source: "Documentation/UserManual/Markdown/Fabi User Manual.md",
+          source: "Documentation/UserManual/Fabi User Manual.md",
           destination: "manuals/fabi/README.md",
           branch: "master",
         },
         {
-          source: "Documentation/UserManual/Markdown/Bilder",
+          source: "Documentation/UserManual/Bilder",
           destination: "manuals/fabi/Bilder",
           branch: "master",
         },
